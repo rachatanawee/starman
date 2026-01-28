@@ -115,12 +115,12 @@ export default function ProductionOrderDetailPage() {
                     <p className="text-gray-600">Priority</p>
                     <p className="font-medium capitalize">{order.priority}</p>
                   </div>
-                  {order.salesOrderId && (
+                  {order.salesOrderIds.length > 0 && (
                     <div>
-                      <p className="text-gray-600">Sales Order</p>
+                      <p className="text-gray-600">Sales Orders</p>
                       <p className="font-medium flex items-center gap-1">
                         <ShoppingCart className="h-3 w-3" />
-                        {order.salesOrderId}
+                        {order.salesOrderIds.join(', ')}
                       </p>
                     </div>
                   )}

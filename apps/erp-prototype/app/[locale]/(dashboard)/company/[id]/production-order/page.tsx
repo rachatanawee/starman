@@ -215,10 +215,10 @@ export default function ProductionOrderPage() {
                             <Badge className={priorityConfig[order.priority].color}>
                               {t(order.priority)}
                             </Badge>
-                            {order.salesOrderId && (
+                            {order.salesOrderIds.length > 0 && (
                               <Badge variant="outline" className="text-blue-600 border-blue-300">
                                 <ShoppingCart className="h-3 w-3 mr-1" />
-                                SO-{order.salesOrderId.slice(-3)}
+                                {order.salesOrderIds.length} SO(s)
                               </Badge>
                             )}
                           </div>

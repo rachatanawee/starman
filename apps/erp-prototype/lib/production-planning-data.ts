@@ -41,7 +41,7 @@ export const mockAIInsights: AIInsight[] = [
     suggestedAction: {
       label: 'Reschedule PO-88',
       action: 'reschedule',
-      payload: { orderId: 'po-88', newDate: '2024-02-16' }
+      payload: { orderId: 'po-88', newDate: '2026-02-16' }
     },
     isResolved: false
   },
@@ -93,8 +93,8 @@ export const mockPlanItems: PlanItem[] = [
     salesOrderIds: ['SO-2024-001', 'SO-2024-002'],  // Combined from 2 SOs
     productName: 'C-Channel 100x50x20x2.0mm',
     quantity: 500,
-    startDate: '2024-02-15',
-    endDate: '2024-02-20',
+    startDate: '2026-02-15',
+    endDate: '2026-02-20',
     workCenter: 'Press Brake',
     status: 'conflict',
     isLocked: false
@@ -105,8 +105,8 @@ export const mockPlanItems: PlanItem[] = [
     salesOrderIds: ['SO-2024-003'],
     productName: 'Electrical Panel Door',
     quantity: 200,
-    startDate: '2024-02-10',
-    endDate: '2024-02-14',
+    startDate: '2026-02-10',
+    endDate: '2026-02-14',
     workCenter: 'Shearing Machine',
     status: 'scheduled',
     isLocked: false
@@ -117,8 +117,8 @@ export const mockPlanItems: PlanItem[] = [
     salesOrderIds: ['SO-2024-004'],
     productName: 'Heavy Duty Mounting Bracket',
     quantity: 1000,
-    startDate: '2024-02-22',
-    endDate: '2024-02-28',
+    startDate: '2026-02-22',
+    endDate: '2026-02-28',
     workCenter: 'Press Brake',
     status: 'scheduled',
     isLocked: false
@@ -129,8 +129,8 @@ export const mockPlanItems: PlanItem[] = [
     salesOrderIds: [],  // Stock production, no SO
     productName: 'C-Channel 100x50x20x2.0mm',
     quantity: 300,
-    startDate: '2024-02-16',
-    endDate: '2024-02-18',
+    startDate: '2026-02-16',
+    endDate: '2026-02-18',
     workCenter: 'Slitting Machine',
     status: 'adjusted',
     isLocked: false,

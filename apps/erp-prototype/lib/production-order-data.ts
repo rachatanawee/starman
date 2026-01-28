@@ -68,9 +68,9 @@ export const mockProductionOrders: ProductionOrder[] = [
     plannedQuantity: 500,
     producedQuantity: 350,
     scrapQuantity: 8,
-    startDate: '2024-02-15',
-    dueDate: '2024-02-20',
-    actualStartDate: '2024-02-15T08:00:00Z',
+    startDate: '2026-02-15',
+    dueDate: '2026-02-20',
+    actualStartDate: '2026-02-15T08:00:00Z',
     status: 'in_progress',
     priority: 'high',
     notes: 'Combined from SO-2024-001 (300 pcs) + SO-2024-002 (200 pcs)',
@@ -130,8 +130,8 @@ export const mockProductionOrders: ProductionOrder[] = [
         scrapQty: 1
       }
     ],
-    createdAt: '2024-02-14T10:30:00Z',
-    updatedAt: '2024-02-18T14:20:00Z'
+    createdAt: '2026-02-14T10:30:00Z',
+    updatedAt: '2026-02-18T14:20:00Z'
   },
   {
     id: 'po-2',
@@ -146,10 +146,10 @@ export const mockProductionOrders: ProductionOrder[] = [
     plannedQuantity: 200,
     producedQuantity: 200,
     scrapQuantity: 4,
-    startDate: '2024-02-10',
-    dueDate: '2024-02-14',
-    actualStartDate: '2024-02-10T07:30:00Z',
-    actualFinishDate: '2024-02-14T16:45:00Z',
+    startDate: '2026-02-10',
+    dueDate: '2026-02-14',
+    actualStartDate: '2026-02-10T07:30:00Z',
+    actualFinishDate: '2026-02-14T16:45:00Z',
     status: 'completed',
     priority: 'normal',
     notes: 'From SO-2024-003',
@@ -215,8 +215,8 @@ export const mockProductionOrders: ProductionOrder[] = [
         scrapQty: 2
       }
     ],
-    createdAt: '2024-02-09T09:15:00Z',
-    updatedAt: '2024-02-14T16:45:00Z'
+    createdAt: '2026-02-09T09:15:00Z',
+    updatedAt: '2026-02-14T16:45:00Z'
   },
   {
     id: 'po-3',
@@ -231,8 +231,8 @@ export const mockProductionOrders: ProductionOrder[] = [
     plannedQuantity: 1000,
     producedQuantity: 0,
     scrapQuantity: 0,
-    startDate: '2024-02-22',
-    dueDate: '2024-02-28',
+    startDate: '2026-02-22',
+    dueDate: '2026-02-28',
     status: 'released',
     priority: 'urgent',
     notes: 'From SO-2024-004 - Material reserved, ready to start',
@@ -298,8 +298,8 @@ export const mockProductionOrders: ProductionOrder[] = [
         scrapQty: 0
       }
     ],
-    createdAt: '2024-02-20T11:00:00Z',
-    updatedAt: '2024-02-20T11:00:00Z'
+    createdAt: '2026-02-20T11:00:00Z',
+    updatedAt: '2026-02-20T11:00:00Z'
   },
   {
     id: 'po-4',
@@ -314,8 +314,8 @@ export const mockProductionOrders: ProductionOrder[] = [
     plannedQuantity: 300,
     producedQuantity: 0,
     scrapQuantity: 0,
-    startDate: '2024-02-25',
-    dueDate: '2024-03-01',
+    startDate: '2026-02-25',
+    dueDate: '2026-03-01',
     status: 'created',
     priority: 'normal',
     notes: 'Stock production - No SO linked',
@@ -375,7 +375,7 @@ export const mockProductionOrders: ProductionOrder[] = [
         scrapQty: 0
       }
     ],
-    createdAt: '2024-02-19T13:45:00Z',
-    updatedAt: '2024-02-19T13:45:00Z'
+    createdAt: '2026-02-19T13:45:00Z',
+    updatedAt: '2026-02-19T13:45:00Z'
   }
 ]

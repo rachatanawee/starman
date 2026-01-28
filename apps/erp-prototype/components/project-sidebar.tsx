@@ -25,8 +25,14 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
   const locale = params.locale as string
   const [userEmail, setUserEmail] = useState('')
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({})
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+    const saved = localStorage.getItem('sidebar_collapsed_sections')
+    if (saved) {
+      setCollapsedSections(JSON.parse(saved))
+    }
     const user = localStorage.getItem('mock_user')
     if (user) {
       const userData = JSON.parse(user)
@@ -47,7 +53,11 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
   }
 
   const toggleSection = (section: string) => {
-    setCollapsedSections(prev => ({ ...prev, [section]: !prev[section] }))
+    setCollapsedSections(prev => {
+      const newState = { ...prev, [section]: !prev[section] }
+      localStorage.setItem('sidebar_collapsed_sections', JSON.stringify(newState))
+      return newState
+    })
   }
 
   const menuItems = projectId ? [
@@ -121,7 +131,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
         {menuItems.map((item, index) => {
           if ((item as any).section) {
             const sectionName = (item as any).section
-            const isCollapsed = collapsedSections[sectionName]
+            const isCollapsed = mounted ? collapsedSections[sectionName] : false
             return !collapsed ? (
               <div key={index}>
                 <button
@@ -145,7 +155,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
           const isGuideButton = (item as any).isGuide
           const section = menuItems.slice(0, index).reverse().find(i => (i as any).section) as any
           const sectionName = section?.section || ''
-          const isSectionCollapsed = sectionName ? collapsedSections[sectionName] : false
+          const isSectionCollapsed = mounted && sectionName ? collapsedSections[sectionName] : false
           
           if (isSectionCollapsed && !collapsed) return null
           

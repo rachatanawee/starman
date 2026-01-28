@@ -132,8 +132,8 @@ export const mockBOMs: BOM[] = [
         notes: 'Approx 5kg per piece + 2% scrap allowance'
       }
     ],
-    createdAt: '2024-01-15T08:30:00Z',
-    updatedAt: '2024-01-15T08:30:00Z'
+    createdAt: '2025-11-15T08:30:00Z',
+    updatedAt: '2025-11-15T08:30:00Z'
   },
   {
     id: 'bom-2',
@@ -187,8 +187,8 @@ export const mockBOMs: BOM[] = [
         operationStep: 20
       }
     ],
-    createdAt: '2024-01-10T09:15:00Z',
-    updatedAt: '2024-02-08T14:20:00Z'
+    createdAt: '2025-11-10T09:15:00Z',
+    updatedAt: '2026-01-08T14:20:00Z'
   },
   {
     id: 'bom-3',
@@ -255,8 +255,8 @@ export const mockBOMs: BOM[] = [
         notes: 'Anti-corrosion coating'
       }
     ],
-    createdAt: '2024-02-01T10:45:00Z',
-    updatedAt: '2024-02-01T10:45:00Z'
+    createdAt: '2026-01-01T10:45:00Z',
+    updatedAt: '2026-01-01T10:45:00Z'
   }
 ]
 
