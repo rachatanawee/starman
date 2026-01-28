@@ -3,6 +3,7 @@
 import { ProjectSidebar } from './project-sidebar'
 import { Breadcrumbs } from './breadcrumbs'
 import { ProjectSwitcher } from './project-switcher'
+import { AIChatWidget } from './ai-chat-widget'
 import { useState } from 'react'
 
 interface ProjectLayoutProps {
@@ -30,6 +31,7 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
         )}
         {children}
       </main>
+      <AIChatWidget />
     </div>
   )
 }

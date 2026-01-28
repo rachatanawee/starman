@@ -1,3 +1,5 @@
+import { AIProvider } from '@/lib/ai-context'
+
 export default function RootLayout({
   children,
 }: {
@@ -6,7 +8,9 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        {children}
+        <AIProvider>
+          {children}
+        </AIProvider>
       </body>
     </html>
   )

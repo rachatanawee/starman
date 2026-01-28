@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Plus, Filter, X, User, CheckCircle, FileText, Send, Ban, CalendarX } from 'lucide-react'
+import { Plus, Filter, X, User, CheckCircle, FileText, Send, Ban, CalendarX, Sparkles } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
@@ -17,6 +17,8 @@ import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import { DateRangeFilter } from '@/components/date-range-filter'
+import { AIAssistant } from '@/components/ai-assistant'
+import { AIInsightsBadge } from '@/components/ai-insights-badge'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 
@@ -318,18 +320,39 @@ export default function QuotationPage() {
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Quotation</h1>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Quotation</h1>
+                  <AIInsightsBadge 
+                    type="positive" 
+                    message="AI-powered pricing recommendations available"
+                    confidence={0.85}
+                  />
+                </div>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">Create and manage sales quotations</p>
               </div>
-              <Button 
-                className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
-                onClick={() => router.push(`/${params.locale}/company/${projectId}/quotation/new`)}
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                <span>New Quotation</span>
-              </Button>
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline"
+                  className="gap-2 border-purple-200 text-purple-600 hover:bg-purple-50"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  <span className="hidden sm:inline">AI Insights</span>
+                </Button>
+                <Button 
+                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
+                  onClick={() => router.push(`/${params.locale}/company/${projectId}/quotation/new`)}
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  <span>New Quotation</span>
+                </Button>
+              </div>
             </div>
           </div>
+
+        <AIAssistant 
+          context="quotation-pricing"
+          data={{ basePrice: totalAmount / filteredData.length, currentRevenue: totalAmount }}
+        />
 
         <div className="w-full">
           <FilterPanel
@@ -344,6 +367,12 @@ export default function QuotationPage() {
             <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
               <span className="text-xs sm:text-sm text-gray-600">Total Amount: </span>
               <span className="text-base sm:text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
+              <AIInsightsBadge 
+                type="positive" 
+                message="23% increase predicted for next quarter"
+                confidence={0.78}
+                compact
+              />
             </div>
             <div role="toolbar" className="flex items-center gap-2 shrink-0">
               <DataGridSortMenu table={table} align="end" />
