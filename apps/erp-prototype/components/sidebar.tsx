@@ -26,9 +26,9 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const locale = params.locale as string
   const [isPending, startTransition] = useTransition()
 
-  const [userIsAdmin, setUserIsAdmin] = useState(false)
-  const [userIsManager, setUserIsManager] = useState(false)
-  const [userRoles, setUserRoles] = useState<string[]>([])
+  const [userIsAdmin, setUserIsAdmin] = useState(true)
+  const [userIsManager, setUserIsManager] = useState(true)
+  const [userRoles, setUserRoles] = useState<string[]>(['admin'])
 
   useEffect(() => {
     const checkRoles = async () => {
@@ -107,16 +107,16 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
           <LayoutDashboard className="h-5 w-5" />
           {!collapsed && t('overview')}
         </Link>
+        {userIsAdmin && (
+          <Link href={`/${locale}/users`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/users` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
+            <Users className="h-5 w-5" />
+            {!collapsed && 'User Management'}
+          </Link>
+        )}
         <Link href={`/${locale}/guide`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/guide` ? 'bg-blue-600 text-white rounded-lg' : 'rounded-lg hover:bg-blue-50 text-blue-600 border border-blue-200'} ${collapsed ? 'justify-center' : ''}`}>
           <BookOpen className="h-5 w-5" />
           {!collapsed && t('userGuide')}
         </Link>
-        {userIsAdmin && (
-          <Link href={`/${locale}/users`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/users` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
-            <Users className="h-5 w-5" />
-            {!collapsed && t('users')}
-          </Link>
-        )}
         {userIsAdmin && (
           <Link href={`/${locale}/form-builder`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname.includes(`/${locale}/form-builder`) ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
             <FileText className="h-5 w-5" />

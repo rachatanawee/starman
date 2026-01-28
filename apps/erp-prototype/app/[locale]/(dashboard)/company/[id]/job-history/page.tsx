@@ -54,7 +54,7 @@ export default function JobHistoryPage() {
                 Jobs Log
               </Button>
             </Link>
-            <Link href="/guide?tab=production&section=job-history">
+            <Link href="/guide?tab=reports">
               <Button variant="outline" size="sm">
                 <BookOpen className="h-4 w-4 mr-2" />
                 Learn More

@@ -43,6 +43,14 @@ AI-powered Enterprise Resource Planning system built with Next.js, TypeScript, a
 - **Tax Staging** - VAT and WHT report preparation
 - **GL Account Mapping** - Chart of accounts configuration
 
+### User Management Module
+- **User Administration** - Manage users with role-based access control
+  - 7 roles: Admin, Manager, Accountant, Production Manager, Warehouse Staff, Sales, Viewer
+  - Module permissions: Sales, Production, Inventory, Purchasing, Accounting, Reports, Settings
+  - Company access control: Assign users to specific companies
+  - Inline editing: Add/edit users without dialog popups
+  - Search and filter: By role, status, name, or email
+
 ### AI Capabilities 🤖
 - **The Strategist** - Production planning optimization
 - **The Co-Pilot** - Shop floor problem diagnosis
@@ -85,8 +93,10 @@ erp/
 │       │           │   ├── worker-allowance/
 │       │           │   ├── wip-costing/
 │       │           │   ├── job-history/
-│       │           │   └── accounting/
-│       │           └── guide/      # User documentation
+│       │           │   ├── accounting/
+│       │           │   └── settings/
+│       │           ├── users/          # User management
+│       │           └── guide/          # User documentation
 │       ├── components/             # Reusable components
 │       │   ├── ui/                # shadcn/ui components
 │       │   ├── tablecn/           # Data grid components
@@ -102,7 +112,8 @@ erp/
 │           ├── worker-allowance-data.ts
 │           ├── wip-costing-data.ts
 │           ├── job-history-data.ts
-│           └── accounting-data.ts
+│           ├── accounting-data.ts
+│           └── user-data.ts
 ```
 
 ## 🚀 Getting Started
@@ -176,9 +187,11 @@ The Strategist AI analyzes production schedules and provides:
 
 ### Mock Data
 All modules use realistic mock data for demonstration:
+- Billion-baht factory scale (invoices 8-15M, production costs 5-12.9M)
 - Steel service center context
+- 20 mock users with 7 different roles
+- 4 sample companies
 - Realistic manufacturing operations
-- Sample customer data
 - Production schedules with conflicts
 
 ### Adding New Features

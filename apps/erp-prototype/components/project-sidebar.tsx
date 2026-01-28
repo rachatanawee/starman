@@ -87,10 +87,10 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
     { section: 'Finance' },
     { href: `/${locale}/company/${projectId}/accounting`, icon: Calculator, label: 'Accounting' },
     { section: 'Settings' },
-    { href: `/${locale}/company/${projectId}/team`, icon: Users, label: 'Team' },
     { href: `/${locale}/company/${projectId}/settings`, icon: Settings, label: 'Settings' },
   ] : [
     { href: `/${locale}/company`, icon: GitBranch, label: 'Companies' },
+    { href: `/${locale}/users`, icon: Users, label: 'User Management' },
     { href: `/${locale}/guide`, icon: BookOpen, label: 'User Guide', isGuide: true },
   ]
 

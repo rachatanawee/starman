@@ -17,11 +17,16 @@ export function OverviewGuide() {
     if (!mounted) return
     
     const renderDiagram = async () => {
+      await new Promise(resolve => setTimeout(resolve, 200))
       const nodes = [mermaidRef1.current, mermaidRef2.current].filter((node): node is HTMLDivElement => node !== null)
       if (nodes.length > 0) {
-        nodes.forEach(node => node.removeAttribute('data-processed'))
-        mermaid.initialize({ startOnLoad: false, theme: 'default' })
-        await mermaid.run({ nodes })
+        try {
+          nodes.forEach(node => node.removeAttribute('data-processed'))
+          mermaid.initialize({ startOnLoad: false, theme: 'default' })
+          await mermaid.run({ nodes })
+        } catch (error) {
+          console.error('Mermaid render error:', error)
+        }
       }
     }
     

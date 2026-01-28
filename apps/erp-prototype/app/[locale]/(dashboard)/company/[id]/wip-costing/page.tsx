@@ -108,7 +108,7 @@ export default function WIPCostingPage() {
             <p className="text-gray-600 mt-1">Real-time job costing and variance analysis</p>
           </div>
           <div className="flex gap-2">
-            <Link href="/guide?tab=finance&section=wip-costing">
+            <Link href="/guide?tab=reports">
               <Button variant="outline" size="sm">
                 <BookOpen className="h-4 w-4 mr-2" />
                 Learn More

@@ -252,7 +252,7 @@ export default function PurchasingPage() {
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">The Gatekeeper - Control every baht going out 💸</p>
               </div>
               <div className="flex gap-2">
-                <Link href="/guide?tab=materials&section=purchasing">
+                <Link href="/guide?tab=materials">
                   <Button variant="outline" size="sm">
                     <BookOpen className="h-4 w-4 mr-2" />
                     Learn More
