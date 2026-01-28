@@ -42,14 +42,14 @@ export default function GuidePage() {
     <ProjectLayout>
       <div className="min-h-screen bg-gray-50">
         <div className="bg-white border-b">
-          <div className="max-w-7xl mx-auto px-6 py-10">
-            <div className="flex items-center gap-4">
-              <div className="bg-gray-900 p-3 rounded-lg">
-                <BookOpen className="h-7 w-7 text-white" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-gray-900 p-2 sm:p-3 rounded-lg">
+                <BookOpen className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Starman ERP Guide</h1>
-                <p className="text-gray-600 text-base mt-1">
+                <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Starman ERP Guide</h1>
+                <p className="text-gray-600 text-sm sm:text-base mt-1">
                   คู่มือการใช้งานระบบ ERP แบบครบวงจร
                 </p>
               </div>
@@ -57,32 +57,32 @@ export default function GuidePage() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-            <TabsList className="grid w-full grid-cols-6 h-auto">
-              <TabsTrigger value="overview" className="flex flex-col items-center gap-2 py-3">
-                <Target className="h-5 w-5" />
-                <span className="text-sm">ภาพรวม</span>
+            <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto gap-2">
+              <TabsTrigger value="overview" className="flex flex-col items-center gap-1 sm:gap-2 py-2 sm:py-3">
+                <Target className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm">ภาพรวม</span>
               </TabsTrigger>
-              <TabsTrigger value="sales" className="flex flex-col items-center gap-2 py-3">
-                <ShoppingCart className="h-5 w-5" />
-                <span className="text-sm">Sales</span>
+              <TabsTrigger value="sales" className="flex flex-col items-center gap-1 sm:gap-2 py-2 sm:py-3">
+                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm">Sales</span>
               </TabsTrigger>
-              <TabsTrigger value="production" className="flex flex-col items-center gap-2 py-3">
-                <Factory className="h-5 w-5" />
-                <span className="text-sm">Production</span>
+              <TabsTrigger value="production" className="flex flex-col items-center gap-1 sm:gap-2 py-2 sm:py-3">
+                <Factory className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm">Production</span>
               </TabsTrigger>
-              <TabsTrigger value="materials" className="flex flex-col items-center gap-2 py-3">
-                <Package className="h-5 w-5" />
-                <span className="text-sm">Materials</span>
+              <TabsTrigger value="materials" className="flex flex-col items-center gap-1 sm:gap-2 py-2 sm:py-3">
+                <Package className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm">Materials</span>
               </TabsTrigger>
-              <TabsTrigger value="finance" className="flex flex-col items-center gap-2 py-3">
-                <Receipt className="h-5 w-5" />
-                <span className="text-sm">Finance</span>
+              <TabsTrigger value="finance" className="flex flex-col items-center gap-1 sm:gap-2 py-2 sm:py-3">
+                <Receipt className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm">Finance</span>
               </TabsTrigger>
-              <TabsTrigger value="reports" className="flex flex-col items-center gap-2 py-3">
-                <BarChart3 className="h-5 w-5" />
-                <span className="text-sm">Reports</span>
+              <TabsTrigger value="reports" className="flex flex-col items-center gap-1 sm:gap-2 py-2 sm:py-3">
+                <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="text-xs sm:text-sm">Reports</span>
               </TabsTrigger>
             </TabsList>
 

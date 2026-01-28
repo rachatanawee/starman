@@ -4,6 +4,12 @@ import type { Metadata, Viewport } from 'next'
 export const metadata: Metadata = {
   title: 'Starman ERP',
   description: 'AI-powered Enterprise Resource Planning system',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', type: 'image/x-icon', sizes: 'any' },
+    ],
+  },
 }
 
 export const viewport: Viewport = {
