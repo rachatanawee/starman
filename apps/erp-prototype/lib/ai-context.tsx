@@ -67,6 +67,29 @@ function generateMockSuggestion(context: string, data: any) {
         { price: data.basePrice * 1.18, reason: 'Premium positioning' }
       ]
     },
+    'dashboard-insights': {
+      confidence: 0.89,
+      insights: [
+        'Revenue growth accelerating - projected ฿850K next month (+18%)',
+        'Production efficiency at 96% - best performance this quarter',
+        'Recommend auto-ordering 5 items to prevent stockouts',
+        '8 delayed orders - suggest shifting resources from Product E to Product A',
+        'Raw materials inventory optimal - no action needed',
+        'Work-in-progress trending up - consider adding evening shift'
+      ],
+      message: `Dashboard Analysis: ฿${data.totalRevenue?.toLocaleString() || 0} revenue, ${data.productionEfficiency || 0}% efficiency, ${data.lowStockItems || 0} items need attention, ${data.activeOrders || 0} active orders`
+    },
+    'customer-trends': {
+      confidence: 0.92,
+      insights: [
+        `Top ${data.topCustomers?.length || 3} customers account for 65% of total revenue`,
+        'Customer retention rate increased by 12% this quarter',
+        'Average order value trending up 15% month-over-month',
+        'Acme Corp shows 45% growth potential based on order history',
+        'Tech Solutions has consistent monthly orders - ideal for subscription model'
+      ],
+      message: `Analyzing ${data.customerCount || 0} customers with total revenue of $${data.totalRevenue?.toLocaleString() || 0}`
+    },
     'sales-forecast': {
       predictedRevenue: data.currentRevenue * 1.23,
       confidence: 0.78,

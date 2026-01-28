@@ -108,6 +108,7 @@ interface UseDataGridProps<TData>
   autoFocus?: boolean | Partial<CellPosition>;
   enableColumnSelection?: boolean;
   enableSearch?: boolean;
+  enableRowSelection?: boolean;
 }
 
 function useDataGrid<TData>({

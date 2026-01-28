@@ -342,7 +342,7 @@ export default function SalesOrderPage() {
   return (
     <ProjectLayout projectId={projectId}>
       <div className="w-full h-full">
-        <div className="p-3 sm:p-4 lg:p-6 space-y-3 sm:space-y-3 lg:space-y-4">
+        <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">

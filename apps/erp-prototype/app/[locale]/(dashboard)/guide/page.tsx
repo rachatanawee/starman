@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useParams, useRouter } from 'next/navigation'
+import { MermaidDiagram } from '@/components/mermaid-diagram'
 
 export default function GuidePage() {
   const params = useParams()
@@ -27,9 +28,9 @@ export default function GuidePage() {
                   <BookOpen className="h-7 w-7 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900">คู่มือการใช้งาน ERP System</h1>
+                  <h1 className="text-3xl font-bold text-gray-900">Starman ERP: Your Business Ground Control</h1>
                   <p className="text-gray-600 text-base mt-1">
-                    ระบบบริหารทรัพยากรองค์กร (Enterprise Resource Planning)
+                    Navigate your business through the chaos. Let our AI-powered Ground Control handle the systems, so you can focus on the mission.
                   </p>
                 </div>
               </div>
@@ -50,16 +51,17 @@ export default function GuidePage() {
             <CardHeader className="border-b bg-gray-50">
               <CardTitle className="flex items-center gap-2 text-xl font-semibold">
                 <Target className="h-5 w-5 text-gray-700" />
-ภาพรวมระบบ ERP
+                ภาพรวม Starman ERP
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6 space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">ERP System คืออะไร?</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Starman ERP คืออะไร?</h3>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  <span className="font-semibold text-gray-900">ERP (Enterprise Resource Planning)</span> เป็นระบบบริหารทรัพยากรองค์กรแบบครบวงจร 
+                  <span className="font-semibold text-gray-900">Starman ERP</span> เป็นระบบบริหารทรัพยากรองค์กรแบบครบวงจร 
                   ที่รวมการทำงานของทุกแผนกเข้าด้วยกัน ตั้งแต่การขาย การจัดซื้อ สต็อกสินค้า การผลิต การเงิน และทรัพยากรบุคคล 
-                  ช่วยให้ข้อมูลทั้งหมดอยู่ในที่เดียว ลดความซ้ำซ้อน และเพิ่มประสิทธิภาพการทำงาน
+                  ช่วยให้ข้อมูลทั้งหมดอยู่ในที่เดียว ลดความซ้ำซ้อน และเพิ่มประสิทธิภาพการทำงาน 
+                  <span className="font-semibold text-amber-700">พร้อมด้วย Agentic AI ที่ช่วยทำงานอัตโนมัติและตัดสินใจอย่างชintelligent</span>
                 </p>
                 
                 <div className="bg-purple-50 p-5 rounded-lg border border-purple-200 mb-4">
@@ -68,7 +70,7 @@ export default function GuidePage() {
                     <div>
                       <h4 className="font-semibold text-gray-900 text-base mb-2">ระบบบูรณาการทุกแผนก</h4>
                       <p className="text-gray-700 text-sm mb-3">
-                        ERP เชื่อมโยงการทำงานของทุกแผนกเข้าด้วยกัน ทำให้ข้อมูลไหลลื่นและทันสมัยตลอดเวลา:
+                        Starman ERP เชื่อมโยงการทำงานของทุกแผนกเข้าด้วยกัน ทำให้ข้อมูลไหลลื่นและทันสมัยตลอดเวลา:
                       </p>
                       <ul className="space-y-2 text-sm text-gray-700">
                         <li className="flex items-start gap-2">
@@ -129,6 +131,44 @@ export default function GuidePage() {
                       <p className="text-xs text-gray-600">
                         <strong>เปรียบเทียบ:</strong> แทนที่การใช้ Excel หลายไฟล์ ด้วยระบบเดียวที่ข้อมูลเชื่อมโยงกันอัตโนมัติ 
                         ลดความผิดพลาดและประหยัดเวลา
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 p-5 rounded-lg border-2 border-amber-300 mb-4">
+                <div className="flex items-start gap-3">
+                  <div className="bg-gradient-to-br from-amber-400 to-orange-500 p-2 rounded-lg">
+                    <Sparkles className="h-7 w-7 text-white mt-1 flex-shrink-0" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 text-base mb-2">พลัง Agentic AI ที่ทำงานแทนคุณ</h4>
+                    <p className="text-gray-700 text-sm mb-3">
+                      AI Agent ที่สามารถคิด วิเคราะห์ และตัดสินใจได้เองอย่างอัจฉริยะ:
+                    </p>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      <li className="flex items-start gap-2">
+                        <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Auto-Order</span>
+                        <span>สั่งซื้อสินค้าอัตโนมัติเมื่อสต็อกต่ำกว่าจุดที่กำหนด</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Smart-Pricing</span>
+                        <span>แนะนำราคาขายที่เหมาะสมตามตลาดแลเคู่แข่ง</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Predictive</span>
+                        <span>ทำนายยอดขายและความต้องการสินค้าล่วงหน้า</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Insights</span>
+                        <span>วิเคราะห์ข้อมูลและให้คำแนะนำเชิงธุรกิจแบบ Real-time</span>
+                      </li>
+                    </ul>
+                    <div className="mt-3 pt-3 border-t border-amber-300">
+                      <p className="text-xs text-amber-900">
+                        <strong>ความแตกต่าง:</strong> AI ไม่ได้แค่ตอบคำถาม แต่สามารถทำงานและตัดสินใจได้เองอย่างอัจฉริยะ 
+                        เหมือนมีผู้ช่วยที่ฉลาดที่คอยช่วยคุณ 24/7
                       </p>
                     </div>
                   </div>
@@ -216,6 +256,149 @@ export default function GuidePage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6 space-y-6">
+              {/* Sales Order Flow Diagram */}
+              <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl border-2 border-purple-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <ArrowRight className="h-5 w-5 text-purple-600" />
+                  Sales Order Process Flow
+                </h3>
+                <MermaidDiagram 
+                  chart={`
+flowchart LR
+    A[ลูกค้าสั่งซื้อ] --> B[สร้างใบเสนอราคา]
+    B --> C{ลูกค้าตกลง?}
+    C -->|ใช่| D[สร้าง Sales Order]
+    C -->|ไม่| E[ปิดงาน]
+    D --> F[ตรวจสอบสต็อก]
+    F --> G{สต็อกพอ?}
+    G -->|ใช่| H[จัดเตรียมสินค้า]
+    G -->|ไม่| I[สั่งซื้อเพิ่ม]
+    I --> H
+    H --> J[จัดส่งสินค้า]
+    J --> K[ออกใบแจ้งหนี้]
+    K --> L[รับชำระเงิน]
+    L --> M[เสร็จสิ้น]
+    
+    style A fill:#e0e7ff
+    style D fill:#ddd6fe
+    style H fill:#bbf7d0
+    style M fill:#86efac
+                  `}
+                  className="bg-white p-4 rounded-lg shadow-sm"
+                />
+              </div>
+
+              {/* System Integration Diagram */}
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border-2 border-blue-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <GitBranch className="h-5 w-5 text-blue-600" />
+                  System Integration Architecture
+                </h3>
+                <MermaidDiagram 
+                  chart={`
+graph TD
+    ERP[Starman ERP Core]
+    
+    ERP --> Sales[Sales Module]
+    ERP --> Purchase[Purchase Module]
+    ERP --> Inventory[Inventory Module]
+    ERP --> Finance[Finance Module]
+    ERP --> AI[AI Agent]
+    
+    Sales --> Customer[Customer Data]
+    Purchase --> Supplier[Supplier Data]
+    Inventory --> Stock[Stock Data]
+    Finance --> Accounting[Accounting Data]
+    
+    AI --> Sales
+    AI --> Purchase
+    AI --> Inventory
+    AI --> Finance
+    
+    style ERP fill:#fbbf24,stroke:#f59e0b,stroke-width:3px
+    style AI fill:#fcd34d,stroke:#f59e0b,stroke-width:2px
+    style Sales fill:#ddd6fe
+    style Purchase fill:#bfdbfe
+    style Inventory fill:#bbf7d0
+    style Finance fill:#fed7aa
+                  `}
+                  className="bg-white p-4 rounded-lg shadow-sm"
+                />
+              </div>
+
+              {/* Sequence Diagram */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-2 border-green-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <ListTodo className="h-5 w-5 text-green-600" />
+                  Order Processing Sequence
+                </h3>
+                <MermaidDiagram 
+                  chart={`
+sequenceDiagram
+    participant C as ลูกค้า
+    participant S as Sales
+    participant I as Inventory
+    participant F as Finance
+    participant AI as AI Agent
+    
+    C->>S: สั่งซื้อสินค้า
+    S->>I: ตรวจสอบสต็อก
+    I-->>S: สต็อกพร้อม
+    S->>AI: ขอคำแนะนำราคา
+    AI-->>S: แนะนำราคา
+    S->>C: ส่งใบเสนอราคา
+    C->>S: ยืนยันคำสั่งซื้อ
+    S->>I: จองสต็อก
+    I-->>S: จองสำเร็จ
+    S->>F: สร้างใบแจ้งหนี้
+    F-->>C: ส่งใบแจ้งหนี้
+    C->>F: ชำระเงิน
+    F->>S: แจ้งชำระเงินแล้ว
+    S->>I: จัดส่งสินค้า
+    I-->>C: ส่งสินค้า
+                  `}
+                  className="bg-white p-4 rounded-lg shadow-sm"
+                />
+              </div>
+
+              {/* AI Decision Flow */}
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-xl border-2 border-amber-300">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-amber-600" />
+                  AI Agent Decision Making
+                </h3>
+                <MermaidDiagram 
+                  chart={`
+flowchart TD
+    Start[AI Agent เริ่มทำงาน] --> Monitor[ตรวจสอบข้อมูล]
+    Monitor --> Analyze[วิเคราะห์ข้อมูล]
+    Analyze --> Decision{ตัดสินใจ}
+    
+    Decision -->|สต็อกต่ำ| AutoOrder[สั่งซื้ออัตโนมัติ]
+    Decision -->|ราคาไม่เหมาะสม| PriceAdjust[แนะนำปรับราคา]
+    Decision -->|แนวโน้มขาย| Forecast[ทำนายยอดขาย]
+    Decision -->|ข้อมูลปกติ| Continue[ดำเนินการต่อ]
+    
+    AutoOrder --> Notify1[แจ้งเตือนผู้ใช้]
+    PriceAdjust --> Notify2[แจ้งเตือนผู้ใช้]
+    Forecast --> Notify3[แจ้งเตือนผู้ใช้]
+    
+    Notify1 --> Monitor
+    Notify2 --> Monitor
+    Notify3 --> Monitor
+    Continue --> Monitor
+    
+    style Start fill:#fcd34d
+    style Decision fill:#fbbf24
+    style AutoOrder fill:#86efac
+    style PriceAdjust fill:#93c5fd
+    style Forecast fill:#c4b5fd
+                  `}
+                  className="bg-white p-4 rounded-lg shadow-sm"
+                />
+              </div>
+
+              {/* Original workflow content */}
               {[
                 {
                   num: 1,
@@ -387,20 +570,29 @@ export default function GuidePage() {
                     title: 'Data Export & Integration',
                     desc: 'Export ข้อมูลและเชื่อมต่อกับระบบอื่นได้ง่าย',
                     benefits: ['Export ข้อมูลเป็น Excel, PDF', 'API สำหรับเชื่อมต่อระบบอื่น', 'Import ข้อมูลจากไฟล์ Excel']
+                  },
+                  {
+                    icon: Sparkles,
+                    color: 'amber',
+                    gradient: true,
+                    title: 'Agentic AI Assistant',
+                    desc: 'AI Agent ที่ทำงานอัตโนมัติ วิเคราะห์ และตัดสินใจแทนคุณอย่างชาญฉลาด',
+                    benefits: ['สั่งซื้อสินค้าอัตโนมัติเมื่อสต็อกต่ำ', 'แนะนำราคาขายที่เหมาะสมตามตลาด', 'ทำนายยอดขายและวางแผนสต็อก', 'วิเคราะห์และให้คำแนะนำธุรกิจ 24/7']
                   }
                 ].map((feature, idx) => {
                   const Icon = feature.icon
+                  const isGradient = feature.gradient
                   return (
-                    <div key={idx} className={`bg-white p-5 rounded-lg border-2 border-${feature.color}-200 hover:shadow-md transition-shadow`}>
+                    <div key={idx} className={`bg-white p-5 rounded-lg border-2 ${isGradient ? 'border-amber-300 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50' : `border-${feature.color}-200`} hover:shadow-md transition-shadow`}>
                       <div className="flex items-start gap-3">
-                        <div className={`bg-${feature.color}-100 p-3 rounded-lg`}>
-                          <Icon className={`h-6 w-6 text-${feature.color}-600`} />
+                        <div className={isGradient ? 'bg-gradient-to-br from-amber-400 to-orange-500 p-3 rounded-lg' : `bg-${feature.color}-100 p-3 rounded-lg`}>
+                          <Icon className={isGradient ? 'h-6 w-6 text-white' : `h-6 w-6 text-${feature.color}-600`} />
                         </div>
                         <div className="flex-1">
                           <h3 className="font-semibold text-lg text-gray-900 mb-2">{feature.title}</h3>
                           <p className="text-sm text-gray-600 mb-3">{feature.desc}</p>
-                          <div className={`bg-${feature.color}-50 p-3 rounded border border-${feature.color}-200`}>
-                            <ul className={`text-xs text-${feature.color}-700 space-y-1`}>
+                          <div className={isGradient ? 'bg-gradient-to-r from-amber-100 to-orange-100 p-3 rounded border border-amber-300' : `bg-${feature.color}-50 p-3 rounded border border-${feature.color}-200`}>
+                            <ul className={isGradient ? 'text-xs text-amber-800 space-y-1' : `text-xs text-${feature.color}-700 space-y-1`}>
                               {feature.benefits.map((b, i) => (
                                 <li key={i}>• {b}</li>
                               ))}
@@ -494,8 +686,8 @@ export default function GuidePage() {
               <div className="space-y-6">
                 {[
                   {
-                    q: 'ERP System เหมาะกับธุรกิจขนาดไหน?',
-                    a: 'ระบบ ERP เหมาะกับธุรกิจทุกขนาด ตั้งแต่ SME ไปจนถึงองค์กรขนาดใหญ่ สามารถปรับแต่งฟีเจอร์ตามความต้องการของแต่ละธุรกิจได้'
+                    q: 'Starman ERP เหมาะกับธุรกิจขนาดไหน?',
+                    a: 'ระบบ Starman ERP เหมาะกับธุรกิจทุกขนาด ตั้งแต่ SME ไปจนถึงองค์กรขนาดใหญ่ สามารถปรับแต่งฟีเจอร์ตามความต้องการของแต่ละธุรกิจได้'
                   },
                   {
                     q: 'ใช้เวลานานแค่ไหนในการติดตั้งระบบ?',

@@ -50,7 +50,7 @@ export default function LoginPage() {
             <div className="bg-purple-500 p-2 rounded-lg">
               <GitBranch className="h-8 w-8" />
             </div>
-            <h1 className="text-3xl font-bold">AI ERP System</h1>
+            <h1 className="text-3xl font-bold">Starman ERP</h1>
           </div>
           <h2 className="text-4xl font-bold mb-4 leading-tight">AI-Powered<br />Enterprise Resource Planning</h2>
           <p className="text-lg text-slate-300 mb-12">
@@ -87,7 +87,7 @@ export default function LoginPage() {
           </div>
         </div>
         <div className="text-sm text-slate-400">
-          © 2025 AI ERP System. Prototype Version.
+          © 2025 Starman ERP. Prototype Version.
         </div>
       </div>
 
@@ -99,7 +99,7 @@ export default function LoginPage() {
             <div className="bg-purple-500 p-2 rounded-lg">
               <GitBranch className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">AI ERP System</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Starman ERP</h1>
           </div>
 
           <Card className="w-full border-0 shadow-xl">

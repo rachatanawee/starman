@@ -6,11 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { 
   Package2, ShoppingCart, DollarSign, TrendingUp, 
-  Factory, Users, AlertCircle, CheckCircle2, Clock, RefreshCw, Printer, Building2
+  Factory, Users, AlertCircle, CheckCircle2, Clock, RefreshCw, Printer, Building2, Sparkles
 } from 'lucide-react'
 import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
 import { ProjectLayout } from '@/components/project-layout'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+import { AIAssistant } from '@/components/ai-assistant'
+import { AIInsightsBadge } from '@/components/ai-insights-badge'
 
 export default function CompanyDashboardPage() {
   const params = useParams()
@@ -18,6 +20,7 @@ export default function CompanyDashboardPage() {
   const projectId = params.id as string
   
   const [project] = useState<MockProject | null>(mockProjectsAPI.getSync(projectId))
+  const [showAI, setShowAI] = useState(false)
 
   if (!project) {
     return (
@@ -91,11 +94,28 @@ export default function CompanyDashboardPage() {
                 <Building2 className="h-6 w-6 text-purple-600" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">{project.name}</h1>
+                <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                  {project.name}
+                  <AIInsightsBadge 
+                    type="positive" 
+                    message="Production on track | Inventory optimized"
+                    confidence={0.89}
+                    compact
+                  />
+                </h1>
                 <p className="text-sm text-gray-600">ERP Dashboard - {project.description}</p>
               </div>
             </div>
             <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 hover:from-amber-100 hover:to-orange-100"
+                onClick={() => setShowAI(!showAI)}
+              >
+                <Sparkles className="h-4 w-4 mr-2" />
+                AI Insights
+              </Button>
               <Button 
                 variant="outline" 
                 size="sm"
@@ -122,6 +142,12 @@ export default function CompanyDashboardPage() {
             <CardContent>
               <div className="text-2xl font-bold">{inventoryStats.totalItems}</div>
               <p className="text-xs text-red-600 mt-1">{inventoryStats.lowStock} low stock items</p>
+              <AIInsightsBadge 
+                type="warning" 
+                message="AI suggests reorder for 5 items"
+                confidence={0.91}
+                compact
+              />
             </CardContent>
           </Card>
 
@@ -158,6 +184,22 @@ export default function CompanyDashboardPage() {
             </CardContent>
           </Card>
         </div>
+
+        {/* AI Assistant */}
+        {showAI && (
+          <div className="mb-8">
+            <AIAssistant
+              title="Company Overview Insights"
+              context="dashboard-insights"
+              data={{ 
+                totalRevenue: salesData[salesData.length - 1].sales,
+                productionEfficiency: 96,
+                lowStockItems: inventoryStats.lowStock,
+                activeOrders: productionStats.activeOrders
+              }}
+            />
+          </div>
+        )}
 
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">

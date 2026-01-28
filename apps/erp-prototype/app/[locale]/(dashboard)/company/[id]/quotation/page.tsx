@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import { DateRangeFilter } from '@/components/date-range-filter'
@@ -80,6 +81,8 @@ export default function QuotationPage() {
     dateFrom: '',
     dateTo: ''
   })
+
+  const [showAI, setShowAI] = React.useState(false)
 
   const filterConfig: FilterConfig = {
     name: 'Filters',
@@ -230,6 +233,29 @@ export default function QuotationPage() {
   const columns = React.useMemo<ColumnDef<Quotation>[]>(
     () => [
       {
+        id: 'select',
+        header: ({ table }) => (
+          <div className="flex items-center justify-center">
+            <Checkbox
+              checked={table.getIsAllPageRowsSelected()}
+              onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+              className="bg-white"
+            />
+          </div>
+        ),
+        cell: ({ row }) => (
+          <div className="flex items-center justify-center">
+            <Checkbox
+              checked={row.getIsSelected()}
+              onCheckedChange={(value) => row.toggleSelected(!!value)}
+            />
+          </div>
+        ),
+        enableSorting: false,
+        enableHiding: false,
+        size: 40,
+      },
+      {
         id: 'quotationNumber',
         accessorKey: 'quotationNumber',
         header: 'Quotation No.',
@@ -309,6 +335,7 @@ export default function QuotationPage() {
     onDataChange: setData,
     getRowId: (row) => row.id,
     enableSearch: true,
+    enableRowSelection: true,
   })
 
   const height = Math.max(400, windowSize.height - 200)
@@ -316,7 +343,7 @@ export default function QuotationPage() {
   return (
     <ProjectLayout projectId={projectId}>
       <div className="w-full h-full">
-        <div className="p-3 sm:p-4 lg:p-6 space-y-3 sm:space-y-3 lg:space-y-4">
+        <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
@@ -324,8 +351,8 @@ export default function QuotationPage() {
                   <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Quotation</h1>
                   <AIInsightsBadge 
                     type="positive" 
-                    message="AI-powered pricing recommendations available"
-                    confidence={0.85}
+                    message="Top customers: Acme Corp (+45%), Tech Solutions (+32%)"
+                    confidence={0.92}
                   />
                 </div>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">Create and manage sales quotations</p>
@@ -333,10 +360,11 @@ export default function QuotationPage() {
               <div className="flex gap-2">
                 <Button 
                   variant="outline"
-                  className="gap-2 border-purple-200 text-purple-600 hover:bg-purple-50"
+                  className="gap-2 border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 hover:from-amber-100 hover:to-orange-100"
+                  onClick={() => setShowAI(!showAI)}
                 >
                   <Sparkles className="h-4 w-4" />
-                  <span className="hidden sm:inline">AI Insights</span>
+                  <span className="hidden sm:inline">Customer Trends</span>
                 </Button>
                 <Button 
                   className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
@@ -349,10 +377,16 @@ export default function QuotationPage() {
             </div>
           </div>
 
-        <AIAssistant 
-          context="quotation-pricing"
-          data={{ basePrice: totalAmount / filteredData.length, currentRevenue: totalAmount }}
-        />
+        {showAI && (
+          <AIAssistant 
+            context="customer-trends"
+            data={{ 
+              topCustomers: ['Acme Corp', 'Tech Solutions', 'Global Industries'],
+              totalRevenue: totalAmount,
+              customerCount: new Set(filteredData.map(q => q.customer)).size
+            }}
+          />
+        )}
 
         <div className="w-full">
           <FilterPanel
@@ -369,8 +403,8 @@ export default function QuotationPage() {
               <span className="text-base sm:text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
               <AIInsightsBadge 
                 type="positive" 
-                message="23% increase predicted for next quarter"
-                confidence={0.78}
+                message="Customer retention rate: 87% | Avg order value trending up 15%"
+                confidence={0.88}
                 compact
               />
             </div>

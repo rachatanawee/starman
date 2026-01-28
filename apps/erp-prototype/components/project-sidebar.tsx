@@ -2,9 +2,9 @@
 
 import { 
   LayoutDashboard, LogOut, ChevronLeft, ChevronRight, Languages,
-  GitBranch, ListTodo, FileText, DollarSign, Users2,
+  Star, ListTodo, FileText, DollarSign, Users2,
   BarChart3, Users, Settings, Calendar, BookOpen, Network,
-  Package2, ShoppingBag, Building2, History, Calculator
+  Package2, ShoppingBag, Building2, History, Calculator, GitBranch
 } from 'lucide-react'
 import { Button } from './ui/button'
 import { QuickSearch } from './quick-search'
@@ -89,9 +89,9 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
         {!collapsed && (
           <div className="flex items-center gap-2">
             <div className="bg-purple-500 p-1.5 rounded-lg">
-              <GitBranch className="h-5 w-5 text-white" />
+              <Star className="h-5 w-5 text-white" />
             </div>
-            <h2 className="text-lg font-bold text-gray-900">ERP System</h2>
+            <h2 className="text-lg font-bold text-gray-900">Starman ERP</h2>
           </div>
         )}
         <Button 
