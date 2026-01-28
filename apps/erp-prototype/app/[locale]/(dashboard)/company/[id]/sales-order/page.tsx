@@ -18,6 +18,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import { DateRangeFilter } from '@/components/date-range-filter'
+import { useTranslations } from 'next-intl'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 
@@ -80,6 +81,7 @@ export default function SalesOrderPage() {
   const router = useRouter()
   const projectId = params.id as string
   const windowSize = useWindowSize({ defaultHeight: 760 })
+  const t = useTranslations('salesOrder')
 
   const [filterCriteria, setFilterCriteria] = React.useState<FilterCriteria>({
     orderNumber: '',
@@ -104,11 +106,11 @@ export default function SalesOrderPage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Filter className="h-3 w-3" />
-            Order Number
+            {t('orderNumber')}
           </Label>
           <Input
             data-testid="filter-order-number"
-            placeholder="Search order..."
+            placeholder={t('searchOrder')}
             value={criteria.orderNumber}
             onChange={(e) => setCriteria('orderNumber', e.target.value)}
             className="h-9"
@@ -117,54 +119,54 @@ export default function SalesOrderPage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Filter className="h-3 w-3" />
-            Status
+            {t('status')}
           </Label>
           <Select value={criteria.status} onValueChange={(v) => setCriteria('status', v)}>
             <SelectTrigger data-testid="filter-status" className="h-9">
-              <SelectValue placeholder="All Status" />
+              <SelectValue placeholder={t('allStatus')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="all">{t('allStatus')}</SelectItem>
               <SelectItem value="Draft">
                 <div className="flex items-center gap-2">
                   <FileText className="h-4 w-4 text-gray-600" />
-                  Draft
+                  {t('draft')}
                 </div>
               </SelectItem>
               <SelectItem value="Pending">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-yellow-600" />
-                  Pending
+                  {t('pending')}
                 </div>
               </SelectItem>
               <SelectItem value="Confirmed">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-blue-600" />
-                  Confirmed
+                  {t('confirmed')}
                 </div>
               </SelectItem>
               <SelectItem value="Processing">
                 <div className="flex items-center gap-2">
                   <Package className="h-4 w-4 text-blue-600" />
-                  Processing
+                  {t('processing')}
                 </div>
               </SelectItem>
               <SelectItem value="Shipped">
                 <div className="flex items-center gap-2">
                   <Truck className="h-4 w-4 text-purple-600" />
-                  Shipped
+                  {t('shipped')}
                 </div>
               </SelectItem>
               <SelectItem value="Completed">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-600" />
-                  Completed
+                  {t('completed')}
                 </div>
               </SelectItem>
               <SelectItem value="Cancelled">
                 <div className="flex items-center gap-2">
                   <XCircle className="h-4 w-4 text-red-600" />
-                  Cancelled
+                  {t('cancelled')}
                 </div>
               </SelectItem>
             </SelectContent>
@@ -173,11 +175,11 @@ export default function SalesOrderPage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <User className="h-3 w-3" />
-            Customer
+            {t('customer')}
           </Label>
           <Input
             data-testid="filter-customer"
-            placeholder="Search customer..."
+            placeholder={t('searchCustomer')}
             value={criteria.customer}
             onChange={(e) => setCriteria('customer', e.target.value)}
             className="h-9"
@@ -195,19 +197,19 @@ export default function SalesOrderPage() {
       <>
         {criteria.orderNumber && (
           <Badge variant="outline" className="gap-1">
-            Order: {criteria.orderNumber}
+            {t('orderNumber')}: {criteria.orderNumber}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('orderNumber', ''); }} />
           </Badge>
         )}
         {criteria.status !== 'all' && (
           <Badge variant="outline" className="gap-1">
-            Status: {criteria.status}
+            {t('status')}: {criteria.status}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('status', 'all'); }} />
           </Badge>
         )}
         {criteria.customer && (
           <Badge variant="outline" className="gap-1">
-            Customer: {criteria.customer}
+            {t('customer')}: {criteria.customer}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('customer', ''); }} />
           </Badge>
         )}
@@ -254,9 +256,9 @@ export default function SalesOrderPage() {
       {
         id: 'orderNumber',
         accessorKey: 'orderNumber',
-        header: 'Order Number',
+        header: t('orderNumber'),
         minSize: 120,
-        meta: { label: 'Order Number', cell: { variant: 'short-text' } },
+        meta: { label: t('orderNumber'), cell: { variant: 'short-text' } },
         cell: ({ row }) => (
           <button
             onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/${row.original.id}`)}
@@ -269,30 +271,30 @@ export default function SalesOrderPage() {
       {
         id: 'customer',
         accessorKey: 'customer',
-        header: 'Customer',
+        header: t('customer'),
         minSize: 150,
-        meta: { label: 'Customer', cell: { variant: 'short-text' } },
+        meta: { label: t('customer'), cell: { variant: 'short-text' } },
       },
       {
         id: 'date',
         accessorKey: 'date',
-        header: 'Date',
+        header: t('date'),
         minSize: 110,
-        meta: { label: 'Date', cell: { variant: 'short-text' } },
+        meta: { label: t('date'), cell: { variant: 'short-text' } },
       },
       {
         id: 'deliveryDate',
         accessorKey: 'deliveryDate',
-        header: 'Delivery',
+        header: t('delivery'),
         minSize: 110,
-        meta: { label: 'Delivery Date', cell: { variant: 'short-text' } },
+        meta: { label: t('deliveryDate'), cell: { variant: 'short-text' } },
       },
       {
         id: 'amount',
         accessorKey: 'amount',
-        header: 'Amount',
+        header: t('amount'),
         minSize: 100,
-        meta: { label: 'Amount', cell: { variant: 'short-text' } },
+        meta: { label: t('amount'), cell: { variant: 'short-text' } },
         cell: ({ row }) => (
           <div className="text-right">{row.original.amount.toLocaleString()}</div>
         ),
@@ -300,7 +302,7 @@ export default function SalesOrderPage() {
       {
         id: 'status',
         accessorKey: 'status',
-        header: 'Status',
+        header: t('status'),
         minSize: 80,
         meta: { label: 'Status', cell: { variant: 'short-text' } },
         cell: ({ row }) => (
@@ -321,9 +323,9 @@ export default function SalesOrderPage() {
       {
         id: 'items',
         accessorKey: 'items',
-        header: 'Items',
+        header: t('items'),
         minSize: 80,
-        meta: { label: 'Items', cell: { variant: 'short-text' } },
+        meta: { label: t('items'), cell: { variant: 'short-text' } },
         cell: ({ row }) => (
           <div className="text-right">{row.original.items}</div>
         ),
@@ -349,23 +351,23 @@ export default function SalesOrderPage() {
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Sales Order</h1>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1">Manage customer orders</p>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{t('title')}</h1>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1">{t('subtitle')}</p>
               </div>
               <div className="flex gap-2">
                 <Link href="/guide?tab=sales&section=sales-order">
                   <Button variant="outline" size="sm">
                     <BookOpen className="h-4 w-4 mr-2" />
-                    Learn More
+                    {t('learnMore')}
                   </Button>
                 </Link>
-                <Button 
+                <Button
                   data-testid="new-order-button"
-                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
+                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow"
                   onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/new`)}
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  <span>New Order</span>
+                  <span>{t('newOrder')}</span>
                 </Button>
               </div>
             </div>
@@ -382,7 +384,7 @@ export default function SalesOrderPage() {
         <div className="flex flex-col gap-3 sm:gap-3 text-sm w-full">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div data-testid="total-amount" className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
-              <span className="text-xs sm:text-sm text-gray-600">Total Amount: </span>
+              <span className="text-xs sm:text-sm text-gray-600">{t('totalAmount')}: </span>
               <span className="text-base sm:text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
             </div>
             <div role="toolbar" className="flex items-center gap-2 shrink-0">

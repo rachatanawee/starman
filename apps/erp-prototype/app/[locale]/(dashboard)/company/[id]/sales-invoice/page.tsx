@@ -18,6 +18,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import { DateRangeFilter } from '@/components/date-range-filter'
+import { useTranslations } from 'next-intl'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 
@@ -63,6 +64,7 @@ export default function SalesInvoicePage() {
   const router = useRouter()
   const projectId = params.id as string
   const windowSize = useWindowSize({ defaultHeight: 760 })
+  const t = useTranslations('salesInvoice')
 
   const [filterCriteria, setFilterCriteria] = React.useState<FilterCriteria>({
     invoiceNumber: '',
@@ -87,11 +89,11 @@ export default function SalesInvoicePage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Filter className="h-3 w-3" />
-            Invoice Number
+            {t('invoiceNumber')}
           </Label>
           <Input
             data-testid="filter-invoice-number"
-            placeholder="Search invoice..."
+            placeholder={t('searchInvoice')}
             value={criteria.invoiceNumber}
             onChange={(e) => setCriteria('invoiceNumber', e.target.value)}
             className="h-9"
@@ -100,36 +102,36 @@ export default function SalesInvoicePage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Filter className="h-3 w-3" />
-            Payment Status
+            {t('paymentStatus')}
           </Label>
           <Select value={criteria.paymentStatus} onValueChange={(v) => setCriteria('paymentStatus', v)}>
             <SelectTrigger data-testid="filter-payment-status" className="h-9">
-              <SelectValue placeholder="All Status" />
+              <SelectValue placeholder={t('allStatus')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="all">{t('allStatus')}</SelectItem>
               <SelectItem value="Paid">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-600" />
-                  Paid
+                  {t('paid')}
                 </div>
               </SelectItem>
               <SelectItem value="Partially Paid">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-blue-600" />
-                  Partially Paid
+                  {t('partiallyPaid')}
                 </div>
               </SelectItem>
               <SelectItem value="Unpaid">
                 <div className="flex items-center gap-2">
                   <DollarSign className="h-4 w-4 text-yellow-600" />
-                  Unpaid
+                  {t('unpaid')}
                 </div>
               </SelectItem>
               <SelectItem value="Overdue">
                 <div className="flex items-center gap-2">
                   <AlertCircle className="h-4 w-4 text-red-600" />
-                  Overdue
+                  {t('overdue')}
                 </div>
               </SelectItem>
             </SelectContent>
@@ -138,11 +140,11 @@ export default function SalesInvoicePage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <User className="h-3 w-3" />
-            Customer
+            {t('customer')}
           </Label>
           <Input
             data-testid="filter-customer"
-            placeholder="Search customer..."
+            placeholder={t('searchCustomer')}
             value={criteria.customer}
             onChange={(e) => setCriteria('customer', e.target.value)}
             className="h-9"
@@ -160,19 +162,19 @@ export default function SalesInvoicePage() {
       <>
         {criteria.invoiceNumber && (
           <Badge variant="outline" className="gap-1">
-            Invoice: {criteria.invoiceNumber}
+            {t('invoiceNumber')}: {criteria.invoiceNumber}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('invoiceNumber', ''); }} />
           </Badge>
         )}
         {criteria.paymentStatus !== 'all' && (
           <Badge variant="outline" className="gap-1">
-            Status: {criteria.paymentStatus}
+            {t('paymentStatus')}: {criteria.paymentStatus}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('paymentStatus', 'all'); }} />
           </Badge>
         )}
         {criteria.customer && (
           <Badge variant="outline" className="gap-1">
-            Customer: {criteria.customer}
+            {t('customer')}: {criteria.customer}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('customer', ''); }} />
           </Badge>
         )}
@@ -223,9 +225,9 @@ export default function SalesInvoicePage() {
       {
         id: 'invoiceNumber',
         accessorKey: 'invoiceNumber',
-        header: 'Invoice Number',
+        header: t('invoiceNumber'),
         minSize: 130,
-        meta: { label: 'Invoice Number', cell: { variant: 'short-text' } },
+        meta: { label: t('invoiceNumber'), cell: { variant: 'short-text' } },
         cell: ({ row }) => (
           <button
             onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-invoice/${row.original.id}`)}
@@ -238,30 +240,30 @@ export default function SalesInvoicePage() {
       {
         id: 'customer',
         accessorKey: 'customer',
-        header: 'Customer',
+        header: t('customer'),
         minSize: 150,
-        meta: { label: 'Customer', cell: { variant: 'short-text' } },
+        meta: { label: t('customer'), cell: { variant: 'short-text' } },
       },
       {
         id: 'invoiceDate',
         accessorKey: 'invoiceDate',
-        header: 'Invoice Date',
+        header: t('invoiceDate'),
         minSize: 110,
-        meta: { label: 'Invoice Date', cell: { variant: 'short-text' } },
+        meta: { label: t('invoiceDate'), cell: { variant: 'short-text' } },
       },
       {
         id: 'dueDate',
         accessorKey: 'dueDate',
-        header: 'Due Date',
+        header: t('dueDate'),
         minSize: 110,
-        meta: { label: 'Due Date', cell: { variant: 'short-text' } },
+        meta: { label: t('dueDate'), cell: { variant: 'short-text' } },
       },
       {
         id: 'grandTotal',
         accessorKey: 'grandTotal',
-        header: 'Total',
+        header: t('grandTotal'),
         minSize: 100,
-        meta: { label: 'Grand Total', cell: { variant: 'short-text' } },
+        meta: { label: t('grandTotal'), cell: { variant: 'short-text' } },
         cell: ({ row }) => (
           <div className="text-right">{row.original.grandTotal.toLocaleString()}</div>
         ),
@@ -269,9 +271,9 @@ export default function SalesInvoicePage() {
       {
         id: 'balanceDue',
         accessorKey: 'balanceDue',
-        header: 'Balance',
+        header: t('balanceDue'),
         minSize: 100,
-        meta: { label: 'Balance Due', cell: { variant: 'short-text' } },
+        meta: { label: t('balanceDue'), cell: { variant: 'short-text' } },
         cell: ({ row }) => (
           <div className="text-right font-semibold">{row.original.balanceDue.toLocaleString()}</div>
         ),
@@ -279,9 +281,9 @@ export default function SalesInvoicePage() {
       {
         id: 'paymentStatus',
         accessorKey: 'paymentStatus',
-        header: 'Status',
+        header: t('paymentStatus'),
         minSize: 80,
-        meta: { label: 'Payment Status', cell: { variant: 'short-text' } },
+        meta: { label: t('paymentStatus'), cell: { variant: 'short-text' } },
         cell: ({ row }) => (
           <TooltipProvider>
             <Tooltip>
@@ -318,23 +320,23 @@ export default function SalesInvoicePage() {
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Sales Invoice</h1>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1">Track invoices and payments</p>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">{t('title')}</h1>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1">{t('subtitle')}</p>
               </div>
               <div className="flex gap-2">
                 <Link href="/guide?tab=sales&section=sales-invoice">
                   <Button variant="outline" size="sm">
                     <BookOpen className="h-4 w-4 mr-2" />
-                    Learn More
+                    {t('learnMore')}
                   </Button>
                 </Link>
-                <Button 
+                <Button
                   data-testid="new-invoice-button"
-                  className="bg-green-600 hover:bg-green-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
+                  className="bg-green-600 hover:bg-green-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow"
                   onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-invoice/new`)}
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  <span>New Invoice</span>
+                  <span>{t('newInvoice')}</span>
                 </Button>
               </div>
             </div>
@@ -352,11 +354,11 @@ export default function SalesInvoicePage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex gap-3">
               <div data-testid="total-amount" className="bg-gradient-to-r from-green-50 to-emerald-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
-                <span className="text-xs sm:text-sm text-gray-600">Total: </span>
+                <span className="text-xs sm:text-sm text-gray-600">{t('totalAmount')}: </span>
                 <span className="text-base sm:text-lg font-bold text-green-600">฿{totalAmount.toLocaleString()}</span>
               </div>
               <div data-testid="total-outstanding" className="bg-gradient-to-r from-red-50 to-orange-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
-                <span className="text-xs sm:text-sm text-gray-600">Outstanding: </span>
+                <span className="text-xs sm:text-sm text-gray-600">{t('totalOutstanding')}: </span>
                 <span className="text-base sm:text-lg font-bold text-red-600">฿{totalOutstanding.toLocaleString()}</span>
               </div>
             </div>

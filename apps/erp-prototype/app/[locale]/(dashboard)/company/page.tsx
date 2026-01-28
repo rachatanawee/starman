@@ -10,11 +10,14 @@ import { Plus, Search, GitBranch, Users, DollarSign, Calendar } from 'lucide-rea
 import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
 import { toast } from 'sonner'
 import { ProjectLayout } from '@/components/project-layout'
+import { useTranslations } from 'next-intl'
 
 export default function ProjectsPage() {
   const router = useRouter()
   const params = useParams()
   const locale = params.locale as string
+  const t = useTranslations('company')
+  const tCommon = useTranslations('common')
   const [projects, setProjects] = useState<MockProject[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
@@ -25,7 +28,7 @@ export default function ProjectsPage() {
         const data = await mockProjectsAPI.list()
         setProjects(data)
       } catch {
-        toast.error('Failed to load projects')
+        toast.error(t('failedToLoad'))
       } finally {
         setIsLoading(false)
       }
@@ -59,7 +62,7 @@ export default function ProjectsPage() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading projects...</p>
+          <p className="text-gray-600">{t('loadingProjects')}</p>
         </div>
       </div>
     )
@@ -73,15 +76,15 @@ export default function ProjectsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Companies</h1>
-              <p className="text-gray-600 mt-1">Manage your ERP companies</p>
+              <h1 className="text-3xl font-bold text-gray-900">{t('companies')}</h1>
+              <p className="text-gray-600 mt-1">{t('manageCompanies')}</p>
             </div>
-            <Button 
+            <Button
               className="bg-purple-600 hover:bg-purple-700"
               onClick={() => router.push(`/${locale}/company/new`)}
             >
               <Plus className="h-4 w-4 mr-2" />
-              New Company
+              {t('newCompany')}
             </Button>
           </div>
 
@@ -91,7 +94,7 @@ export default function ProjectsPage() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               <Input
                 type="text"
-                placeholder="Search companies..."
+                placeholder={t('searchCompanies')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 h-11"
@@ -134,7 +137,7 @@ export default function ProjectsPage() {
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-2 text-gray-600">
                       <Users className="h-4 w-4" />
-                      <span>{project.members} members</span>
+                      <span>{project.members} {t('members')}</span>
                     </div>
                     <Badge variant="secondary" className="text-xs">
                       {project.aiProvider || 'No AI'}
@@ -144,7 +147,7 @@ export default function ProjectsPage() {
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-2 text-gray-600">
                       <DollarSign className="h-4 w-4" />
-                      <span>Budget</span>
+                      <span>{t('budget')}</span>
                     </div>
                     <span className="font-medium">{formatCurrency(project.budget)}</span>
                   </div>
@@ -153,7 +156,7 @@ export default function ProjectsPage() {
                     <div className="flex items-center justify-between text-xs text-gray-500">
                       <div className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
-                        <span>Created {formatDate(project.createdAt)}</span>
+                        <span>{t('created')} {formatDate(project.createdAt)}</span>
                       </div>
                     </div>
                   </div>
@@ -161,7 +164,7 @@ export default function ProjectsPage() {
                   {/* Budget Progress */}
                   <div className="pt-2">
                     <div className="flex justify-between text-xs text-gray-600 mb-1">
-                      <span>Spent</span>
+                      <span>{t('spent')}</span>
                       <span>{Math.round((project.spent / project.budget) * 100)}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
@@ -180,17 +183,17 @@ export default function ProjectsPage() {
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
             <GitBranch className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No companies found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('noCompaniesFound')}</h3>
             <p className="text-gray-600 mb-6">
-              {searchQuery ? 'Try adjusting your search' : 'Get started by creating your first company'}
+              {searchQuery ? t('adjustSearch') : t('getStarted')}
             </p>
             {!searchQuery && (
-              <Button 
+              <Button
                 className="bg-purple-600 hover:bg-purple-700"
                 onClick={() => router.push(`/${locale}/company/new`)}
               >
                 <Plus className="h-4 w-4 mr-2" />
-                Create Company
+                {t('createCompany')}
               </Button>
             )}
           </div>

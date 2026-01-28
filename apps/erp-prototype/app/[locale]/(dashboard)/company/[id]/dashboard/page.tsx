@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { 
-  Package2, ShoppingCart, DollarSign, TrendingUp, 
+import {
+  Package2, ShoppingCart, DollarSign, TrendingUp,
   Factory, Users, AlertCircle, CheckCircle2, Clock, RefreshCw, Printer, Building2, Sparkles
 } from 'lucide-react'
 import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
@@ -13,12 +13,14 @@ import { ProjectLayout } from '@/components/project-layout'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { AIAssistant } from '@/components/ai-assistant'
 import { AIInsightsBadge } from '@/components/ai-insights-badge'
+import { useTranslations } from 'next-intl'
 
 export default function CompanyDashboardPage() {
   const params = useParams()
   const router = useRouter()
   const projectId = params.id as string
-  
+  const t = useTranslations('dashboard')
+
   const [project] = useState<MockProject | null>(mockProjectsAPI.getSync(projectId))
   const [showAI, setShowAI] = useState(false)
 
@@ -27,8 +29,8 @@ export default function CompanyDashboardPage() {
       <ProjectLayout projectId={projectId}>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Company not found</h2>
-            <Button onClick={() => router.push('/en/company')}>Back to Companies</Button>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('companyNotFound')}</h2>
+            <Button onClick={() => router.push('/en/company')}>{t('backToCompanies')}</Button>
           </div>
         </div>
       </ProjectLayout>
@@ -107,26 +109,26 @@ export default function CompanyDashboardPage() {
               </div>
             </div>
             <div className="flex gap-2">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 className="border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 hover:from-amber-100 hover:to-orange-100"
                 onClick={() => setShowAI(!showAI)}
               >
                 <Sparkles className="h-4 w-4 mr-2" />
-                AI Insights
+                {t('aiInsights')}
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 onClick={() => router.push(`/${params.locale}/company/${projectId}/dashboard/report`)}
               >
                 <Printer className="h-4 w-4 mr-2" />
-                Print Report
+                {t('printReport')}
               </Button>
               <Button variant="outline" size="sm">
                 <RefreshCw className="h-4 w-4 mr-2" />
-                Refresh
+                {t('refresh')}
               </Button>
             </div>
           </div>
@@ -136,14 +138,14 @@ export default function CompanyDashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total Inventory</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-600">{t('totalInventory')}</CardTitle>
               <Package2 className="h-4 w-4 text-blue-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{inventoryStats.totalItems}</div>
               <p className="text-xs text-red-600 mt-1">{inventoryStats.lowStock} low stock items</p>
-              <AIInsightsBadge 
-                type="warning" 
+              <AIInsightsBadge
+                type="warning"
                 message="AI suggests reorder for 5 items"
                 confidence={0.91}
                 compact
@@ -153,7 +155,7 @@ export default function CompanyDashboardPage() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Active Orders</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-600">{t('activeOrders')}</CardTitle>
               <ShoppingCart className="h-4 w-4 text-green-500" />
             </CardHeader>
             <CardContent>
@@ -164,7 +166,7 @@ export default function CompanyDashboardPage() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Monthly Revenue</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-600">{t('monthlyRevenue')}</CardTitle>
               <DollarSign className="h-4 w-4 text-purple-500" />
             </CardHeader>
             <CardContent>
@@ -175,7 +177,7 @@ export default function CompanyDashboardPage() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Production Rate</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-600">{t('productionRate')}</CardTitle>
               <Factory className="h-4 w-4 text-orange-500" />
             </CardHeader>
             <CardContent>
@@ -206,7 +208,7 @@ export default function CompanyDashboardPage() {
           {/* Sales Trend */}
           <Card>
             <CardHeader>
-              <CardTitle>Sales Trend</CardTitle>
+              <CardTitle>{t('salesTrend')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -225,7 +227,7 @@ export default function CompanyDashboardPage() {
           {/* Inventory Distribution */}
           <Card>
             <CardHeader>
-              <CardTitle>Inventory Distribution</CardTitle>
+              <CardTitle>{t('inventoryDistribution')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -253,7 +255,7 @@ export default function CompanyDashboardPage() {
           {/* Production Performance */}
           <Card>
             <CardHeader>
-              <CardTitle>Production Performance</CardTitle>
+              <CardTitle>{t('productionPerformance')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -273,7 +275,7 @@ export default function CompanyDashboardPage() {
           {/* Top Products */}
           <Card>
             <CardHeader>
-              <CardTitle>Top Products</CardTitle>
+              <CardTitle>{t('topProducts')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -308,7 +310,7 @@ export default function CompanyDashboardPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <AlertCircle className="h-5 w-5 text-orange-500" />
-                Alerts & Notifications
+                {t('alertsNotifications')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -346,7 +348,7 @@ export default function CompanyDashboardPage() {
           {/* Recent Activity */}
           <Card>
             <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
+              <CardTitle>{t('recentActivity')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -401,25 +403,25 @@ export default function CompanyDashboardPage() {
         {/* Quick Actions */}
         <Card>
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+            <CardTitle>{t('quickActions')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Button variant="outline" className="h-20 flex-col gap-2" onClick={() => router.push(`/${params.locale}/company/${projectId}/inventory`)}>
                 <Package2 className="h-5 w-5" />
-                <span className="text-sm">Inventory</span>
+                <span className="text-sm">{t('inventory')}</span>
               </Button>
               <Button variant="outline" className="h-20 flex-col gap-2" onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order`)}>
                 <ShoppingCart className="h-5 w-5" />
-                <span className="text-sm">Sales Order</span>
+                <span className="text-sm">{t('salesOrder')}</span>
               </Button>
               <Button variant="outline" className="h-20 flex-col gap-2" onClick={() => router.push(`/${params.locale}/company/${projectId}/production-order`)}>
                 <Factory className="h-5 w-5" />
-                <span className="text-sm">Production</span>
+                <span className="text-sm">{t('production')}</span>
               </Button>
               <Button variant="outline" className="h-20 flex-col gap-2" onClick={() => router.push(`/${params.locale}/company/${projectId}/accounting`)}>
                 <DollarSign className="h-5 w-5" />
-                <span className="text-sm">Accounting</span>
+                <span className="text-sm">{t('accounting')}</span>
               </Button>
             </div>
           </CardContent>

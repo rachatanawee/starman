@@ -11,6 +11,7 @@ import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { mockProductionOrders, ProductionOrder, ProductionStatus } from '@/lib/production-order-data'
+import { useTranslations } from 'next-intl'
 
 const statusConfig: Record<ProductionStatus, { label: string; color: string; icon: any }> = {
   created: { label: 'Created', color: 'bg-gray-500', icon: Clock },
@@ -31,6 +32,7 @@ export default function ProductionOrderPage() {
   const params = useParams()
   const router = useRouter()
   const projectId = params.id as string
+  const t = useTranslations('productionOrder')
   const [orders] = useState<ProductionOrder[]>(mockProductionOrders)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<ProductionStatus | 'all'>('all')
@@ -65,22 +67,22 @@ export default function ProductionOrderPage() {
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Production Orders</h1>
-            <p className="text-gray-600 mt-1">Manage manufacturing orders and track progress</p>
+            <h1 className="text-3xl font-bold">{t('title')}</h1>
+            <p className="text-gray-600 mt-1">{t('subtitle')}</p>
           </div>
           <div className="flex gap-2">
             <Link href="/guide?tab=production&section=production-order">
               <Button variant="outline" size="sm">
                 <BookOpen className="h-4 w-4 mr-2" />
-                Learn More
+                {t('learnMore')}
               </Button>
             </Link>
-            <Button 
+            <Button
               onClick={() => router.push(`/${params.locale}/company/${projectId}/production-order/new`)}
               className="bg-purple-600 hover:bg-purple-700"
             >
               <Plus className="h-4 w-4 mr-2" />
-              New Production Order
+              {t('newProductionOrder')}
             </Button>
           </div>
         </div>
@@ -90,7 +92,7 @@ export default function ProductionOrderPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Total Orders</p>
+                  <p className="text-sm text-gray-600">{t('totalOrders')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.total}</p>
                 </div>
                 <Factory className="h-8 w-8 text-purple-600" />
@@ -101,7 +103,7 @@ export default function ProductionOrderPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">In Progress</p>
+                  <p className="text-sm text-gray-600">{t('inProgress')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.inProgress}</p>
                 </div>
                 <PlayCircle className="h-8 w-8 text-yellow-600" />
@@ -112,7 +114,7 @@ export default function ProductionOrderPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Completed</p>
+                  <p className="text-sm text-gray-600">{t('completed')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.completed}</p>
                 </div>
                 <CheckCircle2 className="h-8 w-8 text-green-600" />
@@ -123,7 +125,7 @@ export default function ProductionOrderPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Pending</p>
+                  <p className="text-sm text-gray-600">{t('pending')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.pending}</p>
                 </div>
                 <Clock className="h-8 w-8 text-blue-600" />
@@ -136,7 +138,7 @@ export default function ProductionOrderPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Factory className="h-5 w-5" />
-              Production Orders
+              {t('title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -145,7 +147,7 @@ export default function ProductionOrderPage() {
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
-                    placeholder="Search by order number, product name, or SKU..."
+                    placeholder={t('searchOrders')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-9 pr-9"
@@ -166,21 +168,21 @@ export default function ProductionOrderPage() {
                     size="sm"
                     onClick={() => setStatusFilter('all')}
                   >
-                    All
+                    {t('all')}
                   </Button>
                   <Button
                     variant={statusFilter === 'in_progress' ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setStatusFilter('in_progress')}
                   >
-                    In Progress
+                    {t('inProgress')}
                   </Button>
                   <Button
                     variant={statusFilter === 'completed' ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setStatusFilter('completed')}
                   >
-                    Completed
+                    {t('completed')}
                   </Button>
                 </div>
               </div>
@@ -208,10 +210,10 @@ export default function ProductionOrderPage() {
                             <h3 className="font-semibold text-lg">{order.orderNumber}</h3>
                             <Badge className={statusConfig[order.status].color}>
                               <StatusIcon className="h-3 w-3 mr-1" />
-                              {statusConfig[order.status].label}
+                              {t(order.status)}
                             </Badge>
                             <Badge className={priorityConfig[order.priority].color}>
-                              {priorityConfig[order.priority].label}
+                              {t(order.priority)}
                             </Badge>
                             {order.salesOrderId && (
                               <Badge variant="outline" className="text-blue-600 border-blue-300">
@@ -240,29 +242,29 @@ export default function ProductionOrderPage() {
                             </span>
                             <span className="flex items-center gap-1" title="Materials">
                               <Warehouse className="h-3 w-3" />
-                              {order.materials.length} materials
+                              {order.materials.length} {t('materials')}
                             </span>
                             <span className="flex items-center gap-1" title="Operations">
                               <Factory className="h-3 w-3" />
-                              {order.operations.length} operations
+                              {order.operations.length} {t('operations')}
                             </span>
                           </div>
                           <div className="flex items-center gap-4 mt-3">
                             <div className="flex-1 max-w-xs">
                               <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
-                                <span>Progress</span>
+                                <span>{t('progress')}</span>
                                 <span>{order.producedQuantity} / {order.plannedQuantity} ({progress}%)</span>
                               </div>
                               <Progress value={progress} className="h-2" />
                             </div>
                             <div className="text-sm">
-                              <span className="text-gray-600">Due:</span>{' '}
+                              <span className="text-gray-600">{t('due')}:</span>{' '}
                               <span className="font-medium">{new Date(order.dueDate).toLocaleDateString()}</span>
                             </div>
                             {order.scrapQuantity > 0 && (
                               <div className="text-sm text-orange-600">
                                 <AlertCircle className="h-4 w-4 inline mr-1" />
-                                Scrap: {order.scrapQuantity}
+                                {t('scrap')}: {order.scrapQuantity}
                               </div>
                             )}
                           </div>
@@ -280,7 +282,7 @@ export default function ProductionOrderPage() {
                             }}
                           >
                             <Eye className="h-4 w-4 mr-1" />
-                            View
+                            {t('view')}
                           </Button>
                           <Button
                             variant="outline"
@@ -291,7 +293,7 @@ export default function ProductionOrderPage() {
                             }}
                           >
                             <Edit className="h-4 w-4 mr-1" />
-                            Edit
+                            {t('edit')}
                           </Button>
                         </div>
                       </div>
@@ -301,7 +303,7 @@ export default function ProductionOrderPage() {
               ) : (
                 <div className="text-center py-12 text-gray-500">
                   <Factory className="h-12 w-12 mx-auto mb-3 text-gray-400" />
-                  <p>No production orders found matching your filters</p>
+                  <p>{t('noOrdersFound')}</p>
                   <Button
                     variant="outline"
                     size="sm"
@@ -311,7 +313,7 @@ export default function ProductionOrderPage() {
                       setStatusFilter('all')
                     }}
                   >
-                    Clear Filters
+                    {t('clearFilters')}
                   </Button>
                 </div>
               )}

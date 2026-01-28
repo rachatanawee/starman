@@ -13,10 +13,12 @@ import { useState } from 'react'
 import { mockJobTickets, mockWorkCenters, JobTicket } from '@/lib/manufacturing-data'
 import { OperatorCockpit } from '@/components/operator-cockpit'
 import { SupervisorDashboard } from '@/components/supervisor-dashboard'
+import { useTranslations } from 'next-intl'
 
 export default function ManufacturingPage() {
   const params = useParams()
   const projectId = params.id as string
+  const t = useTranslations('manufacturing')
   const [selectedJobTicket, setSelectedJobTicket] = useState<JobTicket | null>(null)
   const [jobTickets, setJobTickets] = useState(mockJobTickets)
 
@@ -68,19 +70,19 @@ export default function ManufacturingPage() {
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
               <Rocket className="h-8 w-8 text-purple-600" />
-              Manufacturing Execution (The Launch)
+              {t('title')}
             </h1>
-            <p className="text-gray-600 mt-1">Shop floor control and real-time monitoring</p>
+            <p className="text-gray-600 mt-1">{t('subtitle')}</p>
           </div>
           <div className="flex items-center gap-2">
             <Link href="/guide?tab=production&section=manufacturing-execution">
               <Button variant="outline" size="sm">
                 <BookOpen className="h-4 w-4 mr-2" />
-                Learn More
+                {t('learnMore')}
               </Button>
             </Link>
             <Badge variant="outline" className="text-sm">
-              🤖 The Co-Pilot Active
+              {t('coPilotActive')}
             </Badge>
           </div>
         </div>
@@ -89,11 +91,11 @@ export default function ManufacturingPage() {
           <TabsList className="grid w-full max-w-md grid-cols-2">
             <TabsTrigger value="operator" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
-              Operator Cockpit
+              {t('operatorCockpit')}
             </TabsTrigger>
             <TabsTrigger value="supervisor" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
-              Supervisor Dashboard
+              {t('supervisorDashboard')}
             </TabsTrigger>
           </TabsList>
 
@@ -104,7 +106,7 @@ export default function ManufacturingPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Zap className="h-5 w-5" />
-                    Mission Queue - Select Your Job
+                    {t('missionQueue')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -122,26 +124,26 @@ export default function ManufacturingPage() {
                               <p className="text-sm text-gray-600">{ticket.ticketNumber}</p>
                             </div>
                             <Badge className={getPriorityColor(ticket.priority)}>
-                              {ticket.priority.toUpperCase()}
+                              {t(ticket.priority)}
                             </Badge>
                           </div>
                           <div className="space-y-2">
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600">Work Center:</span>
+                              <span className="text-gray-600">{t('workCenter')}:</span>
                               <span className="font-medium">{ticket.workCenterName}</span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600">Target Qty:</span>
+                              <span className="text-gray-600">{t('targetQty')}:</span>
                               <span className="font-medium">{ticket.targetQty} {ticket.unit}</span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600">Due Date:</span>
+                              <span className="text-gray-600">{t('dueDate')}:</span>
                               <span className="font-medium">{new Date(ticket.dueDate).toLocaleDateString()}</span>
                             </div>
                             <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-600">Status:</span>
+                              <span className="text-gray-600">{t('status')}:</span>
                               <Badge className={getStatusColor(ticket.status)}>
-                                {ticket.status.replace('_', ' ').toUpperCase()}
+                                {t(ticket.status)}
                               </Badge>
                             </div>
                           </div>
@@ -157,7 +159,7 @@ export default function ManufacturingPage() {
                   variant="outline"
                   onClick={() => setSelectedJobTicket(null)}
                 >
-                  ← Back to Mission Queue
+                  ← {t('backToMissionQueue')}
                 </Button>
                 <OperatorCockpit
                   jobTicket={selectedJobTicket}

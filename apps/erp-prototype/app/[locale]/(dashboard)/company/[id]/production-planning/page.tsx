@@ -9,6 +9,7 @@ import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { mockAIInsights, mockPlanItems, AIInsight, PlanItem, InsightType, Severity } from '@/lib/production-planning-data'
+import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
 const insightIcons: Record<InsightType, any> = {
@@ -34,6 +35,7 @@ const statusColors = {
 export default function ProductionPlanningPage() {
   const params = useParams()
   const projectId = params.id as string
+  const t = useTranslations('productionPlanning')
   const [insights, setInsights] = useState<AIInsight[]>(mockAIInsights)
   const [planItems, setPlanItems] = useState<PlanItem[]>(mockPlanItems)
   const [isRunningAI, setIsRunningAI] = useState(false)
@@ -59,14 +61,14 @@ export default function ProductionPlanningPage() {
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Production Planning</h1>
-            <p className="text-gray-600 mt-1">AI-powered production scheduling and optimization</p>
+            <h1 className="text-3xl font-bold">{t('title')}</h1>
+            <p className="text-gray-600 mt-1">{t('subtitle')}</p>
           </div>
           <div className="flex gap-2">
             <Link href="/guide?tab=production&section=production-planning">
               <Button variant="outline" size="sm">
                 <BookOpen className="h-4 w-4 mr-2" />
-                Learn More
+                {t('learnMore')}
               </Button>
             </Link>
             <Button
@@ -75,11 +77,11 @@ export default function ProductionPlanningPage() {
               className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
             >
               <Sparkles className="h-4 w-4 mr-2" />
-              {isRunningAI ? 'Analyzing...' : 'Run AI Planning'}
+              {isRunningAI ? t('analyzing') : t('runAIPlanning')}
             </Button>
             <Button variant="outline">
               <Plus className="h-4 w-4 mr-2" />
-              New Plan
+              {t('newPlan')}
             </Button>
           </div>
         </div>
@@ -92,11 +94,11 @@ export default function ProductionPlanningPage() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2">
                     <Calendar className="h-5 w-5" />
-                    Production Schedule
+                    {t('productionSchedule')}
                   </CardTitle>
                   {criticalCount > 0 && (
                     <Badge variant="destructive">
-                      {criticalCount} Critical Issues
+                      {criticalCount} {t('criticalIssues')}
                     </Badge>
                   )}
                 </div>
@@ -125,7 +127,7 @@ export default function ProductionPlanningPage() {
                               }`} />
                               <h3 className="font-semibold">{item.orderNumber}</h3>
                               <Badge className={statusColors[item.status]}>
-                                {item.status}
+                                {t(item.status)}
                               </Badge>
                               {item.isLocked && (
                                 <Lock className="h-3 w-3 text-gray-500" />
@@ -155,7 +157,7 @@ export default function ProductionPlanningPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Capacity Overview</CardTitle>
+                <CardTitle>{t('capacityOverview')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -197,7 +199,7 @@ export default function ProductionPlanningPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-purple-600" />
-                  The Strategist
+                  {t('theStrategist')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -205,7 +207,7 @@ export default function ProductionPlanningPage() {
                   {unresolvedInsights.length > 0 ? (
                     <>
                       <p className="text-sm text-gray-700">
-                        🤖 Detected {unresolvedInsights.length} issues in this month's plan:
+                        🤖 Detected {unresolvedInsights.length} {t('issuesDetected')}
                       </p>
                       {unresolvedInsights.map((insight, index) => {
                         const Icon = insightIcons[insight.type]
@@ -238,7 +240,7 @@ export default function ProductionPlanningPage() {
                   ) : (
                     <div className="text-center py-6">
                       <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-2" />
-                      <p className="text-sm text-gray-700">All clear! No issues detected.</p>
+                      <p className="text-sm text-gray-700">{t('allClear')}</p>
                     </div>
                   )}
                 </div>
@@ -247,21 +249,21 @@ export default function ProductionPlanningPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Quick Stats</CardTitle>
+                <CardTitle>{t('quickStats')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-sm">
                 <div>
-                  <p className="text-gray-600">Total Orders</p>
+                  <p className="text-gray-600">{t('totalOrders')}</p>
                   <p className="text-2xl font-bold">{planItems.length}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600">Conflicts</p>
+                  <p className="text-gray-600">{t('conflicts')}</p>
                   <p className="text-2xl font-bold text-red-600">
                     {planItems.filter(p => p.status === 'conflict').length}
                   </p>
                 </div>
                 <div>
-                  <p className="text-gray-600">AI Adjusted</p>
+                  <p className="text-gray-600">{t('aiAdjusted')}</p>
                   <p className="text-2xl font-bold text-yellow-600">
                     {planItems.filter(p => p.status === 'adjusted').length}
                   </p>

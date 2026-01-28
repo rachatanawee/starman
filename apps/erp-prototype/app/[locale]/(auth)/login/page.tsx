@@ -9,9 +9,12 @@ import { toast } from 'sonner'
 import { Loader2, GitBranch, Sparkles, Shield } from 'lucide-react'
 import { mockAuth } from '@/lib/mock-data'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 export default function LoginPage() {
   const router = useRouter()
+  const t = useTranslations('auth')
+  const tBranding = useTranslations('branding')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -32,11 +35,11 @@ export default function LoginPage() {
       localStorage.setItem('mock_token', result.token)
       localStorage.setItem('mock_user', JSON.stringify(result.user))
       
-      toast.success('Login successful!')
+      toast.success(t('login') + ' ' + 'successful!')
       router.push('/en/company')
     } catch (err) {
-      setError('Login failed. Please try again.')
-      toast.error('Login failed')
+      setError(t('loginFailed'))
+      toast.error(t('loginFailed'))
       setIsLoading(false)
     }
   }
@@ -104,9 +107,9 @@ export default function LoginPage() {
 
           <Card className="w-full border-0 shadow-xl">
             <CardHeader className="space-y-1 pb-6">
-              <CardTitle className="text-2xl font-bold text-gray-900">Welcome Back</CardTitle>
+              <CardTitle className="text-2xl font-bold text-gray-900">{t('welcomeBack')}</CardTitle>
               <CardDescription className="text-base text-gray-600">
-                Sign in to your ERP account
+                {t('signInToAccount')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -118,7 +121,7 @@ export default function LoginPage() {
                 )}
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                    Email
+                    {t('email')}
                   </Label>
                   <Input 
                     id="email" 
@@ -133,7 +136,7 @@ export default function LoginPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="password" className="text-sm font-medium text-gray-700">
-                    Password
+                    {t('password')}
                   </Label>
                   <Input 
                     id="password" 
@@ -150,18 +153,16 @@ export default function LoginPage() {
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Signing in...
+                      {t('signingIn')}
                     </>
                   ) : (
-                    'Sign In'
+                    t('signIn')
                   )}
                 </Button>
               </form>
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <p className="text-xs text-center text-gray-500 leading-relaxed">
-                  🎨 <strong>Prototype Mode</strong> - Any email/password will work
-                  <br />
-                  This is a UI demonstration with mock data only
+                  🎨 <strong>{t('demoMode')}</strong> - {t('uiDemo')}
                 </p>
               </div>
             </CardContent>

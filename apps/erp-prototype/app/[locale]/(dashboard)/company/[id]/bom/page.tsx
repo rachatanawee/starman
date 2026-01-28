@@ -12,11 +12,13 @@ import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { mockBOMs, BOM } from '@/lib/bom-data'
 import { BOMTreeView } from '@/components/bom-tree-view'
+import { useTranslations } from 'next-intl'
 
 export default function BOMPage() {
   const params = useParams()
   const router = useRouter()
   const projectId = params.id as string
+  const t = useTranslations('bom')
   const [boms] = useState<BOM[]>(mockBOMs)
   const [viewMode, setViewMode] = useState<'list' | 'tree'>('list')
   const [selectedForTree, setSelectedForTree] = useState<BOM | null>(null)
@@ -60,19 +62,19 @@ export default function BOMPage() {
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Bill of Materials (BOM)</h1>
-            <p className="text-gray-600 mt-1">Manage production recipes and raw materials</p>
+            <h1 className="text-3xl font-bold">{t('title')}</h1>
+            <p className="text-gray-600 mt-1">{t('subtitle')}</p>
           </div>
           <div className="flex gap-2">
             <Link href="/guide?tab=production&section=bom">
               <Button variant="outline" size="sm">
                 <BookOpen className="h-4 w-4 mr-2" />
-                Learn More
+                {t('learnMore')}
               </Button>
             </Link>
             <Button onClick={handleNewBOM} className="bg-purple-600 hover:bg-purple-700">
               <Plus className="h-4 w-4 mr-2" />
-              New BOM
+              {t('newBOM')}
             </Button>
           </div>
         </div>
@@ -82,7 +84,7 @@ export default function BOMPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Total BOMs</p>
+                  <p className="text-sm text-gray-600">{t('totalBOMs')}</p>
                   <p className="text-2xl font-bold mt-1">{totalBOMs}</p>
                 </div>
                 <Package className="h-8 w-8 text-purple-600" />
@@ -93,7 +95,7 @@ export default function BOMPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Active BOMs</p>
+                  <p className="text-sm text-gray-600">{t('activeBOMs')}</p>
                   <p className="text-2xl font-bold mt-1">{activeBOMs}</p>
                 </div>
                 <Layers className="h-8 w-8 text-green-600" />
@@ -104,7 +106,7 @@ export default function BOMPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Average Cost</p>
+                  <p className="text-sm text-gray-600">{t('averageCost')}</p>
                   <p className="text-2xl font-bold mt-1">
                     ${avgCost.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                   </p>
@@ -120,12 +122,12 @@ export default function BOMPage() {
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
                 <Package className="h-5 w-5" />
-                {viewMode === 'list' ? 'BOM List' : 'BOM Structure'}
+                {viewMode === 'list' ? t('bomList') : t('bomStructure')}
               </CardTitle>
               <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as 'list' | 'tree')}>
                 <TabsList>
-                  <TabsTrigger value="list">List</TabsTrigger>
-                  <TabsTrigger value="tree">Tree</TabsTrigger>
+                  <TabsTrigger value="list">{t('list')}</TabsTrigger>
+                  <TabsTrigger value="tree">{t('tree')}</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -137,7 +139,7 @@ export default function BOMPage() {
                   <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                     <Input
-                      placeholder="Search by product name, SKU, or BOM number..."
+                      placeholder={t('searchBOM')}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="pl-9 pr-9"
@@ -158,21 +160,21 @@ export default function BOMPage() {
                       size="sm"
                       onClick={() => setStatusFilter('all')}
                     >
-                      All
+                      {t('all')}
                     </Button>
                     <Button
                       variant={statusFilter === 'active' ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setStatusFilter('active')}
                     >
-                      Active
+                      {t('active')}
                     </Button>
                     <Button
                       variant={statusFilter === 'inactive' ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setStatusFilter('inactive')}
                     >
-                      Inactive
+                      {t('inactive')}
                     </Button>
                   </div>
                 </div>
@@ -196,10 +198,10 @@ export default function BOMPage() {
                           <div className="flex items-center gap-2">
                             <h3 className="font-semibold text-lg">{bom.productName}</h3>
                             {bom.isDefault && (
-                              <Badge variant="default" className="bg-purple-600">Default</Badge>
+                              <Badge variant="default" className="bg-purple-600">{t('default')}</Badge>
                             )}
                             {!bom.isActive && (
-                              <Badge variant="secondary">Inactive</Badge>
+                              <Badge variant="secondary">{t('inactive')}</Badge>
                             )}
                           </div>
                           <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
@@ -207,9 +209,9 @@ export default function BOMPage() {
                               <Package className="h-4 w-4" />
                               {bom.productSku}
                             </span>
-                            <span>BOM: {bom.bomNumber}</span>
-                            <span>Rev: {bom.revision}</span>
-                            <span>{bom.items.length} items</span>
+                            <span>{t('bomNumber')}: {bom.bomNumber}</span>
+                            <span>{t('revision')}: {bom.revision}</span>
+                            <span>{bom.items.length} {t('items')}</span>
                           </div>
                           <p className="text-sm text-gray-600 mt-2">{bom.description}</p>
                           <div className="flex items-center gap-4 mt-3">
@@ -232,7 +234,7 @@ export default function BOMPage() {
                             onClick={() => handleViewTree(bom)}
                           >
                             <Eye className="h-4 w-4 mr-1" />
-                            View Tree
+                            {t('viewTree')}
                           </Button>
                           <Button
                             variant="outline"
@@ -240,7 +242,7 @@ export default function BOMPage() {
                             onClick={() => handleEditBOM(bom)}
                           >
                             <Edit className="h-4 w-4 mr-1" />
-                            Edit
+                            {t('edit')}
                           </Button>
                         </div>
                       </div>
@@ -249,7 +251,7 @@ export default function BOMPage() {
                 ) : (
                   <div className="text-center py-12 text-gray-500">
                     <Package className="h-12 w-12 mx-auto mb-3 text-gray-400" />
-                    <p>No BOMs found matching your filters</p>
+                    <p>{t('noBOMsFound')}</p>
                     <Button
                       variant="outline"
                       size="sm"
@@ -259,7 +261,7 @@ export default function BOMPage() {
                         setStatusFilter('all')
                       }}
                     >
-                      Clear Filters
+                      {t('clearFilters')}
                     </Button>
                   </div>
                 )}
@@ -271,14 +273,14 @@ export default function BOMPage() {
                     <div className="mb-4 flex items-center justify-between">
                       <div>
                         <h3 className="font-semibold text-lg">{selectedForTree.productName}</h3>
-                        <p className="text-sm text-gray-600">BOM: {selectedForTree.bomNumber} | Rev: {selectedForTree.revision}</p>
+                        <p className="text-sm text-gray-600">{t('bomNumber')}: {selectedForTree.bomNumber} | {t('revision')}: {selectedForTree.revision}</p>
                       </div>
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => setSelectedForTree(null)}
                       >
-                        Back to List
+                        {t('backToList')}
                       </Button>
                     </div>
                     <BOMTreeView bom={selectedForTree} />
@@ -286,13 +288,13 @@ export default function BOMPage() {
                 ) : (
                   <div className="text-center py-12">
                     <AlertCircle className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-                    <p className="text-gray-600">Select a BOM from the list to view its structure</p>
+                    <p className="text-gray-600">{t('selectBOM')}</p>
                     <Button
                       variant="outline"
                       className="mt-4"
                       onClick={() => setViewMode('list')}
                     >
-                      Back to List
+                      {t('backToList')}
                     </Button>
                   </div>
                 )}

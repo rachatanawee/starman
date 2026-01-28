@@ -21,6 +21,7 @@ import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/component
 import { DateRangeFilter } from '@/components/date-range-filter'
 import { AIAssistant } from '@/components/ai-assistant'
 import { AIInsightsBadge } from '@/components/ai-insights-badge'
+import { useTranslations } from 'next-intl'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 
@@ -74,6 +75,7 @@ export default function QuotationPage() {
   const router = useRouter()
   const projectId = params.id as string
   const windowSize = useWindowSize({ defaultHeight: 760 })
+  const t = useTranslations('quotation')
 
   const [filterCriteria, setFilterCriteria] = React.useState<FilterCriteria>({
     quotationNumber: '',
@@ -100,10 +102,10 @@ export default function QuotationPage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Filter className="h-3 w-3" />
-            Quotation Number
+            {t('quotationNumber')}
           </Label>
           <Input
-            placeholder="Search quotation..."
+            placeholder={t('searchQuotation')}
             value={criteria.quotationNumber}
             onChange={(e) => setCriteria('quotationNumber', e.target.value)}
             className="h-9"
@@ -112,42 +114,42 @@ export default function QuotationPage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Filter className="h-3 w-3" />
-            Status
+            {t('status')}
           </Label>
           <Select value={criteria.status} onValueChange={(v) => setCriteria('status', v)}>
             <SelectTrigger className="h-9">
-              <SelectValue placeholder="All Status" />
+              <SelectValue placeholder={t('allStatus')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="all">{t('allStatus')}</SelectItem>
               <SelectItem value="Draft">
                 <div className="flex items-center gap-2">
                   <FileText className="h-4 w-4 text-gray-600" />
-                  Draft
+                  {t('draft')}
                 </div>
               </SelectItem>
               <SelectItem value="Sent">
                 <div className="flex items-center gap-2">
                   <Send className="h-4 w-4 text-blue-600" />
-                  Sent
+                  {t('sent')}
                 </div>
               </SelectItem>
               <SelectItem value="Accepted">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-600" />
-                  Accepted
+                  {t('accepted')}
                 </div>
               </SelectItem>
               <SelectItem value="Rejected">
                 <div className="flex items-center gap-2">
                   <Ban className="h-4 w-4 text-red-600" />
-                  Rejected
+                  {t('rejected')}
                 </div>
               </SelectItem>
               <SelectItem value="Expired">
                 <div className="flex items-center gap-2">
                   <CalendarX className="h-4 w-4 text-orange-600" />
-                  Expired
+                  {t('expired')}
                 </div>
               </SelectItem>
             </SelectContent>
@@ -156,10 +158,10 @@ export default function QuotationPage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <User className="h-3 w-3" />
-            Customer
+            {t('customer')}
           </Label>
           <Input
-            placeholder="Search customer..."
+            placeholder={t('searchCustomer')}
             value={criteria.customer}
             onChange={(e) => setCriteria('customer', e.target.value)}
             className="h-9"
@@ -177,19 +179,19 @@ export default function QuotationPage() {
       <>
         {criteria.quotationNumber && (
           <Badge variant="outline" className="gap-1">
-            Quotation: {criteria.quotationNumber}
+            {t('quotationNumber')}: {criteria.quotationNumber}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('quotationNumber', ''); }} />
           </Badge>
         )}
         {criteria.status !== 'all' && (
           <Badge variant="outline" className="gap-1">
-            Status: {criteria.status}
+            {t('status')}: {criteria.status}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('status', 'all'); }} />
           </Badge>
         )}
         {criteria.customer && (
           <Badge variant="outline" className="gap-1">
-            Customer: {criteria.customer}
+            {t('customer')}: {criteria.customer}
             <X className="h-3 w-3 cursor-pointer" onClick={(e) => { e.stopPropagation(); setCriteria('customer', ''); }} />
           </Badge>
         )}
@@ -259,7 +261,7 @@ export default function QuotationPage() {
       {
         id: 'quotationNumber',
         accessorKey: 'quotationNumber',
-        header: 'Quotation No.',
+        header: t('quotationNumber'),
         minSize: 120,
         cell: ({ row }) => (
           <button
@@ -273,25 +275,25 @@ export default function QuotationPage() {
       {
         id: 'customer',
         accessorKey: 'customer',
-        header: 'Customer',
+        header: t('customer'),
         minSize: 150,
       },
       {
         id: 'date',
         accessorKey: 'date',
-        header: 'Date',
+        header: t('date'),
         minSize: 110,
       },
       {
         id: 'validUntil',
         accessorKey: 'validUntil',
-        header: 'Valid Until',
+        header: t('validUntil'),
         minSize: 110,
       },
       {
         id: 'amount',
         accessorKey: 'amount',
-        header: 'Amount',
+        header: t('amount'),
         minSize: 100,
         cell: ({ row }) => (
           <div className="text-right">{row.original.amount.toLocaleString()}</div>
@@ -300,7 +302,7 @@ export default function QuotationPage() {
       {
         id: 'status',
         accessorKey: 'status',
-        header: 'Status',
+        header: t('status'),
         minSize: 80,
         cell: ({ row }) => (
           <TooltipProvider>
@@ -320,7 +322,7 @@ export default function QuotationPage() {
       {
         id: 'items',
         accessorKey: 'items',
-        header: 'Items',
+        header: t('items'),
         minSize: 80,
         cell: ({ row }) => (
           <div className="text-right">{row.original.items}</div>
@@ -349,36 +351,36 @@ export default function QuotationPage() {
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Quotation</h1>
-                  <AIInsightsBadge 
-                    type="positive" 
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{t('title')}</h1>
+                  <AIInsightsBadge
+                    type="positive"
                     message="Top customers: Acme Corp (+45%), Tech Solutions (+32%)"
                     confidence={0.92}
                   />
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1">Create and manage sales quotations</p>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1">{t('subtitle')}</p>
               </div>
               <div className="flex gap-2">
                 <Link href="/guide?tab=sales&section=quotation">
                   <Button variant="outline" size="sm">
                     <BookOpen className="h-4 w-4 mr-2" />
-                    Learn More
+                    {t('learnMore')}
                   </Button>
                 </Link>
-                <Button 
+                <Button
                   variant="outline"
                   className="gap-2 border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 hover:from-amber-100 hover:to-orange-100"
                   onClick={() => setShowAI(!showAI)}
                 >
                   <Sparkles className="h-4 w-4" />
-                  <span className="hidden sm:inline">Customer Trends</span>
+                  <span className="hidden sm:inline">{t('customerTrends')}</span>
                 </Button>
-                <Button 
-                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
+                <Button
+                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow"
                   onClick={() => router.push(`/${params.locale}/company/${projectId}/quotation/new`)}
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  <span>New Quotation</span>
+                  <span>{t('newQuotation')}</span>
                 </Button>
               </div>
             </div>
@@ -406,10 +408,10 @@ export default function QuotationPage() {
         <div className="flex flex-col gap-3 sm:gap-3 text-sm w-full">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
-              <span className="text-xs sm:text-sm text-gray-600">Total Amount: </span>
+              <span className="text-xs sm:text-sm text-gray-600">{t('totalAmount')}: </span>
               <span className="text-base sm:text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
-              <AIInsightsBadge 
-                type="positive" 
+              <AIInsightsBadge
+                type="positive"
                 message="Customer retention rate: 87% | Avg order value trending up 15%"
                 confidence={0.88}
                 compact

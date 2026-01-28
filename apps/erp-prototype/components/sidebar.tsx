@@ -109,7 +109,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
         </Link>
         <Link href={`/${locale}/guide`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/guide` ? 'bg-blue-600 text-white rounded-lg' : 'rounded-lg hover:bg-blue-50 text-blue-600 border border-blue-200'} ${collapsed ? 'justify-center' : ''}`}>
           <BookOpen className="h-5 w-5" />
-          {!collapsed && 'User Guide'}
+          {!collapsed && t('userGuide')}
         </Link>
         {userIsAdmin && (
           <Link href={`/${locale}/users`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/users` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
@@ -120,42 +120,42 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
         {userIsAdmin && (
           <Link href={`/${locale}/form-builder`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname.includes(`/${locale}/form-builder`) ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
             <FileText className="h-5 w-5" />
-            {!collapsed && 'Form Builder'}
+            {!collapsed && t('formBuilder')}
           </Link>
         )}
         {(userIsAdmin || userIsManager) && (
           <Link href={`/${locale}/prediction`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/prediction` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
             <TrendingUp className="h-5 w-5" />
-            {!collapsed && 'Predictions'}
+            {!collapsed && t('predictions')}
           </Link>
         )}
         {(userIsAdmin || userIsManager) && (
           <Link href={`/${locale}/opportunities`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/opportunities` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
             <FileText className="h-5 w-5" />
-            {!collapsed && 'Opportunities'}
+            {!collapsed && t('opportunities')}
           </Link>
         )}
         {(userIsAdmin || userIsManager) && (
           <Link href={`/${locale}/compare`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/compare` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
             <GitCompare className="h-5 w-5" />
-            {!collapsed && 'Compare'}
+            {!collapsed && t('compare')}
           </Link>
         )}
         {userIsAdmin && (
           <Link href={`/${locale}/data-grid-demo`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/data-grid-demo` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
             <LayoutDashboard className="h-5 w-5" />
-            {!collapsed && 'Data Grid Demo'}
+            {!collapsed && t('dataGridDemo')}
           </Link>
         )}
         {(userIsAdmin || userIsManager) && (
           <Link href={`/${locale}/customer-analysis`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname.includes(`/${locale}/customer-analysis`) ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
             <BarChart3 className="h-5 w-5" />
-            {!collapsed && 'Customer Analysis'}
+            {!collapsed && t('customerAnalysis')}
           </Link>
         )}
         <Link href={`/${locale}/profile`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/profile` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
           <User className="h-5 w-5" />
-          {!collapsed && 'Profile'}
+          {!collapsed && t('profile')}
         </Link>
         {userIsAdmin && (
           <Link href={`/${locale}/settings`} className={`flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all duration-200 ${pathname === `/${locale}/settings` ? 'bg-primary text-primary-foreground rounded-lg' : 'rounded-lg hover:bg-accent/50'} ${collapsed ? 'justify-center' : ''}`}>
