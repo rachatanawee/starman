@@ -141,6 +141,11 @@ export default function ProductionPlanningPage() {
                               </span>
                               <span className="text-gray-600">WC: {item.workCenter}</span>
                             </div>
+                            {item.salesOrderIds.length > 0 && (
+                              <p className="text-xs text-blue-600 mt-2">
+                                📋 From: {item.salesOrderIds.join(', ')}
+                              </p>
+                            )}
                             {item.aiAdjustedReason && (
                               <p className="text-xs text-yellow-700 mt-2 italic">
                                 🤖 {item.aiAdjustedReason}

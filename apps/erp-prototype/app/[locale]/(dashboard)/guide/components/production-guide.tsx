@@ -8,12 +8,13 @@ import mermaid from 'mermaid'
 export function ProductionGuide() {
   const mermaidRef1 = useRef<HTMLDivElement>(null)
   const mermaidRef2 = useRef<HTMLDivElement>(null)
+  const mermaidRef3 = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     mermaid.initialize({ startOnLoad: true, theme: 'default' })
-    const nodes = [mermaidRef1.current, mermaidRef2.current].filter((node): node is HTMLDivElement => node !== null)
+    const nodes = [mermaidRef1.current, mermaidRef2.current, mermaidRef3.current].filter((node): node is HTMLDivElement => node !== null)
     if (nodes.length > 0) {
-      mermaid.run({ nodes })
+      mermaid.run({ nodes }).catch(err => console.error('Mermaid error:', err))
     }
   }, [])
 
@@ -44,23 +45,84 @@ export function ProductionGuide() {
 
       <Card id="production-flow">
         <CardHeader>
-          <CardTitle>Production Flow</CardTitle>
+          <CardTitle>Production Flow: SO → Planning → PO</CardTitle>
         </CardHeader>
         <CardContent>
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-lg border border-purple-200 mb-4">
+            <h4 className="font-semibold mb-2 flex items-center gap-2">
+              <span>🔗</span> การเชื่อมโยง Sales Order → Production Planning → Production Order
+            </h4>
+            <p className="text-sm text-gray-700 mb-3">
+              ระบบ ERP จะเชื่อมโยงข้อมูลตั้งแต่ลูกค้าสั่งซื้อ (Sales Order) ไปจนถึงการผลิตจริง (Production Order) 
+              โดยผ่าน <strong>Production Planning</strong> ที่มี AI ช่วยวิเคราะห์และจัดตารางการผลิตอัจฉริยะ
+            </p>
+            <div className="bg-white p-3 rounded border border-purple-300">
+              <p className="text-xs font-medium mb-2">ตัวอย่างการทำงาน:</p>
+              <div className="space-y-2 text-xs text-gray-700">
+                <div className="flex items-start gap-2">
+                  <span className="font-bold text-purple-600">1.</span>
+                  <div>
+                    <p className="font-medium">Sales Orders (ใบสั่งขาย)</p>
+                    <p className="text-gray-600">• SO-2024-001: C-Channel 300 ชิ้น (ส่งวันที่ 20 ก.พ.)</p>
+                    <p className="text-gray-600">• SO-2024-002: C-Channel 200 ชิ้น (ส่งวันที่ 20 ก.พ.)</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-center text-purple-600">
+                  <span className="text-lg">↓</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="font-bold text-blue-600">2.</span>
+                  <div>
+                    <p className="font-medium">Production Planning (วางแผนการผลิต)</p>
+                    <p className="text-gray-600">🤖 AI วิเคราะห์: "สินค้าเดียวกัน Due Date เดียวกัน → รวมผลิตครั้งเดียว"</p>
+                    <p className="text-gray-600">✅ สร้าง Plan: PO-2024-001 (500 ชิ้น) จาก SO-001 + SO-002</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-center text-blue-600">
+                  <span className="text-lg">↓</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="font-bold text-green-600">3.</span>
+                  <div>
+                    <p className="font-medium">Production Order (คำสั่งผลิต)</p>
+                    <p className="text-gray-600">📋 PO-2024-001: ผลิต C-Channel 500 ชิ้น</p>
+                    <p className="text-gray-600">📦 เบิกวัตถุดิบ: เหล็กแผ่น 2mm จำนวน 2,550 kg</p>
+                    <p className="text-gray-600">⚙️ ขั้นตอน: Slitting → Shearing → Press Brake</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div ref={mermaidRef1} className="mermaid">
-            {`graph LR
-              A[Sales Order<br/>ใบสั่งขาย] --> B[Production Order<br/>คำสั่งผลิต]
-              B --> C[Material Request<br/>เบิกวัตถุดิบ]
-              C --> D[Production<br/>ผลิตสินค้า]
-              D --> E[Quality Check<br/>ตรวจคุณภาพ]
-              E --> F[Finished Goods<br/>สินค้าสำเร็จ]
+            {`graph TB
+              SO1["📋 SO-2024-001<br/>C-Channel 300 pcs"] 
+              SO2["📋 SO-2024-002<br/>C-Channel 200 pcs"]
+              SO3["📋 SO-2024-003<br/>Panel Door 200 pcs"]
               
-              style A fill:#e9d5ff
-              style B fill:#bfdbfe
-              style C fill:#bbf7d0
-              style D fill:#fed7aa
-              style E fill:#fef3c7
-              style F fill:#d1fae5`}
+              PP["🤖 Production Planning<br/>AI Strategist"]
+              
+              PO1["⚙️ PO-2024-001<br/>C-Channel 500 pcs<br/>(รวม SO-001 + SO-002)"]
+              PO2["⚙️ PO-2024-002<br/>Panel Door 200 pcs<br/>(จาก SO-003)"]
+              
+              MFG1["🏭 Manufacturing<br/>ผลิตจริง"]
+              
+              SO1 --> PP
+              SO2 --> PP
+              SO3 --> PP
+              
+              PP -->|"รวมและจัดตาราง"| PO1
+              PP -->|"จัดตาราง"| PO2
+              
+              PO1 --> MFG1
+              PO2 --> MFG1
+              
+              style SO1 fill:#e9d5ff,stroke:#9333ea,stroke-width:2px
+              style SO2 fill:#e9d5ff,stroke:#9333ea,stroke-width:2px
+              style SO3 fill:#e9d5ff,stroke:#9333ea,stroke-width:2px
+              style PP fill:#dbeafe,stroke:#2563eb,stroke-width:3px
+              style PO1 fill:#fed7aa,stroke:#ea580c,stroke-width:2px
+              style PO2 fill:#fed7aa,stroke:#ea580c,stroke-width:2px
+              style MFG1 fill:#d1fae5,stroke:#059669,stroke-width:2px`}
           </div>
         </CardContent>
       </Card>
@@ -262,7 +324,62 @@ export function ProductionGuide() {
               เป็นระบบควบคุมการผลิตหน้างานจริง (Shop Floor Control) ที่เชื่อมต่อระหว่าง "แผนการผลิต" กับ "การผลิตจริง" 
               แบ่งเป็น 2 หน้าจอหลัก: <strong>Operator Cockpit</strong> (สำหรับพนักงานหน้าเครื่อง) และ <strong>Supervisor Dashboard</strong> (สำหรับหัวหน้างาน)
             </p>
+            <div className="bg-white p-3 rounded border border-purple-300">
+              <p className="text-xs font-medium mb-2">🔗 การเชื่อมโยงกับ Production Order:</p>
+              <div className="text-xs text-gray-700 space-y-1">
+                <p>• เมื่อพนักงานรายงาน <strong>Good Qty</strong> → อัพเดท <code>producedQuantity</code> ใน Production Order</p>
+                <p>• เมื่อพนักงานรายงาน <strong>Scrap Qty</strong> → อัพเดท <code>scrapQuantity</code> ใน Production Order</p>
+                <p>• เมื่อกด <strong>START</strong> → บันทึก <code>actualStartDate</code></p>
+                <p>• เมื่อกด <strong>STOP</strong> → บันทึก <code>actualFinishDate</code> และเปลี่ยน <code>status</code> เป็น 'completed'</p>
+                <p>• Timer ทำงาน → อัพเดท <code>operations[].actualRunTime</code></p>
+              </div>
+            </div>
           </div>
+
+          <Card className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-200">
+            <CardHeader>
+              <CardTitle className="text-base">📊 Manufacturing Execution Flow</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div ref={mermaidRef3} className="mermaid">
+                {`sequenceDiagram
+                  participant Op as 👨‍🔧 Operator<br/>(Cockpit)
+                  participant AI as 🤖 AI Co-Pilot
+                  participant PO as Production<br/>Order
+                  participant Inv as Inventory
+                  participant Cost as Costing
+                  
+                  Op->>Op: เลือก Job Ticket<br/>จาก Mission Queue
+                  Op->>PO: กด START
+                  PO-->>PO: บันทึก actualStartDate
+                  
+                  loop ผลิตไปเรื่อยๆ
+                    Op->>Op: ทำงาน (Timer นับเวลา)
+                    Op->>PO: Report Good Qty: 50
+                    PO-->>PO: producedQuantity += 50
+                    PO->>Inv: ตัดสต็อกวัตถุดิบ
+                    PO->>Cost: บันทึกต้นทุนแรงงาน
+                  end
+                  
+                  Note over Op,AI: เครื่องมีปัญหา!
+                  Op->>Op: กด PAUSE
+                  Op->>AI: ระบุ Downtime: Motor Heat
+                  AI-->>Op: แนะนำ: เช็คพัดลมระบายความร้อน
+                  Op->>Op: แก้ไขเสร็จ → กด START อีกครั้ง
+                  
+                  Op->>PO: Report Scrap Qty: 2
+                  PO-->>PO: scrapQuantity += 2
+                  
+                  Op->>PO: กด STOP (เสร็จครบ)
+                  PO-->>PO: actualFinishDate = now()
+                  PO-->>PO: status = 'completed'
+                  PO->>Inv: รับสินค้าสำเร็จเข้าสต็อก
+                  PO->>Cost: คำนวณต้นทุนจริงทั้งหมด
+                  
+                  Note over Op,Cost: งานเสร็จ! Production Order<br/>อัพเดทครบทุกอย่าง`}
+              </div>
+            </CardContent>
+          </Card>
 
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
             <h4 className="font-semibold mb-2 flex items-center gap-2">
@@ -282,17 +399,18 @@ export function ProductionGuide() {
                 <p className="text-xs font-medium mb-2">2. Control Panel (ควบคุมการทำงาน)</p>
                 <ul className="text-xs text-gray-700 space-y-1 list-disc list-inside">
                   <li><strong>Timer:</strong> นับเวลาทำงานจริง เทียบกับเวลามาตรฐาน (แสดงสีเขียว=ทัน, แดง=ช้า)</li>
-                  <li><strong>START:</strong> เริ่มงาน (บันทึกเวลาเริ่มต้น)</li>
+                  <li><strong>START:</strong> เริ่มงาน (บันทึกเวลาเริ่มต้น → อัพเดท Production Order)</li>
                   <li><strong>PAUSE:</strong> พักงาน (ต้องระบุสาเหตุ Downtime)</li>
-                  <li><strong>STOP:</strong> จบงาน (ปิด Job Ticket)</li>
+                  <li><strong>STOP:</strong> จบงาน (ปิด Job Ticket → อัพเดท Production Order เป็น completed)</li>
                 </ul>
               </div>
               <div className="bg-white p-3 rounded border border-blue-300">
                 <p className="text-xs font-medium mb-2">3. Report Output (รายงานผลผลิต)</p>
                 <ul className="text-xs text-gray-700 space-y-1 list-disc list-inside">
-                  <li><strong>Good Qty:</strong> ใส่จำนวนงานดี กดปุ่ม Report → ระบบตัดสต็อกวัตถุดิบอัตโนมัติ</li>
-                  <li><strong>Scrap Qty:</strong> ใส่จำนวนของเสีย เลือก Defect Code (เช่น รอยขีดข่วน, ขนาดผิด)</li>
+                  <li><strong>Good Qty:</strong> ใส่จำนวนงานดี กดปุ่ม Report → ระบบตัดสต็อกวัตถุดิบอัตโนมัติ + อัพเดท <code>producedQuantity</code></li>
+                  <li><strong>Scrap Qty:</strong> ใส่จำนวนของเสีย เลือก Defect Code (เช่น รอยขีดข่วน, ขนาดผิด) → อัพเดท <code>scrapQuantity</code></li>
                   <li>ระบบบันทึกทุกอย่างเป็น Log เพื่อคำนวณต้นทุนจริง</li>
+                  <li><strong>Real-time Update:</strong> ทุกครั้งที่รายงาน Production Order จะอัพเดททันที</li>
                 </ul>
               </div>
             </div>
@@ -370,9 +488,10 @@ export function ProductionGuide() {
               <div className="bg-white p-2 rounded border border-yellow-300">
                 <p className="font-medium mb-1">➡️ ส่งข้อมูลไป:</p>
                 <ul className="text-gray-700 space-y-1 list-disc list-inside">
+                  <li>Production Order (อัพเดทความคืบหน้า)</li>
                   <li>Inventory (ตัดสต็อกอัตโนมัติ)</li>
                   <li>Costing (คำนวณต้นทุนจริง)</li>
-                  <li>Planning (อัปเดตความคืบหน้า)</li>
+                  <li>Planning (อัปเดตตาราง)</li>
                 </ul>
               </div>
             </div>

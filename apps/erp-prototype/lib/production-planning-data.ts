@@ -20,6 +20,7 @@ export interface AIInsight {
 export interface PlanItem {
   id: string
   orderNumber: string
+  salesOrderIds: string[]  // Multiple SO can be combined
   productName: string
   quantity: number
   startDate: string
@@ -89,6 +90,7 @@ export const mockPlanItems: PlanItem[] = [
   {
     id: 'plan-1',
     orderNumber: 'PO-2024-001',
+    salesOrderIds: ['SO-2024-001', 'SO-2024-002'],  // Combined from 2 SOs
     productName: 'C-Channel 100x50x20x2.0mm',
     quantity: 500,
     startDate: '2024-02-15',
@@ -100,6 +102,7 @@ export const mockPlanItems: PlanItem[] = [
   {
     id: 'plan-2',
     orderNumber: 'PO-2024-002',
+    salesOrderIds: ['SO-2024-003'],
     productName: 'Electrical Panel Door',
     quantity: 200,
     startDate: '2024-02-10',
@@ -111,6 +114,7 @@ export const mockPlanItems: PlanItem[] = [
   {
     id: 'plan-3',
     orderNumber: 'PO-2024-003',
+    salesOrderIds: ['SO-2024-004'],
     productName: 'Heavy Duty Mounting Bracket',
     quantity: 1000,
     startDate: '2024-02-22',
@@ -122,6 +126,7 @@ export const mockPlanItems: PlanItem[] = [
   {
     id: 'plan-4',
     orderNumber: 'PO-2024-004',
+    salesOrderIds: [],  // Stock production, no SO
     productName: 'C-Channel 100x50x20x2.0mm',
     quantity: 300,
     startDate: '2024-02-16',

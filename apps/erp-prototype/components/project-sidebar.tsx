@@ -4,7 +4,7 @@ import {
   LayoutDashboard, LogOut, ChevronLeft, ChevronRight, Languages,
   Star, ListTodo, FileText, DollarSign, Users2,
   BarChart3, Users, Settings, Calendar, BookOpen, Network,
-  Package2, ShoppingBag, Building2, History, Calculator, GitBranch
+  Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown, ChevronUp
 } from 'lucide-react'
 import { Button } from './ui/button'
 import { QuickSearch } from './quick-search'
@@ -24,6 +24,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
   const router = useRouter()
   const locale = params.locale as string
   const [userEmail, setUserEmail] = useState('')
+  const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     const user = localStorage.getItem('mock_user')
@@ -45,6 +46,10 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
     router.push(newPath)
   }
 
+  const toggleSection = (section: string) => {
+    setCollapsedSections(prev => ({ ...prev, [section]: !prev[section] }))
+  }
+
   const menuItems = projectId ? [
     { href: `/${locale}/company`, icon: GitBranch, label: '← All Companies', isBack: true },
     { href: `/${locale}/guide`, icon: BookOpen, label: 'User Guide', isGuide: true },
@@ -54,8 +59,8 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
     { href: `/${locale}/company/${projectId}/sales-invoice`, icon: DollarSign, label: 'Sales Invoice' },
     { section: 'Production' },
     { href: `/${locale}/company/${projectId}/bom`, icon: GitBranch, label: 'BOM' },
-    { href: `/${locale}/company/${projectId}/production-order`, icon: Calendar, label: 'Production Order' },
     { href: `/${locale}/company/${projectId}/production-planning`, icon: BarChart3, label: 'Production Planning' },
+    { href: `/${locale}/company/${projectId}/production-order`, icon: Calendar, label: 'Production Order' },
     { href: `/${locale}/company/${projectId}/manufacturing`, icon: Settings, label: 'Manufacturing' },
     { section: 'Materials' },
     { href: `/${locale}/company/${projectId}/mrp`, icon: Network, label: 'MRP' },
@@ -115,9 +120,17 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
       <nav className="flex-1 space-y-1 p-2 overflow-y-auto">
         {menuItems.map((item, index) => {
           if ((item as any).section) {
+            const sectionName = (item as any).section
+            const isCollapsed = collapsedSections[sectionName]
             return !collapsed ? (
-              <div key={index} className="px-3 pt-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                {(item as any).section}
+              <div key={index}>
+                <button
+                  onClick={() => toggleSection(sectionName)}
+                  className="w-full flex items-center justify-between px-3 pt-4 pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider hover:text-gray-700 transition-colors"
+                >
+                  <span>{sectionName}</span>
+                  {isCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                </button>
               </div>
             ) : (
               <div key={index} className="border-t my-2"></div>
@@ -130,6 +143,11 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
           const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
           const isBackButton = (item as any).isBack
           const isGuideButton = (item as any).isGuide
+          const section = menuItems.slice(0, index).reverse().find(i => (i as any).section) as any
+          const sectionName = section?.section || ''
+          const isSectionCollapsed = sectionName ? collapsedSections[sectionName] : false
+          
+          if (isSectionCollapsed && !collapsed) return null
           
           return (
             <div key={item.href}>

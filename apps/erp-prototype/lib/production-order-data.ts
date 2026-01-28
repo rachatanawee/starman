@@ -31,7 +31,8 @@ export interface ProductionOperation {
 export interface ProductionOrder {
   id: string
   orderNumber: string
-  salesOrderId?: string
+  salesOrderIds: string[]  // Multiple SO can be combined
+  planningId?: string  // Link to production planning
   productId: string
   productName: string
   productSku: string
@@ -57,7 +58,8 @@ export const mockProductionOrders: ProductionOrder[] = [
   {
     id: 'po-1',
     orderNumber: 'PO-2024-001',
-    salesOrderId: 'so-123',
+    salesOrderIds: ['SO-2024-001', 'SO-2024-002'],  // Combined from 2 SOs
+    planningId: 'plan-1',
     productId: 'prod-1',
     productName: 'C-Channel 100x50x20x2.0mm',
     productSku: 'FG-CCHAN-100',
@@ -71,7 +73,7 @@ export const mockProductionOrders: ProductionOrder[] = [
     actualStartDate: '2024-02-15T08:00:00Z',
     status: 'in_progress',
     priority: 'high',
-    notes: 'Rush order for ABC Construction',
+    notes: 'Combined from SO-2024-001 (300 pcs) + SO-2024-002 (200 pcs)',
     materials: [
       {
         id: 'mat-1',
@@ -134,6 +136,8 @@ export const mockProductionOrders: ProductionOrder[] = [
   {
     id: 'po-2',
     orderNumber: 'PO-2024-002',
+    salesOrderIds: ['SO-2024-003'],
+    planningId: 'plan-2',
     productId: 'prod-2',
     productName: 'Electrical Panel Door 600x400mm',
     productSku: 'FG-PANEL-600',
@@ -148,6 +152,7 @@ export const mockProductionOrders: ProductionOrder[] = [
     actualFinishDate: '2024-02-14T16:45:00Z',
     status: 'completed',
     priority: 'normal',
+    notes: 'From SO-2024-003',
     materials: [
       {
         id: 'mat-2',
@@ -216,7 +221,8 @@ export const mockProductionOrders: ProductionOrder[] = [
   {
     id: 'po-3',
     orderNumber: 'PO-2024-003',
-    salesOrderId: 'so-456',
+    salesOrderIds: ['SO-2024-004'],
+    planningId: 'plan-3',
     productId: 'prod-3',
     productName: 'Heavy Duty Mounting Bracket',
     productSku: 'FG-BRKT-HD-001',
@@ -229,7 +235,7 @@ export const mockProductionOrders: ProductionOrder[] = [
     dueDate: '2024-02-28',
     status: 'released',
     priority: 'urgent',
-    notes: 'Material reserved, ready to start',
+    notes: 'From SO-2024-004 - Material reserved, ready to start',
     materials: [
       {
         id: 'mat-5',
@@ -298,6 +304,8 @@ export const mockProductionOrders: ProductionOrder[] = [
   {
     id: 'po-4',
     orderNumber: 'PO-2024-004',
+    salesOrderIds: [],  // Stock production, no SO
+    planningId: 'plan-4',
     productId: 'prod-1',
     productName: 'C-Channel 100x50x20x2.0mm',
     productSku: 'FG-CCHAN-100',
@@ -310,7 +318,7 @@ export const mockProductionOrders: ProductionOrder[] = [
     dueDate: '2024-03-01',
     status: 'created',
     priority: 'normal',
-    notes: 'Waiting for material approval',
+    notes: 'Stock production - No SO linked',
     materials: [
       {
         id: 'mat-8',
