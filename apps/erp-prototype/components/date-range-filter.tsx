@@ -27,6 +27,7 @@ export function DateRangeFilter({
       </Label>
       <div className="flex gap-2">
         <Input
+          data-testid="filter-date-from"
           type="date"
           value={dateFrom}
           onChange={(e) => onDateFromChange(e.target.value)}
@@ -34,6 +35,7 @@ export function DateRangeFilter({
           placeholder="From"
         />
         <Input
+          data-testid="filter-date-to"
           type="date"
           value={dateTo}
           onChange={(e) => onDateToChange(e.target.value)}

@@ -106,6 +106,7 @@ export default function SalesOrderPage() {
             Order Number
           </Label>
           <Input
+            data-testid="filter-order-number"
             placeholder="Search order..."
             value={criteria.orderNumber}
             onChange={(e) => setCriteria('orderNumber', e.target.value)}
@@ -118,7 +119,7 @@ export default function SalesOrderPage() {
             Status
           </Label>
           <Select value={criteria.status} onValueChange={(v) => setCriteria('status', v)}>
-            <SelectTrigger className="h-9">
+            <SelectTrigger data-testid="filter-status" className="h-9">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent>
@@ -174,6 +175,7 @@ export default function SalesOrderPage() {
             Customer
           </Label>
           <Input
+            data-testid="filter-customer"
             placeholder="Search customer..."
             value={criteria.customer}
             onChange={(e) => setCriteria('customer', e.target.value)}
@@ -350,6 +352,7 @@ export default function SalesOrderPage() {
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">Manage customer orders</p>
               </div>
               <Button 
+                data-testid="new-order-button"
                 className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
                 onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/new`)}
               >
@@ -369,7 +372,7 @@ export default function SalesOrderPage() {
 
         <div className="flex flex-col gap-3 sm:gap-3 text-sm w-full">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
+            <div data-testid="total-amount" className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
               <span className="text-xs sm:text-sm text-gray-600">Total Amount: </span>
               <span className="text-base sm:text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
             </div>
@@ -380,7 +383,7 @@ export default function SalesOrderPage() {
             </div>
           </div>
           <div className="w-full overflow-x-auto">
-            <DataGrid {...dataGridProps} table={table} height={height} />
+            <DataGrid data-testid="sales-order-grid" {...dataGridProps} table={table} height={height} />
           </div>
         </div>
         </div>

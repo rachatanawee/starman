@@ -106,6 +106,7 @@ export function DataGrid<TData>({
         aria-rowcount={rows.length + (onRowAdd ? 1 : 0)}
         aria-colcount={columns.length}
         data-slot="grid"
+        data-testid="data-grid"
         tabIndex={0}
         ref={dataGridRef}
         className="relative flex flex-col select-none overflow-auto rounded-md border focus:outline-none"
@@ -152,6 +153,7 @@ export function DataGrid<TData>({
                             : undefined
                     }
                     data-slot="grid-header-cell"
+                    data-testid={`grid-header-${header.column.id}`}
                     tabIndex={-1}
                     className={cn("relative", {
                       "border-r": header.column.id !== "select",
