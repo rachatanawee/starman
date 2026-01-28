@@ -4,9 +4,10 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Plus, Calendar, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, Lock } from 'lucide-react'
+import { Plus, Calendar, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, Lock, BookOpen } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
+import Link from 'next/link'
 import { mockAIInsights, mockPlanItems, AIInsight, PlanItem, InsightType, Severity } from '@/lib/production-planning-data'
 import { toast } from 'sonner'
 
@@ -62,6 +63,12 @@ export default function ProductionPlanningPage() {
             <p className="text-gray-600 mt-1">AI-powered production scheduling and optimization</p>
           </div>
           <div className="flex gap-2">
+            <Link href="/guide?tab=production&section=production-planning">
+              <Button variant="outline" size="sm">
+                <BookOpen className="h-4 w-4 mr-2" />
+                Learn More
+              </Button>
+            </Link>
             <Button
               onClick={handleRunAI}
               disabled={isRunningAI}

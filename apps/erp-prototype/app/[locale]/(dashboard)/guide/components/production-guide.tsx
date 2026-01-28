@@ -19,7 +19,7 @@ export function ProductionGuide() {
 
   return (
     <>
-      <Card>
+      <Card id="production-module">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Factory className="h-5 w-5" />
@@ -42,7 +42,7 @@ export function ProductionGuide() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card id="production-flow">
         <CardHeader>
           <CardTitle>Production Flow</CardTitle>
         </CardHeader>
@@ -65,7 +65,7 @@ export function ProductionGuide() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card id="bom">
         <CardHeader>
           <CardTitle>Production Process Sequence</CardTitle>
         </CardHeader>
@@ -98,7 +98,7 @@ export function ProductionGuide() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card id="production-order">
         <CardHeader>
           <CardTitle>🤖 AI Agent ใน Production</CardTitle>
         </CardHeader>
@@ -136,7 +136,7 @@ export function ProductionGuide() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card id="production-planning">
         <CardHeader>
           <CardTitle>📊 Production Planning with AI - คู่มือการใช้งาน</CardTitle>
         </CardHeader>
@@ -251,7 +251,7 @@ export function ProductionGuide() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card id="manufacturing-execution">
         <CardHeader>
           <CardTitle>🚀 Manufacturing Execution (The Launch)</CardTitle>
         </CardHeader>

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { 
   BookOpen, Target, ShoppingCart, Package, Factory, Receipt, BarChart3
 } from 'lucide-react'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import * as React from 'react'
 import { OverviewGuide } from './components/overview-guide'
@@ -17,7 +17,26 @@ import { ReportsGuide } from './components/reports-guide'
 
 export default function GuidePage() {
   const params = useParams()
+  const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = React.useState('overview')
+
+  React.useEffect(() => {
+    const tab = searchParams.get('tab')
+    const section = searchParams.get('section')
+    
+    if (tab) {
+      setActiveTab(tab)
+    }
+    
+    if (section) {
+      setTimeout(() => {
+        const element = document.getElementById(section)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+  }, [searchParams])
 
   return (
     <ProjectLayout>

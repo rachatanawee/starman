@@ -6,9 +6,10 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Progress } from '@/components/ui/progress'
-import { Plus, Factory, Search, Filter, X, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Edit, Eye } from 'lucide-react'
+import { Plus, Factory, Search, Filter, X, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Edit, Eye, BookOpen } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { mockProductionOrders, ProductionOrder, ProductionStatus } from '@/lib/production-order-data'
 
 const statusConfig: Record<ProductionStatus, { label: string; color: string; icon: any }> = {
@@ -67,13 +68,21 @@ export default function ProductionOrderPage() {
             <h1 className="text-3xl font-bold">Production Orders</h1>
             <p className="text-gray-600 mt-1">Manage manufacturing orders and track progress</p>
           </div>
-          <Button 
-            onClick={() => router.push(`/${params.locale}/company/${projectId}/production-order/new`)}
-            className="bg-purple-600 hover:bg-purple-700"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            New Production Order
-          </Button>
+          <div className="flex gap-2">
+            <Link href="/guide?tab=production&section=production-order">
+              <Button variant="outline" size="sm">
+                <BookOpen className="h-4 w-4 mr-2" />
+                Learn More
+              </Button>
+            </Link>
+            <Button 
+              onClick={() => router.push(`/${params.locale}/company/${projectId}/production-order/new`)}
+              className="bg-purple-600 hover:bg-purple-700"
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              New Production Order
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

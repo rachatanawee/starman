@@ -5,9 +5,10 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
-import { Rocket, BarChart3, Users, Zap } from 'lucide-react'
+import { Rocket, BarChart3, Users, Zap, BookOpen } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
+import Link from 'next/link'
 import { useState } from 'react'
 import { mockJobTickets, mockWorkCenters, JobTicket } from '@/lib/manufacturing-data'
 import { OperatorCockpit } from '@/components/operator-cockpit'
@@ -72,6 +73,12 @@ export default function ManufacturingPage() {
             <p className="text-gray-600 mt-1">Shop floor control and real-time monitoring</p>
           </div>
           <div className="flex items-center gap-2">
+            <Link href="/guide?tab=production&section=manufacturing-execution">
+              <Button variant="outline" size="sm">
+                <BookOpen className="h-4 w-4 mr-2" />
+                Learn More
+              </Button>
+            </Link>
             <Badge variant="outline" className="text-sm">
               🤖 The Co-Pilot Active
             </Badge>

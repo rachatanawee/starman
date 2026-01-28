@@ -19,7 +19,7 @@ export function SalesGuide() {
 
   return (
     <>
-      <Card>
+      <Card id="quotation">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <ShoppingCart className="h-5 w-5" />
@@ -52,7 +52,7 @@ export function SalesGuide() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card id="sales-order">
         <CardHeader>
           <CardTitle>Document Flow Diagram</CardTitle>
         </CardHeader>
@@ -71,7 +71,7 @@ export function SalesGuide() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card id="sales-invoice">
         <CardHeader>
           <CardTitle>Sales Process Sequence</CardTitle>
         </CardHeader>

@@ -1,9 +1,10 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Plus, Filter, X, User, CheckCircle, FileText, Send, Ban, CalendarX, Sparkles } from 'lucide-react'
+import { Plus, Filter, X, User, CheckCircle, FileText, Send, Ban, CalendarX, Sparkles, BookOpen } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
 import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
 import { DataGridSortMenu } from '@/components/tablecn/data-grid/data-grid-sort-menu'
@@ -358,6 +359,12 @@ export default function QuotationPage() {
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">Create and manage sales quotations</p>
               </div>
               <div className="flex gap-2">
+                <Link href="/guide?tab=sales&section=quotation">
+                  <Button variant="outline" size="sm">
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    Learn More
+                  </Button>
+                </Link>
                 <Button 
                   variant="outline"
                   className="gap-2 border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 hover:from-amber-100 hover:to-orange-100"

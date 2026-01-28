@@ -1,9 +1,10 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Plus, Filter, X, User, Receipt, DollarSign, AlertCircle, CheckCircle, Clock } from 'lucide-react'
+import { Plus, Filter, X, User, Receipt, DollarSign, AlertCircle, CheckCircle, Clock, BookOpen } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
 import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
 import { DataGridSortMenu } from '@/components/tablecn/data-grid/data-grid-sort-menu'
@@ -320,14 +321,22 @@ export default function SalesInvoicePage() {
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Sales Invoice</h1>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">Track invoices and payments</p>
               </div>
-              <Button 
-                data-testid="new-invoice-button"
-                className="bg-green-600 hover:bg-green-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
-                onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-invoice/new`)}
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                <span>New Invoice</span>
-              </Button>
+              <div className="flex gap-2">
+                <Link href="/guide?tab=sales&section=sales-invoice">
+                  <Button variant="outline" size="sm">
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    Learn More
+                  </Button>
+                </Link>
+                <Button 
+                  data-testid="new-invoice-button"
+                  className="bg-green-600 hover:bg-green-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
+                  onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-invoice/new`)}
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  <span>New Invoice</span>
+                </Button>
+              </div>
             </div>
           </div>
 

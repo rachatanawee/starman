@@ -1,9 +1,10 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Plus, Filter, X, User, Clock, Package, Truck, CheckCircle, XCircle, FileText } from 'lucide-react'
+import { Plus, Filter, X, User, Clock, Package, Truck, CheckCircle, XCircle, FileText, BookOpen } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
 import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
 import { DataGridSortMenu } from '@/components/tablecn/data-grid/data-grid-sort-menu'
@@ -351,14 +352,22 @@ export default function SalesOrderPage() {
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Sales Order</h1>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">Manage customer orders</p>
               </div>
-              <Button 
-                data-testid="new-order-button"
-                className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
-                onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/new`)}
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                <span>New Order</span>
-              </Button>
+              <div className="flex gap-2">
+                <Link href="/guide?tab=sales&section=sales-order">
+                  <Button variant="outline" size="sm">
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    Learn More
+                  </Button>
+                </Link>
+                <Button 
+                  data-testid="new-order-button"
+                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
+                  onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/new`)}
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  <span>New Order</span>
+                </Button>
+              </div>
             </div>
           </div>
 

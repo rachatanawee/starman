@@ -6,9 +6,10 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
-import { Plus, Package, Eye, Edit, Layers, TrendingUp, AlertCircle, Search, Filter, X } from 'lucide-react'
+import { Plus, Package, Eye, Edit, Layers, TrendingUp, AlertCircle, Search, Filter, X, BookOpen } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { mockBOMs, BOM } from '@/lib/bom-data'
 import { BOMTreeView } from '@/components/bom-tree-view'
 
@@ -62,10 +63,18 @@ export default function BOMPage() {
             <h1 className="text-3xl font-bold">Bill of Materials (BOM)</h1>
             <p className="text-gray-600 mt-1">Manage production recipes and raw materials</p>
           </div>
-          <Button onClick={handleNewBOM} className="bg-purple-600 hover:bg-purple-700">
-            <Plus className="h-4 w-4 mr-2" />
-            New BOM
-          </Button>
+          <div className="flex gap-2">
+            <Link href="/guide?tab=production&section=bom">
+              <Button variant="outline" size="sm">
+                <BookOpen className="h-4 w-4 mr-2" />
+                Learn More
+              </Button>
+            </Link>
+            <Button onClick={handleNewBOM} className="bg-purple-600 hover:bg-purple-700">
+              <Plus className="h-4 w-4 mr-2" />
+              New BOM
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
