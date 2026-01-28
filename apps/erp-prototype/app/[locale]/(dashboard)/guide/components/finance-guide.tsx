@@ -11,7 +11,7 @@ export function FinanceGuide() {
 
   useEffect(() => {
     mermaid.initialize({ startOnLoad: true, theme: 'default' })
-    const nodes = [mermaidRef1.current, mermaidRef2.current].filter(Boolean)
+    const nodes = [mermaidRef1.current, mermaidRef2.current].filter((node): node is HTMLDivElement => node !== null)
     if (nodes.length > 0) {
       mermaid.run({ nodes })
     }
