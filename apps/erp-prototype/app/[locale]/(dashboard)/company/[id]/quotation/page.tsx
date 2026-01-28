@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Plus, Filter, X, Calendar, User, CheckCircle, FileText, Send, Ban, CalendarX } from 'lucide-react'
+import { Plus, Filter, X, User, CheckCircle, FileText, Send, Ban, CalendarX } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
@@ -16,6 +16,7 @@ import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
+import { DateRangeFilter } from '@/components/date-range-filter'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 
@@ -158,28 +159,12 @@ export default function QuotationPage() {
             className="h-9"
           />
         </div>
-        <div className="space-y-2">
-          <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
-            <Calendar className="h-3 w-3" />
-            Date Range
-          </Label>
-          <div className="flex gap-2">
-            <Input
-              type="date"
-              value={criteria.dateFrom}
-              onChange={(e) => setCriteria('dateFrom', e.target.value)}
-              className="h-9 flex-1"
-              placeholder="From"
-            />
-            <Input
-              type="date"
-              value={criteria.dateTo}
-              onChange={(e) => setCriteria('dateTo', e.target.value)}
-              className="h-9 flex-1"
-              placeholder="To"
-            />
-          </div>
-        </div>
+        <DateRangeFilter
+          dateFrom={criteria.dateFrom}
+          dateTo={criteria.dateTo}
+          onDateFromChange={(value) => setCriteria('dateFrom', value)}
+          onDateToChange={(value) => setCriteria('dateTo', value)}
+        />
       </div>
     ),
     renderBadges: (criteria, setCriteria) => (
