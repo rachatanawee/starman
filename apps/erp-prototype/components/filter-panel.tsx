@@ -84,31 +84,31 @@ export function FilterPanel({ config, criteria, onCriteriaChange }: FilterPanelP
   }
 
   return (
-    <div className="bg-white rounded-lg border shadow-sm">
-      <div className="w-full p-4 border-b bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 transition-colors">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 flex-wrap cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-            <Filter className="h-5 w-5 text-purple-600" />
-            <h3 className="font-semibold text-gray-900">{config.name}</h3>
+    <div className="bg-white rounded-lg border shadow-sm overflow-hidden w-full max-w-full">
+      <div className="w-full p-3 sm:p-4 border-b bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 transition-colors">
+        <div className="flex items-start sm:items-center justify-between gap-2 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap cursor-pointer min-w-0" onClick={() => setIsOpen(!isOpen)}>
+            <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 shrink-0" />
+            <h3 className="font-semibold text-sm sm:text-base text-gray-900">{config.name}</h3>
             {hasActiveFilters && (
-              <Badge variant="secondary" className="ml-2">
+              <Badge variant="secondary" className="text-xs">
                 {activeFilterCount} active
               </Badge>
             )}
             {!isOpen && hasActiveFilters && config.renderBadges && (
-              <div className="flex items-center gap-2 ml-2 flex-wrap">
+              <div className="flex items-center gap-2 flex-wrap">
                 {config.renderBadges(criteria, setCriteria)}
               </div>
             )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0 flex-wrap">
             {hasActiveFilters && (
               <>
                 <Dialog open={isSaveDialogOpen} onOpenChange={setIsSaveDialogOpen}>
                   <DialogTrigger asChild>
-                    <Button variant="ghost" size="sm" className="h-8 text-xs">
-                      <Save className="h-3 w-3 mr-1" />
-                      Save
+                    <Button variant="ghost" size="sm" className="h-7 sm:h-8 text-xs px-2 sm:px-3">
+                      <Save className="h-3 w-3 sm:mr-1" />
+                      <span className="hidden sm:inline">Save</span>
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
@@ -126,17 +126,17 @@ export function FilterPanel({ config, criteria, onCriteriaChange }: FilterPanelP
                     </div>
                   </DialogContent>
                 </Dialog>
-                <Button variant="ghost" size="sm" onClick={clearFilters} className="h-8 text-xs">
-                  <X className="h-3 w-3 mr-1" />
-                  Clear all
+                <Button variant="ghost" size="sm" onClick={clearFilters} className="h-7 sm:h-8 text-xs px-2 sm:px-3">
+                  <X className="h-3 w-3 sm:mr-1" />
+                  <span className="hidden sm:inline">Clear all</span>
                 </Button>
               </>
             )}
             <Dialog open={isLoadDialogOpen} onOpenChange={setIsLoadDialogOpen}>
               <DialogTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 text-xs">
-                  <FolderOpen className="h-3 w-3 mr-1" />
-                  Load
+                <Button variant="ghost" size="sm" className="h-7 sm:h-8 text-xs px-2 sm:px-3">
+                  <FolderOpen className="h-3 w-3 sm:mr-1" />
+                  <span className="hidden sm:inline">Load</span>
                 </Button>
               </DialogTrigger>
               <DialogContent>
@@ -161,15 +161,17 @@ export function FilterPanel({ config, criteria, onCriteriaChange }: FilterPanelP
                 </div>
               </DialogContent>
             </Dialog>
-            <button onClick={() => setIsOpen(!isOpen)} className="p-1 hover:bg-white/50 rounded transition-colors">
+            <button onClick={() => setIsOpen(!isOpen)} className="p-1 hover:bg-white/50 rounded transition-colors shrink-0">
               <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </button>
           </div>
         </div>
       </div>
       {isOpen && (
-        <div className="p-4">
-          {config.renderFilters(criteria, setCriteria)}
+        <div className="p-3 sm:p-4 w-full">
+          <div className="w-full max-w-full">
+            {config.renderFilters(criteria, setCriteria)}
+          </div>
         </div>
       )}
     </div>

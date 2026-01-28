@@ -27,9 +27,9 @@ export default function GuidePage() {
                   <BookOpen className="h-7 w-7 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900">คู่มือการใช้งาน ProjectFlow</h1>
+                  <h1 className="text-3xl font-bold text-gray-900">คู่มือการใช้งาน ERP System</h1>
                   <p className="text-gray-600 text-base mt-1">
-                    ระบบบริหารจัดการโปรเจกต์ด้วย AI และ GitLab Integration
+                    ระบบบริหารทรัพยากรองค์กร (Enterprise Resource Planning)
                   </p>
                 </div>
               </div>
@@ -50,48 +50,48 @@ export default function GuidePage() {
             <CardHeader className="border-b bg-gray-50">
               <CardTitle className="flex items-center gap-2 text-xl font-semibold">
                 <Target className="h-5 w-5 text-gray-700" />
-                สรุปสำหรับผู้บริหาร
+ภาพรวมระบบ ERP
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6 space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">ProjectFlow คืออะไร?</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">ERP System คืออะไร?</h3>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  <span className="font-semibold text-gray-900">ProjectFlow</span> เป็นระบบบริหารจัดการโปรเจกต์ที่ใช้ <span className="font-semibold text-gray-900">AI เป็นผู้ช่วยหลัก</span> 
-                  ในการจัดการ Requirements, Tasks และ Issues ช่วยลดภาระงานด้านเอกสารและการวางแผนของทีม 
-                  โดยเชื่อมต่อกับ GitLab เพื่อให้ทีมพัฒนาทำงานได้อย่างราบรื่น พร้อมระบบรายงานและติดตามแบบ Real-time
+                  <span className="font-semibold text-gray-900">ERP (Enterprise Resource Planning)</span> เป็นระบบบริหารทรัพยากรองค์กรแบบครบวงจร 
+                  ที่รวมการทำงานของทุกแผนกเข้าด้วยกัน ตั้งแต่การขาย การจัดซื้อ สต็อกสินค้า การผลิต การเงิน และทรัพยากรบุคคล 
+                  ช่วยให้ข้อมูลทั้งหมดอยู่ในที่เดียว ลดความซ้ำซ้อน และเพิ่มประสิทธิภาพการทำงาน
                 </p>
                 
                 <div className="bg-purple-50 p-5 rounded-lg border border-purple-200 mb-4">
                   <div className="flex items-start gap-3">
-                    <Sparkles className="h-7 w-7 text-purple-700 mt-1 flex-shrink-0" />
+                    <Workflow className="h-7 w-7 text-purple-700 mt-1 flex-shrink-0" />
                     <div>
-                      <h4 className="font-semibold text-gray-900 text-base mb-2">AI ช่วยจัดการงานเอกสารและวางแผน</h4>
+                      <h4 className="font-semibold text-gray-900 text-base mb-2">ระบบบูรณาการทุกแผนก</h4>
                       <p className="text-gray-700 text-sm mb-3">
-                        AI ทำหน้าที่เป็น <strong>ผู้ช่วยอัจฉริยะ</strong> ที่ช่วยแปลงความต้องการเป็นแผนงานที่ชัดเจน:
+                        ERP เชื่อมโยงการทำงานของทุกแผนกเข้าด้วยกัน ทำให้ข้อมูลไหลลื่นและทันสมัยตลอดเวลา:
                       </p>
                       <ul className="space-y-2 text-sm text-gray-700">
                         <li className="flex items-start gap-2">
-                          <span className="bg-purple-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Requirements</span>
-                          <span>AI อ่านบันทึกการประชุมและสรุปเป็น Requirements พร้อม Acceptance Criteria อัตโนมัติ</span>
+                          <span className="bg-purple-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Sales</span>
+                          <span>จัดการใบเสนอราคา ใบสั่งขาย และติดตามสถานะการขายแบบ Real-time</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Tasks</span>
-                          <span>AI แบ่งงานเป็น Tasks ย่อยๆ พร้อมประมาณเวลาและลำดับการทำงาน ไม่ต้องนั่งวางแผนเอง</span>
+                          <span className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Purchase</span>
+                          <span>สั่งซื้อสินค้า ติดตามใบสั่งซื้อ และจัดการกับซัพพลายเออร์</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="bg-green-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Issues</span>
-                          <span>AI สร้าง GitLab Issues พร้อมมอบหมายงานให้ทีมอัตโนมัติ ลดงานเอกสาร</span>
+                          <span className="bg-green-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Inventory</span>
+                          <span>ตรวจสอบสต็อกสินค้า ติดตามการเคลื่อนไหว และแจ้งเตือนเมื่อสินค้าใกล้หมด</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="bg-orange-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Smart</span>
-                          <span>AI เรียนรู้จากโปรเจกต์เก่าเพื่อประมาณการที่แม่นยำขึ้นเรื่อยๆ</span>
+                          <span className="bg-orange-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Finance</span>
+                          <span>บันทึกรายรับ-รายจ่าย ออกใบแจ้งหนี้ และสร้างรายงานทางการเงิน</span>
                         </li>
                       </ul>
                       <div className="mt-3 pt-3 border-t border-purple-200">
                         <p className="text-xs text-gray-600">
-                          <strong>ประโยชน์:</strong> ลดเวลาทำเอกสารและวางแผนจาก 2-3 วัน เหลือเพียง 30 นาที 
-                          ทีมสามารถเริ่มทำงานได้เร็วขึ้น และมีเวลามากขึ้นสำหรับการพัฒนาจริง
+                          <strong>ประโยชน์:</strong> ลดเวลาการทำงานซ้ำซ้อน ข้อมูลถูกต้องและทันสมัย 
+                          ตัดสินใจได้เร็วขึ้นด้วยข้อมูลที่แม่นยำ
                         </p>
                       </div>
                     </div>
@@ -101,34 +101,34 @@ export default function GuidePage() {
 
               <div className="bg-blue-50 p-5 rounded-lg border border-blue-200 mb-4">
                 <div className="flex items-start gap-3">
-                  <GitBranch className="h-7 w-7 text-blue-700 mt-1 flex-shrink-0" />
+                  <BarChart3 className="h-7 w-7 text-blue-700 mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900 text-base mb-2">Single Source of Truth</h4>
+                    <h4 className="font-semibold text-gray-900 text-base mb-2">ข้อมูลรวมศูนย์ ตัดสินใจได้เร็ว</h4>
                     <p className="text-gray-700 text-sm mb-3">
-                      ProjectFlow เชื่อมต่อกับ <strong>GitLab</strong> เพื่อให้ข้อมูลทั้งหมดอยู่ในที่เดียว ลดความซ้ำซ้อนและเพิ่มความแม่นยำ:
+                      ข้อมูลทั้งหมดอยู่ในที่เดียว ทำให้ผู้บริหารเห็นภาพรวมและตัดสินใจได้อย่างรวดเร็ว:
                     </p>
                     <ul className="space-y-2 text-sm text-gray-700">
                       <li className="flex items-start gap-2">
-                        <span className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Requirements</span>
-                        <span>ความต้องการของระบบถูกบันทึกและติดตามใน GitLab Issues</span>
+                        <span className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Dashboard</span>
+                        <span>ดูภาพรวมยอดขาย สต็อก และการเงินแบบ Real-time</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="bg-green-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Tasks</span>
-                        <span>งานทั้งหมดถูกสร้างและมอบหมายผ่าน GitLab พร้อม Timeline</span>
+                        <span className="bg-green-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Reports</span>
+                        <span>สร้างรายงานต่างๆ ได้ทันที ไม่ต้องรวบรวมข้อมูลจากหลายที่</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="bg-purple-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Progress</span>
-                        <span>ความคืบหน้าอัพเดทอัตโนมัติจากการทำงานจริงของทีม</span>
+                        <span className="bg-purple-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Tracking</span>
+                        <span>ติดตามสถานะใบสั่งขาย ใบสั่งซื้อ และการจัดส่งได้ทุกที่ทุกเวลา</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="bg-orange-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Traceability</span>
-                        <span>ติดตามได้ว่า Requirement ไหนเชื่อมโยงกับ Task และ Code ใด</span>
+                        <span className="bg-orange-600 text-white px-2 py-0.5 rounded text-xs font-medium mt-0.5">Integration</span>
+                        <span>เชื่อมต่อกับระบบอื่นๆ เช่น ระบบบัญชี ระบบ CRM ได้อย่างง่ายดาย</span>
                       </li>
                     </ul>
                     <div className="mt-3 pt-3 border-t border-blue-200">
                       <p className="text-xs text-gray-600">
-                        <strong>เปรียบเทียบ:</strong> เหมือนการใช้ MS Project ร่วมกับ Excel แต่ข้อมูลทั้งหมดเชื่อมโยงกันอัตโนมัติ 
-                        ไม่ต้องอัพเดทหลายที่ และมีการ sync กับงานจริงของทีมพัฒนา
+                        <strong>เปรียบเทียบ:</strong> แทนที่การใช้ Excel หลายไฟล์ ด้วยระบบเดียวที่ข้อมูลเชื่อมโยงกันอัตโนมัติ 
+                        ลดความผิดพลาดและประหยัดเวลา
                       </p>
                     </div>
                   </div>
@@ -144,19 +144,19 @@ export default function GuidePage() {
                   <ul className="space-y-2 text-sm text-gray-700">
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 mt-0.5">•</span>
-                      <span><strong>ลดความซ้ำซ้อน</strong> AI ช่วยให้ Requirements, Tasks และ Tests เชื่อมโยงกันอัตโนมัติ</span>
+                      <span><strong>ลดความซ้ำซ้อน</strong> ข้อมูลอยู่ในที่เดียว ไม่ต้องกรอกซ้ำหลายที่</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 mt-0.5">•</span>
-                      <span><strong>เพิ่มความชัดเจน</strong> AI สร้าง Acceptance Criteria ที่ชัดเจนและวัดผลได้</span>
+                      <span><strong>เพิ่มความแม่นยำ</strong> ลดข้อผิดพลาดจากการกรอกข้อมูลด้วยมือ</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 mt-0.5">•</span>
-                      <span><strong>ลดเวลาวางแผน 60%</strong> AI แปลง Requirements เป็น Tasks ได้ใน 30 นาที</span>
+                      <span><strong>ประหยัดเวลา</strong> ลดเวลาการทำงานด้านเอกสารและรายงาน</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 mt-0.5">•</span>
-                      <span><strong>ประมาณการแม่นยำ</strong> AI เรียนรู้จากโปรเจกต์เก่าเพื่อประมาณเวลาที่ดีขึ้น</span>
+                      <span><strong>ตัดสินใจเร็วขึ้น</strong> มีข้อมูลที่ถูกต้องและทันสมัยเสมอ</span>
                     </li>
                   </ul>
                 </div>
@@ -169,15 +169,19 @@ export default function GuidePage() {
                   <ul className="space-y-2 text-sm text-gray-700">
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 mt-0.5">•</span>
-                      <span><strong>Project Manager (PM)</strong> - วางแผนและติดตามโปรเจกต์</span>
+                      <span><strong>ฝ่ายขาย</strong> - จัดการใบเสนอราคาและใบสั่งขาย</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 mt-0.5">•</span>
-                      <span><strong>System Analyst (SA)</strong> - กำหนด Requirements</span>
+                      <span><strong>ฝ่ายจัดซื้อ</strong> - สั่งซื้อสินค้าและจัดการซัพพลายเออร์</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 mt-0.5">•</span>
-                      <span><strong>Development Team</strong> - ทำงานตาม Tasks</span>
+                      <span><strong>ฝ่ายคลังสินค้า</strong> - ตรวจสอบและจัดการสต็อก</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-gray-400 mt-0.5">•</span>
+                      <span><strong>ฝ่ายบัญชี</strong> - บันทึกรายรับ-รายจ่ายและสร้างรายงาน</span>
                     </li>
                   </ul>
                 </div>
@@ -185,19 +189,19 @@ export default function GuidePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white p-5 rounded-lg border border-gray-200 text-center">
-                  <Sparkles className="h-8 w-8 text-gray-700 mx-auto mb-2" />
-                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">AI-Powered</h3>
-                  <p className="text-xs text-gray-600">สร้าง Tasks และประมาณการอัตโนมัติ</p>
+                  <DollarSign className="h-8 w-8 text-gray-700 mx-auto mb-2" />
+                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Sales & Purchase</h3>
+                  <p className="text-xs text-gray-600">จัดการการขายและการซื้ออย่างมีประสิทธิภาพ</p>
                 </div>
                 <div className="bg-white p-5 rounded-lg border border-gray-200 text-center">
-                  <GitBranch className="h-8 w-8 text-gray-700 mx-auto mb-2" />
-                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">GitLab Integration</h3>
-                  <p className="text-xs text-gray-600">เชื่อมต่อกับ GitLab CE แบบ Seamless</p>
+                  <ListTodo className="h-8 w-8 text-gray-700 mx-auto mb-2" />
+                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Inventory Management</h3>
+                  <p className="text-xs text-gray-600">ควบคุมสต็อกสินค้าแบบ Real-time</p>
                 </div>
                 <div className="bg-white p-5 rounded-lg border border-gray-200 text-center">
                   <BarChart3 className="h-8 w-8 text-gray-700 mx-auto mb-2" />
-                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Real-time Monitoring</h3>
-                  <p className="text-xs text-gray-600">ติดตามความคืบหน้าแบบ Real-time</p>
+                  <h3 className="font-semibold text-gray-900 mb-1 text-sm">Financial Reports</h3>
+                  <p className="text-xs text-gray-600">รายงานทางการเงินที่ถูกต้องและทันสมัย</p>
                 </div>
               </div>
             </CardContent>
@@ -216,54 +220,54 @@ export default function GuidePage() {
                 {
                   num: 1,
                   color: 'purple',
-                  title: 'ขั้นตอนวางแผน (Planning)',
-                  role: 'PM & SA',
-                  desc: 'กำหนด Requirements และ Epics',
-                  details: 'PM และ SA ร่วมกันกำหนดความต้องการของโปรเจกต์ โดยสามารถ Paste บันทึกการประชุมเพื่อให้ AI สรุป Requirements อัตโนมัติ พร้อม Acceptance Criteria',
+                  title: 'รับคำสั่งซื้อ (Sales Order)',
+                  role: 'ฝ่ายขาย',
+                  desc: 'สร้างใบเสนอราคาและใบสั่งขาย',
+                  details: 'ฝ่ายขายรับคำสั่งซื้อจากลูกค้า สร้างใบเสนอราคา และออกใบสั่งขายในระบบ ข้อมูลจะถูกส่งต่อไปยังฝ่ายอื่นๆ อัตโนมัติ',
                   items: [
-                    { icon: FileText, title: 'Requirements', desc: 'อัพโหลดบันทึกการประชุมหรือกำหนด Requirements ด้วยตนเอง' },
-                    { icon: GitBranch, title: 'Epics', desc: 'แบ่งโปรเจกต์เป็น Features และ Epics' }
+                    { icon: FileText, title: 'Quotation', desc: 'สร้างใบเสนอราคาให้ลูกค้า' },
+                    { icon: CheckSquare, title: 'Sales Order', desc: 'ออกใบสั่งขายเมื่อลูกค้าตกลง' }
                   ]
                 },
                 {
                   num: 2,
                   color: 'blue',
-                  title: 'สร้าง Tasks ด้วย AI → GitLab',
-                  role: 'PM',
-                  desc: 'ใช้ AI สร้าง Tasks อัตโนมัติและ Submit ไปยัง GitLab',
-                  details: 'PM ใช้ AI Task Generator เพื่อสร้าง Tasks จาก Requirements โดยอัตโนมัติ พร้อมประมาณการเวลา จากนั้น Submit ไปยัง GitLab เพื่อสร้าง Issues และ Milestones',
+                  title: 'จัดซื้อสินค้า (Purchase)',
+                  role: 'ฝ่ายจัดซื้อ',
+                  desc: 'สั่งซื้อสินค้าจากซัพพลายเออร์',
+                  details: 'ฝ่ายจัดซื้อตรวจสอบสต็อกสินค้า สร้างใบสั่งซื้อ และติดตามการจัดส่งจากซัพพลายเออร์ ระบบจะแจ้งเตือนเมื่อสินค้าใกล้หมด',
                   steps: [
-                    'ใส่ Requirements ที่ต้องการพัฒนา',
-                    'กำหนด Sprint Start Date และ Duration',
-                    'AI สร้าง Tasks พร้อมประมาณการ',
-                    'ปรับแต่งแบบ Iterative',
-                    '✅ Submit to GitLab → สร้าง Issues + Milestones + Assignees'
+                    'ตรวจสอบสต็อกสินค้าคงเหลือ',
+                    'สร้างใบสั่งซื้อ (Purchase Order)',
+                    'ส่งใบสั่งซื้อให้ซัพพลายเออร์',
+                    'ติดตามการจัดส่ง',
+                    '✅ รับสินค้าเข้าคลัง'
                   ]
                 },
                 {
                   num: 3,
                   color: 'green',
-                  title: 'ขั้นตอนดำเนินการ (Execution) บน GitLab',
-                  role: 'Development Team',
-                  desc: 'ทำงานตาม GitLab Issues และอัพเดทสถานะ',
-                  details: 'ทีมพัฒนาทำงานตาม GitLab Issues ที่ได้รับมอบหมาย อัพเดทสถานะผ่าน GitLab และระบบจะ Sync อัตโนมัติ',
+                  title: 'จัดการคลังสินค้า (Inventory)',
+                  role: 'ฝ่ายคลัง',
+                  desc: 'ตรวจสอบและจัดการสต็อกสินค้า',
+                  details: 'ฝ่ายคลังรับสินค้าเข้า จัดเก็บ และเบิกสินค้าออกตามใบสั่งขาย ระบบจะอัพเดทสต็อกแบบ Real-time',
                   items: [
-                    { icon: ListTodo, title: 'Tasks (GitLab Issues)', desc: 'ทำงานและอัพเดทสถานะใน GitLab' },
-                    { icon: Calendar, title: 'Gantt Chart', desc: 'แสดง Timeline จาก GitLab Milestones' },
-                    { icon: CheckSquare, title: 'Acceptance', desc: 'ติดตาม Acceptance Criteria จาก Issues' }
+                    { icon: ListTodo, title: 'Stock In', desc: 'รับสินค้าเข้าคลังและอัพเดทสต็อก' },
+                    { icon: Calendar, title: 'Stock Out', desc: 'เบิกสินค้าออกตามใบสั่งขาย' },
+                    { icon: CheckSquare, title: 'Stock Count', desc: 'ตรวจนับสต็อกและปรับยอด' }
                   ]
                 },
                 {
                   num: 4,
                   color: 'orange',
-                  title: 'ขั้นตอนติดตาม (Monitoring)',
-                  role: 'PM & Stakeholders',
-                  desc: 'ติดตามและควบคุมโปรเจกต์',
-                  details: 'PM และ Stakeholders ติดตามความคืบหน้า งบประมาณ และความเสี่ยงของโปรเจกต์',
+                  title: 'บันทึกบัญชี (Accounting)',
+                  role: 'ฝ่ายบัญชี',
+                  desc: 'บันทึกรายรับ-รายจ่ายและสร้างรายงาน',
+                  details: 'ฝ่ายบัญชีบันทึกรายรับจากการขาย รายจ่ายจากการซื้อ ออกใบแจ้งหนี้ และสร้างรายงานทางการเงิน',
                   items: [
-                    { icon: BarChart3, title: 'Dashboard', desc: 'ภาพรวมโปรเจกต์แบบ Real-time' },
-                    { icon: DollarSign, title: 'Costs', desc: 'ติดตามงบประมาณและค่าใช้จ่าย' },
-                    { icon: AlertTriangle, title: 'Risks', desc: 'ระบุและจัดการความเสี่ยง' }
+                    { icon: BarChart3, title: 'Invoice', desc: 'ออกใบแจ้งหนี้ให้ลูกค้า' },
+                    { icon: DollarSign, title: 'Payment', desc: 'บันทึกการรับชำระเงิน' },
+                    { icon: AlertTriangle, title: 'Reports', desc: 'สร้างรายงานทางการเงิน' }
                   ]
                 }
               ].map((step, idx) => (
@@ -329,60 +333,60 @@ export default function GuidePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {[
                   {
-                    icon: Sparkles,
+                    icon: DollarSign,
                     color: 'purple',
-                    title: 'AI Requirements Analyzer',
-                    desc: 'Paste บันทึกการประชุมเพื่อให้ AI วิเคราะห์และสรุป Requirements อัตโนมัติ พร้อม Acceptance Criteria',
-                    benefits: ['วิเคราะห์บันทึกการประชุมภาษาไทยและอังกฤษ', 'สร้าง Requirements พร้อม Acceptance Criteria', 'จัดหมวดหมู่และกำหนด Priority อัตโนมัติ']
+                    title: 'Sales Order Management',
+                    desc: 'จัดการใบเสนอราคาและใบสั่งขายอย่างมีประสิทธิภาพ ติดตามสถานะแบบ Real-time',
+                    benefits: ['สร้างใบเสนอราคาและใบสั่งขาย', 'ติดตามสถานะการขาย', 'เชื่อมโยงกับสต็อกและบัญชีอัตโนมัติ']
                   },
                   {
-                    icon: Sparkles,
-                    color: 'purple',
-                    title: 'AI Task Generation',
-                    desc: 'สร้าง Tasks จาก Requirements อัตโนมัติด้วย AI พร้อมประมาณการเวลาที่แม่นยำ',
-                    benefits: ['ลดเวลาวางแผนจาก 2-3 วัน เหลือ 30 นาที', 'ประมาณการที่แม่นยำกว่า Manual Planning', 'ปรับแต่งได้แบบ Iterative']
-                  },
-                  {
-                    icon: GitBranch,
+                    icon: ListTodo,
                     color: 'blue',
-                    title: 'GitLab Integration (Core)',
-                    desc: 'GitLab CE เป็นแกนหลักในการจัดเก็บ Requirements, Tasks และ Assignments แบบ Real-time',
-                    benefits: ['Requirements → GitLab Issues (label: requirement)', 'Tasks → GitLab Issues + Milestones', 'Auto-sync Status จาก GitLab', 'Link กับ Merge Requests และ Commits']
-                  },
-                  {
-                    icon: Calendar,
-                    color: 'green',
-                    title: 'Interactive Gantt Chart',
-                    desc: 'แสดง Timeline โปรเจกต์แบบ Interactive พร้อมฟีเจอร์ย่อ/ขยาย Milestones',
-                    benefits: ['Freeze Task Column เมื่อ Scroll', 'Collapse/Expand Milestones', 'Zoom In/Out Timeline']
+                    title: 'Purchase Order Management',
+                    desc: 'สั่งซื้อสินค้าและจัดการซัพพลายเออร์ได้อย่างง่ายดาย',
+                    benefits: ['สร้างใบสั่งซื้ออัตโนมัติ', 'ติดตามการจัดส่งจากซัพพลายเออร์', 'เชื่อมโยงกับสต็อกและบัญชี']
                   },
                   {
                     icon: BarChart3,
-                    color: 'orange',
-                    title: 'Real-time Analytics',
-                    desc: 'ติดตามความคืบหน้า ค่าใช้จ่าย และความเสี่ยงแบบ Real-time',
-                    benefits: ['Progress & Velocity Charts', 'Budget vs Actual Spending', 'Risk Heat Map']
+                    color: 'green',
+                    title: 'Inventory Control',
+                    desc: 'ควบคุมสต็อกสินค้าแบบ Real-time พร้อมแจ้งเตือนเมื่อสินค้าใกล้หมด',
+                    benefits: ['ตรวจสอบสต็อกแบบ Real-time', 'แจ้งเตือนสินค้าใกล้หมด', 'ติดตามการเคลื่อนไหวสินค้า']
                   },
                   {
-                    icon: Shield,
-                    color: 'red',
-                    title: 'Risk Management',
-                    desc: 'ระบุ ติดตาม และจัดการความเสี่ยงของโปรเจกต์อย่างเป็นระบบ',
-                    benefits: ['Risk Register & Assessment', 'Mitigation Planning', 'Risk Monitoring & Alerts']
+                    icon: FileText,
+                    color: 'orange',
+                    title: 'Financial Accounting',
+                    desc: 'บันทึกรายรับ-รายจ่าย ออกใบแจ้งหนี้ และสร้างรายงานทางการเงิน',
+                    benefits: ['บันทึกบัญชีอัตโนมัติ', 'ออกใบแจ้งหนี้และใบเสร็จ', 'รายงานทางการเงินครบถ้วน']
                   },
                   {
                     icon: Users,
                     color: 'indigo',
-                    title: 'Team Collaboration',
-                    desc: 'จัดการทีม บทบาท และการกระจาย Workload อย่างมีประสิทธิภาพ',
-                    benefits: ['Team Member Management', 'Workload Distribution', 'Performance Tracking']
+                    title: 'Customer & Supplier Management',
+                    desc: 'จัดการข้อมูลลูกค้าและซัพพลายเออร์อย่างเป็นระบบ',
+                    benefits: ['ข้อมูลลูกค้าและซัพพลายเออร์', 'ประวัติการซื้อขาย', 'วงเงินเครดิตและเงื่อนไขการชำระ']
+                  },
+                  {
+                    icon: Shield,
+                    color: 'red',
+                    title: 'Multi-Company Support',
+                    desc: 'รองรับการทำงานหลายบริษัทในระบบเดียว แยกข้อมูลชัดเจน',
+                    benefits: ['จัดการหลายบริษัทในระบบเดียว', 'แยกข้อมูลแต่ละบริษัทชัดเจน', 'รายงานรวมและแยกตามบริษัท']
+                  },
+                  {
+                    icon: Calendar,
+                    color: 'teal',
+                    title: 'Dashboard & Reports',
+                    desc: 'ภาพรวมธุรกิจแบบ Real-time พร้อมรายงานที่ครบถ้วน',
+                    benefits: ['Dashboard แสดงภาพรวมธุรกิจ', 'รายงานยอดขาย สต็อก การเงิน', 'Export รายงานเป็น PDF และ Excel']
                   },
                   {
                     icon: Download,
-                    color: 'teal',
-                    title: 'Export SRS Document',
-                    desc: 'Export Requirements เป็นเอกสาร SRS (Software Requirements Specification) ในรูปแบบ MS Word',
-                    benefits: ['Export เป็น MS Word (.docx)', 'Wizard แบบ Step-by-Step', 'ปรับแต่ง Format และเนื้อหาได้', 'เหมาะสำหรับนำเสนอผู้บริหาร']
+                    color: 'pink',
+                    title: 'Data Export & Integration',
+                    desc: 'Export ข้อมูลและเชื่อมต่อกับระบบอื่นได้ง่าย',
+                    benefits: ['Export ข้อมูลเป็น Excel, PDF', 'API สำหรับเชื่อมต่อระบบอื่น', 'Import ข้อมูลจากไฟล์ Excel']
                   }
                 ].map((feature, idx) => {
                   const Icon = feature.icon
@@ -424,36 +428,36 @@ export default function GuidePage() {
                 {
                   num: 1,
                   color: 'indigo',
-                  title: 'สร้างหรือเลือก Project',
-                  desc: 'เริ่มต้นด้วยการสร้าง Project ใหม่หรือเลือก Project ที่มีอยู่จากหน้า Projects',
-                  details: ['ชื่อ Project และคำอธิบาย', 'GitLab Project URL และ Access Token', 'งบประมาณและ Timeline', 'AI Provider (OpenAI, Claude, Gemini)']
+                  title: 'สร้างบริษัทและตั้งค่าระบบ',
+                  desc: 'เริ่มต้นด้วยการสร้างบริษัทและตั้งค่าพื้นฐานของระบบ',
+                  details: ['ข้อมูลบริษัท (ชื่อ ที่อยู่ เลขที่ภาษี)', 'สกุลเงินและหน่วยเงิน', 'ข้อมูลลูกค้าและซัพพลายเออร์', 'ข้อมูลสินค้าและหมวดหมู่สินค้า']
                 },
                 {
                   num: 2,
                   color: 'purple',
-                  title: 'กำหนด Requirements',
-                  desc: 'ไปที่หน้า Requirements และกำหนดความต้องการของโปรเจกต์ โดยสามารถ Paste บันทึกการประชุมให้ AI วิเคราะห์',
+                  title: 'สร้างใบสั่งขายแรก',
+                  desc: 'ไปที่หน้า Sales Order และสร้างใบสั่งขายให้ลูกค้า',
                   details: [
-                    'Paste บันทึกการประชุม (Meeting Transcript) ในช่อง AI Requirements Analyzer',
-                    'คลิก Analyze with AI เพื่อให้ AI สรุป Requirements พร้อม Acceptance Criteria',
-                    'ตรวจสอบและแก้ไข Requirements ที่ AI สร้างให้',
-                    'กำหนด Epic, Priority และ Category สำหรับแต่ละ Requirement',
-                    'คลิก Save เพื่อบันทึก'
+                    'คลิก New Order เพื่อสร้างใบสั่งขายใหม่',
+                    'เลือกลูกค้า วันที่ส่ง และวันที่จัดส่ง',
+                    'เพิ่มรายการสินค้าที่ต้องการขาย',
+                    'ระบบจะคำนวณยอดรวมและอัพเดทสต็อกอัตโนมัติ',
+                    'บันทึกและส่งใบสั่งขายให้ลูกค้า'
                   ]
                 },
                 {
                   num: 3,
                   color: 'blue',
-                  title: 'สร้าง Tasks ด้วย AI และ Submit to GitLab',
-                  desc: 'ใช้ AI Task Generator ในหน้า Tasks เพื่อสร้าง Tasks จาก Requirements อัตโนมัติ แล้ว Submit ไปยัง GitLab',
-                  details: ['คลิก Generate with AI', 'Copy Requirements จากหน้า Requirements', 'กำหนด Sprint Start Date และ Duration', 'Review Tasks ที่ AI สร้างให้', '✅ Submit to GitLab → สร้าง Issues, Milestones, Assignees']
+                  title: 'จัดซื้อสินค้า',
+                  desc: 'ไปที่หน้า Purchase Order เพื่อสั่งซื้อสินค้าจากซัพพลายเออร์',
+                  details: ['คลิก New Purchase Order', 'เลือกซัพพลายเออร์และสินค้าที่ต้องการซื้อ', 'ระบบคำนวณยอดรวมและส่งใบสั่งซื้อ', 'ติดตามสถานะการจัดส่ง', 'รับสินค้าเข้าคลังและอัพเดทสต็อก']
                 },
                 {
                   num: 4,
                   color: 'green',
-                  title: 'ติดตามความคืบหน้า',
-                  desc: 'ใช้ Dashboard, Gantt Chart และเครื่องมืออื่นๆ เพื่อติดตามความคืบหน้าของโปรเจกต์',
-                  details: ['Dashboard: ภาพรวมและ Metrics', 'Gantt Chart: Timeline และ Dependencies', 'Costs: งบประมาณและค่าใช้จ่าย', 'Risks: ความเสี่ยงและการจัดการ']
+                  title: 'ติดตามและสร้างรายงาน',
+                  desc: 'ใช้ Dashboard และรายงานต่างๆ เพื่อติดตามธุรกิจ',
+                  details: ['Dashboard: ภาพรวมยอดขาย สต็อก การเงิน', 'Sales Report: รายงานการขาย', 'Inventory Report: รายงานสต็อกสินค้า', 'Financial Report: รายงานทางการเงิน']
                 }
               ].map((step, idx) => (
                 <div key={idx} className={`flex items-start gap-4 p-5 bg-${step.color}-50 rounded-lg border-2 border-${step.color}-200`}>
@@ -490,40 +494,40 @@ export default function GuidePage() {
               <div className="space-y-6">
                 {[
                   {
-                    q: 'AI สามารถสร้าง Requirements จากบันทึกการประชุมได้จริงหรือ?',
-                    a: 'ได้ครับ เพียงแค่ Copy บันทึกการประชุม (ภาษาไทยหรืออังกฤษ) มา Paste ในช่อง AI Requirements Analyzer แล้วคลิก "Analyze with AI" ระบบจะวิเคราะห์และสร้าง Requirements พร้อม Acceptance Criteria ให้อัตโนมัติ คุณสามารถแก้ไขและปรับแต่งได้ตามต้องการ'
+                    q: 'ERP System เหมาะกับธุรกิจขนาดไหน?',
+                    a: 'ระบบ ERP เหมาะกับธุรกิจทุกขนาด ตั้งแต่ SME ไปจนถึงองค์กรขนาดใหญ่ สามารถปรับแต่งฟีเจอร์ตามความต้องการของแต่ละธุรกิจได้'
                   },
                   {
-                    q: 'AI สร้าง Tasks ได้แม่นยำแค่ไหน? ต้องแก้เยอะไหม?',
-                    a: 'AI จะสร้าง Tasks พร้อมประมาณการเวลาจาก Requirements ที่คุณให้มา โดยทั่วไปแม่นยำประมาณ 70-80% คุณสามารถปรับแต่งได้แบบ Iterative (กด Generate ซ้ำได้) และ AI จะเรียนรู้จากโปรเจกต์เก่าเพื่อประมาณการที่ดีขึ้นเรื่อยๆ'
+                    q: 'ใช้เวลานานแค่ไหนในการติดตั้งระบบ?',
+                    a: 'ขึ้นอยู่กับขนาดและความซับซ้อนของธุรกิจ โดยทั่วไปใช้เวลา 1-3 เดือนสำหรับการติดตั้งและฝึกอบรมพนักงาน รวมถึงการ migrate ข้อมูลเดิม'
                   },
                   {
-                    q: 'ต้องใช้ GitLab หรือไม่? ใช้ GitHub ได้ไหม?',
-                    a: 'ปัจจุบันระบบรองรับเฉพาะ GitLab CE เท่านั้น เนื่องจากเป็น Core System ที่ใช้จัดเก็บ Requirements, Tasks และ Issues ทั้งหมด การใช้ GitLab ช่วยให้ข้อมูลทั้งหมดอยู่ในที่เดียวและ Sync กันอัตโนมัติ'
+                    q: 'ข้อมูลเก่าจากระบบเดิมสามารถย้ายมาได้ไหม?',
+                    a: 'ได้ครับ ระบบรองรับการ Import ข้อมูลจากไฟล์ Excel และสามารถเชื่อมต่อกับระบบเดิมผ่าน API เพื่อย้ายข้อมูลมาได้อย่างปลอดภัย'
                   },
                   {
-                    q: 'ถ้าทีมไม่คุ้นเคยกับ GitLab จะใช้งานยากไหม?',
-                    a: 'ไม่ยากครับ PM และ SA ใช้งานผ่าน ProjectFlow ส่วนใหญ่ ส่วนทีมพัฒนาจะทำงานผ่าน GitLab ตามปกติ (สร้าง Branch, Commit, Merge Request) ระบบจะ Sync สถานะอัตโนมัติ ไม่ต้องเรียนรู้เครื่องมือใหม่'
+                    q: 'พนักงานต้องเรียนรู้ระบบนานไหม?',
+                    a: 'ระบบออกแบบให้ใช้งานง่าย โดยทั่วไปพนักงานสามารถเริ่มใช้งานได้ภายใน 1-2 สัปดาห์ พร้อมทั้งมีคู่มือและการฝึกอบรมให้'
                   },
                   {
-                    q: 'Gantt Chart แสดงข้อมูลจากไหน?',
-                    a: 'Gantt Chart ดึงข้อมูลจาก GitLab Milestones และ Issues โดยตรง แสดง Timeline, Dependencies และความคืบหน้าแบบ Real-time ไม่ต้องอัพเดทด้วยตนเอง'
+                    q: 'สามารถใช้งานผ่านมือถือได้ไหม?',
+                    a: 'ได้ครับ ระบบรองรับการใช้งานผ่าน Web Browser บนมือถือและแท็บเล็ต สามารถเข้าถึงข้อมูลได้ทุกที่ทุกเวลา'
                   },
                   {
-                    q: 'ข้อมูลโปรเจกต์เก่าจะหายไหมถ้าเปลี่ยนมาใช้ระบบนี้?',
-                    a: 'ไม่หายครับ เนื่องจากข้อมูลทั้งหมดจัดเก็บใน GitLab ของคุณเอง ProjectFlow เป็นเพียง Interface ที่ช่วยจัดการและแสดงผล ถ้าไม่ใช้ระบบแล้ว ข้อมูลทั้งหมดยังอยู่ใน GitLab'
+                    q: 'ข้อมูลปลอดภัยแค่ไหน?',
+                    a: 'ระบบมีการเข้ารหัสข้อมูล (Encryption) และระบบสำรองข้อมูล (Backup) อัตโนมัติทุกวัน พร้อมระบบควบคุมสิทธิ์การเข้าถึงข้อมูลตามบทบาทของผู้ใช้'
                   },
                   {
-                    q: 'ราคาเท่าไหร่? คิดตาม User หรือ Project?',
-                    a: 'ระบบนี้เป็น Prototype สำหรับ Demo ยังไม่มีการเก็บค่าใช้จ่าย สำหรับการใช้งานจริง กรุณาติดต่อทีมขายเพื่อขอใบเสนอราคาตามความต้องการของบริษัทคุณ'
+                    q: 'ราคาเท่าไหร่? คิดตาม User หรือ Module?',
+                    a: 'ราคาขึ้นอยู่กับจำนวน User และ Module ที่ต้องการใช้งาน กรุณาติดต่อทีมขายเพื่อขอใบเสนอราคาที่เหมาะกับธุรกิจของคุณ'
                   },
                   {
-                    q: 'สามารถ Export รายงานเป็น PDF หรือ Excel ได้ไหม?',
-                    a: 'ได้ครับ ระบบรองรับการ Export Dashboard, Gantt Chart, Cost Report และ Risk Report เป็น PDF และ Excel สำหรับนำเสนอผู้บริหารหรือ Stakeholders'
+                    q: 'มีการอัพเดทระบบบ่อยแค่ไหน?',
+                    a: 'ระบบมีการอัพเดทฟีเจอร์ใหม่และแก้ไขบั๊กเป็นประจำทุกเดือน โดยไม่มีค่าใช้จ่ายเพิ่มเติมสำหรับลูกค้าที่มี Support Package'
                   },
                   {
-                    q: 'Export SRS Document ทำอย่างไร?',
-                    a: 'ไปที่หน้า Requirements แล้วคลิกปุ่ม "Export SRS" ระบบจะพาคุณผ่าน Wizard 4 ขั้นตอน: (1) กรอกข้อมูลเอกสาร (ชื่อ, เวอร์ชัน, ผู้เขียน) (2) เลือกรายการที่ต้องการ Export (Acceptance Criteria, Priority, Category, Epic) (3) Preview เอกสาร (4) Export เป็น MS Word (.docx) เหมาะสำหรับนำเสนอผู้บริหารหรือเก็บเป็นเอกสารอ้างอิง'
+                    q: 'สามารถปรับแต่งระบบตามความต้องการได้ไหม?',
+                    a: 'ได้ครับ ระบบรองรับการปรับแต่ง (Customization) ตามความต้องการของแต่ละธุรกิจ ทั้งการเพิ่มฟีลด์ การปรับรายงาน และการเชื่อมต่อกับระบบอื่น'
                   }
                 ].map((faq, idx) => (
                   <div key={idx} className="border-b border-gray-200 pb-5 last:border-0 last:pb-0">

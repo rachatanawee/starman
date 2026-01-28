@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Plus, Filter, X, Calendar, User, Clock, Package, Truck, CheckCircle, XCircle } from 'lucide-react'
+import { Plus, Filter, X, Calendar, User, Clock, Package, Truck, CheckCircle, XCircle, FileText } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
@@ -31,38 +31,40 @@ interface SalesOrder {
 }
 
 const mockData: SalesOrder[] = [
-  { id: '1', orderNumber: 'SO-2026-001', customer: 'Acme Corp', date: '2026/01/15', deliveryDate: '2026/01/20', amount: 15000, status: 'Completed', items: 5 },
+  { id: '1', orderNumber: 'SO-2026-001', customer: 'Acme Corp', date: '2026/01/15', deliveryDate: '2026/01/20', amount: 15000, status: 'Confirmed', items: 5 },
   { id: '2', orderNumber: 'SO-2026-002', customer: 'Tech Solutions', date: '2026/01/16', deliveryDate: '2026/01/22', amount: 28500, status: 'Processing', items: 8 },
   { id: '3', orderNumber: 'SO-2026-003', customer: 'Global Industries', date: '2026/01/17', deliveryDate: '2026/01/25', amount: 42000, status: 'Pending', items: 12 },
   { id: '4', orderNumber: 'SO-2026-004', customer: 'Smart Systems', date: '2026/01/18', deliveryDate: '2026/01/23', amount: 19800, status: 'Completed', items: 6 },
   { id: '5', orderNumber: 'SO-2026-005', customer: 'Digital Dynamics', date: '2026/01/19', deliveryDate: '2026/01/26', amount: 33600, status: 'Shipped', items: 10 },
   { id: '6', orderNumber: 'SO-2026-006', customer: 'Innovate Ltd', date: '2026/01/20', deliveryDate: '2026/01/27', amount: 25000, status: 'Processing', items: 7 },
-  { id: '7', orderNumber: 'SO-2026-007', customer: 'Future Tech', date: '2026/01/21', deliveryDate: '2026/01/28', amount: 18500, status: 'Pending', items: 4 },
+  { id: '7', orderNumber: 'SO-2026-007', customer: 'Future Tech', date: '2026/01/21', deliveryDate: '2026/01/28', amount: 18500, status: 'Draft', items: 4 },
   { id: '8', orderNumber: 'SO-2026-008', customer: 'Mega Corp', date: '2026/01/22', deliveryDate: '2026/01/30', amount: 52000, status: 'Completed', items: 15 },
   { id: '9', orderNumber: 'SO-2026-009', customer: 'Prime Solutions', date: '2026/01/23', deliveryDate: '2026/01/31', amount: 31200, status: 'Shipped', items: 9 },
-  { id: '10', orderNumber: 'SO-2026-010', customer: 'Alpha Industries', date: '2026/01/24', deliveryDate: '2026/02/01', amount: 22500, status: 'Processing', items: 6 },
+  { id: '10', orderNumber: 'SO-2026-010', customer: 'Alpha Industries', date: '2026/01/24', deliveryDate: '2026/02/01', amount: 22500, status: 'Confirmed', items: 6 },
   { id: '11', orderNumber: 'SO-2026-011', customer: 'Beta Systems', date: '2026/01/25', deliveryDate: '2026/02/02', amount: 38000, status: 'Completed', items: 11 },
   { id: '12', orderNumber: 'SO-2026-012', customer: 'Gamma Tech', date: '2026/01/26', deliveryDate: '2026/02/03', amount: 16800, status: 'Pending', items: 5 },
   { id: '13', orderNumber: 'SO-2026-013', customer: 'Delta Corp', date: '2026/01/27', deliveryDate: '2026/02/05', amount: 45000, status: 'Shipped', items: 13 },
   { id: '14', orderNumber: 'SO-2026-014', customer: 'Epsilon Ltd', date: '2026/01/28', deliveryDate: '2026/02/06', amount: 27500, status: 'Processing', items: 8 },
   { id: '15', orderNumber: 'SO-2026-015', customer: 'Zeta Industries', date: '2026/01/29', deliveryDate: '2026/02/07', amount: 35000, status: 'Completed', items: 10 },
-  { id: '16', orderNumber: 'SO-2026-016', customer: 'Omega Solutions', date: '2026/01/30', deliveryDate: '2026/02/08', amount: 29800, status: 'Pending', items: 7 },
-  { id: '17', orderNumber: 'SO-2026-017', customer: 'Nexus Corp', date: '2026/01/31', deliveryDate: '2026/02/09', amount: 41000, status: 'Processing', items: 12 },
+  { id: '16', orderNumber: 'SO-2026-016', customer: 'Omega Solutions', date: '2026/01/30', deliveryDate: '2026/02/08', amount: 29800, status: 'Draft', items: 7 },
+  { id: '17', orderNumber: 'SO-2026-017', customer: 'Nexus Corp', date: '2026/01/31', deliveryDate: '2026/02/09', amount: 41000, status: 'Confirmed', items: 12 },
   { id: '18', orderNumber: 'SO-2026-018', customer: 'Vertex Systems', date: '2026/02/01', deliveryDate: '2026/02/10', amount: 23500, status: 'Shipped', items: 6 },
   { id: '19', orderNumber: 'SO-2026-019', customer: 'Quantum Tech', date: '2026/02/02', deliveryDate: '2026/02/12', amount: 36000, status: 'Completed', items: 10 },
   { id: '20', orderNumber: 'SO-2026-020', customer: 'Stellar Industries', date: '2026/02/03', deliveryDate: '2026/02/13', amount: 48500, status: 'Processing', items: 14 },
   { id: '21', orderNumber: 'SO-2026-021', customer: 'Horizon Ltd', date: '2026/02/04', deliveryDate: '2026/02/14', amount: 21000, status: 'Pending', items: 5 },
   { id: '22', orderNumber: 'SO-2026-022', customer: 'Apex Solutions', date: '2026/02/05', deliveryDate: '2026/02/15', amount: 32500, status: 'Shipped', items: 9 },
   { id: '23', orderNumber: 'SO-2026-023', customer: 'Pinnacle Corp', date: '2026/02/06', deliveryDate: '2026/02/16', amount: 26800, status: 'Completed', items: 7 },
-  { id: '24', orderNumber: 'SO-2026-024', customer: 'Summit Tech', date: '2026/02/07', deliveryDate: '2026/02/17', amount: 39000, status: 'Processing', items: 11 },
+  { id: '24', orderNumber: 'SO-2026-024', customer: 'Summit Tech', date: '2026/02/07', deliveryDate: '2026/02/17', amount: 39000, status: 'Confirmed', items: 11 },
   { id: '25', orderNumber: 'SO-2026-025', customer: 'Zenith Industries', date: '2026/02/08', deliveryDate: '2026/02/18', amount: 44500, status: 'Shipped', items: 13 },
 ]
 
-const statuses = ['Pending', 'Processing', 'Shipped', 'Completed', 'Cancelled']
+const statuses = ['Draft', 'Pending', 'Confirmed', 'Processing', 'Shipped', 'Completed', 'Cancelled']
 
 const getStatusIcon = (status: string) => {
   switch (status) {
+    case 'Draft': return <FileText className="h-4 w-4 text-gray-600" />
     case 'Pending': return <Clock className="h-4 w-4 text-yellow-600" />
+    case 'Confirmed': return <CheckCircle className="h-4 w-4 text-blue-600" />
     case 'Processing': return <Package className="h-4 w-4 text-blue-600" />
     case 'Shipped': return <Truck className="h-4 w-4 text-purple-600" />
     case 'Completed': return <CheckCircle className="h-4 w-4 text-green-600" />
@@ -96,7 +98,7 @@ export default function SalesOrderPage() {
       dateTo: ''
     },
     renderFilters: (criteria, setCriteria) => (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-3 sm:gap-4">
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Filter className="h-3 w-3" />
@@ -120,10 +122,22 @@ export default function SalesOrderPage() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="Draft">
+                <div className="flex items-center gap-2">
+                  <FileText className="h-4 w-4 text-gray-600" />
+                  Draft
+                </div>
+              </SelectItem>
               <SelectItem value="Pending">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-yellow-600" />
                   Pending
+                </div>
+              </SelectItem>
+              <SelectItem value="Confirmed">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-blue-600" />
+                  Confirmed
                 </div>
               </SelectItem>
               <SelectItem value="Processing">
@@ -329,7 +343,7 @@ export default function SalesOrderPage() {
         ),
       },
     ],
-    []
+    [params.locale, projectId, router]
   )
 
   const { table, ...dataGridProps } = useDataGrid({
@@ -337,9 +351,6 @@ export default function SalesOrderPage() {
     data,
     onDataChange: setData,
     getRowId: (row) => row.id,
-    initialState: { 
-      rowHeight: 'sm'
-    },
     enableSearch: true,
   })
 
@@ -347,37 +358,46 @@ export default function SalesOrderPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
-      <div className="p-6 space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Sales Order</h1>
-            <p className="text-gray-600 mt-1">Manage customer orders</p>
+      <div className="w-full h-full">
+        <div className="p-3 sm:p-4 lg:p-6 space-y-3 sm:space-y-4 lg:space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold">Sales Order</h1>
+              <p className="text-xs sm:text-sm text-gray-600 mt-1">Manage customer orders</p>
+            </div>
+            <Button 
+              className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit" 
+              onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/new`)}
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              <span>New Order</span>
+            </Button>
           </div>
-          <Button className="bg-purple-600 hover:bg-purple-700" onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/new`)}>
-            <Plus className="h-4 w-4 mr-2" />
-            New Order
-          </Button>
+
+        <div className="w-full">
+          <FilterPanel
+            config={filterConfig}
+            criteria={filterCriteria}
+            onCriteriaChange={setFilterCriteria}
+          />
         </div>
 
-        <FilterPanel
-          config={filterConfig}
-          criteria={filterCriteria}
-          onCriteriaChange={setFilterCriteria}
-        />
-
-        <div className="flex flex-col gap-4 text-sm">
-          <div className="flex items-center justify-between">
-            <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-4 py-2 rounded-lg border">
-              <span className="text-sm text-gray-600">Total Amount: </span>
-              <span className="text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
+        <div className="flex flex-col gap-3 sm:gap-4 text-sm w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
+              <span className="text-xs sm:text-sm text-gray-600">Total Amount: </span>
+              <span className="text-base sm:text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
             </div>
-            <div role="toolbar" className="flex items-center gap-2">
+            <div role="toolbar" className="flex items-center gap-2 shrink-0">
               <DataGridSortMenu table={table} align="end" />
               <DataGridRowHeightMenu table={table} align="end" />
               <DataGridViewMenu table={table} align="end" />
             </div>
           </div>
-          <DataGrid {...dataGridProps} table={table} height={height} />
+          <div className="w-full overflow-x-auto">
+            <DataGrid {...dataGridProps} table={table} height={height} />
+          </div>
+        </div>
         </div>
       </div>
     </ProjectLayout>

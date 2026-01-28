@@ -79,10 +79,11 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
 
   return (
     <div 
-      className={`fixed left-0 top-0 flex h-screen flex-col border-r bg-white transition-all duration-300 ease-in-out z-50 ${
+      className={`hidden lg:block flex-shrink-0 h-screen border-r bg-white transition-all duration-300 ease-in-out sticky top-0 ${
         collapsed ? 'w-16' : 'w-64'
       }`}
     >
+      <div className="flex flex-col h-full">
       {/* Header */}
       <div className="flex items-center justify-between border-b p-4">
         {!collapsed && (
@@ -179,6 +180,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
           <LogOut className={`h-4 w-4 ${collapsed ? '' : 'mr-2'}`} />
           {!collapsed && 'Logout'}
         </Button>
+      </div>
       </div>
     </div>
   )
