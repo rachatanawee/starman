@@ -1,4 +1,16 @@
 import { AIProvider } from '@/lib/ai-context'
+import type { Metadata, Viewport } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Starman ERP',
+  description: 'AI-powered Enterprise Resource Planning system',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export default function RootLayout({
   children,

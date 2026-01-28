@@ -216,4 +216,19 @@
     @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
   }
+  
+  /* Mobile responsive fixes */
+  @media (max-width: 1024px) {
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    
+    /* Make tables scrollable on mobile */
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
 }

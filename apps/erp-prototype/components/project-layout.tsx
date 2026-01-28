@@ -1,6 +1,7 @@
 'use client'
 
 import { ProjectSidebar } from './project-sidebar'
+import { MobileMenu } from './mobile-menu'
 import { Breadcrumbs } from './breadcrumbs'
 import { ProjectSwitcher } from './project-switcher'
 import { AIChatWidget } from './ai-chat-widget'
@@ -16,16 +17,17 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
 
   return (
     <div className="flex min-h-screen w-full">
+      <MobileMenu projectId={projectId} />
       <ProjectSidebar 
         collapsed={collapsed} 
         onToggle={() => setCollapsed(!collapsed)}
         projectId={projectId}
       />
       <main 
-        className="flex-1 min-h-screen bg-gray-50 transition-all duration-300 min-w-0"
+        className="flex-1 min-h-screen bg-gray-50 transition-all duration-300 w-full overflow-x-hidden pt-16 lg:pt-0"
       >
         {projectId && (
-          <div className="bg-white border-b shadow-md px-4 sm:px-6 py-2 sticky top-0 z-40 backdrop-blur-sm bg-white/95">
+          <div className="hidden lg:block bg-white border-b shadow-md px-4 sm:px-6 py-2 sticky top-0 z-40 backdrop-blur-sm bg-white/95">
             <Breadcrumbs />
           </div>
         )}
