@@ -24,7 +24,7 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
         className="flex-1 min-h-screen bg-gray-50 transition-all duration-300 min-w-0"
       >
         {projectId && (
-          <div className="bg-white border-b px-4 sm:px-6 py-3 sm:py-4">
+          <div className="bg-white border-b shadow-md px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-40 backdrop-blur-sm bg-white/95">
             <Breadcrumbs />
           </div>
         )}

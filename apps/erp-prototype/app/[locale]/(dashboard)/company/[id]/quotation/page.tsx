@@ -89,7 +89,7 @@ export default function QuotationPage() {
       dateTo: ''
     },
     renderFilters: (criteria, setCriteria) => (
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Filter className="h-3 w-3" />
@@ -161,26 +161,24 @@ export default function QuotationPage() {
         <div className="space-y-2">
           <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
             <Calendar className="h-3 w-3" />
-            From Date
+            Date Range
           </Label>
-          <Input
-            type="date"
-            value={criteria.dateFrom}
-            onChange={(e) => setCriteria('dateFrom', e.target.value)}
-            className="h-9"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label className="text-xs font-medium text-gray-700 flex items-center gap-1">
-            <Calendar className="h-3 w-3" />
-            To Date
-          </Label>
-          <Input
-            type="date"
-            value={criteria.dateTo}
-            onChange={(e) => setCriteria('dateTo', e.target.value)}
-            className="h-9"
-          />
+          <div className="flex gap-2">
+            <Input
+              type="date"
+              value={criteria.dateFrom}
+              onChange={(e) => setCriteria('dateFrom', e.target.value)}
+              className="h-9 flex-1"
+              placeholder="From"
+            />
+            <Input
+              type="date"
+              value={criteria.dateTo}
+              onChange={(e) => setCriteria('dateTo', e.target.value)}
+              className="h-9 flex-1"
+              placeholder="To"
+            />
+          </div>
         </div>
       </div>
     ),
@@ -331,19 +329,21 @@ export default function QuotationPage() {
   return (
     <ProjectLayout projectId={projectId}>
       <div className="w-full h-full">
-        <div className="p-3 sm:p-4 lg:p-6 space-y-3 sm:space-y-4 lg:space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-            <div className="min-w-0 flex-1">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold">Quotation</h1>
-              <p className="text-xs sm:text-sm text-gray-600 mt-1">Create and manage sales quotations</p>
+        <div className="p-3 sm:p-4 lg:p-6 space-y-3 sm:space-y-3 lg:space-y-4">
+          <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Quotation</h1>
+                <p className="text-xs sm:text-sm text-gray-600 mt-1">Create and manage sales quotations</p>
+              </div>
+              <Button 
+                className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow" 
+                onClick={() => router.push(`/${params.locale}/company/${projectId}/quotation/new`)}
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                <span>New Quotation</span>
+              </Button>
             </div>
-            <Button 
-              className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit" 
-              onClick={() => router.push(`/${params.locale}/company/${projectId}/quotation/new`)}
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              <span>New Quotation</span>
-            </Button>
           </div>
 
         <div className="w-full">
@@ -354,7 +354,7 @@ export default function QuotationPage() {
           />
         </div>
 
-        <div className="flex flex-col gap-3 sm:gap-4 text-sm w-full">
+        <div className="flex flex-col gap-3 sm:gap-3 text-sm w-full">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
               <span className="text-xs sm:text-sm text-gray-600">Total Amount: </span>
