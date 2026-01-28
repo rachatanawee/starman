@@ -27,10 +27,12 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({})
   const [mounted, setMounted] = useState(false)
   const [version, setVersion] = useState('v0.1.0')
+  const [buildTime, setBuildTime] = useState('')
 
   useEffect(() => {
     setMounted(true)
     setVersion(process.env.NEXT_PUBLIC_APP_VERSION || 'v0.1.0')
+    setBuildTime(process.env.NEXT_PUBLIC_BUILD_TIME || new Date().toISOString())
     const saved = localStorage.getItem('sidebar_collapsed_sections')
     if (saved) {
       setCollapsedSections(JSON.parse(saved))
@@ -211,7 +213,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
           {!collapsed && 'Logout'}
         </Button>
         {!collapsed && mounted && (
-          <div className="px-3 py-1 text-xs text-gray-400 text-center">
+          <div className="px-3 py-1 text-xs text-gray-400 text-center cursor-help" title={`Built: ${new Date(buildTime).toLocaleString()}`}>
             {version}
           </div>
         )}

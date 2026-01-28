@@ -30,7 +30,7 @@
     "build": "npm run version:generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "version:generate": "node -e \"const fs=require('fs');const v=require('./package.json').version;let h='dev';try{h=require('child_process').execSync('git rev-parse --short HEAD').toString().trim()}catch(e){}fs.writeFileSync('.env.local','NEXT_PUBLIC_APP_VERSION=v'+v+'-'+h+'\\n')\""
+    "version:generate": "node -e \"const fs=require('fs');const v=require('./package.json').version;const t=new Date().toISOString();let h='dev';try{h=require('child_process').execSync('git rev-parse --short HEAD').toString().trim()}catch(e){}fs.writeFileSync('.env.local','NEXT_PUBLIC_APP_VERSION=v'+v+'-'+h+'\\nNEXT_PUBLIC_BUILD_TIME='+t+'\\n')\""
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Toaster } from '@/components/toaster'
+import { PageTransition } from '@/components/page-transition'
 import '../globals.css'
 
 export const dynamic = 'force-dynamic'
@@ -42,7 +43,9 @@ export default async function LocaleLayout({
       <link rel="stylesheet" href={`${basePath}/themes/${settings.theme_name || 'tangerine'}.css`} />
       <NuqsAdapter>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
           <Toaster />
         </NextIntlClientProvider>
       </NuqsAdapter>
