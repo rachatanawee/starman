@@ -7,6 +7,7 @@ import {
   Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown, ChevronUp
 } from 'lucide-react'
 import { Button } from './ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
 import { QuickSearch } from './quick-search'
 import Link from 'next/link'
 import { useParams, usePathname, useRouter } from 'next/navigation'
@@ -213,9 +214,18 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
           {!collapsed && 'Logout'}
         </Button>
         {!collapsed && mounted && (
-          <div className="px-3 py-1 text-xs text-gray-400 text-center cursor-help" title={`Built: ${new Date(buildTime).toLocaleString()}`}>
-            {version}
-          </div>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="px-3 py-1 text-xs text-gray-400 text-center cursor-help">
+                  {version}
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">Built: {new Date(buildTime).toLocaleString()}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         )}
       </div>
       </div>
