@@ -24,6 +24,8 @@ export default function EditSalesInvoicePage() {
 
   const [formData, setFormData] = React.useState({
     invoiceNumber: 'INV-2026-001',
+    salesOrderId: 'SO-2026-055',
+    quotationId: 'QT-2026-001',
     customer: 'acme',
     customerTaxId: '0-1234-56789-01-2',
     customerBranch: 'Head Office',
@@ -102,6 +104,72 @@ export default function EditSalesInvoicePage() {
             </div>
           </div>
         </div>
+
+        <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-900">
+              <Receipt className="h-5 w-5" />
+              Document Chain
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="bg-blue-100 rounded-full p-2">
+                  <span className="text-xs font-bold text-blue-700">1</span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-semibold">Quotation</span>
+                    <button
+                      type="button"
+                      onClick={() => router.push(`/${params.locale}/company/${projectId}/quotation/QT-001`)}
+                      className="text-blue-600 hover:underline text-sm font-mono"
+                    >
+                      QT-2026-001
+                    </button>
+                    <Badge variant="outline" className="text-xs">Accepted</Badge>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1">2026-01-10 - Initial quote created</p>
+                </div>
+              </div>
+              <div className="ml-6 border-l-2 border-blue-300 h-4"></div>
+              <div className="flex items-start gap-3">
+                <div className="bg-purple-100 rounded-full p-2">
+                  <span className="text-xs font-bold text-purple-700">2</span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-semibold">Sales Order</span>
+                    <button
+                      type="button"
+                      onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/SO-001`)}
+                      className="text-purple-600 hover:underline text-sm font-mono"
+                    >
+                      SO-2026-055
+                    </button>
+                    <Badge variant="outline" className="text-xs">Completed</Badge>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1">2026-01-12 - Order confirmed from QT-2026-001</p>
+                </div>
+              </div>
+              <div className="ml-6 border-l-2 border-blue-300 h-4"></div>
+              <div className="flex items-start gap-3">
+                <div className="bg-green-100 rounded-full p-2">
+                  <span className="text-xs font-bold text-green-700">3</span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-semibold">Sales Invoice</span>
+                    <span className="text-green-600 text-sm font-mono font-bold">{formData.invoiceNumber}</span>
+                    {getStatusBadge(formData.paymentStatus)}
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1">2026-01-15 - Invoice created from SO-2026-055</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <Card>

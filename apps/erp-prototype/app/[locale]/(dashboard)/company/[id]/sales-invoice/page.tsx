@@ -23,6 +23,8 @@ import * as React from 'react'
 interface SalesInvoice {
   id: string
   invoiceNumber: string
+  salesOrderId?: string
+  quotationId?: string
   customer: string
   invoiceDate: string
   dueDate: string
@@ -33,16 +35,16 @@ interface SalesInvoice {
 }
 
 const mockData: SalesInvoice[] = [
-  { id: '1', invoiceNumber: 'INV-2026-001', customer: 'Acme Corp', invoiceDate: '2026/01/15', dueDate: '2026/02/14', grandTotal: 16050, totalPaid: 16050, balanceDue: 0, paymentStatus: 'Paid' },
-  { id: '2', invoiceNumber: 'INV-2026-002', customer: 'Tech Solutions', invoiceDate: '2026/01/16', dueDate: '2026/02/15', grandTotal: 30495, totalPaid: 15000, balanceDue: 15495, paymentStatus: 'Partially Paid' },
-  { id: '3', invoiceNumber: 'INV-2026-003', customer: 'Global Industries', invoiceDate: '2026/01/17', dueDate: '2026/02/16', grandTotal: 44940, totalPaid: 0, balanceDue: 44940, paymentStatus: 'Unpaid' },
-  { id: '4', invoiceNumber: 'INV-2026-004', customer: 'Smart Systems', invoiceDate: '2026/01/18', dueDate: '2026/02/17', grandTotal: 21186, totalPaid: 21186, balanceDue: 0, paymentStatus: 'Paid' },
-  { id: '5', invoiceNumber: 'INV-2026-005', customer: 'Digital Dynamics', invoiceDate: '2026/01/19', dueDate: '2026/02/18', grandTotal: 35952, totalPaid: 35952, balanceDue: 0, paymentStatus: 'Paid' },
-  { id: '6', invoiceNumber: 'INV-2026-006', customer: 'Innovate Ltd', invoiceDate: '2026/01/20', dueDate: '2026/01/25', grandTotal: 26750, totalPaid: 0, balanceDue: 26750, paymentStatus: 'Overdue' },
+  { id: '1', invoiceNumber: 'INV-2026-001', salesOrderId: 'SO-2026-001', quotationId: 'QT-2026-001', customer: 'Acme Corp', invoiceDate: '2026/01/15', dueDate: '2026/02/14', grandTotal: 16050, totalPaid: 16050, balanceDue: 0, paymentStatus: 'Paid' },
+  { id: '2', invoiceNumber: 'INV-2026-002', salesOrderId: 'SO-2026-002', quotationId: 'QT-2026-002', customer: 'Tech Solutions', invoiceDate: '2026/01/16', dueDate: '2026/02/15', grandTotal: 30495, totalPaid: 15000, balanceDue: 15495, paymentStatus: 'Partially Paid' },
+  { id: '3', invoiceNumber: 'INV-2026-003', salesOrderId: 'SO-2026-003', customer: 'Global Industries', invoiceDate: '2026/01/17', dueDate: '2026/02/16', grandTotal: 44940, totalPaid: 0, balanceDue: 44940, paymentStatus: 'Unpaid' },
+  { id: '4', invoiceNumber: 'INV-2026-004', salesOrderId: 'SO-2026-004', customer: 'Smart Systems', invoiceDate: '2026/01/18', dueDate: '2026/02/17', grandTotal: 21186, totalPaid: 21186, balanceDue: 0, paymentStatus: 'Paid' },
+  { id: '5', invoiceNumber: 'INV-2026-005', salesOrderId: 'SO-2026-005', customer: 'Digital Dynamics', invoiceDate: '2026/01/19', dueDate: '2026/02/18', grandTotal: 35952, totalPaid: 35952, balanceDue: 0, paymentStatus: 'Paid' },
+  { id: '6', invoiceNumber: 'INV-2026-006', salesOrderId: 'SO-2026-006', customer: 'Innovate Ltd', invoiceDate: '2026/01/20', dueDate: '2026/01/25', grandTotal: 26750, totalPaid: 0, balanceDue: 26750, paymentStatus: 'Overdue' },
   { id: '7', invoiceNumber: 'INV-2026-007', customer: 'Future Tech', invoiceDate: '2026/01/21', dueDate: '2026/02/20', grandTotal: 19795, totalPaid: 0, balanceDue: 19795, paymentStatus: 'Unpaid' },
-  { id: '8', invoiceNumber: 'INV-2026-008', customer: 'Mega Corp', invoiceDate: '2026/01/22', dueDate: '2026/02/21', grandTotal: 55640, totalPaid: 55640, balanceDue: 0, paymentStatus: 'Paid' },
-  { id: '9', invoiceNumber: 'INV-2026-009', customer: 'Prime Solutions', invoiceDate: '2026/01/23', dueDate: '2026/02/22', grandTotal: 33384, totalPaid: 20000, balanceDue: 13384, paymentStatus: 'Partially Paid' },
-  { id: '10', invoiceNumber: 'INV-2026-010', customer: 'Alpha Industries', invoiceDate: '2026/01/24', dueDate: '2026/01/29', grandTotal: 24075, totalPaid: 0, balanceDue: 24075, paymentStatus: 'Overdue' },
+  { id: '8', invoiceNumber: 'INV-2026-008', salesOrderId: 'SO-2026-008', customer: 'Mega Corp', invoiceDate: '2026/01/22', dueDate: '2026/02/21', grandTotal: 55640, totalPaid: 55640, balanceDue: 0, paymentStatus: 'Paid' },
+  { id: '9', invoiceNumber: 'INV-2026-009', salesOrderId: 'SO-2026-009', customer: 'Prime Solutions', invoiceDate: '2026/01/23', dueDate: '2026/02/22', grandTotal: 33384, totalPaid: 20000, balanceDue: 13384, paymentStatus: 'Partially Paid' },
+  { id: '10', invoiceNumber: 'INV-2026-010', salesOrderId: 'SO-2026-010', customer: 'Alpha Industries', invoiceDate: '2026/01/24', dueDate: '2026/01/29', grandTotal: 24075, totalPaid: 0, balanceDue: 24075, paymentStatus: 'Overdue' },
 ]
 
 const getStatusIcon = (status: string) => {
