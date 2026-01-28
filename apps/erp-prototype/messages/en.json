@@ -1,0 +1,16 @@
+{
+  "auth": {
+    "login": "Login",
+    "username": "Username",
+    "emailOrUsername": "Username or Email",
+    "email": "Email",
+    "password": "Password",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "users": "Users",
+    "settings": "Settings"
+  }
+}
