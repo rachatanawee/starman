@@ -1,21 +1,19 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { ProjectLayout } from '@/components/project-layout'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Settings, GitBranch, Sparkles, Save } from 'lucide-react'
+import { Switch } from '@/components/ui/switch'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save } from 'lucide-react'
 import { mockProjectsAPI } from '@/lib/mock-data'
 
 export default function SettingsPage() {
   const params = useParams()
-  const router = useRouter()
   const projectId = params.id as string
-  
   const project = mockProjectsAPI.getSync(projectId)
 
   if (!project) {
@@ -23,7 +21,7 @@ export default function SettingsPage() {
       <ProjectLayout projectId={projectId}>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <p className="text-gray-600">Project not found</p>
+            <p className="text-gray-600">Company not found</p>
           </div>
         </div>
       </ProjectLayout>
@@ -37,86 +35,263 @@ export default function SettingsPage() {
           <div className="flex items-center gap-3">
             <Settings className="h-8 w-8 text-purple-600" />
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Company Settings</h1>
-              <p className="text-sm text-gray-600">Manage company configuration</p>
+              <h1 className="text-2xl font-bold text-gray-900">ERP Settings</h1>
+              <p className="text-sm text-gray-600">Configure system preferences and business rules</p>
             </div>
           </div>
         </div>
 
-        <div className="space-y-6 max-w-3xl">
-          <Card>
-            <CardHeader>
-              <CardTitle>General Information</CardTitle>
-              <CardDescription>Basic company details</CardDescription>
+        <div className="space-y-6 max-w-4xl">
+          {/* Company Profile */}
+          <Card className="border-blue-200">
+            <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50">
+              <div className="flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-blue-600" />
+                <CardTitle className="text-blue-900">Company Profile</CardTitle>
+              </div>
+              <CardDescription>Basic company information</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="name">Company Name</Label>
-                <Input id="name" defaultValue={project?.name} />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Company Name</Label>
+                  <Input defaultValue={project?.name} />
+                </div>
+                <div>
+                  <Label>Tax ID</Label>
+                  <Input placeholder="0-1234-56789-01-2" />
+                </div>
               </div>
               <div>
-                <Label htmlFor="description">Description</Label>
-                <Textarea id="description" defaultValue={project?.description} rows={3} />
+                <Label>Address</Label>
+                <Input placeholder="123 Business Street, Bangkok 10110" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="budget">Budget (THB)</Label>
-                  <Input id="budget" type="number" defaultValue={project?.budget} />
+                  <Label>Phone</Label>
+                  <Input placeholder="02-123-4567" />
                 </div>
                 <div>
-                  <Label htmlFor="members">Team Size</Label>
-                  <Input id="members" type="number" defaultValue={project?.members} />
+                  <Label>Email</Label>
+                  <Input type="email" placeholder="contact@company.com" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
+          {/* Financial Settings */}
+          <Card className="border-green-200">
+            <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50">
               <div className="flex items-center gap-2">
-                <GitBranch className="h-5 w-5 text-purple-600" />
-                <CardTitle>GitLab Integration</CardTitle>
+                <DollarSign className="h-5 w-5 text-green-600" />
+                <CardTitle className="text-green-900">Financial Settings</CardTitle>
               </div>
-              <CardDescription>Connect to your GitLab repository</CardDescription>
+              <CardDescription>Currency and pricing configuration</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="gitlab-url">GitLab URL</Label>
-                <Input id="gitlab-url" placeholder="https://gitlab.example.com/project" defaultValue={project?.gitlabUrl} />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Base Currency</Label>
+                  <Select defaultValue="thb">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="thb">THB (฿)</SelectItem>
+                      <SelectItem value="usd">USD ($)</SelectItem>
+                      <SelectItem value="eur">EUR (€)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label>Fiscal Year Start</Label>
+                  <Select defaultValue="jan">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="jan">January</SelectItem>
+                      <SelectItem value="apr">April</SelectItem>
+                      <SelectItem value="oct">October</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div>
-                <Label htmlFor="gitlab-token">Access Token</Label>
-                <Input id="gitlab-token" type="password" placeholder="glpat-xxxxxxxxxxxx" />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Default VAT Rate (%)</Label>
+                  <Input type="number" defaultValue="7" />
+                </div>
+                <div>
+                  <Label>Default WHT Rate (%)</Label>
+                  <Input type="number" defaultValue="3" />
+                </div>
               </div>
-              <Button variant="outline">Test Connection</Button>
+              <div className="flex items-center justify-between pt-2">
+                <div>
+                  <Label>Auto-calculate Tax</Label>
+                  <p className="text-sm text-gray-500">Automatically add VAT to prices</p>
+                </div>
+                <Switch defaultChecked />
+              </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
+          {/* Localization */}
+          <Card className="border-orange-200">
+            <CardHeader className="bg-gradient-to-r from-orange-50 to-amber-50">
               <div className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-purple-600" />
-                <CardTitle>AI Provider</CardTitle>
+                <Globe className="h-5 w-5 text-orange-600" />
+                <CardTitle className="text-orange-900">Localization</CardTitle>
               </div>
-              <CardDescription>Configure AI features</CardDescription>
+              <CardDescription>Language and regional settings</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="ai-provider">Provider</Label>
-                <Input id="ai-provider" defaultValue={project?.aiProvider} />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Default Language</Label>
+                  <Select defaultValue="th">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="th">ไทย (Thai)</SelectItem>
+                      <SelectItem value="en">English</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label>Timezone</Label>
+                  <Select defaultValue="bangkok">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="bangkok">Bangkok (GMT+7)</SelectItem>
+                      <SelectItem value="singapore">Singapore (GMT+8)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div>
-                <Label htmlFor="ai-key">API Key</Label>
-                <Input id="ai-key" type="password" placeholder="sk-xxxxxxxxxxxx" />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Date Format</Label>
+                  <Select defaultValue="dd/mm/yyyy">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="dd/mm/yyyy">DD/MM/YYYY</SelectItem>
+                      <SelectItem value="mm/dd/yyyy">MM/DD/YYYY</SelectItem>
+                      <SelectItem value="yyyy-mm-dd">YYYY-MM-DD</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label>Number Format</Label>
+                  <Select defaultValue="comma">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="comma">1,234.56</SelectItem>
+                      <SelectItem value="period">1.234,56</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Notifications */}
+          <Card className="border-purple-200">
+            <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
+              <div className="flex items-center gap-2">
+                <Bell className="h-5 w-5 text-purple-600" />
+                <CardTitle className="text-purple-900">Notifications</CardTitle>
+              </div>
+              <CardDescription>Alert preferences</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Low Stock Alerts</Label>
+                  <p className="text-sm text-gray-500">Notify when inventory is low</p>
+                </div>
+                <Switch defaultChecked />
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Production Delays</Label>
+                  <p className="text-sm text-gray-500">Alert on late production orders</p>
+                </div>
+                <Switch defaultChecked />
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Payment Reminders</Label>
+                  <p className="text-sm text-gray-500">Remind customers of due invoices</p>
+                </div>
+                <Switch defaultChecked />
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>AI Insights</Label>
+                  <p className="text-sm text-gray-500">Receive AI-powered recommendations</p>
+                </div>
+                <Switch defaultChecked />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Security */}
+          <Card className="border-red-200">
+            <CardHeader className="bg-gradient-to-r from-red-50 to-rose-50">
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-red-600" />
+                <CardTitle className="text-red-900">Security</CardTitle>
+              </div>
+              <CardDescription>Access control and data protection</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Two-Factor Authentication</Label>
+                  <p className="text-sm text-gray-500">Require 2FA for all users</p>
+                </div>
+                <Switch />
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Session Timeout</Label>
+                  <p className="text-sm text-gray-500">Auto-logout after inactivity</p>
+                </div>
+                <Select defaultValue="30">
+                  <SelectTrigger className="w-32">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="15">15 min</SelectItem>
+                    <SelectItem value="30">30 min</SelectItem>
+                    <SelectItem value="60">60 min</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Audit Logging</Label>
+                  <p className="text-sm text-gray-500">Track all system changes</p>
+                </div>
+                <Switch defaultChecked />
               </div>
             </CardContent>
           </Card>
 
           <div className="flex justify-end gap-3">
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">Reset to Default</Button>
             <Button className="bg-purple-600 hover:bg-purple-700">
               <Save className="h-4 w-4 mr-2" />
-              Save Changes
+              Save Settings
             </Button>
           </div>
         </div>

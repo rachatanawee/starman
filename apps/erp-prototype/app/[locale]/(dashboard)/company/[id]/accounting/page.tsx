@@ -15,6 +15,9 @@ export default function AccountingPage() {
   const projectId = params.id as string
   const stats = getSyncStats()
   const [alerts, setAlerts] = useState(mockAIAlerts)
+  const [syncing, setSyncing] = useState(false)
+  const [syncProgress, setSyncProgress] = useState(0)
+  const [syncMessage, setSyncMessage] = useState('')
 
   const handleAutoFix = (alertId: number) => {
     setAlerts(prev => prev.filter(a => a.id !== alertId))
@@ -22,6 +25,30 @@ export default function AccountingPage() {
 
   const handleDismiss = (alertId: number) => {
     setAlerts(prev => prev.filter(a => a.id !== alertId))
+  }
+
+  const handleSync = async () => {
+    setSyncing(true)
+    setSyncProgress(0)
+    
+    const steps = [
+      { progress: 20, message: 'Connecting to FlowAccount API...' },
+      { progress: 40, message: 'Validating account mappings...' },
+      { progress: 60, message: 'Syncing pending documents...' },
+      { progress: 80, message: 'Updating sync logs...' },
+      { progress: 100, message: 'Sync completed successfully!' }
+    ]
+
+    for (const step of steps) {
+      await new Promise(resolve => setTimeout(resolve, 800))
+      setSyncProgress(step.progress)
+      setSyncMessage(step.message)
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    setSyncing(false)
+    setSyncProgress(0)
+    setSyncMessage('')
   }
 
   return (
@@ -38,12 +65,32 @@ export default function AccountingPage() {
               <Settings className="h-4 w-4 mr-2" />
               Configure
             </Button>
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Sync Now
+            <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleSync} disabled={syncing}>
+              <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
+              {syncing ? 'Syncing...' : 'Sync Now'}
             </Button>
           </div>
         </div>
+
+        {/* Connection Status */}
+        {syncing && (
+          <Card className="border-purple-200 bg-purple-50">
+            <CardContent className="pt-6">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-purple-900">{syncMessage}</span>
+                  <span className="text-sm font-semibold text-purple-600">{syncProgress}%</span>
+                </div>
+                <div className="w-full bg-purple-200 rounded-full h-2 overflow-hidden">
+                  <div 
+                    className="bg-purple-600 h-2 rounded-full transition-all duration-500 ease-out"
+                    style={{ width: `${syncProgress}%` }}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Connection Status */}
         <Card>
@@ -78,17 +125,17 @@ export default function AccountingPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Pending Sync</p>
-                  <p className="text-2xl font-bold text-orange-600">{stats.pending}</p>
+                  <p className="text-2xl font-bold text-gray-900">{stats.pending}</p>
                 </div>
-                <Clock className="h-8 w-8 text-orange-600" />
+                <Clock className="h-8 w-8 text-gray-400" />
               </div>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border-red-200 bg-red-50">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Failed</p>
+                  <p className="text-sm text-red-600 font-medium">Failed</p>
                   <p className="text-2xl font-bold text-red-600">{stats.failed}</p>
                 </div>
                 <XCircle className="h-8 w-8 text-red-600" />
@@ -100,17 +147,17 @@ export default function AccountingPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-500">Synced</p>
-                  <p className="text-2xl font-bold text-green-600">{stats.success}</p>
+                  <p className="text-2xl font-bold text-gray-900">{stats.success}</p>
                 </div>
-                <CheckCircle2 className="h-8 w-8 text-green-600" />
+                <CheckCircle2 className="h-8 w-8 text-gray-400" />
               </div>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border-purple-200 bg-purple-50">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">AI Alerts</p>
+                  <p className="text-sm text-purple-600 font-medium">AI Alerts</p>
                   <p className="text-2xl font-bold text-purple-600">{alerts.length}</p>
                 </div>
                 <Zap className="h-8 w-8 text-purple-600" />
@@ -121,16 +168,19 @@ export default function AccountingPage() {
 
         {/* AI Reconciliation Alerts */}
         {alerts.length > 0 && (
-          <Card>
-            <CardHeader>
+          <Card className="border-purple-200">
+            <CardHeader className="bg-purple-50">
               <CardTitle className="flex items-center gap-2">
                 <Zap className="h-5 w-5 text-purple-600" />
-                AI Reconciliation Agent
+                <span className="text-purple-900">AI Reconciliation Agent</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {alerts.map(alert => (
-                <div key={alert.id} className="border rounded-lg p-4 space-y-2">
+                <div key={alert.id} className={`border rounded-lg p-4 space-y-2 ${
+                  alert.severity === 'high' ? 'border-red-200 bg-red-50' :
+                  alert.severity === 'medium' ? 'border-orange-200 bg-orange-50' : 'border-yellow-200 bg-yellow-50'
+                }`}>
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-3 flex-1">
                       <AlertTriangle className={`h-5 w-5 mt-0.5 ${
@@ -151,9 +201,9 @@ export default function AccountingPage() {
                         <p className="text-sm text-gray-500 mt-2">💡 {alert.suggestedAction}</p>
                       </div>
                     </div>
-                    <div className="flex gap-2">
+                      <div className="flex gap-2">
                       {alert.canAutoFix && (
-                        <Button size="sm" onClick={() => handleAutoFix(alert.id)}>
+                        <Button size="sm" className="bg-purple-600 hover:bg-purple-700" onClick={() => handleAutoFix(alert.id)}>
                           Auto-Fix
                         </Button>
                       )}

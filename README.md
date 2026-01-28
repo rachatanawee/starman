@@ -22,9 +22,32 @@ AI-powered Enterprise Resource Planning system built with Next.js, TypeScript, a
   - Supervisor Dashboard - Real-time factory monitoring with OEE metrics
   - AI Co-Pilot - Intelligent problem-solving assistance
 
+### Reports & Analytics Module
+- **Factory Capacity Report** - Machine utilization and bottleneck analysis
+- **Worker Allowance Report** - Labor cost tracking and productivity metrics
+- **WIP Costing** - Real-time job costing with AI Financial Analyst
+  - Cost ledger tracking (DM/DL/OH)
+  - Variance analysis
+  - Margin erosion alerts
+  - One-click cost optimization
+- **Job History** - Completed production analysis with performance rankings
+
+### Accounting Interface Module
+- **Integration Hub** - Bridge to Thai accounting software (PEAK, FlowAccount, TRCLOUD, Express)
+- **Sync Dashboard** - Real-time document sync status monitoring
+- **AI Reconciliation Agent** - Intelligent error detection and auto-fix
+  - Missing Tax ID alerts
+  - Unsynced document detection
+  - Mapping error resolution
+  - Duplicate entry prevention
+- **Tax Staging** - VAT and WHT report preparation
+- **GL Account Mapping** - Chart of accounts configuration
+
 ### AI Capabilities 🤖
 - **The Strategist** - Production planning optimization
 - **The Co-Pilot** - Shop floor problem diagnosis
+- **The Financial Analyst** - WIP costing and margin analysis
+- **The Reconciliation Agent** - Accounting sync error resolution
 - Customer trend analysis
 - Predictive maintenance alerts
 - One-click fix actions
@@ -57,7 +80,12 @@ erp/
 │       │           │   ├── bom/
 │       │           │   ├── production-order/
 │       │           │   ├── production-planning/
-│       │           │   └── manufacturing/
+│       │           │   ├── manufacturing/
+│       │           │   ├── factory-capacity/
+│       │           │   ├── worker-allowance/
+│       │           │   ├── wip-costing/
+│       │           │   ├── job-history/
+│       │           │   └── accounting/
 │       │           └── guide/      # User documentation
 │       ├── components/             # Reusable components
 │       │   ├── ui/                # shadcn/ui components
@@ -69,7 +97,12 @@ erp/
 │           ├── bom-data.ts
 │           ├── production-order-data.ts
 │           ├── production-planning-data.ts
-│           └── manufacturing-data.ts
+│           ├── manufacturing-data.ts
+│           ├── factory-capacity-data.ts
+│           ├── worker-allowance-data.ts
+│           ├── wip-costing-data.ts
+│           ├── job-history-data.ts
+│           └── accounting-data.ts
 ```
 
 ## 🚀 Getting Started

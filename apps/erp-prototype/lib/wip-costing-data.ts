@@ -60,9 +60,9 @@ export const mockCostLedger: CostLedgerEntry[] = [
     sourceDocType: 'inventory_trx',
     sourceDocId: 'INV-TRX-1001',
     description: 'Steel Plate SS400 - 500kg issued',
-    amount: 25000,
+    amount: 2500000,
     quantityUsed: 500,
-    unitCostAtTime: 50
+    unitCostAtTime: 5000
   },
   {
     id: 'CL-002',
@@ -74,9 +74,9 @@ export const mockCostLedger: CostLedgerEntry[] = [
     sourceDocType: 'job_ticket',
     sourceDocId: 'JT-1001',
     description: 'Cutting operation - 3 hours',
-    amount: 900,
+    amount: 90000,
     quantityUsed: 3,
-    unitCostAtTime: 300
+    unitCostAtTime: 30000
   },
   {
     id: 'CL-003',
@@ -88,9 +88,9 @@ export const mockCostLedger: CostLedgerEntry[] = [
     sourceDocType: 'job_ticket',
     sourceDocId: 'JT-1001',
     description: 'Machine overhead - Cutting 3 hours',
-    amount: 600,
+    amount: 60000,
     quantityUsed: 3,
-    unitCostAtTime: 200
+    unitCostAtTime: 20000
   },
   {
     id: 'CL-004',
@@ -102,9 +102,9 @@ export const mockCostLedger: CostLedgerEntry[] = [
     sourceDocType: 'inventory_trx',
     sourceDocId: 'INV-TRX-1002',
     description: 'Re-issue due to scrap - 50kg',
-    amount: 2500,
+    amount: 250000,
     quantityUsed: 50,
-    unitCostAtTime: 50
+    unitCostAtTime: 5000
   },
   // PO-2024-002 - Channel Steel (High Variance)
   {
@@ -117,9 +117,9 @@ export const mockCostLedger: CostLedgerEntry[] = [
     sourceDocType: 'inventory_trx',
     sourceDocId: 'INV-TRX-1003',
     description: 'Steel Coil - 800kg issued',
-    amount: 48000,
+    amount: 4800000,
     quantityUsed: 800,
-    unitCostAtTime: 60
+    unitCostAtTime: 6000
   },
   {
     id: 'CL-006',
@@ -131,9 +131,9 @@ export const mockCostLedger: CostLedgerEntry[] = [
     sourceDocType: 'job_ticket',
     sourceDocId: 'JT-1002',
     description: 'Bending operation - 5 hours',
-    amount: 1500,
+    amount: 150000,
     quantityUsed: 5,
-    unitCostAtTime: 300
+    unitCostAtTime: 30000
   },
   {
     id: 'CL-007',
@@ -145,9 +145,9 @@ export const mockCostLedger: CostLedgerEntry[] = [
     sourceDocType: 'job_ticket',
     sourceDocId: 'JT-1002',
     description: 'Machine overhead - Bending 5 hours (Machine breakdown +2hr)',
-    amount: 1400,
+    amount: 140000,
     quantityUsed: 7,
-    unitCostAtTime: 200
+    unitCostAtTime: 20000
   }
 ]
 
@@ -162,14 +162,14 @@ export const mockWIPBalances: WIPBalance[] = [
     targetQty: 100,
     completedQty: 45,
     progressPercent: 45,
-    totalDMCost: 27500, // 25000 + 2500 (re-issue)
-    totalDLCost: 900,
-    totalOHCost: 600,
-    totalWIPValue: 29000,
-    standardCostEstimate: 25000,
-    costVariance: 4000,
+    totalDMCost: 2750000, // 2500000 + 250000 (re-issue)
+    totalDLCost: 90000,
+    totalOHCost: 60000,
+    totalWIPValue: 2900000,
+    standardCostEstimate: 2500000,
+    costVariance: 400000,
     variancePercent: 16,
-    unitActualCost: 644.44, // 29000 / 45
+    unitActualCost: 64444, // 2900000 / 45
     daysInWIP: 3
   },
   {
@@ -182,14 +182,14 @@ export const mockWIPBalances: WIPBalance[] = [
     targetQty: 200,
     completedQty: 120,
     progressPercent: 60,
-    totalDMCost: 48000,
-    totalDLCost: 1500,
-    totalOHCost: 1400,
-    totalWIPValue: 50900,
-    standardCostEstimate: 44000,
-    costVariance: 6900,
+    totalDMCost: 4800000,
+    totalDLCost: 150000,
+    totalOHCost: 140000,
+    totalWIPValue: 5090000,
+    standardCostEstimate: 4400000,
+    costVariance: 690000,
     variancePercent: 15.7,
-    unitActualCost: 424.17, // 50900 / 120
+    unitActualCost: 42417, // 5090000 / 120
     daysInWIP: 4
   },
   {
@@ -202,14 +202,14 @@ export const mockWIPBalances: WIPBalance[] = [
     targetQty: 150,
     completedQty: 30,
     progressPercent: 20,
-    totalDMCost: 18000,
-    totalDLCost: 600,
-    totalOHCost: 400,
-    totalWIPValue: 19000,
-    standardCostEstimate: 18500,
-    costVariance: 500,
+    totalDMCost: 1800000,
+    totalDLCost: 60000,
+    totalOHCost: 40000,
+    totalWIPValue: 1900000,
+    standardCostEstimate: 1850000,
+    costVariance: 50000,
     variancePercent: 2.7,
-    unitActualCost: 633.33,
+    unitActualCost: 63333,
     daysInWIP: 8
   },
   {
@@ -222,14 +222,14 @@ export const mockWIPBalances: WIPBalance[] = [
     targetQty: 300,
     completedQty: 80,
     progressPercent: 27,
-    totalDMCost: 24000,
-    totalDLCost: 1200,
-    totalOHCost: 800,
-    totalWIPValue: 26000,
-    standardCostEstimate: 24000,
-    costVariance: 2000,
+    totalDMCost: 2400000,
+    totalDLCost: 120000,
+    totalOHCost: 80000,
+    totalWIPValue: 2600000,
+    standardCostEstimate: 2400000,
+    costVariance: 200000,
     variancePercent: 8.3,
-    unitActualCost: 325,
+    unitActualCost: 32500,
     daysInWIP: 10
   }
 ]
@@ -245,7 +245,7 @@ export const mockAIFinancialAlerts: AIFinancialAlert[] = [
     description: 'Cost variance +16% due to material re-issue (scrap)',
     impact: 'If production continues at current rate, gross margin will drop from 25% to 8%',
     recommendation: 'Investigate cutting process quality. Consider operator retraining or blade replacement.',
-    estimatedSavings: 4000,
+    estimatedSavings: 400000,
     actionable: true
   },
   {
@@ -258,7 +258,7 @@ export const mockAIFinancialAlerts: AIFinancialAlert[] = [
     description: 'Machine overhead +40% due to breakdown (2 extra hours)',
     impact: 'Unit cost increased by ฿24 per piece',
     recommendation: 'Schedule preventive maintenance for Bending Machine #2. Check hydraulic system.',
-    estimatedSavings: 1400,
+    estimatedSavings: 140000,
     actionable: true
   },
   {
@@ -269,7 +269,7 @@ export const mockAIFinancialAlerts: AIFinancialAlert[] = [
     productName: 'Square Tube 50x50mm',
     title: '⏰ WIP Aging Alert',
     description: 'Job paused for 10 days with ฿26,000 locked in WIP',
-    impact: 'Cash flow impact: ฿26K tied up. Customer delivery at risk.',
+    impact: 'Cash flow impact: ฿2.6M tied up. Customer delivery at risk.',
     recommendation: 'Resume production immediately or consider partial shipment of 80 completed units.',
     actionable: true
   },
@@ -283,14 +283,14 @@ export const mockAIFinancialAlerts: AIFinancialAlert[] = [
     description: 'Average actual cost increased 12% vs standard (last 30 days)',
     impact: 'Current pricing may not cover actual production costs',
     recommendation: 'Update price list: Steel Beam +8%, Channel Steel +10% to maintain 20% margin target.',
-    estimatedSavings: 15000,
+    estimatedSavings: 1500000,
     actionable: true
   }
 ]
 
 export const costAllocationRules = [
-  { workCenter: 'Cutting Machine', ohRatePerHour: 200, type: 'machine_hour' },
-  { workCenter: 'Bending Machine', ohRatePerHour: 200, type: 'machine_hour' },
-  { workCenter: 'Welding Station', ohRatePerHour: 150, type: 'machine_hour' },
-  { workCenter: 'Assembly Line', ohRatePerHour: 100, type: 'labor_hour' }
+  { workCenter: 'Cutting Machine', ohRatePerHour: 20000, type: 'machine_hour' },
+  { workCenter: 'Bending Machine', ohRatePerHour: 20000, type: 'machine_hour' },
+  { workCenter: 'Welding Station', ohRatePerHour: 15000, type: 'machine_hour' },
+  { workCenter: 'Assembly Line', ohRatePerHour: 10000, type: 'labor_hour' }
 ]

@@ -137,7 +137,7 @@ export const mockSyncLogs: SyncLog[] = [
     externalRefId: 'FA-INV-8821',
     syncedAt: new Date('2024-01-15T10:30:00'),
     retryCount: 0,
-    amount: 107000
+    amount: 8750000
   },
   {
     id: 2,
@@ -149,7 +149,7 @@ export const mockSyncLogs: SyncLog[] = [
     errorMessage: 'Customer Tax ID missing - Cannot claim VAT',
     syncedAt: new Date('2024-01-15T11:45:00'),
     retryCount: 2,
-    amount: 85600
+    amount: 12450000
   },
   {
     id: 3,
@@ -160,7 +160,7 @@ export const mockSyncLogs: SyncLog[] = [
     syncAction: 'create',
     syncedAt: new Date('2024-01-15T14:20:00'),
     retryCount: 0,
-    amount: 45000
+    amount: 6800000
   },
   {
     id: 4,
@@ -172,7 +172,7 @@ export const mockSyncLogs: SyncLog[] = [
     externalRefId: 'FA-INV-8823',
     syncedAt: new Date('2024-01-15T13:15:00'),
     retryCount: 0,
-    amount: 128000
+    amount: 15200000
   },
   {
     id: 5,
@@ -184,7 +184,7 @@ export const mockSyncLogs: SyncLog[] = [
     errorMessage: 'Account mapping not found for adjustment reason',
     syncedAt: new Date('2024-01-15T09:00:00'),
     retryCount: 1,
-    amount: 12500
+    amount: 2350000
   }
 ]
 
@@ -194,7 +194,7 @@ export const mockAIAlerts: AIReconciliationAlert[] = [
     type: 'missing_tax_id',
     severity: 'high',
     title: 'Missing Tax ID - VAT Claim Risk',
-    description: 'Invoice INV-2024-002 has VAT amount ฿5,600 but customer Tax ID is not specified. This will prevent VAT input claim.',
+    description: 'Invoice INV-2024-002 has VAT amount ฿871,500 but customer Tax ID is not specified. This will prevent VAT input claim.',
     documentRef: 'INV-2024-002',
     suggestedAction: 'Request Tax ID from customer or convert to non-VAT invoice',
     canAutoFix: false,
@@ -237,11 +237,11 @@ export const mockAIAlerts: AIReconciliationAlert[] = [
 
 export const mockTaxSummary: TaxSummary = {
   month: 'January 2024',
-  vatSales: 28450,
-  vatPurchase: 12300,
-  vatPayable: 16150,
-  whtIssued: 4500,
-  whtReceived: 1200
+  vatSales: 3150000,
+  vatPurchase: 1820000,
+  vatPayable: 1330000,
+  whtIssued: 285000,
+  whtReceived: 95000
 }
 
 export function getSyncStats() {

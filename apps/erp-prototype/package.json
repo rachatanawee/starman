@@ -27,9 +27,10 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "dev:debug": "NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
+    "build": "npm run version:generate && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "version:generate": "node -e \"const fs=require('fs');const v=require('./package.json').version;const h=require('child_process').execSync('git rev-parse --short HEAD').toString().trim();fs.writeFileSync('.env.local',fs.readFileSync('.env.local','utf8').replace(/NEXT_PUBLIC_APP_VERSION=.*/,'')+'NEXT_PUBLIC_APP_VERSION=v'+v+'-'+h+'\\n')\""
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

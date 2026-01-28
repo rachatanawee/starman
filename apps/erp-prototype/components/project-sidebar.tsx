@@ -26,9 +26,11 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
   const [userEmail, setUserEmail] = useState('')
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({})
   const [mounted, setMounted] = useState(false)
+  const [version, setVersion] = useState('v0.1.0')
 
   useEffect(() => {
     setMounted(true)
+    setVersion(process.env.NEXT_PUBLIC_APP_VERSION || 'v0.1.0')
     const saved = localStorage.getItem('sidebar_collapsed_sections')
     if (saved) {
       setCollapsedSections(JSON.parse(saved))
@@ -208,6 +210,11 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
           <LogOut className={`h-4 w-4 ${collapsed ? '' : 'mr-2'}`} />
           {!collapsed && 'Logout'}
         </Button>
+        {!collapsed && mounted && (
+          <div className="px-3 py-1 text-xs text-gray-400 text-center">
+            {version}
+          </div>
+        )}
       </div>
       </div>
     </div>
