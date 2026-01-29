@@ -11,7 +11,6 @@ import {
 import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
 import { ProjectLayout } from '@/components/project-layout'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
-import { AIAssistant } from '@/components/ai-assistant'
 import { AIInsightsBadge } from '@/components/ai-insights-badge'
 import { useTranslations } from 'next-intl'
 
@@ -22,7 +21,6 @@ export default function CompanyDashboardPage() {
   const t = useTranslations('dashboard')
 
   const [project] = useState<MockProject | null>(mockProjectsAPI.getSync(projectId))
-  const [showAI, setShowAI] = useState(false)
 
   if (!project) {
     return (
@@ -112,15 +110,6 @@ export default function CompanyDashboardPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 hover:from-amber-100 hover:to-orange-100"
-                onClick={() => setShowAI(!showAI)}
-              >
-                <Sparkles className="h-4 w-4 mr-2" />
-                {t('aiInsights')}
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
                 onClick={() => router.push(`/${params.locale}/company/${projectId}/dashboard/report`)}
               >
                 <Printer className="h-4 w-4 mr-2" />
@@ -186,22 +175,6 @@ export default function CompanyDashboardPage() {
             </CardContent>
           </Card>
         </div>
-
-        {/* AI Assistant */}
-        {showAI && (
-          <div className="mb-8">
-            <AIAssistant
-              title="Company Overview Insights"
-              context="dashboard-insights"
-              data={{ 
-                totalRevenue: salesData[salesData.length - 1].sales,
-                productionEfficiency: 96,
-                lowStockItems: inventoryStats.lowStock,
-                activeOrders: productionStats.activeOrders
-              }}
-            />
-          </div>
-        )}
 
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">

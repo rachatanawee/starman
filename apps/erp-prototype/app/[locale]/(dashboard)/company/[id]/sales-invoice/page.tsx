@@ -325,19 +325,20 @@ export default function SalesInvoicePage() {
               </div>
               <div className="flex gap-2">
                 <Link href="/guide?tab=sales&section=sales-invoice">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="transition-all hover:scale-105 active:scale-95">
                     <BookOpen className="h-4 w-4 mr-2" />
                     {t('learnMore')}
                   </Button>
                 </Link>
-                <Button
-                  data-testid="new-invoice-button"
-                  className="bg-green-600 hover:bg-green-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow"
-                  onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-invoice/new`)}
-                >
-                  <Plus className="h-4 w-4 mr-2" />
-                  <span>{t('newInvoice')}</span>
-                </Button>
+                <Link href={`/${params.locale}/company/${projectId}/sales-invoice/new`}>
+                  <Button
+                    data-testid="new-invoice-button"
+                    className="bg-green-600 hover:bg-green-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    <span>{t('newInvoice')}</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

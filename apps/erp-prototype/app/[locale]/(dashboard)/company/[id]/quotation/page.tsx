@@ -19,7 +19,6 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import { DateRangeFilter } from '@/components/date-range-filter'
-import { AIAssistant } from '@/components/ai-assistant'
 import { AIInsightsBadge } from '@/components/ai-insights-badge'
 import { useTranslations } from 'next-intl'
 import type { ColumnDef } from '@tanstack/react-table'
@@ -85,7 +84,7 @@ export default function QuotationPage() {
     dateTo: ''
   })
 
-  const [showAI, setShowAI] = React.useState(false)
+
 
   const filterConfig: FilterConfig = {
     name: 'Filters',
@@ -362,40 +361,23 @@ export default function QuotationPage() {
               </div>
               <div className="flex gap-2">
                 <Link href="/guide?tab=sales&section=quotation">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="transition-all hover:scale-105 active:scale-95">
                     <BookOpen className="h-4 w-4 mr-2" />
                     {t('learnMore')}
                   </Button>
                 </Link>
-                <Button
-                  variant="outline"
-                  className="gap-2 border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 hover:from-amber-100 hover:to-orange-100"
-                  onClick={() => setShowAI(!showAI)}
-                >
-                  <Sparkles className="h-4 w-4" />
-                  <span className="hidden sm:inline">{t('customerTrends')}</span>
-                </Button>
-                <Button
-                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow"
-                  onClick={() => router.push(`/${params.locale}/company/${projectId}/quotation/new`)}
-                >
-                  <Plus className="h-4 w-4 mr-2" />
-                  <span>{t('newQuotation')}</span>
-                </Button>
+
+                <Link href={`/${params.locale}/company/${projectId}/quotation/new`}>
+                  <Button
+                    className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    <span>{t('newQuotation')}</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
-
-        {showAI && (
-          <AIAssistant 
-            context="customer-trends"
-            data={{ 
-              topCustomers: ['Acme Corp', 'Tech Solutions', 'Global Industries'],
-              totalRevenue: totalAmount,
-              customerCount: new Set(filteredData.map(q => q.customer)).size
-            }}
-          />
-        )}
 
         <div className="w-full">
           <FilterPanel

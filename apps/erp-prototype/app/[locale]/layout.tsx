@@ -2,7 +2,6 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import { Toaster } from '@/components/toaster'
 import { PageTransition } from '@/components/page-transition'
 import '../globals.css'
 
@@ -46,7 +45,6 @@ export default async function LocaleLayout({
           <PageTransition>
             {children}
           </PageTransition>
-          <Toaster />
         </NextIntlClientProvider>
       </NuqsAdapter>
     </>
