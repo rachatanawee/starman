@@ -1,4 +1,3 @@
-import { AIProvider } from '@/lib/ai-context'
 import type { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = {
@@ -23,9 +22,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <AIProvider>
-          {children}
-        </AIProvider>
+        {children}
       </body>
     </html>
   )

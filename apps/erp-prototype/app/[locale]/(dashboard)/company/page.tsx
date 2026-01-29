@@ -140,7 +140,7 @@ export default function ProjectsPage() {
                       <span>{project.members} {t('members')}</span>
                     </div>
                     <Badge variant="secondary" className="text-xs">
-                      {project.aiProvider || 'No AI'}
+                      ERP
                     </Badge>
                   </div>
 
