@@ -13,7 +13,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Users, Plus, Edit, Trash2, Shield, Search, X, Building2 } from 'lucide-react'
 import { mockUsers, roleLabels, statusLabels, type User, type UserRole, type UserStatus } from '@/lib/user-data'
 import { mockProjects } from '@/lib/mock-data'
-import { toast } from 'sonner'
+import { FloatingUndo, InlineFeedback } from '@/components/feedback'
 
 export default function UsersPage() {
   const [users, setUsers] = useState(mockUsers)
@@ -21,6 +21,8 @@ export default function UsersPage() {
   const [filterRole, setFilterRole] = useState<string>('all')
   const [filterStatus, setFilterStatus] = useState<string>('all')
   const [editingUser, setEditingUser] = useState<User | null>(null)
+  const [undoAction, setUndoAction] = useState<{ message: string; action: () => void } | null>(null)
+  const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
   const filteredUsers = users.filter(user => {
     const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -36,21 +38,38 @@ export default function UsersPage() {
 
   const handleDelete = (userId: string) => {
     if (confirm('Are you sure you want to delete this user?')) {
+      const oldUsers = [...users]
+      const deletedUser = users.find(u => u.id === userId)
       setUsers(users.filter(u => u.id !== userId))
-      toast.success('User deleted successfully')
+      setUndoAction({
+        message: `${deletedUser?.name} deleted`,
+        action: () => setUsers(oldUsers)
+      })
     }
   }
 
   const handleSave = () => {
     if (!editingUser) return
     
+    if (!editingUser.name || !editingUser.email) {
+      setFeedback({ type: 'error', message: 'Name and email are required' })
+      return
+    }
+
+    const oldUsers = [...users]
     if (editingUser.id) {
       setUsers(users.map(u => u.id === editingUser.id ? editingUser : u))
-      toast.success('User updated successfully')
+      setUndoAction({
+        message: `${editingUser.name} updated`,
+        action: () => setUsers(oldUsers)
+      })
     } else {
       const newUser = { ...editingUser, id: Date.now().toString() }
       setUsers([...users, newUser])
-      toast.success('User created successfully')
+      setUndoAction({
+        message: `${newUser.name} created`,
+        action: () => setUsers(oldUsers)
+      })
     }
     setEditingUser(null)
   }
@@ -168,6 +187,13 @@ export default function UsersPage() {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
+              {feedback && (
+                <InlineFeedback
+                  type={feedback.type}
+                  message={feedback.message}
+                  onDismiss={() => setFeedback(null)}
+                />
+              )}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Name</Label>
@@ -351,6 +377,14 @@ export default function UsersPage() {
           ))}
         </div>
       </div>
+
+      {undoAction && (
+        <FloatingUndo
+          message={undoAction.message}
+          onUndo={undoAction.action}
+          onDismiss={() => setUndoAction(null)}
+        />
+      )}
     </ProjectLayout>
   )
 }

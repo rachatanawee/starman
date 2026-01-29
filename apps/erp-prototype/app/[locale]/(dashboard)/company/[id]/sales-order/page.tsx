@@ -361,14 +361,15 @@ export default function SalesOrderPage() {
                     {t('learnMore')}
                   </Button>
                 </Link>
-                <Button
-                  data-testid="new-order-button"
-                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow"
-                  onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/new`)}
-                >
-                  <Plus className="h-4 w-4 mr-2" />
-                  <span>{t('newOrder')}</span>
-                </Button>
+                <Link href={`/${params.locale}/company/${projectId}/sales-order/new`}>
+                  <Button
+                    data-testid="new-order-button"
+                    className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    <span>{t('newOrder')}</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

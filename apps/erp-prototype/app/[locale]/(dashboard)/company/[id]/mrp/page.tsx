@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Sparkles, Package, AlertTriangle, TrendingUp, Zap, Clock, CheckCircle, ShoppingCart, BookOpen } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Sparkles, Package, AlertTriangle, TrendingUp, Zap, Clock, CheckCircle, ShoppingCart, BookOpen, FileText, Calendar } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { mockMRPRequirements, mockAIRecommendations, MRPRequirement, AIRecommendation } from '@/lib/mrp-data'
-import { toast } from 'sonner'
+import { FloatingUndo, StatusIndicator } from '@/components/feedback'
 import { useTranslations } from 'next-intl'
 
 const priorityColors = {
@@ -45,22 +46,47 @@ export default function MRPPage() {
   const [requirements, setRequirements] = useState<MRPRequirement[]>(mockMRPRequirements)
   const [recommendations, setRecommendations] = useState<AIRecommendation[]>(mockAIRecommendations)
   const [isRunning, setIsRunning] = useState(false)
+  const [selectedItems, setSelectedItems] = useState<string[]>([])
+  const [undoAction, setUndoAction] = useState<{ message: string; action: () => void } | null>(null)
+  const [groupBy, setGroupBy] = useState<'priority' | 'vendor' | 'date'>('priority')
 
   const handleRunMRP = () => {
     setIsRunning(true)
     setTimeout(() => {
       setIsRunning(false)
-      toast.success('MRP calculation completed')
     }, 2000)
   }
 
   const handleApplyRecommendation = (recId: string) => {
+    const oldRecs = [...recommendations]
     setRecommendations(prev => prev.filter(r => r.id !== recId))
-    toast.success('Recommendation applied')
+    setUndoAction({
+      message: 'Recommendation applied',
+      action: () => setRecommendations(oldRecs)
+    })
   }
 
-  const handleCreatePR = (req: MRPRequirement) => {
-    toast.success(`Purchase Request created for ${req.productName}`)
+  const handleCreatePR = (items: MRPRequirement[]) => {
+    const oldReqs = [...requirements]
+    setRequirements(requirements.map(r => 
+      items.find(i => i.id === r.id) ? { ...r, status: 'ordered' as const } : r
+    ))
+    setSelectedItems([])
+    setUndoAction({
+      message: `PR created for ${items.length} item(s)`,
+      action: () => setRequirements(oldReqs)
+    })
+  }
+
+  const toggleSelect = (id: string) => {
+    setSelectedItems(prev => 
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+    )
+  }
+
+  const toggleSelectAll = () => {
+    const shortageIds = requirements.filter(r => r.status === 'shortage').map(r => r.id)
+    setSelectedItems(prev => prev.length === shortageIds.length ? [] : shortageIds)
   }
 
   const stats = {
@@ -68,6 +94,31 @@ export default function MRPPage() {
     shortages: requirements.filter(r => r.status === 'shortage').length,
     totalValue: requirements.reduce((sum, r) => sum + r.estimatedCost, 0),
     urgentItems: requirements.filter(r => r.priority === 'urgent').length
+  }
+
+  const groupedRequirements = () => {
+    const shortages = requirements.filter(r => r.status === 'shortage')
+    if (groupBy === 'priority') {
+      return {
+        urgent: shortages.filter(r => r.priority === 'urgent'),
+        high: shortages.filter(r => r.priority === 'high'),
+        normal: shortages.filter(r => r.priority === 'normal')
+      }
+    } else if (groupBy === 'vendor') {
+      const byVendor: Record<string, MRPRequirement[]> = {}
+      shortages.forEach(r => {
+        if (!byVendor[r.suggestedVendor]) byVendor[r.suggestedVendor] = []
+        byVendor[r.suggestedVendor].push(r)
+      })
+      return byVendor
+    } else {
+      const byDate: Record<string, MRPRequirement[]> = {}
+      shortages.forEach(r => {
+        if (!byDate[r.suggestedOrderDate]) byDate[r.suggestedOrderDate] = []
+        byDate[r.suggestedOrderDate].push(r)
+      })
+      return byDate
+    }
   }
 
   return (
@@ -93,7 +144,7 @@ export default function MRPPage() {
               disabled={isRunning}
               className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
             >
-              <Sparkles className="h-4 w-4 mr-2" />
+              {isRunning ? <StatusIndicator status="loading" size="sm" /> : <Sparkles className="h-4 w-4 mr-2" />}
               {isRunning ? t('runningMRP') : t('runMRP')}
             </Button>
           </div>
@@ -146,151 +197,157 @@ export default function MRPPage() {
           </Card>
         </div>
 
-        <div className="grid grid-cols-3 gap-6">
-          {/* Left: Requirements */}
-          <div className="col-span-2 space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('materialRequirements')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {requirements.map(req => (
-                    <div
-                      key={req.id}
-                      className={`border rounded-lg p-4 ${
-                        req.status === 'shortage' ? 'border-red-300 bg-red-50' : 'border-gray-200'
-                      }`}
-                    >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <h3 className="font-semibold">{req.productName}</h3>
-                            <Badge className={statusColors[req.status]}>
-                              {t(req.status)}
-                            </Badge>
-                            <Badge className={priorityColors[req.priority]}>
-                              {t(req.priority)}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-gray-600 mb-2">SKU: {req.productSku}</p>
-                          <div className="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                              <p className="text-gray-600">{t('required')}: <span className="font-medium">{req.requiredQty}</span></p>
-                              <p className="text-gray-600">{t('available')}: <span className="font-medium">{req.availableQty}</span></p>
-                              {req.shortageQty > 0 && (
-                                <p className="text-red-600">{t('shortage')}: <span className="font-bold">{req.shortageQty}</span></p>
-                              )}
-                            </div>
-                            <div>
-                              <p className="text-gray-600">{t('requiredDate')}: <span className="font-medium">{new Date(req.requiredDate).toLocaleDateString()}</span></p>
-                              <p className="text-gray-600">{t('leadTime')}: <span className="font-medium">{req.leadTimeDays} days</span></p>
-                              <p className="text-blue-600">{t('orderBy')}: <span className="font-bold">{new Date(req.suggestedOrderDate).toLocaleDateString()}</span></p>
-                            </div>
-                          </div>
-                          <div className="mt-3 pt-3 border-t">
-                            <p className="text-xs text-gray-600">{t('suggestedVendor')}: <span className="font-medium">{req.suggestedVendor}</span></p>
-                            {req.estimatedCost > 0 && (
-                              <p className="text-xs text-gray-600">{t('estimatedCost')}: <span className="font-medium">฿{req.estimatedCost.toLocaleString()}</span></p>
-                            )}
-                          </div>
-                        </div>
-                        {req.status === 'shortage' && (
-                          <Button
-                            size="sm"
-                            onClick={() => handleCreatePR(req)}
-                            className="ml-4"
-                          >
-                            {t('createPR')}
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+        <div className="space-y-4">
+          {/* AI Recommendations Bar */}
+          {recommendations.length > 0 && (
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-purple-600" />
+                  <span className="font-semibold">AI Supply Commander:</span>
+                  <span className="text-sm text-gray-600">{recommendations.length} recommendations</span>
                 </div>
-              </CardContent>
-            </Card>
+                <div className="flex gap-2">
+                  {recommendations.slice(0, 2).map((rec) => {
+                    const Icon = aiIcons[rec.type]
+                    return (
+                      <Button
+                        key={rec.id}
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleApplyRecommendation(rec.id)}
+                        className="text-xs"
+                      >
+                        <Icon className="h-3 w-3 mr-1" />
+                        {rec.action?.label}
+                      </Button>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Bulk Actions */}
+          {selectedItems.length > 0 && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">{selectedItems.length} items selected</span>
+                <Button
+                  size="sm"
+                  onClick={() => handleCreatePR(requirements.filter(r => selectedItems.includes(r.id)))}
+                >
+                  <FileText className="h-4 w-4 mr-2" />
+                  Create PR for Selected
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* Group By */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600">Group by:</span>
+            <div className="flex gap-1">
+              <Button
+                size="sm"
+                variant={groupBy === 'priority' ? 'default' : 'outline'}
+                onClick={() => setGroupBy('priority')}
+              >
+                Priority
+              </Button>
+              <Button
+                size="sm"
+                variant={groupBy === 'vendor' ? 'default' : 'outline'}
+                onClick={() => setGroupBy('vendor')}
+              >
+                Vendor
+              </Button>
+              <Button
+                size="sm"
+                variant={groupBy === 'date' ? 'default' : 'outline'}
+                onClick={() => setGroupBy('date')}
+              >
+                Order Date
+              </Button>
+            </div>
+            <Button size="sm" variant="outline" onClick={toggleSelectAll} className="ml-auto">
+              Select All Shortages
+            </Button>
           </div>
 
-          {/* Right: AI Recommendations */}
-          <div className="space-y-4">
-            <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-blue-50">
+          {/* Requirements by Group */}
+          {Object.entries(groupedRequirements()).map(([group, items]) => (
+            <Card key={group}>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-purple-600" />
-                  {t('theSupplyCommander')}
+                <CardTitle className="text-base flex items-center justify-between">
+                  <span className="capitalize">{group} ({items.length})</span>
+                  {groupBy === 'vendor' && (
+                    <span className="text-sm font-normal text-gray-600">
+                      Total: ฿{items.reduce((sum, i) => sum + i.estimatedCost, 0).toLocaleString()}
+                    </span>
+                  )}
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recommendations.length > 0 ? (
-                    <>
-                      <p className="text-sm text-gray-700">
-                        🤖 {recommendations.length} {t('aiRecommendations')}
-                      </p>
-                      {recommendations.map(rec => {
-                        const Icon = aiIcons[rec.type]
-                        return (
-                          <div
-                            key={rec.id}
-                            className={`border rounded-lg p-3 ${severityColors[rec.severity]}`}
-                          >
-                            <div className="flex items-start gap-2">
-                              <Icon className="h-4 w-4 mt-0.5 shrink-0" />
-                              <div className="flex-1 min-w-0">
-                                <p className="font-semibold text-sm">{rec.title}</p>
-                                <p className="text-xs mt-1">{rec.message}</p>
-                                {rec.action && (
-                                  <Button
-                                    size="sm"
-                                    className="mt-2 w-full"
-                                    onClick={() => handleApplyRecommendation(rec.id)}
-                                  >
-                                    {rec.action.label}
-                                  </Button>
-                                )}
-                              </div>
-                            </div>
+              <CardContent className="space-y-3">
+                {items.map(req => (
+                  <div
+                    key={req.id}
+                    className={`border rounded-lg p-4 ${
+                      selectedItems.includes(req.id) ? 'border-blue-400 bg-blue-50' : 'border-gray-200'
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <Checkbox
+                        checked={selectedItems.includes(req.id)}
+                        onCheckedChange={() => toggleSelect(req.id)}
+                        className="mt-1"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="font-semibold">{req.productName}</h3>
+                          <Badge className={priorityColors[req.priority]}>{req.priority}</Badge>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 text-sm mb-3">
+                          <div>
+                            <p className="text-gray-600">Shortage: <span className="font-bold text-red-600">{req.shortageQty}</span></p>
+                            <p className="text-gray-600">Cost: <span className="font-medium">฿{req.estimatedCost.toLocaleString()}</span></p>
                           </div>
-                        )
-                      })}
-                    </>
-                  ) : (
-                    <div className="text-center py-6">
-                      <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-2" />
-                      <p className="text-sm text-gray-700">{t('allOptimized')}</p>
+                          <div>
+                            <p className="text-gray-600">Order by: <span className="font-medium">{new Date(req.suggestedOrderDate).toLocaleDateString()}</span></p>
+                            <p className="text-gray-600">Lead time: <span className="font-medium">{req.leadTimeDays}d</span></p>
+                          </div>
+                          <div>
+                            <p className="text-gray-600">Vendor: <span className="font-medium">{req.suggestedVendor}</span></p>
+                          </div>
+                        </div>
+                        {/* Traceability */}
+                        <div className="border-t pt-2">
+                          <p className="text-xs font-medium text-gray-700 mb-1">Used in:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {req.allocations.map((alloc, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs">
+                                {alloc.salesOrderNumber} ({alloc.customerName}) → {alloc.productionOrderNumber}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                ))}
               </CardContent>
             </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">{t('quickStats')}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div>
-                  <p className="text-gray-600">{t('itemsToOrder')}</p>
-                  <p className="text-2xl font-bold">{stats.shortages}</p>
-                </div>
-                <div>
-                  <p className="text-gray-600">{t('estimatedSpend')}</p>
-                  <p className="text-2xl font-bold text-green-600">
-                    ฿{stats.totalValue.toLocaleString()}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-600">{t('urgentActions')}</p>
-                  <p className="text-2xl font-bold text-red-600">
-                    {stats.urgentItems}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          ))}
         </div>
       </div>
+
+      {undoAction && (
+        <FloatingUndo
+          message={undoAction.message}
+          onUndo={undoAction.action}
+          onDismiss={() => setUndoAction(null)}
+        />
+      )}
     </ProjectLayout>
   )
 }

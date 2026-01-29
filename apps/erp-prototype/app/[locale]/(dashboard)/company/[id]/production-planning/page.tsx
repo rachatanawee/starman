@@ -10,7 +10,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { mockAIInsights, mockPlanItems, AIInsight, PlanItem, InsightType, Severity } from '@/lib/production-planning-data'
 import { useTranslations } from 'next-intl'
-import { toast } from 'sonner'
+import { FloatingUndo, StatusIndicator } from '@/components/feedback'
 
 const insightIcons: Record<InsightType, any> = {
   capacity_conflict: AlertTriangle,
@@ -48,19 +48,24 @@ export default function ProductionPlanningPage() {
   const [filterStatus, setFilterStatus] = useState('All')
   const [searchPO, setSearchPO] = useState('')
   const [viewMode, setViewMode] = useState<'week' | 'month'>('week')
+  const [undoAction, setUndoAction] = useState<{ message: string; action: () => void } | null>(null)
+  const [aiStatus, setAIStatus] = useState<'idle' | 'loading' | 'success'>('idle')
 
   const handleResolveInsight = (insightId: string) => {
+    const oldInsights = [...insights]
     setInsights(insights.map(i => i.id === insightId ? { ...i, isResolved: true } : i))
-    toast.success('Action applied successfully')
+    setUndoAction({
+      message: 'AI insight resolved',
+      action: () => setInsights(oldInsights)
+    })
   }
 
   const handleRunAI = () => {
-    setIsRunningAI(true)
+    setAIStatus('loading')
     setTimeout(() => {
-      // AI auto-schedules unplanned items
+      const oldItems = [...planItems]
       const updated = planItems.map(item => {
         if (!item.startDate) {
-          // Find best date with lowest capacity
           const bestDate = weekDates.reduce((best, date) => {
             const capacity = getCapacityForDate(date)
             const bestCapacity = getCapacityForDate(best)
@@ -77,8 +82,12 @@ export default function ProductionPlanningPage() {
         return item
       })
       setPlanItems(updated)
-      setIsRunningAI(false)
-      toast.success('AI planning completed - 2 orders scheduled')
+      setAIStatus('success')
+      setTimeout(() => setAIStatus('idle'), 2000)
+      setUndoAction({
+        message: 'AI scheduled 2 orders',
+        action: () => setPlanItems(oldItems)
+      })
     }, 2000)
   }
 
@@ -88,6 +97,7 @@ export default function ProductionPlanningPage() {
 
   const handleDrop = (date: string) => {
     if (!draggedItem || !draggedItem.startDate || !draggedItem.endDate) return
+    const oldItems = [...planItems]
     const duration = new Date(draggedItem.endDate).getTime() - new Date(draggedItem.startDate).getTime()
     const newEndDate = new Date(new Date(date).getTime() + duration).toISOString().split('T')[0]
     setPlanItems(planItems.map(item => 
@@ -96,14 +106,14 @@ export default function ProductionPlanningPage() {
         : item
     ))
     setDraggedItem(null)
-    toast.success('Schedule updated')
+    setUndoAction({
+      message: `${draggedItem.orderNumber} moved to ${new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
+      action: () => setPlanItems(oldItems)
+    })
   }
 
   const handleCreateOrder = () => {
-    if (!newOrder.orderNumber || !newOrder.productName || !newOrder.quantity) {
-      toast.error('Please fill all fields')
-      return
-    }
+    if (!newOrder.orderNumber || !newOrder.productName || !newOrder.quantity) return
     const order: PlanItem = {
       id: `plan-${Date.now()}`,
       orderNumber: newOrder.orderNumber,
@@ -116,10 +126,14 @@ export default function ProductionPlanningPage() {
       status: 'scheduled',
       isLocked: false
     }
+    const oldItems = [...planItems]
     setPlanItems([...planItems, order])
     setNewOrder({ orderNumber: '', productName: '', quantity: '', workCenter: 'Press Brake' })
     setShowNewOrder(false)
-    toast.success('Order created')
+    setUndoAction({
+      message: `${order.orderNumber} created`,
+      action: () => setPlanItems(oldItems)
+    })
   }
 
   const unresolvedInsights = insights.filter(i => !i.isResolved)
@@ -220,11 +234,15 @@ export default function ProductionPlanningPage() {
             </Link>
             <Button
               onClick={handleRunAI}
-              disabled={isRunningAI}
+              disabled={aiStatus === 'loading'}
               className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
             >
-              <Sparkles className="h-4 w-4 mr-2" />
-              {isRunningAI ? 'Analyzing...' : 'Run AI Planning'}
+              {aiStatus === 'loading' ? (
+                <StatusIndicator status="loading" size="sm" />
+              ) : (
+                <Sparkles className="h-4 w-4 mr-2" />
+              )}
+              {aiStatus === 'loading' ? 'Analyzing...' : 'Run AI Planning'}
             </Button>
           </div>
         </div>
@@ -528,6 +546,14 @@ export default function ProductionPlanningPage() {
           </div>
         )}
       </div>
+
+      {undoAction && (
+        <FloatingUndo
+          message={undoAction.message}
+          onUndo={undoAction.action}
+          onDismiss={() => setUndoAction(null)}
+        />
+      )}
     </ProjectLayout>
   )
 }
