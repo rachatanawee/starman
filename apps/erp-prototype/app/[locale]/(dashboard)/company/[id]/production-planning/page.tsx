@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Plus, Calendar, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, Lock, BookOpen } from 'lucide-react'
+import { Plus, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, BookOpen, Package, Factory } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
@@ -35,10 +35,19 @@ const statusColors = {
 export default function ProductionPlanningPage() {
   const params = useParams()
   const projectId = params.id as string
+  const locale = (params.locale as string) || 'en'
   const t = useTranslations('productionPlanning')
   const [insights, setInsights] = useState<AIInsight[]>(mockAIInsights)
   const [planItems, setPlanItems] = useState<PlanItem[]>(mockPlanItems)
   const [isRunningAI, setIsRunningAI] = useState(false)
+  const [draggedItem, setDraggedItem] = useState<PlanItem | null>(null)
+  const [showNewOrder, setShowNewOrder] = useState(false)
+  const [newOrder, setNewOrder] = useState({ orderNumber: '', productName: '', quantity: '', workCenter: 'Press Brake' })
+  const [weekOffset, setWeekOffset] = useState(0)
+  const [filterWorkCenter, setFilterWorkCenter] = useState('All')
+  const [filterStatus, setFilterStatus] = useState('All')
+  const [searchPO, setSearchPO] = useState('')
+  const [viewMode, setViewMode] = useState<'week' | 'month'>('week')
 
   const handleResolveInsight = (insightId: string) => {
     setInsights(insights.map(i => i.id === insightId ? { ...i, isResolved: true } : i))
@@ -48,27 +57,165 @@ export default function ProductionPlanningPage() {
   const handleRunAI = () => {
     setIsRunningAI(true)
     setTimeout(() => {
+      // AI auto-schedules unplanned items
+      const updated = planItems.map(item => {
+        if (!item.startDate) {
+          // Find best date with lowest capacity
+          const bestDate = weekDates.reduce((best, date) => {
+            const capacity = getCapacityForDate(date)
+            const bestCapacity = getCapacityForDate(best)
+            return capacity < bestCapacity ? date : best
+          })
+          return {
+            ...item,
+            startDate: bestDate,
+            endDate: new Date(new Date(bestDate).getTime() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            status: 'adjusted' as const,
+            aiAdjustedReason: 'AI optimized for capacity balance'
+          }
+        }
+        return item
+      })
+      setPlanItems(updated)
       setIsRunningAI(false)
-      toast.success('AI analysis completed')
+      toast.success('AI planning completed - 2 orders scheduled')
     }, 2000)
+  }
+
+  const handleDragStart = (item: PlanItem) => {
+    setDraggedItem(item)
+  }
+
+  const handleDrop = (date: string) => {
+    if (!draggedItem || !draggedItem.startDate || !draggedItem.endDate) return
+    const duration = new Date(draggedItem.endDate).getTime() - new Date(draggedItem.startDate).getTime()
+    const newEndDate = new Date(new Date(date).getTime() + duration).toISOString().split('T')[0]
+    setPlanItems(planItems.map(item => 
+      item.id === draggedItem.id 
+        ? { ...item, startDate: date, endDate: newEndDate, status: 'adjusted' as const }
+        : item
+    ))
+    setDraggedItem(null)
+    toast.success('Schedule updated')
+  }
+
+  const handleCreateOrder = () => {
+    if (!newOrder.orderNumber || !newOrder.productName || !newOrder.quantity) {
+      toast.error('Please fill all fields')
+      return
+    }
+    const order: PlanItem = {
+      id: `plan-${Date.now()}`,
+      orderNumber: newOrder.orderNumber,
+      salesOrderIds: [],
+      productName: newOrder.productName,
+      quantity: parseInt(newOrder.quantity),
+      startDate: '',
+      endDate: '',
+      workCenter: newOrder.workCenter,
+      status: 'scheduled',
+      isLocked: false
+    }
+    setPlanItems([...planItems, order])
+    setNewOrder({ orderNumber: '', productName: '', quantity: '', workCenter: 'Press Brake' })
+    setShowNewOrder(false)
+    toast.success('Order created')
   }
 
   const unresolvedInsights = insights.filter(i => !i.isResolved)
   const criticalCount = unresolvedInsights.filter(i => i.severity === 'critical' || i.severity === 'high').length
 
+  // Generate dates based on view mode
+  const dates = viewMode === 'week' 
+    ? Array.from({ length: 7 }, (_, i) => {
+        const date = new Date('2026-01-27')
+        date.setDate(date.getDate() + i + (weekOffset * 7))
+        return date.toISOString().split('T')[0]
+      })
+    : (() => {
+        const year = 2026
+        const month = weekOffset
+        const firstDay = new Date(year, month, 1)
+        const lastDay = new Date(year, month + 1, 0)
+        return Array.from({ length: lastDay.getDate() }, (_, i) => {
+          const date = new Date(year, month, i + 1)
+          return date.toISOString().split('T')[0]
+        })
+      })()
+
+  const weekDates = dates
+  const periodStart = new Date(dates[0])
+  const periodEnd = new Date(dates[dates.length - 1])
+  const periodLabel = viewMode === 'week'
+    ? `${periodStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${periodEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, ${periodStart.getFullYear()}`
+    : `${periodStart.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`
+
+  const filteredItems = planItems.filter(item => {
+    if (filterWorkCenter !== 'All' && item.workCenter !== filterWorkCenter) return false
+    if (filterStatus !== 'All' && item.status !== filterStatus) return false
+    if (searchPO && !item.orderNumber.toLowerCase().includes(searchPO.toLowerCase())) return false
+    return true
+  })
+
+  const unplannedItems = filteredItems.filter(item => !item.startDate)
+  const getItemsForDate = (date: string) => filteredItems.filter(item => item.startDate === date)
+  const getCapacityForDate = (date: string) => {
+    const items = getItemsForDate(date)
+    const load = items.length * 30
+    return Math.min(load, 150)
+  }
+  const getCapacityColor = (capacity: number) => {
+    if (capacity >= 100) return '🔴'
+    if (capacity >= 80) return '🟡'
+    return '🟢'
+  }
+
+  const materialStatus = (item: PlanItem) => {
+    if (item.status === 'conflict') return { icon: '🔴', label: 'Missing' }
+    if (item.status === 'adjusted') return { icon: '🟡', label: 'Partial' }
+    return { icon: '🟢', label: 'Ready' }
+  }
+
   return (
     <ProjectLayout projectId={projectId}>
-      <div className="p-6 space-y-6">
+      <div className="p-6 space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">{t('title')}</h1>
-            <p className="text-gray-600 mt-1">{t('subtitle')}</p>
+            <h1 className="text-3xl font-bold">Production Planning Board</h1>
+            <p className="text-gray-600 mt-1">{viewMode === 'week' ? `Week ${5 + weekOffset}` : ''} {periodLabel}</p>
           </div>
           <div className="flex gap-2">
+            <div className="flex border rounded-lg">
+              <Button 
+                variant={viewMode === 'week' ? 'default' : 'ghost'} 
+                size="sm" 
+                onClick={() => setViewMode('week')}
+                className="rounded-r-none"
+              >
+                Week
+              </Button>
+              <Button 
+                variant={viewMode === 'month' ? 'default' : 'ghost'} 
+                size="sm" 
+                onClick={() => setViewMode('month')}
+                className="rounded-l-none"
+              >
+                Month
+              </Button>
+            </div>
+            <Button variant="outline" size="sm" onClick={() => setWeekOffset(weekOffset - 1)}>
+              ← Prev
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => setWeekOffset(0)} disabled={weekOffset === 0}>
+              Today
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => setWeekOffset(weekOffset + 1)}>
+              Next →
+            </Button>
             <Link href="/guide?tab=production&section=production-planning">
               <Button variant="outline" size="sm">
                 <BookOpen className="h-4 w-4 mr-2" />
-                {t('learnMore')}
+                Learn More
               </Button>
             </Link>
             <Button
@@ -77,206 +224,309 @@ export default function ProductionPlanningPage() {
               className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
             >
               <Sparkles className="h-4 w-4 mr-2" />
-              {isRunningAI ? t('analyzing') : t('runAIPlanning')}
-            </Button>
-            <Button variant="outline">
-              <Plus className="h-4 w-4 mr-2" />
-              {t('newPlan')}
+              {isRunningAI ? 'Analyzing...' : 'Run AI Planning'}
             </Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-6">
-          {/* Left Panel: Schedule */}
-          <div className="col-span-2 space-y-6">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2">
-                    <Calendar className="h-5 w-5" />
-                    {t('productionSchedule')}
-                  </CardTitle>
-                  {criticalCount > 0 && (
-                    <Badge variant="destructive">
-                      {criticalCount} {t('criticalIssues')}
-                    </Badge>
-                  )}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {planItems.map(item => {
-                    const Icon = item.status === 'conflict' ? AlertTriangle : item.status === 'adjusted' ? Zap : CheckCircle
-                    
+        {/* Summary Stats */}
+        <div className="grid grid-cols-5 gap-3">
+          <Card>
+            <CardContent className="pt-4">
+              <p className="text-sm text-gray-600">Total Orders</p>
+              <p className="text-2xl font-bold">{filteredItems.length}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4">
+              <p className="text-sm text-gray-600">Unplanned</p>
+              <p className="text-2xl font-bold text-gray-600">{unplannedItems.length}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4">
+              <p className="text-sm text-gray-600">Scheduled</p>
+              <p className="text-2xl font-bold text-green-600">{filteredItems.filter(p => p.status === 'scheduled').length}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4">
+              <p className="text-sm text-gray-600">Conflicts</p>
+              <p className="text-2xl font-bold text-red-600">{filteredItems.filter(p => p.status === 'conflict').length}</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="pt-4">
+              <p className="text-sm text-gray-600">AI Adjusted</p>
+              <p className="text-2xl font-bold text-yellow-600">{filteredItems.filter(p => p.status === 'adjusted').length}</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Filters */}
+        <div className="flex gap-3">
+          <input
+            type="text"
+            placeholder="Search PO..."
+            value={searchPO}
+            onChange={(e) => setSearchPO(e.target.value)}
+            className="px-3 py-2 border rounded-lg text-sm w-48"
+          />
+          <select
+            value={filterWorkCenter}
+            onChange={(e) => setFilterWorkCenter(e.target.value)}
+            className="px-3 py-2 border rounded-lg text-sm"
+          >
+            <option>All Work Centers</option>
+            <option>Press Brake</option>
+            <option>Shearing Machine</option>
+            <option>Slitting Machine</option>
+          </select>
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+            className="px-3 py-2 border rounded-lg text-sm"
+          >
+            <option>All Status</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="adjusted">AI Adjusted</option>
+            <option value="conflict">Conflict</option>
+          </select>
+        </div>
+
+        {/* AI Insights Bar */}
+        {unresolvedInsights.length > 0 && (
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-purple-600" />
+                <span className="font-semibold">AI Insights:</span>
+                <Badge variant="destructive">{criticalCount} Critical</Badge>
+                <span className="text-sm text-gray-600">{unresolvedInsights.length} total issues</span>
+              </div>
+              <div className="flex gap-2">
+                {unresolvedInsights.slice(0, 2).map((insight) => {
+                  const Icon = insightIcons[insight.type]
+                  return (
+                    <Button
+                      key={insight.id}
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleResolveInsight(insight.id)}
+                      className="text-xs"
+                    >
+                      <Icon className="h-3 w-3 mr-1" />
+                      {insight.suggestedAction?.label}
+                    </Button>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Planning Board */}
+        {viewMode === 'week' ? (
+          <div className="flex gap-3 overflow-x-auto pb-4">
+            {/* Unplanned Column */}
+            <div className="flex-shrink-0 w-64">
+              <Card className="h-full">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-semibold">Unplanned</CardTitle>
+                  <p className="text-xs text-gray-500">{unplannedItems.length} orders</p>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {unplannedItems.map(item => {
+                    const material = materialStatus(item)
                     return (
                       <div
                         key={item.id}
-                        className={`border rounded-lg p-4 ${
-                          item.status === 'conflict' ? 'border-red-300 bg-red-50' :
-                          item.status === 'adjusted' ? 'border-yellow-300 bg-yellow-50' :
-                          'border-gray-200'
-                        }`}
+                        draggable
+                        onDragStart={() => handleDragStart(item)}
+                        className="border rounded-lg p-3 bg-white hover:shadow-md cursor-move transition-shadow"
                       >
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2">
-                              <Icon className={`h-4 w-4 ${
-                                item.status === 'conflict' ? 'text-red-600' :
-                                item.status === 'adjusted' ? 'text-yellow-600' :
-                                'text-green-600'
-                              }`} />
-                              <h3 className="font-semibold">{item.orderNumber}</h3>
-                              <Badge className={statusColors[item.status]}>
-                                {t(item.status)}
-                              </Badge>
-                              {item.isLocked && (
-                                <Lock className="h-3 w-3 text-gray-500" />
-                              )}
-                            </div>
-                            <p className="text-sm text-gray-600 mt-1">{item.productName}</p>
-                            <div className="flex items-center gap-4 mt-2 text-sm">
-                              <span className="text-gray-600">Qty: {item.quantity}</span>
-                              <span className="text-gray-600">
-                                {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
-                              </span>
-                              <span className="text-gray-600">WC: {item.workCenter}</span>
-                            </div>
-                            {item.salesOrderIds.length > 0 && (
-                              <p className="text-xs text-blue-600 mt-2">
-                                📋 From: {item.salesOrderIds.join(', ')}
-                              </p>
-                            )}
-                            {item.aiAdjustedReason && (
-                              <p className="text-xs text-yellow-700 mt-2 italic">
-                                🤖 {item.aiAdjustedReason}
-                              </p>
-                            )}
-                          </div>
+                        <div className="flex items-start justify-between mb-2">
+                          <span className="font-semibold text-sm">{item.orderNumber}</span>
+                          <Badge variant="outline" className="text-xs">{item.quantity}</Badge>
+                        </div>
+                        <p className="text-xs text-gray-600 mb-2">{item.productName}</p>
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="flex items-center gap-1">
+                            <Factory className="h-3 w-3" />
+                            {item.workCenter}
+                          </span>
+                          <span>{material.icon} {material.label}</span>
                         </div>
                       </div>
                     )
                   })}
-                </div>
-              </CardContent>
-            </Card>
+                  {showNewOrder ? (
+                    <div className="border rounded-lg p-3 bg-blue-50 border-blue-300 space-y-2">
+                      <input
+                        placeholder="PO Number"
+                        value={newOrder.orderNumber}
+                        onChange={(e) => setNewOrder({...newOrder, orderNumber: e.target.value})}
+                        className="w-full px-2 py-1 text-sm border rounded"
+                      />
+                      <input
+                        placeholder="Product Name"
+                        value={newOrder.productName}
+                        onChange={(e) => setNewOrder({...newOrder, productName: e.target.value})}
+                        className="w-full px-2 py-1 text-sm border rounded"
+                      />
+                      <input
+                        type="number"
+                        placeholder="Quantity"
+                        value={newOrder.quantity}
+                        onChange={(e) => setNewOrder({...newOrder, quantity: e.target.value})}
+                        className="w-full px-2 py-1 text-sm border rounded"
+                      />
+                      <select
+                        value={newOrder.workCenter}
+                        onChange={(e) => setNewOrder({...newOrder, workCenter: e.target.value})}
+                        className="w-full px-2 py-1 text-sm border rounded"
+                      >
+                        <option>Press Brake</option>
+                        <option>Shearing Machine</option>
+                        <option>Slitting Machine</option>
+                      </select>
+                      <div className="flex gap-2">
+                        <Button size="sm" onClick={handleCreateOrder} className="flex-1">Create</Button>
+                        <Button size="sm" variant="outline" onClick={() => setShowNewOrder(false)} className="flex-1">Cancel</Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <Button variant="outline" size="sm" className="w-full" onClick={() => setShowNewOrder(true)}>
+                      <Plus className="h-3 w-3 mr-1" />
+                      New Order
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('capacityOverview')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div>
-                    <div className="flex items-center justify-between text-sm mb-1">
-                      <span>Press Brake</span>
-                      <span className="font-semibold text-red-600">150%</span>
-                    </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-red-500" style={{ width: '100%' }} />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between text-sm mb-1">
-                      <span>Shearing Machine</span>
-                      <span className="font-semibold text-green-600">75%</span>
-                    </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-green-500" style={{ width: '75%' }} />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between text-sm mb-1">
-                      <span>Slitting Machine</span>
-                      <span className="font-semibold text-yellow-600">90%</span>
-                    </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-yellow-500" style={{ width: '90%' }} />
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+            {/* Date Columns */}
+            {dates.map((date, index) => {
+              const items = getItemsForDate(date)
+              const capacity = getCapacityForDate(date)
+              const capacityIcon = getCapacityColor(capacity)
+              const dateObj = new Date(date)
+              const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' })
+              const dayNum = dateObj.getDate()
 
-          {/* Right Panel: AI Strategist */}
-          <div className="space-y-6">
-            <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-blue-50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-purple-600" />
-                  {t('theStrategist')}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {unresolvedInsights.length > 0 ? (
-                    <>
-                      <p className="text-sm text-gray-700">
-                        🤖 Detected {unresolvedInsights.length} {t('issuesDetected')}
+              return (
+                <div key={date} className="flex-shrink-0 w-64">
+                  <Card className="h-full">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-sm font-semibold">{dayName} {dayNum}</CardTitle>
+                      <p className="text-xs text-gray-500">
+                        {capacityIcon} {capacity}%
                       </p>
-                      {unresolvedInsights.map((insight, index) => {
-                        const Icon = insightIcons[insight.type]
+                    </CardHeader>
+                    <CardContent
+                      className="space-y-2 min-h-[400px]"
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={() => handleDrop(date)}
+                    >
+                      {items.map(item => {
+                        const material = materialStatus(item)
+                        const duration = Math.ceil((new Date(item.endDate).getTime() - new Date(item.startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1
                         
                         return (
                           <div
-                            key={insight.id}
-                            className={`border rounded-lg p-3 ${severityColors[insight.severity]}`}
+                            key={item.id}
+                            draggable
+                            onDragStart={() => handleDragStart(item)}
+                            className={`border rounded-lg p-3 cursor-move hover:shadow-md transition-shadow ${
+                              item.status === 'conflict' ? 'bg-red-50 border-red-300' :
+                              item.status === 'adjusted' ? 'bg-yellow-50 border-yellow-300' :
+                              'bg-white'
+                            }`}
                           >
-                            <div className="flex items-start gap-2">
-                              <Icon className="h-4 w-4 mt-0.5 shrink-0" />
-                              <div className="flex-1 min-w-0">
-                                <p className="font-semibold text-sm">{index + 1}. {insight.title}</p>
-                                <p className="text-xs mt-1">{insight.message}</p>
-                                {insight.suggestedAction && (
-                                  <Button
-                                    size="sm"
-                                    className="mt-2 w-full"
-                                    onClick={() => handleResolveInsight(insight.id)}
-                                  >
-                                    {insight.suggestedAction.label}
-                                  </Button>
-                                )}
-                              </div>
+                            <div className="flex items-start justify-between mb-2">
+                              <span className="font-semibold text-sm">{item.orderNumber}</span>
+                              <Badge variant="outline" className="text-xs">{item.quantity}</Badge>
                             </div>
+                            <p className="text-xs text-gray-600 mb-2">{item.productName}</p>
+                            <div className="mb-2">
+                              <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                <div 
+                                  className={`h-full ${
+                                    item.status === 'conflict' ? 'bg-red-500' :
+                                    item.status === 'adjusted' ? 'bg-yellow-500' :
+                                    'bg-blue-500'
+                                  }`}
+                                  style={{ width: `${(duration / 7) * 100}%` }}
+                                />
+                              </div>
+                              <p className="text-xs text-gray-500 mt-1">{duration}d duration</p>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="flex items-center gap-1">
+                                <Factory className="h-3 w-3" />
+                                {item.workCenter}
+                              </span>
+                              <span>{material.icon}</span>
+                            </div>
+                            {item.aiAdjustedReason && (
+                              <p className="text-xs text-purple-600 mt-2 italic">🤖 AI adjusted</p>
+                            )}
                           </div>
                         )
                       })}
-                    </>
-                  ) : (
-                    <div className="text-center py-6">
-                      <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-2" />
-                      <p className="text-sm text-gray-700">{t('allClear')}</p>
-                    </div>
-                  )}
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('quickStats')}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div>
-                  <p className="text-gray-600">{t('totalOrders')}</p>
-                  <p className="text-2xl font-bold">{planItems.length}</p>
-                </div>
-                <div>
-                  <p className="text-gray-600">{t('conflicts')}</p>
-                  <p className="text-2xl font-bold text-red-600">
-                    {planItems.filter(p => p.status === 'conflict').length}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-600">{t('aiAdjusted')}</p>
-                  <p className="text-2xl font-bold text-yellow-600">
-                    {planItems.filter(p => p.status === 'adjusted').length}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+              )
+            })}
           </div>
-        </div>
+        ) : (
+          <div className="grid grid-cols-7 gap-2">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+              <div key={day} className="text-center text-sm font-semibold text-gray-600 py-2">{day}</div>
+            ))}
+            {Array.from({ length: new Date(dates[0]).getDay() }).map((_, i) => (
+              <div key={`empty-${i}`} className="border rounded-lg bg-gray-50 min-h-[120px]" />
+            ))}
+            {dates.map(date => {
+              const items = getItemsForDate(date)
+              const capacity = getCapacityForDate(date)
+              const capacityIcon = getCapacityColor(capacity)
+              const dateObj = new Date(date)
+              const dayNum = dateObj.getDate()
+
+              return (
+                <div
+                  key={date}
+                  className="border rounded-lg p-2 min-h-[120px] hover:bg-gray-50"
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => handleDrop(date)}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-semibold">{dayNum}</span>
+                    <span className="text-xs">{capacityIcon}</span>
+                  </div>
+                  <div className="space-y-1">
+                    {items.map(item => (
+                      <div
+                        key={item.id}
+                        draggable
+                        onDragStart={() => handleDragStart(item)}
+                        className={`text-xs p-1 rounded cursor-move ${
+                          item.status === 'conflict' ? 'bg-red-100' :
+                          item.status === 'adjusted' ? 'bg-yellow-100' :
+                          'bg-blue-100'
+                        }`}
+                      >
+                        {item.orderNumber}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
       </div>
     </ProjectLayout>
   )
