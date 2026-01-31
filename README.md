@@ -4,6 +4,13 @@ AI-powered Enterprise Resource Planning system built with Next.js, TypeScript, a
 
 ## 🌟 Features
 
+### Theme System 🎨
+- **8 Beautiful Themes** - Tangerine, Ocean Breeze, Claude, Forest Green, Royal Purple, Crimson Red, Clean Slate, Twitter Blue
+- **Instant Theme Switching** - Change themes without page refresh
+- **Persistent Preferences** - Theme selection saved to localStorage
+- **Comprehensive Coverage** - Themes apply to all UI elements (sidebar, buttons, titles, charts, borders)
+- **Visual Preview** - See theme colors before applying
+
 ### Sales Module
 - **Quotation Management** - Create and manage sales quotations with AI-powered customer insights
 - **Sales Order** - Track customer orders with complete document linkage
@@ -23,6 +30,12 @@ AI-powered Enterprise Resource Planning system built with Next.js, TypeScript, a
   - AI Co-Pilot - Intelligent problem-solving assistance
 
 ### Reports & Analytics Module
+- **Dashboard** - Executive overview with modern design
+  - Fullscreen mode for presentations
+  - Export to CSV for data analysis
+  - Print-friendly layout
+  - Real-time metrics with hover effects
+  - Gradient headers and visual enhancements
 - **Factory Capacity Report** - Machine utilization and bottleneck analysis
 - **Worker Allowance Report** - Labor cost tracking and productivity metrics
 - **WIP Costing** - Real-time job costing with AI Financial Analyst
@@ -60,17 +73,75 @@ AI-powered Enterprise Resource Planning system built with Next.js, TypeScript, a
 - Predictive maintenance alerts
 - One-click fix actions
 
+## 🎨 Theme System
+
+Starman ERP features a comprehensive theme system with 8 beautiful color themes that transform the entire application interface.
+
+### Available Themes
+- **Tangerine** - Vibrant orange theme (default)
+- **Ocean Breeze** - Calming blue theme
+- **Claude** - Warm brown theme
+- **Forest Green** - Natural green theme
+- **Royal Purple** - Elegant purple theme
+- **Crimson Red** - Bold red theme
+- **Clean Slate** - Professional gray theme
+- **Twitter Blue** - Classic Twitter blue
+
+### Theme Features
+- **Global Color System**: Themes apply to all UI elements including:
+  - Sidebar highlights and active states
+  - Primary buttons and actions
+  - Page titles and icons
+  - Progress bars and charts
+  - Borders and accents
+  - Focus rings and hover states
+  
+- **Persistent Settings**: Theme selection is saved to localStorage and persists across sessions
+- **Dynamic Loading**: Themes are loaded dynamically without page refresh
+- **Visual Preview**: Settings page shows color preview for each theme
+- **Consistent Design**: All pages follow the same design language with theme-aware components
+
+### Changing Themes
+1. Navigate to Settings page (`/company/[id]/settings`)
+2. Scroll to "Theme & Appearance" section
+3. Click on any theme card to apply it instantly
+4. Your selection is automatically saved
+
+### Theme Architecture
+- **CSS Variables**: Uses CSS custom properties for dynamic theming
+- **OKLCH Color Space**: Modern color format for better perceptual uniformity
+- **Tailwind Integration**: Theme variables integrate seamlessly with Tailwind utilities
+- **Component Support**: All UI components are theme-aware using `bg-primary`, `text-primary`, etc.
+
+### Adding Custom Themes
+1. Create a new CSS file in `/public/themes/your-theme.css`
+2. Define the required CSS variables:
+   ```css
+   :root {
+     --primary: oklch(0.65 0.25 30);
+     --primary-foreground: oklch(1 0 0);
+     --sidebar-primary: oklch(0.65 0.25 30);
+     --sidebar-primary-foreground: oklch(1 0 0);
+     --ring: oklch(0.65 0.25 30);
+     --sidebar-ring: oklch(0.65 0.25 30);
+   }
+   ```
+3. Add the theme to the settings context in `/lib/settings-context.tsx`
+4. Theme will be available in the Settings page
+
 ## 🛠️ Tech Stack
 
+- **Runtime**: Bun (fast JavaScript runtime)
 - **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS with OKLCH color space
 - **UI Components**: shadcn/ui
 - **Data Grid**: TanStack Table
 - **Charts**: Recharts
 - **Diagrams**: Mermaid
-- **State Management**: React Hooks
-- **Internationalization**: next-intl
+- **State Management**: React Context + Hooks
+- **Internationalization**: next-intl (English/Thai)
+- **Theme System**: Dynamic CSS loading with localStorage persistence
 
 ## 📁 Project Structure
 
@@ -100,27 +171,40 @@ erp/
 │       ├── components/             # Reusable components
 │       │   ├── ui/                # shadcn/ui components
 │       │   ├── tablecn/           # Data grid components
+│       │   ├── theme-loader.tsx   # Dynamic theme loading
+│       │   ├── page-title.tsx     # Consistent page titles
 │       │   ├── operator-cockpit.tsx
 │       │   ├── supervisor-dashboard.tsx
 │       │   └── bom-tree-view.tsx
-│       └── lib/                   # Utilities and mock data
-│           ├── bom-data.ts
-│           ├── production-order-data.ts
-│           ├── production-planning-data.ts
-│           ├── manufacturing-data.ts
-│           ├── factory-capacity-data.ts
-│           ├── worker-allowance-data.ts
-│           ├── wip-costing-data.ts
-│           ├── job-history-data.ts
-│           ├── accounting-data.ts
-│           └── user-data.ts
+│       ├── lib/                   # Utilities and mock data
+│       │   ├── settings-context.tsx  # Theme state management
+│       │   ├── bom-data.ts
+│       │   ├── production-order-data.ts
+│       │   ├── production-planning-data.ts
+│       │   ├── manufacturing-data.ts
+│       │   ├── factory-capacity-data.ts
+│       │   ├── worker-allowance-data.ts
+│       │   ├── wip-costing-data.ts
+│       │   ├── job-history-data.ts
+│       │   ├── accounting-data.ts
+│       │   └── user-data.ts
+│       └── public/
+│           └── themes/            # Theme CSS files
+│               ├── tangerine.css
+│               ├── ocean-breeze.css
+│               ├── claude.css
+│               ├── forest-green.css
+│               ├── royal-purple.css
+│               ├── crimson-red.css
+│               ├── clean-slate.css
+│               └── twitter.css
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+- Bun 1.0+ (recommended) or Node.js 18+
+- Git
 
 ### Installation
 
@@ -129,14 +213,27 @@ erp/
 git clone <repository-url>
 cd erp
 
+# Navigate to the app directory
+cd apps/erp-prototype
+
 # Install dependencies
-npm install
+bun install
 
 # Run development server
-npm run dev
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3200](http://localhost:3200) in your browser.
+
+### Build for Production
+
+```bash
+# Build the application
+bun run build
+
+# Start production server
+bun run start
+```
 
 ## 📖 User Guide
 
@@ -149,6 +246,14 @@ The system includes comprehensive built-in documentation accessible via the "Lea
 - **Production Planning**: `/guide?tab=production&section=production-planning`
 
 ## 🎯 Key Concepts
+
+### Theme System
+The application uses a dynamic theme system that allows users to customize the entire interface:
+- Themes are loaded as CSS files from `/public/themes/`
+- Settings are managed by `SettingsProvider` context
+- Theme changes apply instantly via `ThemeLoader` component
+- All components use theme-aware CSS variables (`--primary`, `--primary-foreground`, etc.)
+- Tailwind config supports both HSL and OKLCH color formats
 
 ### Document Flow
 ```
@@ -177,11 +282,14 @@ The Strategist AI analyzes production schedules and provides:
 
 ## 🎨 Design System
 
-- **Color Scheme**: Purple/Blue gradient for primary actions
-- **Typography**: System fonts with responsive sizing
-- **Components**: Consistent shadcn/ui design language
-- **Icons**: Lucide React icons
-- **Responsive**: Mobile-first approach
+- **Theme System**: 8 customizable color themes with instant switching
+- **Color Variables**: CSS custom properties using OKLCH color space
+- **Typography**: System fonts with responsive sizing (text-xl/2xl/3xl)
+- **Components**: Consistent shadcn/ui design language with theme integration
+- **Icons**: Lucide React icons matching sidebar navigation
+- **Responsive**: Mobile-first approach with breakpoints (sm/md/lg/xl)
+- **Animations**: Smooth transitions and hover effects
+- **Accessibility**: Focus rings and keyboard navigation support
 
 ## 🔧 Development
 

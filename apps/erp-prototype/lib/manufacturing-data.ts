@@ -177,7 +177,7 @@ export const mockWorkCenters: WorkCenter[] = [
     status: 'running',
     currentJobTicket: 'jt-001',
     efficiency: 85,
-    position: { x: 100, y: 100 }
+    position: { x: 20, y: 25 }
   },
   {
     id: 'wc-002',
@@ -185,7 +185,7 @@ export const mockWorkCenters: WorkCenter[] = [
     code: 'SHR-01',
     status: 'idle',
     efficiency: 92,
-    position: { x: 300, y: 100 }
+    position: { x: 50, y: 25 }
   },
   {
     id: 'wc-003',
@@ -193,7 +193,7 @@ export const mockWorkCenters: WorkCenter[] = [
     code: 'PRS-01',
     status: 'setup',
     efficiency: 78,
-    position: { x: 100, y: 250 }
+    position: { x: 80, y: 25 }
   },
   {
     id: 'wc-004',
@@ -201,7 +201,7 @@ export const mockWorkCenters: WorkCenter[] = [
     code: 'WLD-01',
     status: 'down',
     efficiency: 65,
-    position: { x: 300, y: 250 }
+    position: { x: 20, y: 60 }
   },
   {
     id: 'wc-005',
@@ -209,7 +209,7 @@ export const mockWorkCenters: WorkCenter[] = [
     code: 'QC-01',
     status: 'running',
     efficiency: 95,
-    position: { x: 200, y: 400 }
+    position: { x: 50, y: 60 }
   }
 ]
 

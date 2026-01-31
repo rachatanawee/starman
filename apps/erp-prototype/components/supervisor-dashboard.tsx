@@ -128,7 +128,7 @@ export function SupervisorDashboard({ workCenters }: SupervisorDashboardProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="relative bg-gray-50 rounded-lg p-6 h-[400px] border-2 border-gray-200">
+            <div className="relative bg-gray-50 rounded-lg p-6 h-[400px] border-2 border-gray-200 overflow-hidden">
               {/* Grid Background */}
               <div className="absolute inset-0 opacity-10">
                 <div className="grid grid-cols-4 grid-rows-4 h-full">
@@ -143,7 +143,7 @@ export function SupervisorDashboard({ workCenters }: SupervisorDashboardProps) {
                 <div
                   key={wc.id}
                   className="absolute transform -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: `${wc.position.x}px`, top: `${wc.position.y}px` }}
+                  style={{ left: `${wc.position.x}%`, top: `${wc.position.y}%` }}
                 >
                   <div className={`${getStatusColor(wc.status)} rounded-lg p-3 shadow-lg min-w-[120px] cursor-pointer hover:scale-105 transition-transform`}>
                     <p className="text-white font-bold text-xs">{wc.code}</p>

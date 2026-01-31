@@ -38,6 +38,74 @@ export function OperatorCockpit({ jobTicket, onUpdateStatus, onReportOutput, onR
   const [selectedDefectCode, setSelectedDefectCode] = useState('')
   const [selectedDowntimeCode, setSelectedDowntimeCode] = useState('')
   const [remark, setRemark] = useState('')
+  const [showCoPilot, setShowCoPilot] = useState(true)
+
+  // AI Co-Pilot Insights
+  const getAIInsights = () => {
+    const insights = []
+    const progress = ((jobTicket.actualGoodQty + jobTicket.actualScrapQty) / jobTicket.targetQty) * 100
+    const scrapRate = jobTicket.actualScrapQty / (jobTicket.actualGoodQty + jobTicket.actualScrapQty) * 100
+    const isOnTime = elapsedTime <= jobTicket.standardTimeMin * 60
+
+    // Behind schedule
+    if (!isOnTime && jobTicket.status === 'in_progress') {
+      insights.push({
+        type: 'warning',
+        icon: '⚠️',
+        title: 'Behind Schedule',
+        message: `You're ${Math.floor((elapsedTime - jobTicket.standardTimeMin * 60) / 60)} minutes behind. Consider increasing speed or requesting assistance.`,
+        action: 'Request Help'
+      })
+    }
+
+    // High scrap rate
+    if (scrapRate > 5 && jobTicket.actualScrapQty > 0) {
+      insights.push({
+        type: 'error',
+        icon: '🔴',
+        title: 'High Scrap Rate',
+        message: `Scrap rate is ${scrapRate.toFixed(1)}%. Check machine settings and material quality.`,
+        action: 'View Checklist'
+      })
+    }
+
+    // Good progress
+    if (progress > 50 && progress < 100 && scrapRate < 2 && isOnTime) {
+      insights.push({
+        type: 'success',
+        icon: '✅',
+        title: 'Excellent Progress',
+        message: `You're ${progress.toFixed(0)}% complete with minimal scrap. Keep up the good work!`,
+        action: null
+      })
+    }
+
+    // Near completion
+    if (progress > 90 && progress < 100) {
+      insights.push({
+        type: 'info',
+        icon: '🎯',
+        title: 'Almost Done',
+        message: `Only ${jobTicket.targetQty - jobTicket.actualGoodQty} units remaining. Prepare for quality check.`,
+        action: 'QC Checklist'
+      })
+    }
+
+    // Starting job
+    if (jobTicket.actualGoodQty === 0 && jobTicket.status === 'pending') {
+      insights.push({
+        type: 'info',
+        icon: '🚀',
+        title: 'Ready to Start',
+        message: 'All materials are ready. Review the work instructions before starting.',
+        action: 'View Instructions'
+      })
+    }
+
+    return insights
+  }
+
+  const aiInsights = getAIInsights()
 
   // Timer
   useEffect(() => {
@@ -115,6 +183,71 @@ export function OperatorCockpit({ jobTicket, onUpdateStatus, onReportOutput, onR
 
   return (
     <div className="space-y-4">
+      {/* AI Co-Pilot Panel */}
+      {showCoPilot && aiInsights.length > 0 && (
+        <Card className="border-2 border-purple-500 bg-gradient-to-r from-purple-50 to-blue-50">
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2 text-purple-700">
+                🤖 The Co-Pilot
+                <Badge variant="outline" className="text-xs">AI Active</Badge>
+              </CardTitle>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowCoPilot(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {aiInsights.map((insight, index) => (
+              <div
+                key={index}
+                className={`p-4 rounded-lg border-l-4 ${
+                  insight.type === 'error' ? 'bg-red-50 border-red-500' :
+                  insight.type === 'warning' ? 'bg-yellow-50 border-yellow-500' :
+                  insight.type === 'success' ? 'bg-green-50 border-green-500' :
+                  'bg-blue-50 border-blue-500'
+                }`}
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xl">{insight.icon}</span>
+                      <h4 className="font-semibold">{insight.title}</h4>
+                    </div>
+                    <p className="text-sm text-gray-700">{insight.message}</p>
+                  </div>
+                  {insight.action && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="ml-4 whitespace-nowrap"
+                    >
+                      {insight.action}
+                    </Button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {!showCoPilot && (
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setShowCoPilot(true)}
+          className="w-full border-purple-300 text-purple-700 hover:bg-purple-50"
+        >
+          🤖 Show AI Co-Pilot Suggestions
+        </Button>
+      )}
+
       {/* Job Info Header */}
       <Card className="border-2 border-blue-500">
         <CardHeader className="pb-3">
