@@ -320,7 +320,10 @@ export default function SalesInvoicePage() {
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">{t('title')}</h1>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold flex items-center gap-2 text-gray-900">
+                  <DollarSign className="h-8 w-8 text-primary flex-shrink-0" />
+                  <span>{t('title')}</span>
+                </h1>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">{t('subtitle')}</p>
               </div>
               <div className="flex gap-2">
@@ -333,7 +336,7 @@ export default function SalesInvoicePage() {
                 <Link href={`/${params.locale}/company/${projectId}/sales-invoice/new`}>
                   <Button
                     data-testid="new-invoice-button"
-                    className="bg-green-600 hover:bg-green-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
+                    className="bg-primary hover:bg-primary/90 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
                   >
                     <Plus className="h-4 w-4 mr-2" />
                     <span>{t('newInvoice')}</span>

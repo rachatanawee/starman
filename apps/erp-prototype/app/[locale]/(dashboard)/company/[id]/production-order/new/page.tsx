@@ -51,7 +51,7 @@ export default function NewProductionOrderPage() {
               <p className="text-gray-600 mt-1">Schedule a new manufacturing order</p>
             </div>
           </div>
-          <Button onClick={handleSave} className="bg-purple-600 hover:bg-purple-700">
+          <Button onClick={handleSave} className="bg-primary hover:bg-primary/90">
             <Save className="h-4 w-4 mr-2" />
             Create Order
           </Button>
@@ -150,7 +150,7 @@ export default function NewProductionOrderPage() {
                     
                     return (
                       <div className="space-y-3">
-                        <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                        <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg">
                           <div>
                             <p className="font-semibold">{selectedBOM.productName}</p>
                             <p className="text-sm text-gray-600">{selectedBOM.productSku}</p>

@@ -77,7 +77,7 @@ export default function InventoryDetailPage() {
     switch (category) {
       case 'raw_material': return 'bg-blue-100 text-blue-800'
       case 'finished_goods': return 'bg-green-100 text-green-800'
-      case 'hardware': return 'bg-purple-100 text-purple-800'
+      case 'hardware': return 'bg-primary/10 text-primary'
       case 'consumable': return 'bg-orange-100 text-orange-800'
       default: return 'bg-gray-100 text-gray-800'
     }
@@ -102,7 +102,7 @@ export default function InventoryDetailPage() {
                 <Button variant="outline" onClick={() => setIsEditing(false)}>
                   Cancel
                 </Button>
-                <Button onClick={handleSave} className="bg-purple-600 hover:bg-purple-700">
+                <Button onClick={handleSave} className="bg-primary hover:bg-primary/90">
                   <Save className="h-4 w-4 mr-2" />
                   Save Changes
                 </Button>
@@ -293,7 +293,7 @@ export default function InventoryDetailPage() {
                 </div>
                 <div className="pt-3 border-t">
                   <p className="text-sm text-gray-600">Total Value</p>
-                  <p className="text-xl font-bold text-purple-600">฿{item.totalValue.toLocaleString()}</p>
+                  <p className="text-xl font-bold text-primary">฿{item.totalValue.toLocaleString()}</p>
                 </div>
               </CardContent>
             </Card>

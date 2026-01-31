@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
-import { Plus, Package, Eye, Edit, Layers, TrendingUp, AlertCircle, Search, Filter, X, BookOpen } from 'lucide-react'
+import { Plus, Package, Eye, Edit, Layers, TrendingUp, AlertCircle, Search, Filter, X, BookOpen, GitBranch } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -62,7 +62,10 @@ export default function BOMPage() {
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">{t('title')}</h1>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+              <GitBranch className="h-8 w-8 text-primary" />
+              {t('title')}
+            </h1>
             <p className="text-gray-600 mt-1">{t('subtitle')}</p>
           </div>
           <div className="flex gap-2">
@@ -72,7 +75,7 @@ export default function BOMPage() {
                 {t('learnMore')}
               </Button>
             </Link>
-            <Button onClick={handleNewBOM} className="bg-purple-600 hover:bg-purple-700">
+            <Button onClick={handleNewBOM} className="bg-primary hover:bg-primary/90">
               <Plus className="h-4 w-4 mr-2" />
               {t('newBOM')}
             </Button>
@@ -87,7 +90,7 @@ export default function BOMPage() {
                   <p className="text-sm text-gray-600">{t('totalBOMs')}</p>
                   <p className="text-2xl font-bold mt-1">{totalBOMs}</p>
                 </div>
-                <Package className="h-8 w-8 text-purple-600" />
+                <Package className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -98,7 +101,7 @@ export default function BOMPage() {
                   <p className="text-sm text-gray-600">{t('activeBOMs')}</p>
                   <p className="text-2xl font-bold mt-1">{activeBOMs}</p>
                 </div>
-                <Layers className="h-8 w-8 text-green-600" />
+                <Layers className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -111,7 +114,7 @@ export default function BOMPage() {
                     ${avgCost.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                   </p>
                 </div>
-                <TrendingUp className="h-8 w-8 text-blue-600" />
+                <TrendingUp className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -198,7 +201,7 @@ export default function BOMPage() {
                           <div className="flex items-center gap-2">
                             <h3 className="font-semibold text-lg">{bom.productName}</h3>
                             {bom.isDefault && (
-                              <Badge variant="default" className="bg-purple-600">{t('default')}</Badge>
+                              <Badge variant="default" className="bg-primary">{t('default')}</Badge>
                             )}
                             {!bom.isActive && (
                               <Badge variant="secondary">{t('inactive')}</Badge>

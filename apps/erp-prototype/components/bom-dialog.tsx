@@ -244,7 +244,7 @@ export function BOMDialog({ open, onOpenChange, bom, onSave }: BOMDialogProps) {
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancel
           </Button>
-          <Button onClick={handleSave} className="bg-purple-600 hover:bg-purple-700">
+          <Button onClick={handleSave} className="bg-primary hover:bg-primary/90">
             Save
           </Button>
         </DialogFooter>

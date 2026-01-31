@@ -100,7 +100,7 @@ export default function UsersPage() {
 
   const getRoleColor = (role: UserRole) => {
     switch (role) {
-      case 'admin': return 'bg-purple-100 text-purple-800'
+      case 'admin': return 'bg-primary/10 text-primary'
       case 'manager': return 'bg-blue-100 text-blue-800'
       case 'accountant': return 'bg-green-100 text-green-800'
       case 'production_manager': return 'bg-orange-100 text-orange-800'
@@ -120,7 +120,7 @@ export default function UsersPage() {
             <h1 className="text-3xl font-bold">User Management</h1>
             <p className="text-gray-600 mt-1">Manage users and their permissions</p>
           </div>
-          <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleNewUser}>
+          <Button className="bg-primary hover:bg-primary/90" onClick={handleNewUser}>
             <Plus className="h-4 w-4 mr-2" />
             Add User
           </Button>
@@ -177,7 +177,7 @@ export default function UsersPage() {
         </Card>
 
         {editingUser && (
-          <Card className="border-purple-200 bg-purple-50">
+          <Card className="border-primary/20 bg-primary/5">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>{editingUser.id ? 'Edit User' : 'Add New User'}</CardTitle>
@@ -304,7 +304,7 @@ export default function UsersPage() {
               </div>
               <div className="flex justify-end gap-2 pt-4">
                 <Button variant="outline" onClick={() => setEditingUser(null)}>Cancel</Button>
-                <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleSave}>Save</Button>
+                <Button className="bg-primary hover:bg-primary/90" onClick={handleSave}>Save</Button>
               </div>
             </CardContent>
           </Card>

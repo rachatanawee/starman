@@ -31,7 +31,7 @@ export function ProductionGuide() {
           <p className="text-gray-700 mb-4">
             จัดการคำสั่งผลิต วางแผนการผลิต แลาติดตามสถานะการผลิต
           </p>
-          <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+          <div className="bg-orange-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-2">ฟีเจอร์หลัก</h4>
             <ul className="space-y-1 text-sm text-gray-700">
               <li>• สร้างคำสั่งผลิต (Production Order)</li>
@@ -48,7 +48,7 @@ export function ProductionGuide() {
           <CardTitle>Production Flow: SO → Planning → PO</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-lg border border-purple-200 mb-4">
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-lg border border-primary/20 mb-4">
             <h4 className="font-semibold mb-2 flex items-center gap-2">
               <span>🔗</span> การเชื่อมโยง Sales Order → Production Planning → Production Order
             </h4>
@@ -60,14 +60,14 @@ export function ProductionGuide() {
               <p className="text-xs font-medium mb-2">ตัวอย่างการทำงาน:</p>
               <div className="space-y-2 text-xs text-gray-700">
                 <div className="flex items-start gap-2">
-                  <span className="font-bold text-purple-600">1.</span>
+                  <span className="font-bold text-primary">1.</span>
                   <div>
                     <p className="font-medium">Sales Orders (ใบสั่งขาย)</p>
                     <p className="text-gray-600">• SO-2024-001: C-Channel 300 ชิ้น (ส่งวันที่ 20 ก.พ.)</p>
                     <p className="text-gray-600">• SO-2024-002: C-Channel 200 ชิ้น (ส่งวันที่ 20 ก.พ.)</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-center text-purple-600">
+                <div className="flex items-center justify-center text-primary">
                   <span className="text-lg">↓</span>
                 </div>
                 <div className="flex items-start gap-2">
@@ -165,7 +165,7 @@ export function ProductionGuide() {
           <CardTitle>🤖 AI Agent ใน Production</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-4 rounded-lg border border-purple-200">
+          <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-3 flex items-center gap-2">
               <span>🧠</span> The Strategist - AI Production Planner
             </h4>
@@ -187,7 +187,7 @@ export function ProductionGuide() {
               <li>• ลดของเสียและ Downtime ด้วย Predictive Analytics</li>
             </ul>
           </div>
-          <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg border border-orange-200">
+          <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-3">⚠️ Predictive Maintenance</h4>
             <ul className="space-y-2 text-sm text-gray-700">
               <li>• พยากรณ์ความเสี่ยงของเครื่องจักรจาก Historical Data</li>
@@ -289,7 +289,7 @@ export function ProductionGuide() {
             </div>
           </div>
 
-          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+          <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-2">💡 ประโยชน์ที่ได้รับ</h4>
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div className="bg-white p-2 rounded border border-purple-300">
@@ -318,7 +318,7 @@ export function ProductionGuide() {
           <CardTitle>🚀 Manufacturing Execution (The Launch)</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+          <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-2">Manufacturing Execution คืออะไร?</h4>
             <p className="text-sm text-gray-700 mb-3">
               เป็นระบบควบคุมการผลิตหน้างานจริง (Shop Floor Control) ที่เชื่อมต่อระหว่าง "แผนการผลิต" กับ "การผลิตจริง" 
@@ -336,7 +336,7 @@ export function ProductionGuide() {
             </div>
           </div>
 
-          <Card className="bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-200">
+          <Card className="bg-gradient-to-br from-indigo-50 to-purple-50 border-primary/20">
             <CardHeader>
               <CardTitle className="text-base">📊 Manufacturing Execution Flow</CardTitle>
             </CardHeader>
@@ -452,7 +452,7 @@ export function ProductionGuide() {
             </div>
           </div>
 
-          <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+          <div className="bg-orange-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-2 flex items-center gap-2">
               <span>🤖</span> The Co-Pilot - AI ช่วยแก้ปัญหาหน้างาน
             </h4>

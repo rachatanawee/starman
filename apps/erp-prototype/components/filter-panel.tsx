@@ -107,13 +107,13 @@ export function FilterPanel({ config, criteria, onCriteriaChange }: FilterPanelP
 
   return (
     <div className="bg-white rounded-lg border shadow-sm overflow-hidden w-full max-w-full">
-      <div className="w-full px-3 py-1.5 border-b bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 transition-colors">
+      <div className="w-full px-3 py-1.5 border-b bg-gradient-to-r from-primary/5 to-primary/10 hover:from-primary/10 hover:to-primary/15 transition-colors">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5 cursor-pointer min-w-0" onClick={() => setIsOpen(!isOpen)}>
-            <Filter className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+            <Filter className="h-3.5 w-3.5 text-primary shrink-0" />
             <h3 className="font-semibold text-xs text-gray-900">{config.name}</h3>
             {loadedFilterName && (
-              <span className="text-xs text-purple-600">• {loadedFilterName}</span>
+              <span className="text-xs text-primary">• {loadedFilterName}</span>
             )}
             {hasActiveFilters && (
               <Badge variant="secondary" className="text-xs h-4 px-1.5">
@@ -172,9 +172,9 @@ export function FilterPanel({ config, criteria, onCriteriaChange }: FilterPanelP
                     savedFilters.map((saved, index) => {
                       const summary = getFilterSummary(saved.filters)
                       return (
-                        <div key={index} className="flex items-center justify-between p-3 border border-gray-200 bg-white rounded-lg hover:border-purple-300 hover:bg-purple-50 transition-all">
+                        <div key={index} className="flex items-center justify-between p-3 border border-gray-200 bg-white rounded-lg hover:border-primary hover:bg-primary/5 transition-all">
                           <button onClick={() => loadFilter(saved.filters, saved.name)} className="flex-1 text-left min-w-0">
-                            <div className="text-sm font-medium text-gray-700 hover:text-purple-700">{saved.name}</div>
+                            <div className="text-sm font-medium text-gray-700 hover:text-primary">{saved.name}</div>
                             <div className="text-xs text-gray-500 truncate mt-0.5">{summary}</div>
                           </button>
                           <Button variant="ghost" size="sm" onClick={() => deleteFilter(index)} className="text-gray-400 hover:text-red-600 hover:bg-red-50 ml-2 shrink-0">

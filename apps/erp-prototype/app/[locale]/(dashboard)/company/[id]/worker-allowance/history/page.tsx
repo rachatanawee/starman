@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
-import { Filter, X, ArrowLeft } from 'lucide-react'
+import { Filter, X, ArrowLeft, History } from 'lucide-react'
 import { mockDailyAllowanceSummary, DailyAllowanceSummary } from '@/lib/worker-allowance-data'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
 import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
@@ -247,7 +247,8 @@ export default function WorkerAllowanceHistoryPage() {
                   <Button variant="ghost" size="sm" onClick={() => router.back()}>
                     <ArrowLeft className="h-4 w-4" />
                   </Button>
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <History className="h-8 w-8 text-primary flex-shrink-0" />
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
                     Worker Allowance History
                   </h1>
                 </div>
@@ -268,7 +269,7 @@ export default function WorkerAllowanceHistoryPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
                 <span className="text-xs sm:text-sm text-gray-600">Total Amount: </span>
-                <span className="text-base sm:text-lg font-bold text-purple-600">฿{totalAmount.toLocaleString()}</span>
+                <span className="text-base sm:text-lg font-bold text-primary">฿{totalAmount.toLocaleString()}</span>
               </div>
               <div role="toolbar" className="flex items-center gap-2 shrink-0">
                 <DataGridSortMenu table={table} align="end" />

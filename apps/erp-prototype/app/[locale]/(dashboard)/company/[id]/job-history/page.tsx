@@ -42,7 +42,7 @@ export default function JobHistoryPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
-              <History className="h-8 w-8 text-purple-600" />
+              <History className="h-8 w-8 text-primary" />
               Job History
             </h1>
             <p className="text-gray-600 mt-1">Completed production orders and performance analysis</p>
@@ -71,7 +71,7 @@ export default function JobHistoryPage() {
                   <p className="text-sm text-gray-600">Total Jobs</p>
                   <p className="text-2xl font-bold mt-1">{stats.totalJobs}</p>
                 </div>
-                <CheckCircle className="h-8 w-8 text-green-600" />
+                <CheckCircle className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -82,7 +82,7 @@ export default function JobHistoryPage() {
                   <p className="text-sm text-gray-600">Avg Yield Rate</p>
                   <p className="text-2xl font-bold mt-1">{stats.avgYieldRate.toFixed(1)}%</p>
                 </div>
-                <TrendingUp className="h-8 w-8 text-blue-600" />
+                <TrendingUp className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -93,7 +93,7 @@ export default function JobHistoryPage() {
                   <p className="text-sm text-gray-600">On-Time Rate</p>
                   <p className="text-2xl font-bold mt-1">{stats.onTimeRate.toFixed(0)}%</p>
                 </div>
-                <Calendar className="h-8 w-8 text-purple-600" />
+                <Calendar className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -104,7 +104,7 @@ export default function JobHistoryPage() {
                   <p className="text-sm text-gray-600">Total Value</p>
                   <p className="text-2xl font-bold mt-1">฿{(stats.totalRevenue / 1000).toFixed(0)}K</p>
                 </div>
-                <DollarSign className="h-8 w-8 text-green-600" />
+                <DollarSign className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -134,7 +134,7 @@ export default function JobHistoryPage() {
                       onClick={() => setSelectedJob(job)}
                       className={`border rounded-lg p-4 cursor-pointer transition-all ${
                         selectedJob?.id === job.id
-                          ? 'border-purple-500 bg-purple-50'
+                          ? 'border-purple-500 bg-primary/5'
                           : 'border-gray-200 hover:border-purple-300'
                       } ${job.costVariance > 0 ? 'border-l-4 border-l-orange-500' : 'border-l-4 border-l-green-500'}`}
                     >

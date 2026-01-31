@@ -224,9 +224,9 @@ export function SupervisorDashboard({ workCenters }: SupervisorDashboardProps) {
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium">Quality</span>
-                  <span className="text-sm font-bold text-purple-600">{mockOEEData.quality}%</span>
+                  <span className="text-sm font-bold text-primary">{mockOEEData.quality}%</span>
                 </div>
-                <Progress value={mockOEEData.quality} className="h-2 bg-purple-100" />
+                <Progress value={mockOEEData.quality} className="h-2 bg-primary/10" />
                 <p className="text-xs text-gray-500 mt-1">Good Qty / Total Qty</p>
               </div>
             </div>

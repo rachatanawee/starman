@@ -73,7 +73,7 @@ export function ProjectSwitcher() {
           className="w-[280px] justify-between"
         >
           <div className="flex items-center gap-2 truncate">
-            <div className="bg-purple-500 p-1 rounded">
+            <div className="bg-primary/50 p-1 rounded">
               <div className="h-4 w-4 text-white" />
             </div>
             <span className="truncate">{currentProject.name}</span>

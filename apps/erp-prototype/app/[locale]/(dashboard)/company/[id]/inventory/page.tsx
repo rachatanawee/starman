@@ -232,7 +232,7 @@ export default function InventoryPage() {
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold flex items-center gap-2">
-                  <Package2 className="h-8 w-8 text-purple-600" />
+                  <Package2 className="h-8 w-8 text-primary" />
                   Inventory
                 </h1>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">The Warehouse Guardian - Real-time visibility 🏦</p>
@@ -245,7 +245,7 @@ export default function InventoryPage() {
                   </Button>
                 </Link>
                 <Button
-                  className="bg-purple-600 hover:bg-purple-700 shadow-md hover:shadow-lg transition-shadow"
+                  className="bg-primary hover:bg-primary/90 shadow-md hover:shadow-lg transition-shadow"
                   onClick={() => router.push(`/${params.locale}/company/${projectId}/inventory/adjust`)}
                 >
                   <Plus className="h-4 w-4 mr-2" />
@@ -256,7 +256,7 @@ export default function InventoryPage() {
           </div>
 
           {mockAIGuardianAlerts.length > 0 && showAlerts && (
-            <Card className="border-orange-200 bg-orange-50">
+            <Card className="border-primary/20 bg-orange-50">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2 text-orange-800">
@@ -305,7 +305,7 @@ export default function InventoryPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
                 <span className="text-xs sm:text-sm text-gray-600">Total Value: </span>
-                <span className="text-base sm:text-lg font-bold text-purple-600">฿{totalValue.toLocaleString()}</span>
+                <span className="text-base sm:text-lg font-bold text-primary">฿{totalValue.toLocaleString()}</span>
               </div>
               <div role="toolbar" className="flex items-center gap-2 shrink-0">
                 <DataGridSortMenu table={table} align="end" />

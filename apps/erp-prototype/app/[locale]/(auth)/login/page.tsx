@@ -50,7 +50,7 @@ export default function LoginPage() {
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-12 flex-col justify-between text-white">
         <div>
           <div className="flex items-center gap-3 mb-8">
-            <div className="bg-purple-500 p-2 rounded-lg">
+            <div className="bg-primary/50 p-2 rounded-lg">
               <GitBranch className="h-8 w-8" />
             </div>
             <h1 className="text-3xl font-bold">Starman ERP</h1>
@@ -61,8 +61,8 @@ export default function LoginPage() {
           </p>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <div className="bg-purple-500/20 p-3 rounded-lg flex-shrink-0">
-                <Sparkles className="h-6 w-6 text-purple-400" />
+              <div className="bg-primary/50/20 p-3 rounded-lg flex-shrink-0">
+                <Sparkles className="h-6 w-6 text-primary/60" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg mb-1">AI-Driven Insights</h3>
@@ -70,8 +70,8 @@ export default function LoginPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="bg-purple-500/20 p-3 rounded-lg flex-shrink-0">
-                <GitBranch className="h-6 w-6 text-purple-400" />
+              <div className="bg-primary/50/20 p-3 rounded-lg flex-shrink-0">
+                <GitBranch className="h-6 w-6 text-primary/60" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg mb-1">Integrated Operations</h3>
@@ -79,8 +79,8 @@ export default function LoginPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="bg-purple-500/20 p-3 rounded-lg flex-shrink-0">
-                <Shield className="h-6 w-6 text-purple-400" />
+              <div className="bg-primary/50/20 p-3 rounded-lg flex-shrink-0">
+                <Shield className="h-6 w-6 text-primary/60" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg mb-1">Real-Time Visibility</h3>
@@ -99,7 +99,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
-            <div className="bg-purple-500 p-2 rounded-lg">
+            <div className="bg-primary/50 p-2 rounded-lg">
               <GitBranch className="h-6 w-6 text-white" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900">Starman ERP</h1>
@@ -115,7 +115,7 @@ export default function LoginPage() {
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-5">
                 {error && (
-                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                  <div className="bg-red-50 border border-primary/20 text-red-700 px-4 py-3 rounded-lg text-sm">
                     {error}
                   </div>
                 )}
@@ -149,7 +149,7 @@ export default function LoginPage() {
                     className="h-11 border-gray-300 focus:border-purple-500 focus:ring-purple-500"
                   />
                 </div>
-                <Button type="submit" className="w-full h-11 text-base bg-purple-600 hover:bg-purple-700" disabled={isLoading}>
+                <Button type="submit" className="w-full h-11 text-base bg-primary hover:bg-primary/90" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-5 w-5 animate-spin" />

@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import {
   Package2, ShoppingCart, DollarSign, TrendingUp,
-  Factory, Users, AlertCircle, CheckCircle2, Clock, RefreshCw, Printer, Building2, Sparkles
+  Factory, Users, AlertCircle, CheckCircle2, Clock, RefreshCw, Printer, Building2, Sparkles, LayoutDashboard, Maximize, Minimize, Download
 } from 'lucide-react'
 import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
 import { ProjectLayout } from '@/components/project-layout'
@@ -21,6 +21,48 @@ export default function CompanyDashboardPage() {
   const t = useTranslations('dashboard')
 
   const [project] = useState<MockProject | null>(mockProjectsAPI.getSync(projectId))
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen()
+      setIsFullscreen(true)
+    } else {
+      document.exitFullscreen()
+      setIsFullscreen(false)
+    }
+  }
+
+  const handlePrint = () => {
+    window.print()
+  }
+
+  const handleExport = () => {
+    // Create a simple CSV export
+    const data = [
+      ['Dashboard Report', project?.name || ''],
+      ['Generated', new Date().toLocaleString()],
+      [''],
+      ['Inventory Stats'],
+      ['Total Items', inventoryStats.totalItems],
+      ['Low Stock', inventoryStats.lowStock],
+      ['Out of Stock', inventoryStats.outOfStock],
+      [''],
+      ['Production Stats'],
+      ['Active Orders', productionStats.activeOrders],
+      ['Completed', productionStats.completed],
+      ['Pending', productionStats.pending],
+      ['Delayed', productionStats.delayed],
+    ]
+    
+    const csv = data.map(row => row.join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv' })
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `dashboard-${projectId}-${Date.now()}.csv`
+    a.click()
+  }
 
   if (!project) {
     return (
@@ -85,13 +127,27 @@ export default function CompanyDashboardPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <style jsx global>{`
+        @media print {
+          .no-print {
+            display: none !important;
+          }
+          body {
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+          }
+          .print-break {
+            page-break-after: always;
+          }
+        }
+      `}</style>
       <div className="p-6">
         {/* Header */}
-        <div className="bg-white border-b mb-6 -m-6 p-6">
+        <div className="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border-b mb-6 -m-6 p-6 backdrop-blur-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-purple-100 p-2 rounded-lg">
-                <Building2 className="h-6 w-6 text-purple-600" />
+              <div className="bg-primary/20 p-3 rounded-xl shadow-lg ring-2 ring-primary/20">
+                <LayoutDashboard className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -106,16 +162,35 @@ export default function CompanyDashboardPage() {
                 <p className="text-sm text-gray-600">ERP Dashboard - {project.description}</p>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 no-print">
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => router.push(`/${params.locale}/company/${projectId}/dashboard/report`)}
+                className="hover:scale-105 transition-transform"
+                onClick={toggleFullscreen}
+              >
+                {isFullscreen ? <Minimize className="h-4 w-4 mr-2" /> : <Maximize className="h-4 w-4 mr-2" />}
+                {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="hover:scale-105 transition-transform"
+                onClick={handleExport}
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Export CSV
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="hover:scale-105 transition-transform"
+                onClick={handlePrint}
               >
                 <Printer className="h-4 w-4 mr-2" />
                 {t('printReport')}
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform">
                 <RefreshCw className="h-4 w-4 mr-2" />
                 {t('refresh')}
               </Button>
@@ -125,14 +200,16 @@ export default function CompanyDashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-blue-500">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">{t('totalInventory')}</CardTitle>
-              <Package2 className="h-4 w-4 text-blue-500" />
+              <div className="bg-blue-100 p-2 rounded-lg">
+                <Package2 className="h-5 w-5 text-blue-600" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{inventoryStats.totalItems}</div>
-              <p className="text-xs text-red-600 mt-1">{inventoryStats.lowStock} low stock items</p>
+              <div className="text-3xl font-bold text-gray-900">{inventoryStats.totalItems}</div>
+              <p className="text-xs text-red-600 mt-1 font-medium">{inventoryStats.lowStock} low stock items</p>
               <AIInsightsBadge
                 type="warning"
                 message="AI suggests reorder for 5 items"
@@ -142,35 +219,44 @@ export default function CompanyDashboardPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-green-500">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">{t('activeOrders')}</CardTitle>
-              <ShoppingCart className="h-4 w-4 text-green-500" />
+              <div className="bg-green-100 p-2 rounded-lg">
+                <ShoppingCart className="h-5 w-5 text-green-600" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{productionStats.activeOrders}</div>
+              <div className="text-3xl font-bold text-green-600">{productionStats.activeOrders}</div>
               <p className="text-xs text-gray-600 mt-1">{productionStats.pending} pending</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-primary">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">{t('monthlyRevenue')}</CardTitle>
-              <DollarSign className="h-4 w-4 text-purple-500" />
+              <div className="bg-primary/10 p-2 rounded-lg">
+                <DollarSign className="h-5 w-5 text-primary" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-purple-600">฿{salesData[salesData.length - 1].sales.toLocaleString()}</div>
-              <p className="text-xs text-green-600 mt-1">+12% from last month</p>
+              <div className="text-3xl font-bold text-primary">฿{salesData[salesData.length - 1].sales.toLocaleString()}</div>
+              <p className="text-xs text-green-600 mt-1 font-medium flex items-center gap-1">
+                <TrendingUp className="h-3 w-3" />
+                +12% from last month
+              </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-orange-500">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">{t('productionRate')}</CardTitle>
-              <Factory className="h-4 w-4 text-orange-500" />
+              <div className="bg-orange-100 p-2 rounded-lg">
+                <Factory className="h-5 w-5 text-orange-600" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-orange-600">96%</div>
+              <div className="text-3xl font-bold text-orange-600">96%</div>
               <p className="text-xs text-gray-600 mt-1">Efficiency this week</p>
             </CardContent>
           </Card>
@@ -179,9 +265,12 @@ export default function CompanyDashboardPage() {
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Sales Trend */}
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('salesTrend')}</CardTitle>
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-transparent">
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-primary" />
+                {t('salesTrend')}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -198,9 +287,12 @@ export default function CompanyDashboardPage() {
           </Card>
 
           {/* Inventory Distribution */}
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('inventoryDistribution')}</CardTitle>
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-transparent">
+              <CardTitle className="flex items-center gap-2">
+                <Package2 className="h-5 w-5 text-primary" />
+                {t('inventoryDistribution')}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -226,9 +318,12 @@ export default function CompanyDashboardPage() {
           </Card>
 
           {/* Production Performance */}
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('productionPerformance')}</CardTitle>
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-transparent">
+              <CardTitle className="flex items-center gap-2">
+                <Factory className="h-5 w-5 text-primary" />
+                {t('productionPerformance')}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -246,9 +341,12 @@ export default function CompanyDashboardPage() {
           </Card>
 
           {/* Top Products */}
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('topProducts')}</CardTitle>
+          <Card className="hover:shadow-lg transition-shadow">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-transparent">
+              <CardTitle className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-primary" />
+                {t('topProducts')}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -261,12 +359,12 @@ export default function CompanyDashboardPage() {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div 
-                          className="bg-purple-600 h-2 rounded-full"
+                          className="bg-primary h-2 rounded-full"
                           style={{ width: `${(product.units / topProducts[0].units) * 100}%` }}
                         />
                       </div>
                     </div>
-                    <span className="text-sm font-semibold text-purple-600 ml-4">
+                    <span className="text-sm font-semibold text-primary ml-4">
                       ฿{product.revenue.toLocaleString()}
                     </span>
                   </div>
@@ -288,28 +386,28 @@ export default function CompanyDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-primary/20">
                   <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-red-900">Low Stock Alert</p>
+                    <p className="text-sm font-medium text-primary">Low Stock Alert</p>
                     <p className="text-xs text-red-700">5 items are out of stock, 23 items below minimum level</p>
                     <p className="text-xs text-red-600 mt-1">2 hours ago</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-orange-50 rounded-lg border border-orange-200">
-                  <Clock className="h-5 w-5 text-orange-600 mt-0.5" />
+                <div className="flex items-start gap-3 p-3 bg-orange-50 rounded-lg border border-primary/20">
+                  <Clock className="h-5 w-5 text-primary mt-0.5" />
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-orange-900">Production Delay</p>
+                    <p className="text-sm font-medium text-primary">Production Delay</p>
                     <p className="text-xs text-orange-700">Order #PO-2024-156 is delayed by 2 days</p>
                     <p className="text-xs text-orange-600 mt-1">5 hours ago</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-green-900">Shipment Completed</p>
+                    <p className="text-sm font-medium text-primary">Shipment Completed</p>
                     <p className="text-xs text-green-700">Order #SO-2024-892 delivered successfully</p>
                     <p className="text-xs text-green-600 mt-1">1 day ago</p>
                   </div>
@@ -348,8 +446,8 @@ export default function CompanyDashboardPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="bg-purple-100 p-2 rounded-full">
-                    <Package2 className="h-4 w-4 text-purple-600" />
+                  <div className="bg-primary/10 p-2 rounded-full">
+                    <Package2 className="h-4 w-4 text-primary" />
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-medium">Inventory Received</p>
@@ -374,7 +472,7 @@ export default function CompanyDashboardPage() {
         </div>
 
         {/* Quick Actions */}
-        <Card>
+        <Card className="no-print">
           <CardHeader>
             <CardTitle>{t('quickActions')}</CardTitle>
           </CardHeader>

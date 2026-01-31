@@ -75,7 +75,7 @@ export function MaterialsGuide() {
               </p>
             </div>
 
-            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+            <div className="bg-orange-50 p-4 rounded-lg border border-primary/20">
               <h4 className="font-semibold mb-2 flex items-center gap-2">
                 <span className="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">3</span>
                 Stock Adjustment (ปรับยอด)
@@ -86,7 +86,7 @@ export function MaterialsGuide() {
             </div>
           </div>
 
-          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200 mt-4">
+          <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 mt-4">
             <h4 className="font-semibold mb-2">💡 หมายเหตุสำคัญ</h4>
             <ul className="space-y-1 text-sm text-gray-700">
               <li>• SKU ถูกสร้างที่ <strong>Product Master</strong> หรือ <strong>BOM</strong> ก่อน</li>
@@ -236,7 +236,7 @@ export function MaterialsGuide() {
               <li>• เพิ่มประสิทธิภาพการจัดการสต็อก</li>
             </ul>
           </div>
-          <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-4 rounded-lg border border-teal-200">
+          <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-3">📊 Stock Optimization</h4>
             <ul className="space-y-2 text-sm text-gray-700">
               <li>• วิเคราะห์สินค้าค้างและช้าเคลื่อนที่</li>

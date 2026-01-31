@@ -108,8 +108,8 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
       <div className="flex items-center justify-between border-b p-4">
         {!collapsed && (
           <div className="flex items-center gap-2">
-            <div className="bg-purple-500 p-1.5 rounded-lg">
-              <Star className="h-5 w-5 text-white" />
+            <div className="bg-primary p-1.5 rounded-lg">
+              <Star className="h-5 w-5 text-primary-foreground" />
             </div>
             <h2 className="text-lg font-bold text-gray-900">Starman ERP</h2>
           </div>
@@ -171,7 +171,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
                 href={item.href}
                 className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-all duration-200 rounded-lg ${
                   isActive
-                    ? 'bg-purple-100 text-purple-700'
+                    ? 'bg-primary/10 text-primary'
                     : isBackButton
                     ? 'text-gray-600 hover:bg-gray-50 border border-gray-200'
                     : isGuideButton

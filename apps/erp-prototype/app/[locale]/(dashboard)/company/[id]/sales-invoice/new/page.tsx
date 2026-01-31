@@ -234,7 +234,7 @@ export default function NewSalesInvoicePage() {
 
           <div className="flex justify-end gap-3">
             <Button type="button" variant="outline" onClick={() => router.back()}>Cancel</Button>
-            <Button type="submit" className="bg-green-600 hover:bg-green-700">
+            <Button type="submit" className="bg-primary hover:bg-primary/90">
               <Receipt className="h-4 w-4 mr-2" />
               Create Invoice
             </Button>

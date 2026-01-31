@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Plus, Filter, X, User, Clock, Package, Truck, CheckCircle, XCircle, FileText, BookOpen } from 'lucide-react'
+import { Plus, Filter, X, User, Clock, Package, Truck, CheckCircle, XCircle, FileText, BookOpen, ListTodo } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -18,6 +18,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import { DateRangeFilter } from '@/components/date-range-filter'
+import { PageTitle } from '@/components/page-title'
 import { useTranslations } from 'next-intl'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
@@ -69,7 +70,7 @@ const getStatusIcon = (status: string) => {
     case 'Pending': return <Clock className="h-4 w-4 text-yellow-600" />
     case 'Confirmed': return <CheckCircle className="h-4 w-4 text-blue-600" />
     case 'Processing': return <Package className="h-4 w-4 text-blue-600" />
-    case 'Shipped': return <Truck className="h-4 w-4 text-purple-600" />
+    case 'Shipped': return <Truck className="h-4 w-4 text-primary" />
     case 'Completed': return <CheckCircle className="h-4 w-4 text-green-600" />
     case 'Cancelled': return <XCircle className="h-4 w-4 text-red-600" />
     default: return null
@@ -153,7 +154,7 @@ export default function SalesOrderPage() {
               </SelectItem>
               <SelectItem value="Shipped">
                 <div className="flex items-center gap-2">
-                  <Truck className="h-4 w-4 text-purple-600" />
+                  <Truck className="h-4 w-4 text-primary" />
                   {t('shipped')}
                 </div>
               </SelectItem>
@@ -350,10 +351,11 @@ export default function SalesOrderPage() {
         <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-              <div className="min-w-0 flex-1">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{t('title')}</h1>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1">{t('subtitle')}</p>
-              </div>
+              <PageTitle 
+                icon={ListTodo}
+                title={t('title')}
+                subtitle={t('subtitle')}
+              />
               <div className="flex gap-2">
                 <Link href="/guide?tab=sales&section=sales-order">
                   <Button variant="outline" size="sm">
@@ -364,7 +366,7 @@ export default function SalesOrderPage() {
                 <Link href={`/${params.locale}/company/${projectId}/sales-order/new`}>
                   <Button
                     data-testid="new-order-button"
-                    className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
+                    className="bg-primary hover:bg-primary/90 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
                   >
                     <Plus className="h-4 w-4 mr-2" />
                     <span>{t('newOrder')}</span>
@@ -386,7 +388,7 @@ export default function SalesOrderPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div data-testid="total-amount" className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
               <span className="text-xs sm:text-sm text-gray-600">{t('totalAmount')}: </span>
-              <span className="text-base sm:text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
+              <span className="text-base sm:text-lg font-bold text-primary">{totalAmount.toLocaleString()}</span>
             </div>
             <div role="toolbar" className="flex items-center gap-2 shrink-0">
               <DataGridSortMenu table={table} align="end" />

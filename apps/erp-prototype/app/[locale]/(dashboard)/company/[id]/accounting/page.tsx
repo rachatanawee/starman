@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { RefreshCw, Settings, AlertTriangle, CheckCircle2, Clock, XCircle, FileText, TrendingUp, Zap, ExternalLink } from 'lucide-react'
+import { RefreshCw, Settings, AlertTriangle, CheckCircle2, Clock, XCircle, FileText, TrendingUp, Zap, ExternalLink, Calculator } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import { mockIntegration, mockSyncLogs, mockAIAlerts, mockTaxSummary, mockAccountMappings, getSyncStats } from '@/lib/accounting-data'
@@ -57,7 +57,10 @@ export default function AccountingPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Accounting Interface</h1>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+              <Calculator className="h-8 w-8 text-primary" />
+              Accounting Interface
+            </h1>
             <p className="text-gray-600 mt-1">Bridge to Thai accounting software (Pre-Accounting Hub)</p>
           </div>
           <div className="flex gap-2">
@@ -65,7 +68,7 @@ export default function AccountingPage() {
               <Settings className="h-4 w-4 mr-2" />
               Configure
             </Button>
-            <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleSync} disabled={syncing}>
+            <Button className="bg-primary hover:bg-primary/90" onClick={handleSync} disabled={syncing}>
               <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
               {syncing ? 'Syncing...' : 'Sync Now'}
             </Button>
@@ -74,16 +77,16 @@ export default function AccountingPage() {
 
         {/* Connection Status */}
         {syncing && (
-          <Card className="border-purple-200 bg-purple-50">
+          <Card className="border-primary/20 bg-primary/5">
             <CardContent className="pt-6">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-purple-900">{syncMessage}</span>
-                  <span className="text-sm font-semibold text-purple-600">{syncProgress}%</span>
+                  <span className="text-sm font-medium text-primary">{syncMessage}</span>
+                  <span className="text-sm font-semibold text-primary">{syncProgress}%</span>
                 </div>
-                <div className="w-full bg-purple-200 rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-primary/20 rounded-full h-2 overflow-hidden">
                   <div 
-                    className="bg-purple-600 h-2 rounded-full transition-all duration-500 ease-out"
+                    className="bg-primary h-2 rounded-full transition-all duration-500 ease-out"
                     style={{ width: `${syncProgress}%` }}
                   />
                 </div>
@@ -131,14 +134,14 @@ export default function AccountingPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-red-200 bg-red-50">
+          <Card className="border-primary/20 bg-red-50">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-red-600 font-medium">Failed</p>
                   <p className="text-2xl font-bold text-red-600">{stats.failed}</p>
                 </div>
-                <XCircle className="h-8 w-8 text-red-600" />
+                <XCircle className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -153,14 +156,14 @@ export default function AccountingPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-purple-200 bg-purple-50">
+          <Card className="border-primary/20 bg-primary/5">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-purple-600 font-medium">AI Alerts</p>
-                  <p className="text-2xl font-bold text-purple-600">{alerts.length}</p>
+                  <p className="text-sm text-primary font-medium">AI Alerts</p>
+                  <p className="text-2xl font-bold text-primary">{alerts.length}</p>
                 </div>
-                <Zap className="h-8 w-8 text-purple-600" />
+                <Zap className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -168,18 +171,18 @@ export default function AccountingPage() {
 
         {/* AI Reconciliation Alerts */}
         {alerts.length > 0 && (
-          <Card className="border-purple-200">
-            <CardHeader className="bg-purple-50">
+          <Card className="border-primary/20">
+            <CardHeader className="bg-primary/5">
               <CardTitle className="flex items-center gap-2">
-                <Zap className="h-5 w-5 text-purple-600" />
-                <span className="text-purple-900">AI Reconciliation Agent</span>
+                <Zap className="h-5 w-5 text-primary" />
+                <span className="text-primary">AI Reconciliation Agent</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {alerts.map(alert => (
                 <div key={alert.id} className={`border rounded-lg p-4 space-y-2 ${
-                  alert.severity === 'high' ? 'border-red-200 bg-red-50' :
-                  alert.severity === 'medium' ? 'border-orange-200 bg-orange-50' : 'border-yellow-200 bg-yellow-50'
+                  alert.severity === 'high' ? 'border-primary/20 bg-red-50' :
+                  alert.severity === 'medium' ? 'border-primary/20 bg-orange-50' : 'border-yellow-200 bg-yellow-50'
                 }`}>
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-3 flex-1">
@@ -196,14 +199,14 @@ export default function AccountingPage() {
                         </div>
                         <p className="text-sm text-gray-600 mt-1">{alert.description}</p>
                         {alert.documentRef && (
-                          <p className="text-sm text-purple-600 mt-1">📄 {alert.documentRef}</p>
+                          <p className="text-sm text-primary mt-1">📄 {alert.documentRef}</p>
                         )}
                         <p className="text-sm text-gray-500 mt-2">💡 {alert.suggestedAction}</p>
                       </div>
                     </div>
                       <div className="flex gap-2">
                       {alert.canAutoFix && (
-                        <Button size="sm" className="bg-purple-600 hover:bg-purple-700" onClick={() => handleAutoFix(alert.id)}>
+                        <Button size="sm" className="bg-primary hover:bg-primary/90" onClick={() => handleAutoFix(alert.id)}>
                           Auto-Fix
                         </Button>
                       )}
@@ -286,7 +289,7 @@ export default function AccountingPage() {
                         <p className="text-sm text-red-600 mt-1">⚠️ {log.errorMessage}</p>
                       )}
                       {log.externalRefId && (
-                        <p className="text-sm text-purple-600 mt-1">🔗 {log.externalRefId}</p>
+                        <p className="text-sm text-primary mt-1">🔗 {log.externalRefId}</p>
                       )}
                     </div>
                   </div>

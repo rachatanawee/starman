@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Plus, Filter, X, Clock, Package, CheckCircle, XCircle, FileText, BookOpen, AlertTriangle, ShieldAlert } from 'lucide-react'
+import { Plus, Filter, X, Clock, Package, CheckCircle, XCircle, FileText, BookOpen, AlertTriangle, ShieldAlert, ShoppingBag } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -246,7 +246,7 @@ export default function PurchasingPage() {
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold flex items-center gap-2">
-                  <ShieldAlert className="h-8 w-8 text-purple-600" />
+                  <ShoppingBag className="h-8 w-8 text-primary" />
                   Purchasing
                 </h1>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">The Gatekeeper - Control every baht going out 💸</p>
@@ -259,7 +259,7 @@ export default function PurchasingPage() {
                   </Button>
                 </Link>
                 <Button
-                  className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow"
+                  className="bg-primary hover:bg-primary/90 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-shadow"
                   onClick={() => router.push(`/${params.locale}/company/${projectId}/purchasing/new`)}
                 >
                   <Plus className="h-4 w-4 mr-2" />
@@ -270,7 +270,7 @@ export default function PurchasingPage() {
           </div>
 
           {mockAIAlerts.length > 0 && showAlerts && (
-            <Card className="border-red-200 bg-red-50">
+            <Card className="border-primary/20 bg-red-50">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2 text-red-800">
@@ -319,7 +319,7 @@ export default function PurchasingPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
                 <span className="text-xs sm:text-sm text-gray-600">Total Amount: </span>
-                <span className="text-base sm:text-lg font-bold text-purple-600">฿{totalAmount.toLocaleString()}</span>
+                <span className="text-base sm:text-lg font-bold text-primary">฿{totalAmount.toLocaleString()}</span>
               </div>
               <div role="toolbar" className="flex items-center gap-2 shrink-0">
                 <DataGridSortMenu table={table} align="end" />

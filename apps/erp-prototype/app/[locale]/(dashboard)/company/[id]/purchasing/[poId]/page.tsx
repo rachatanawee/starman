@@ -196,7 +196,7 @@ export default function PurchaseOrderDetailPage() {
                           <p className="text-gray-600">Due: {new Date(bill.dueDate).toLocaleDateString()}</p>
                         </div>
                         {bill.aiWarnings && bill.aiWarnings.length > 0 && (
-                          <div className="mt-3 pt-3 border-t border-red-200 space-y-1">
+                          <div className="mt-3 pt-3 border-t border-primary/20 space-y-1">
                             <div className="flex items-center gap-2 text-red-800 font-semibold text-sm">
                               <AlertTriangle className="h-4 w-4" />
                               AI Gatekeeper Alerts
@@ -230,7 +230,7 @@ export default function PurchaseOrderDetailPage() {
                 </div>
                 <div className="pt-3 border-t flex justify-between">
                   <span className="font-semibold">Grand Total</span>
-                  <span className="text-xl font-bold text-purple-600">฿{po.grandTotal.toLocaleString()}</span>
+                  <span className="text-xl font-bold text-primary">฿{po.grandTotal.toLocaleString()}</span>
                 </div>
               </CardContent>
             </Card>

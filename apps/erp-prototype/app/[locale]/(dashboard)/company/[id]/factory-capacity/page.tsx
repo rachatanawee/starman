@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
-import { Clock, Factory, AlertTriangle, TrendingUp, Zap, CheckCircle, X, Sparkles } from 'lucide-react'
+import { Clock, Factory, AlertTriangle, TrendingUp, Zap, CheckCircle, X, Sparkles, Building2 } from 'lucide-react'
 import { mockWorkCenterCapacity, mockMachineDowntime, mockAICapacityAlerts, AICapacityAlert } from '@/lib/factory-capacity-data'
 import { toast } from 'sonner'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts'
@@ -67,7 +67,7 @@ export default function FactoryCapacityPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
-              <Factory className="h-8 w-8 text-purple-600" />
+              <Building2 className="h-8 w-8 text-primary" />
               Factory Capacity
             </h1>
             <p className="text-gray-600 mt-1">The Capacity Balancer - ผู้คุมกฎแห่งเวลา ⏱️</p>
@@ -98,7 +98,7 @@ export default function FactoryCapacityPage() {
                   <p className="text-sm text-gray-600">Total Capacity</p>
                   <p className="text-2xl font-bold mt-1">{stats.totalCapacity} hrs</p>
                 </div>
-                <Factory className="h-8 w-8 text-purple-600" />
+                <Factory className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -109,7 +109,7 @@ export default function FactoryCapacityPage() {
                   <p className="text-sm text-gray-600">Total Load</p>
                   <p className="text-2xl font-bold mt-1">{stats.totalLoad.toFixed(1)} hrs</p>
                 </div>
-                <TrendingUp className="h-8 w-8 text-blue-600" />
+                <TrendingUp className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -122,7 +122,7 @@ export default function FactoryCapacityPage() {
                     {avgLoad}%
                   </p>
                 </div>
-                <Zap className="h-8 w-8 text-orange-600" />
+                <Zap className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -133,17 +133,17 @@ export default function FactoryCapacityPage() {
                   <p className="text-sm text-gray-600">Overload</p>
                   <p className="text-2xl font-bold mt-1 text-red-600">{stats.overloadCount}</p>
                 </div>
-                <AlertTriangle className="h-8 w-8 text-red-600" />
+                <AlertTriangle className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
         </div>
 
         {showAlerts && alerts.length > 0 && (
-          <Card className="border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50">
+          <Card className="border-primary/20 bg-gradient-to-r from-purple-50 to-blue-50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-purple-600" />
+                <Sparkles className="h-5 w-5 text-primary" />
                 AI Capacity Balancer Alerts
               </CardTitle>
             </CardHeader>

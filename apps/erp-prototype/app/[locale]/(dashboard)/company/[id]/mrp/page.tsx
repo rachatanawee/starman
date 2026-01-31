@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Sparkles, Package, AlertTriangle, TrendingUp, Zap, Clock, CheckCircle, ShoppingCart, BookOpen, FileText, Calendar } from 'lucide-react'
+import { Sparkles, Package, AlertTriangle, TrendingUp, Zap, Clock, CheckCircle, ShoppingCart, BookOpen, FileText, Calendar, Network } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
@@ -127,7 +127,7 @@ export default function MRPPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
-              <Package className="h-8 w-8 text-purple-600" />
+              <Network className="h-8 w-8 text-primary" />
               {t('title')}
             </h1>
             <p className="text-gray-600 mt-1">{t('subtitle')}</p>
@@ -142,7 +142,7 @@ export default function MRPPage() {
             <Button
               onClick={handleRunMRP}
               disabled={isRunning}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              className="bg-primary hover:bg-primary/90"
             >
               {isRunning ? <StatusIndicator status="loading" size="sm" /> : <Sparkles className="h-4 w-4 mr-2" />}
               {isRunning ? t('runningMRP') : t('runMRP')}
@@ -158,7 +158,7 @@ export default function MRPPage() {
                   <p className="text-sm text-gray-600">{t('totalItems')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.totalItems}</p>
                 </div>
-                <Package className="h-8 w-8 text-purple-600" />
+                <Package className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -169,7 +169,7 @@ export default function MRPPage() {
                   <p className="text-sm text-gray-600">{t('shortages')}</p>
                   <p className="text-2xl font-bold mt-1 text-red-600">{stats.shortages}</p>
                 </div>
-                <AlertTriangle className="h-8 w-8 text-red-600" />
+                <AlertTriangle className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -180,7 +180,7 @@ export default function MRPPage() {
                   <p className="text-sm text-gray-600">{t('totalValue')}</p>
                   <p className="text-2xl font-bold mt-1">฿{stats.totalValue.toLocaleString()}</p>
                 </div>
-                <ShoppingCart className="h-8 w-8 text-green-600" />
+                <ShoppingCart className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -191,7 +191,7 @@ export default function MRPPage() {
                   <p className="text-sm text-gray-600">{t('urgentItems')}</p>
                   <p className="text-2xl font-bold mt-1 text-orange-600">{stats.urgentItems}</p>
                 </div>
-                <Clock className="h-8 w-8 text-orange-600" />
+                <Clock className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -200,10 +200,10 @@ export default function MRPPage() {
         <div className="space-y-4">
           {/* AI Recommendations Bar */}
           {recommendations.length > 0 && (
-            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-4">
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-primary/20 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-purple-600" />
+                  <Sparkles className="h-5 w-5 text-primary" />
                   <span className="font-semibold">AI Supply Commander:</span>
                   <span className="text-sm text-gray-600">{recommendations.length} recommendations</span>
                 </div>

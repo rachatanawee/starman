@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Plus, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, BookOpen, Package, Factory } from 'lucide-react'
+import { Plus, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, BookOpen, Package, Factory, BarChart3 } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
@@ -195,7 +195,10 @@ export default function ProductionPlanningPage() {
       <div className="p-6 space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Production Planning Board</h1>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+              <BarChart3 className="h-8 w-8 text-primary" />
+              Production Planning Board
+            </h1>
             <p className="text-gray-600 mt-1">{viewMode === 'week' ? `Week ${5 + weekOffset}` : ''} {periodLabel}</p>
           </div>
           <div className="flex gap-2">
@@ -314,10 +317,10 @@ export default function ProductionPlanningPage() {
 
         {/* AI Insights Bar */}
         {unresolvedInsights.length > 0 && (
-          <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-3">
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-primary/20 rounded-lg p-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-purple-600" />
+                <Sparkles className="h-5 w-5 text-primary" />
                 <span className="font-semibold">AI Insights:</span>
                 <Badge variant="destructive">{criticalCount} Critical</Badge>
                 <span className="text-sm text-gray-600">{unresolvedInsights.length} total issues</span>
@@ -487,7 +490,7 @@ export default function ProductionPlanningPage() {
                               <span>{material.icon}</span>
                             </div>
                             {item.aiAdjustedReason && (
-                              <p className="text-xs text-purple-600 mt-2 italic">🤖 AI adjusted</p>
+                              <p className="text-xs text-primary mt-2 italic">🤖 AI adjusted</p>
                             )}
                           </div>
                         )

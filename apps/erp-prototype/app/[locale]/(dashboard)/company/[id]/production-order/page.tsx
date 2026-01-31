@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Progress } from '@/components/ui/progress'
-import { Plus, Factory, Search, Filter, X, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Edit, Eye, BookOpen } from 'lucide-react'
+import { Plus, Factory, Search, Filter, X, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Edit, Eye, BookOpen, Calendar } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -18,7 +18,7 @@ const statusConfig: Record<ProductionStatus, { label: string; color: string; ico
   released: { label: 'Released', color: 'bg-blue-500', icon: PlayCircle },
   in_progress: { label: 'In Progress', color: 'bg-yellow-500', icon: Factory },
   completed: { label: 'Completed', color: 'bg-green-500', icon: CheckCircle2 },
-  closed: { label: 'Closed', color: 'bg-purple-500', icon: CheckCircle2 },
+  closed: { label: 'Closed', color: 'bg-primary/50', icon: CheckCircle2 },
   cancelled: { label: 'Cancelled', color: 'bg-red-500', icon: X }
 }
 
@@ -67,7 +67,10 @@ export default function ProductionOrderPage() {
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">{t('title')}</h1>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+              <Calendar className="h-8 w-8 text-primary" />
+              {t('title')}
+            </h1>
             <p className="text-gray-600 mt-1">{t('subtitle')}</p>
           </div>
           <div className="flex gap-2">
@@ -79,7 +82,7 @@ export default function ProductionOrderPage() {
             </Link>
             <Button
               onClick={() => router.push(`/${params.locale}/company/${projectId}/production-order/new`)}
-              className="bg-purple-600 hover:bg-purple-700"
+              className="bg-primary hover:bg-primary/90"
             >
               <Plus className="h-4 w-4 mr-2" />
               {t('newProductionOrder')}
@@ -95,7 +98,7 @@ export default function ProductionOrderPage() {
                   <p className="text-sm text-gray-600">{t('totalOrders')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.total}</p>
                 </div>
-                <Factory className="h-8 w-8 text-purple-600" />
+                <Factory className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -106,7 +109,7 @@ export default function ProductionOrderPage() {
                   <p className="text-sm text-gray-600">{t('inProgress')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.inProgress}</p>
                 </div>
-                <PlayCircle className="h-8 w-8 text-yellow-600" />
+                <PlayCircle className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -117,7 +120,7 @@ export default function ProductionOrderPage() {
                   <p className="text-sm text-gray-600">{t('completed')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.completed}</p>
                 </div>
-                <CheckCircle2 className="h-8 w-8 text-green-600" />
+                <CheckCircle2 className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -128,7 +131,7 @@ export default function ProductionOrderPage() {
                   <p className="text-sm text-gray-600">{t('pending')}</p>
                   <p className="text-2xl font-bold mt-1">{stats.pending}</p>
                 </div>
-                <Clock className="h-8 w-8 text-blue-600" />
+                <Clock className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>

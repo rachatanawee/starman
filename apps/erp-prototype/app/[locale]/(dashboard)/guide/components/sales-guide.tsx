@@ -108,7 +108,7 @@ export function SalesGuide() {
           <CardTitle>🤖 AI Agent ใน Sales</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg border border-purple-200">
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-3">📊 Customer Insights</h4>
             <ul className="space-y-2 text-sm text-gray-700">
               <li>• วิเคราะห์พฤติกรรมการซื้อของลูกค้า</li>

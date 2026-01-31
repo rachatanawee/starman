@@ -115,7 +115,7 @@ export default function ProjectReportPage() {
             </Button>
             <h1 className="text-xl font-bold text-gray-900">Project Status Report</h1>
           </div>
-          <Button onClick={handlePrint} className="bg-purple-600 hover:bg-purple-700">
+          <Button onClick={handlePrint} className="bg-primary hover:bg-primary/90">
             <Printer className="h-4 w-4 mr-2" />
             Print Report
           </Button>
@@ -127,8 +127,8 @@ export default function ProjectReportPage() {
         {/* Report Header */}
         <div className="mb-8 print-avoid-break">
           <div className="flex items-center gap-3 mb-4">
-            <div className="bg-purple-100 p-3 rounded-lg">
-              <GitBranch className="h-8 w-8 text-purple-600" />
+            <div className="bg-primary/10 p-3 rounded-lg">
+              <GitBranch className="h-8 w-8 text-primary" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
@@ -161,15 +161,15 @@ export default function ProjectReportPage() {
           </h2>
           
           {/* AI Insights Section */}
-          <div className="mb-6 bg-gradient-to-br from-purple-50 to-white border-2 border-purple-200 rounded-lg p-6">
+          <div className="mb-6 bg-gradient-to-br from-purple-50 to-white border-2 border-primary/20 rounded-lg p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Brain className="h-6 w-6 text-purple-600" />
+              <Brain className="h-6 w-6 text-primary" />
               <h3 className="text-xl font-bold text-gray-900">AI Project Analysis</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white p-4 rounded-lg border border-purple-100">
                 <div className="flex items-start gap-3">
-                  <TrendingUp className="h-5 w-5 text-green-600 mt-1" />
+                  <TrendingUp className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h4 className="font-semibold text-sm mb-2">Project Health: Good</h4>
                     <p className="text-xs text-gray-600 leading-relaxed">
@@ -195,7 +195,7 @@ export default function ProjectReportPage() {
               </div>
               <div className="bg-white p-4 rounded-lg border border-purple-100">
                 <div className="flex items-start gap-3">
-                  <Brain className="h-5 w-5 text-purple-600 mt-1" />
+                  <Brain className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h4 className="font-semibold text-sm mb-2">AI Recommendations</h4>
                     <p className="text-xs text-gray-600 leading-relaxed">
@@ -211,7 +211,7 @@ export default function ProjectReportPage() {
             {/* Code Analysis */}
             <div className="bg-white p-4 rounded-lg border border-purple-100 mt-4">
               <div className="flex items-center gap-2 mb-3">
-                <Code2 className="h-5 w-5 text-purple-600" />
+                <Code2 className="h-5 w-5 text-primary" />
                 <h4 className="font-semibold text-sm">Code Quality Metrics</h4>
               </div>
               <div className="grid grid-cols-4 gap-4">
@@ -237,7 +237,7 @@ export default function ProjectReportPage() {
             {/* Cost Analysis */}
             <div className="bg-white p-4 rounded-lg border border-purple-100 mt-4">
               <div className="flex items-center gap-2 mb-3">
-                <Wallet className="h-5 w-5 text-purple-600" />
+                <Wallet className="h-5 w-5 text-primary" />
                 <h4 className="font-semibold text-sm">Cost Efficiency Analysis</h4>
               </div>
               <div className="grid grid-cols-4 gap-4">
@@ -254,7 +254,7 @@ export default function ProjectReportPage() {
                   <div className="text-xs text-gray-600 mt-1">Cost per Task</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">฿{Math.round(project.spent * 1.15).toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-primary">฿{Math.round(project.spent * 1.15).toLocaleString()}</div>
                   <div className="text-xs text-gray-600 mt-1">Projected Total</div>
                 </div>
               </div>
@@ -273,7 +273,7 @@ export default function ProjectReportPage() {
 
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
-                <DollarSign className="h-5 w-5 text-green-600" />
+                <DollarSign className="h-5 w-5 text-primary" />
                 <span className="text-sm text-gray-600">Budget</span>
               </div>
               <div className="text-3xl font-bold text-green-600">{budgetPercentage}%</div>
@@ -284,16 +284,16 @@ export default function ProjectReportPage() {
 
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Users className="h-5 w-5 text-purple-600" />
+                <Users className="h-5 w-5 text-primary" />
                 <span className="text-sm text-gray-600">Team</span>
               </div>
-              <div className="text-3xl font-bold text-purple-600">{project.members}</div>
+              <div className="text-3xl font-bold text-primary">{project.members}</div>
               <div className="text-xs text-gray-600 mt-1">Active members</div>
             </div>
 
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
-                <AlertTriangle className="h-5 w-5 text-orange-600" />
+                <AlertTriangle className="h-5 w-5 text-primary" />
                 <span className="text-sm text-gray-600">Risks</span>
               </div>
               <div className="text-3xl font-bold text-orange-600">{risks.length}</div>
@@ -332,14 +332,14 @@ export default function ProjectReportPage() {
             <div className="flex flex-col justify-center space-y-3">
               <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                  <CheckCircle2 className="h-5 w-5 text-primary" />
                   <span className="font-semibold">Completed</span>
                 </div>
                 <span className="text-2xl font-bold text-green-600">{taskStats.done}</span>
               </div>
               <div className="flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded">
                 <div className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-blue-600" />
+                  <Clock className="h-5 w-5 text-primary" />
                   <span className="font-semibold">In Progress</span>
                 </div>
                 <span className="text-2xl font-bold text-blue-600">{taskStats.inProgress}</span>
@@ -352,7 +352,7 @@ export default function ProjectReportPage() {
                 <span className="text-2xl font-bold text-gray-600">{taskStats.todo}</span>
               </div>
               {taskStats.blocked > 0 && (
-                <div className="flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded">
+                <div className="flex items-center justify-between p-3 bg-red-50 border border-primary/20 rounded">
                   <div className="flex items-center gap-2">
                     <AlertTriangle className="h-5 w-5 text-red-600" />
                     <span className="font-semibold">Blocked</span>
@@ -447,7 +447,7 @@ export default function ProjectReportPage() {
                 <div className={`p-2 rounded-full ${
                   activity.type === 'completed' ? 'bg-green-100' :
                   activity.type === 'started' ? 'bg-blue-100' :
-                  'bg-purple-100'
+                  'bg-primary/10'
                 }`}>
                   {activity.type === 'completed' ? (
                     <CheckCircle2 className={`h-4 w-4 ${
@@ -456,7 +456,7 @@ export default function ProjectReportPage() {
                   ) : activity.type === 'started' ? (
                     <Clock className="h-4 w-4 text-blue-600" />
                   ) : (
-                    <Users className="h-4 w-4 text-purple-600" />
+                    <Users className="h-4 w-4 text-primary" />
                   )}
                 </div>
                 <div className="flex-1">

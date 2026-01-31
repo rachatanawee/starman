@@ -73,7 +73,7 @@ export default function AccountingConfigurePage() {
               <p className="text-gray-600 mt-1">Connect to Thai accounting software</p>
             </div>
           </div>
-          <Button className="bg-purple-600 hover:bg-purple-700">
+          <Button className="bg-primary hover:bg-primary/90">
             <Save className="h-4 w-4 mr-2" />
             Save Changes
           </Button>

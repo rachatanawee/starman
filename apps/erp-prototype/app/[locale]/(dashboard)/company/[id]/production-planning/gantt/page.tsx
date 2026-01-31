@@ -106,7 +106,7 @@ export default function GanttChartPage() {
               Week
             </Button>
             {hasChanges && (
-              <Button size="sm" onClick={handleSave} className="bg-green-600 hover:bg-green-700">
+              <Button size="sm" onClick={handleSave} className="bg-primary hover:bg-primary/90">
                 <Save className="h-4 w-4 mr-2" />
                 Save Changes
               </Button>

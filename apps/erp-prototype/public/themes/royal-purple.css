@@ -1,0 +1,8 @@
+:root {
+  --primary: oklch(0.5647 0.1890 295.2339);
+  --primary-foreground: oklch(1.0000 0 0);
+  --sidebar-primary: oklch(0.5647 0.1890 295.2339);
+  --sidebar-primary-foreground: oklch(1.0000 0 0);
+  --ring: oklch(0.5647 0.1890 295.2339);
+  --sidebar-ring: oklch(0.5647 0.1890 295.2339);
+}

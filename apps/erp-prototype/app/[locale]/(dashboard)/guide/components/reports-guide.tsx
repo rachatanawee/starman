@@ -25,7 +25,7 @@ export function ReportsGuide() {
         <CardContent className="space-y-4">
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
             <div className="flex items-center gap-2 mb-3">
-              <Building2 className="h-5 w-5 text-blue-600" />
+              <Building2 className="h-5 w-5 text-primary" />
               <h4 className="font-semibold">Factory Capacity (กำลังการผลิต)</h4>
             </div>
             <p className="text-sm text-gray-700 mb-2">วิเคราะห์กำลังการผลิตและการใช้งานเครื่องจักร</p>
@@ -39,7 +39,7 @@ export function ReportsGuide() {
 
           <div className="bg-green-50 p-4 rounded-lg border border-green-200">
             <div className="flex items-center gap-2 mb-3">
-              <Users2 className="h-5 w-5 text-green-600" />
+              <Users2 className="h-5 w-5 text-primary" />
               <h4 className="font-semibold">Worker Allowance (ค่าแรงคนงาน)</h4>
             </div>
             <p className="text-sm text-gray-700 mb-2">รายงานค่าแรงและประสิทธิภาพพนักงาน</p>
@@ -51,9 +51,9 @@ export function ReportsGuide() {
             </ul>
           </div>
 
-          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+          <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
             <div className="flex items-center gap-2 mb-3">
-              <DollarSign className="h-5 w-5 text-purple-600" />
+              <DollarSign className="h-5 w-5 text-primary" />
               <h4 className="font-semibold">WIP Costing (ต้นทุนงานระหว่างทำ)</h4>
             </div>
             <p className="text-sm text-gray-700 mb-2">รายงานต้นทุนการผลิตแบบ Real-time</p>
@@ -65,9 +65,9 @@ export function ReportsGuide() {
             </ul>
           </div>
 
-          <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+          <div className="bg-orange-50 p-4 rounded-lg border border-primary/20">
             <div className="flex items-center gap-2 mb-3">
-              <History className="h-5 w-5 text-orange-600" />
+              <History className="h-5 w-5 text-primary" />
               <h4 className="font-semibold">Job History (ประวัติการผลิต)</h4>
             </div>
             <p className="text-sm text-gray-700 mb-2">รายงานผลการผลิตที่เสร็จสมบูรณ์</p>
@@ -87,7 +87,7 @@ export function ReportsGuide() {
           <CardTitle>🤖 AI-Powered Analytics</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-4 rounded-lg border border-indigo-200">
+          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-3">📈 The Financial Analyst</h4>
             <p className="text-sm text-gray-700 mb-2">AI วิเคราะห์ต้นทุนและกำไร</p>
             <ul className="space-y-2 text-sm text-gray-700">
@@ -98,7 +98,7 @@ export function ReportsGuide() {
             </ul>
           </div>
 
-          <div className="bg-gradient-to-br from-pink-50 to-rose-50 p-4 rounded-lg border border-pink-200">
+          <div className="bg-gradient-to-br from-pink-50 to-rose-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-3">🎯 The Strategist</h4>
             <p className="text-sm text-gray-700 mb-2">AI วางแผนการผลิต</p>
             <ul className="space-y-2 text-sm text-gray-700">
@@ -136,11 +136,11 @@ export function ReportsGuide() {
               <h4 className="font-semibold mb-2 text-blue-800">📊 Data-Driven Decisions</h4>
               <p className="text-sm text-gray-700">ตัดสินใจด้วยข้อมูลจริง ไม่ใช่ประสบการณ์</p>
             </div>
-            <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-              <h4 className="font-semibold mb-2 text-purple-800">🎯 Proactive Management</h4>
+            <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+              <h4 className="font-semibold mb-2 text-primary">🎯 Proactive Management</h4>
               <p className="text-sm text-gray-700">แก้ปัญหาก่อนเกิด ไม่ใช่หลังเกิด</p>
             </div>
-            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+            <div className="bg-orange-50 p-4 rounded-lg border border-primary/20">
               <h4 className="font-semibold mb-2 text-orange-800">💰 Cost Control</h4>
               <p className="text-sm text-gray-700">ควบคุมต้นทุนแบบ Real-time</p>
             </div>

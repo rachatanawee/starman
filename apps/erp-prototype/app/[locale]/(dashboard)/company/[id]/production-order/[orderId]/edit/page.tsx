@@ -76,7 +76,7 @@ export default function EditProductionOrderPage() {
             </div>
           </div>
           {canEdit && (
-            <Button onClick={handleSave} className="bg-purple-600 hover:bg-purple-700">
+            <Button onClick={handleSave} className="bg-primary hover:bg-primary/90">
               <Save className="h-4 w-4 mr-2" />
               Save Changes
             </Button>

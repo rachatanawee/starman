@@ -80,7 +80,7 @@ export default function ProjectsPage() {
               <p className="text-gray-600 mt-1">{t('manageCompanies')}</p>
             </div>
             <Button
-              className="bg-purple-600 hover:bg-purple-700"
+              className="bg-primary hover:bg-primary/90"
               onClick={() => router.push(`/${locale}/company/new`)}
             >
               <Plus className="h-4 w-4 mr-2" />
@@ -116,8 +116,8 @@ export default function ProjectsPage() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="bg-purple-100 p-2 rounded-lg">
-                      <GitBranch className="h-5 w-5 text-purple-600" />
+                    <div className="bg-primary/10 p-2 rounded-lg">
+                      <GitBranch className="h-5 w-5 text-primary" />
                     </div>
                     <div>
                       <CardTitle className="text-lg">{project.name}</CardTitle>
@@ -169,7 +169,7 @@ export default function ProjectsPage() {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div 
-                        className="bg-purple-600 h-2 rounded-full transition-all"
+                        className="bg-primary h-2 rounded-full transition-all"
                         style={{ width: `${Math.min((project.spent / project.budget) * 100, 100)}%` }}
                       />
                     </div>
@@ -189,7 +189,7 @@ export default function ProjectsPage() {
             </p>
             {!searchQuery && (
               <Button
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-primary hover:bg-primary/90"
                 onClick={() => router.push(`/${locale}/company/new`)}
               >
                 <Plus className="h-4 w-4 mr-2" />

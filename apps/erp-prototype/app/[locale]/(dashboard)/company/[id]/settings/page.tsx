@@ -8,13 +8,27 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save } from 'lucide-react'
+import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save, Palette } from 'lucide-react'
 import { mockProjectsAPI } from '@/lib/mock-data'
+import { useSettings, useSettingsActions } from '@/lib/settings-context'
 
 export default function SettingsPage() {
   const params = useParams()
   const projectId = params.id as string
   const project = mockProjectsAPI.getSync(projectId)
+  const settings = useSettings()
+  const { updateTheme } = useSettingsActions()
+
+  const themes = [
+    { value: 'tangerine', label: 'Tangerine', color: 'bg-orange-500' },
+    { value: 'ocean-breeze', label: 'Ocean Breeze', color: 'bg-blue-500' },
+    { value: 'claude', label: 'Claude', color: 'bg-amber-600' },
+    { value: 'forest-green', label: 'Forest Green', color: 'bg-green-600' },
+    { value: 'royal-purple', label: 'Royal Purple', color: 'bg-primary' },
+    { value: 'crimson-red', label: 'Crimson Red', color: 'bg-red-600' },
+    { value: 'clean-slate', label: 'Clean Slate', color: 'bg-slate-600' },
+    { value: 'twitter', label: 'Twitter Blue', color: 'bg-sky-500' },
+  ]
 
   if (!project) {
     return (
@@ -33,7 +47,7 @@ export default function SettingsPage() {
       <div className="p-6">
         <div className="bg-white border-b mb-6 -m-6 p-6">
           <div className="flex items-center gap-3">
-            <Settings className="h-8 w-8 text-purple-600" />
+            <Settings className="h-8 w-8 text-primary" />
             <div>
               <h1 className="text-2xl font-bold text-gray-900">ERP Settings</h1>
               <p className="text-sm text-gray-600">Configure system preferences and business rules</p>
@@ -42,12 +56,62 @@ export default function SettingsPage() {
         </div>
 
         <div className="space-y-6 max-w-4xl">
+          {/* Theme Settings */}
+          <Card className="border-primary/20">
+            <CardHeader className="bg-gradient-to-r from-pink-50 to-purple-50">
+              <div className="flex items-center gap-2">
+                <Palette className="h-5 w-5 text-primary" />
+                <CardTitle className="text-primary">Theme & Appearance</CardTitle>
+              </div>
+              <CardDescription>Choose a color theme for the system</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label className="mb-3 block">Select Theme Color</Label>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {themes.map((theme) => (
+                    <button
+                      key={theme.value}
+                      onClick={() => updateTheme(theme.value)}
+                      className={`
+                        relative p-4 rounded-lg border-2 transition-all hover:scale-105
+                        ${settings.theme_name === theme.value 
+                          ? 'border-primary shadow-lg ring-2 ring-primary/20' 
+                          : 'border-gray-200 hover:border-gray-300'
+                        }
+                      `}
+                    >
+                      <div className="flex flex-col items-center gap-2">
+                        <div className={`w-12 h-12 rounded-full ${theme.color} shadow-md`} />
+                        <span className="text-sm font-medium text-gray-700">
+                          {theme.label}
+                        </span>
+                      </div>
+                      {settings.theme_name === theme.value && (
+                        <div className="absolute top-2 right-2">
+                          <div className="w-5 h-5 bg-primary rounded-full flex items-center justify-center">
+                            <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-sm text-gray-500 mt-3">
+                  Theme colors will be applied to sidebar, header, buttons, and all highlights throughout the system
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Company Profile */}
           <Card className="border-blue-200">
             <CardHeader className="bg-gradient-to-r from-blue-50 to-cyan-50">
               <div className="flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-blue-600" />
-                <CardTitle className="text-blue-900">Company Profile</CardTitle>
+                <Building2 className="h-5 w-5 text-primary" />
+                <CardTitle className="text-primary">Company Profile</CardTitle>
               </div>
               <CardDescription>Basic company information</CardDescription>
             </CardHeader>
@@ -83,8 +147,8 @@ export default function SettingsPage() {
           <Card className="border-green-200">
             <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50">
               <div className="flex items-center gap-2">
-                <DollarSign className="h-5 w-5 text-green-600" />
-                <CardTitle className="text-green-900">Financial Settings</CardTitle>
+                <DollarSign className="h-5 w-5 text-primary" />
+                <CardTitle className="text-primary">Financial Settings</CardTitle>
               </div>
               <CardDescription>Currency and pricing configuration</CardDescription>
             </CardHeader>
@@ -138,11 +202,11 @@ export default function SettingsPage() {
           </Card>
 
           {/* Localization */}
-          <Card className="border-orange-200">
+          <Card className="border-primary/20">
             <CardHeader className="bg-gradient-to-r from-orange-50 to-amber-50">
               <div className="flex items-center gap-2">
-                <Globe className="h-5 w-5 text-orange-600" />
-                <CardTitle className="text-orange-900">Localization</CardTitle>
+                <Globe className="h-5 w-5 text-primary" />
+                <CardTitle className="text-primary">Localization</CardTitle>
               </div>
               <CardDescription>Language and regional settings</CardDescription>
             </CardHeader>
@@ -204,11 +268,11 @@ export default function SettingsPage() {
           </Card>
 
           {/* Notifications */}
-          <Card className="border-purple-200">
+          <Card className="border-primary/20">
             <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50">
               <div className="flex items-center gap-2">
-                <Bell className="h-5 w-5 text-purple-600" />
-                <CardTitle className="text-purple-900">Notifications</CardTitle>
+                <Bell className="h-5 w-5 text-primary" />
+                <CardTitle className="text-primary">Notifications</CardTitle>
               </div>
               <CardDescription>Alert preferences</CardDescription>
             </CardHeader>
@@ -245,11 +309,11 @@ export default function SettingsPage() {
           </Card>
 
           {/* Security */}
-          <Card className="border-red-200">
+          <Card className="border-primary/20">
             <CardHeader className="bg-gradient-to-r from-red-50 to-rose-50">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-red-600" />
-                <CardTitle className="text-red-900">Security</CardTitle>
+                <CardTitle className="text-primary">Security</CardTitle>
               </div>
               <CardDescription>Access control and data protection</CardDescription>
             </CardHeader>
@@ -289,7 +353,7 @@ export default function SettingsPage() {
 
           <div className="flex justify-end gap-3">
             <Button variant="outline">Reset to Default</Button>
-            <Button className="bg-purple-600 hover:bg-purple-700">
+            <Button className="bg-primary hover:bg-primary/90">
               <Save className="h-4 w-4 mr-2" />
               Save Settings
             </Button>

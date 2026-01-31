@@ -214,13 +214,13 @@ export default function NewPurchaseOrderPage() {
                 </div>
                 <div className="pt-3 border-t flex justify-between">
                   <span className="font-semibold">Grand Total</span>
-                  <span className="text-xl font-bold text-purple-600">฿{calculateGrandTotal().toLocaleString()}</span>
+                  <span className="text-xl font-bold text-primary">฿{calculateGrandTotal().toLocaleString()}</span>
                 </div>
               </CardContent>
             </Card>
 
             <div className="space-y-2">
-              <Button className="w-full bg-purple-600 hover:bg-purple-700" onClick={handleSave}>
+              <Button className="w-full bg-primary hover:bg-primary/90" onClick={handleSave}>
                 <Save className="h-4 w-4 mr-2" />
                 Save PO
               </Button>

@@ -87,7 +87,7 @@ export default function NewCompanyPage() {
               Back to Companies
             </Link>
             <div className="flex items-center gap-3">
-              <div className="bg-purple-500 p-2 rounded-lg">
+              <div className="bg-primary/50 p-2 rounded-lg">
                 <Building2 className="h-6 w-6 text-white" />
               </div>
               <div>
@@ -105,7 +105,7 @@ export default function NewCompanyPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-purple-600" />
+                  <Building2 className="h-5 w-5 text-primary" />
                   Company Information
                 </CardTitle>
                 <CardDescription>
@@ -181,7 +181,7 @@ export default function NewCompanyPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-blue-600" />
+                  <MapPin className="h-5 w-5 text-primary" />
                   Contact Information
                 </CardTitle>
                 <CardDescription>
@@ -245,7 +245,7 @@ export default function NewCompanyPage() {
               </Button>
               <Button
                 type="submit"
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-primary hover:bg-primary/90"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Creating...' : 'Create Company'}

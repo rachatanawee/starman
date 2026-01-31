@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
-import { DollarSign, Users, TrendingUp, AlertTriangle, CheckCircle, X, Sparkles, Trophy, Target, History } from 'lucide-react'
+import { DollarSign, Users, TrendingUp, AlertTriangle, CheckCircle, X, Sparkles, Trophy, Target, History, Users2 } from 'lucide-react'
 import { mockDailyAllowanceSummary, mockAllowanceTransactions, mockAICoachingAlerts, AICoachingAlert, DailyAllowanceSummary } from '@/lib/worker-allowance-data'
 import { toast } from 'sonner'
 
@@ -80,7 +80,7 @@ export default function WorkerAllowancePage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
-              <DollarSign className="h-8 w-8 text-purple-600" />
+              <Users2 className="h-8 w-8 text-primary" />
               Worker Allowance
             </h1>
             <p className="text-gray-600 mt-1">The Performance Coach - ขวัญและกำลังใจ 💰</p>
@@ -112,7 +112,7 @@ export default function WorkerAllowancePage() {
                   <p className="text-sm text-gray-600">Total Workers</p>
                   <p className="text-2xl font-bold mt-1">{stats.totalWorkers}</p>
                 </div>
-                <Users className="h-8 w-8 text-purple-600" />
+                <Users className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -123,7 +123,7 @@ export default function WorkerAllowancePage() {
                   <p className="text-sm text-gray-600">Total Amount</p>
                   <p className="text-2xl font-bold mt-1">฿{stats.totalAmount.toLocaleString()}</p>
                 </div>
-                <DollarSign className="h-8 w-8 text-green-600" />
+                <DollarSign className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -134,7 +134,7 @@ export default function WorkerAllowancePage() {
                   <p className="text-sm text-gray-600">Avg/Worker</p>
                   <p className="text-2xl font-bold mt-1">฿{stats.avgPerWorker.toFixed(0)}</p>
                 </div>
-                <TrendingUp className="h-8 w-8 text-blue-600" />
+                <TrendingUp className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -145,17 +145,17 @@ export default function WorkerAllowancePage() {
                   <p className="text-sm text-gray-600">Pending</p>
                   <p className="text-2xl font-bold mt-1 text-orange-600">{stats.pendingCount}</p>
                 </div>
-                <AlertTriangle className="h-8 w-8 text-orange-600" />
+                <AlertTriangle className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
         </div>
 
         {showAlerts && alerts.length > 0 && (
-          <Card className="border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50">
+          <Card className="border-primary/20 bg-gradient-to-r from-purple-50 to-blue-50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-purple-600" />
+                <Sparkles className="h-5 w-5 text-primary" />
                 AI Performance Coach Alerts
               </CardTitle>
             </CardHeader>
@@ -204,7 +204,7 @@ export default function WorkerAllowancePage() {
                     <div 
                       key={summary.id} 
                       className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                        selectedSummary === summary.id ? 'border-purple-500 bg-purple-50' : 'hover:bg-gray-50'
+                        selectedSummary === summary.id ? 'border-purple-500 bg-primary/5' : 'hover:bg-gray-50'
                       }`}
                       onClick={() => setSelectedSummary(summary.id)}
                     >

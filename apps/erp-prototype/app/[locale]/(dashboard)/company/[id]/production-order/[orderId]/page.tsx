@@ -15,7 +15,7 @@ const statusConfig: Record<ProductionStatus, { label: string; color: string; ico
   released: { label: 'Released', color: 'bg-blue-500', icon: PlayCircle },
   in_progress: { label: 'In Progress', color: 'bg-yellow-500', icon: Factory },
   completed: { label: 'Completed', color: 'bg-green-500', icon: CheckCircle2 },
-  closed: { label: 'Closed', color: 'bg-purple-500', icon: CheckCircle2 },
+  closed: { label: 'Closed', color: 'bg-primary/50', icon: CheckCircle2 },
   cancelled: { label: 'Cancelled', color: 'bg-red-500', icon: AlertCircle }
 }
 

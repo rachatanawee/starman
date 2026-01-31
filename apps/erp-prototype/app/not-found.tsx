@@ -10,9 +10,9 @@ export default function NotFound() {
         {/* 404 Icon */}
         <div className="mb-8 flex justify-center">
           <div className="relative">
-            <div className="absolute inset-0 bg-purple-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+            <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl opacity-30 animate-pulse"></div>
             <div className="relative bg-white rounded-full p-8 shadow-xl border border-gray-200">
-              <FileQuestion className="h-24 w-24 text-purple-600" />
+              <FileQuestion className="h-24 w-24 text-primary" />
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function NotFound() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700 min-w-[200px]">
+          <Button asChild size="lg" className="bg-primary hover:bg-primary/90 min-w-[200px]">
             <Link href="/en/company">
               <Home className="h-5 w-5 mr-2" />
               กลับหน้าหลัก
@@ -51,19 +51,19 @@ export default function NotFound() {
           <div className="space-y-2 text-left">
             <Link 
               href="/en/company" 
-              className="block text-purple-600 hover:text-purple-700 hover:underline text-sm"
+              className="block text-primary hover:text-primary hover:underline text-sm"
             >
               → รายการบริษัททั้งหมด
             </Link>
             <Link 
               href="/en/guide" 
-              className="block text-purple-600 hover:text-purple-700 hover:underline text-sm"
+              className="block text-primary hover:text-primary hover:underline text-sm"
             >
               → คู่มือการใช้งาน
             </Link>
             <Link 
               href="/en/guide/demo" 
-              className="block text-purple-600 hover:text-purple-700 hover:underline text-sm"
+              className="block text-primary hover:text-primary hover:underline text-sm"
             >
               → Demo Walkthrough
             </Link>

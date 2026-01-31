@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
-import { Rocket, BarChart3, Users, Zap, BookOpen } from 'lucide-react'
+import { Rocket, BarChart3, Users, Zap, BookOpen, Settings } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
@@ -69,7 +69,7 @@ export default function ManufacturingPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
-              <Rocket className="h-8 w-8 text-purple-600" />
+              <Settings className="h-8 w-8 text-primary" />
               {t('title')}
             </h1>
             <p className="text-gray-600 mt-1">{t('subtitle')}</p>

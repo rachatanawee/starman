@@ -98,7 +98,7 @@ export default function EditSalesOrderPage() {
                 <Button type="button" variant="outline" onClick={() => router.back()}>
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+                <Button type="submit" className="bg-primary hover:bg-primary/90">
                   <Save className="h-4 w-4 mr-2" />
                   Update Order
                 </Button>

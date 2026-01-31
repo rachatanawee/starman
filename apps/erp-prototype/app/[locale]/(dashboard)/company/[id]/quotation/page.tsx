@@ -350,7 +350,8 @@ export default function QuotationPage() {
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">{t('title')}</h1>
+                  <FileText className="h-8 w-8 text-primary flex-shrink-0" />
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">{t('title')}</h1>
                   <AIInsightsBadge
                     type="positive"
                     message="Top customers: Acme Corp (+45%), Tech Solutions (+32%)"
@@ -369,7 +370,7 @@ export default function QuotationPage() {
 
                 <Link href={`/${params.locale}/company/${projectId}/quotation/new`}>
                   <Button
-                    className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
+                    className="bg-primary hover:bg-primary/90 w-full sm:w-auto sm:shrink-0 sm:min-w-fit shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95"
                   >
                     <Plus className="h-4 w-4 mr-2" />
                     <span>{t('newQuotation')}</span>
@@ -391,7 +392,7 @@ export default function QuotationPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="bg-gradient-to-r from-purple-50 to-blue-50 px-3 sm:px-4 py-2 rounded-lg border shrink-0">
               <span className="text-xs sm:text-sm text-gray-600">{t('totalAmount')}: </span>
-              <span className="text-base sm:text-lg font-bold text-purple-600">{totalAmount.toLocaleString()}</span>
+              <span className="text-base sm:text-lg font-bold text-primary">{totalAmount.toLocaleString()}</span>
               <AIInsightsBadge
                 type="positive"
                 message="Customer retention rate: 87% | Avg order value trending up 15%"

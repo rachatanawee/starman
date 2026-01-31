@@ -34,17 +34,17 @@ export function BOMTreeView({ bom }: BOMTreeViewProps) {
   return (
     <div className="space-y-2">
       {/* Root Product */}
-      <div className="flex items-center gap-2 p-3 bg-purple-50 border border-purple-200 rounded-lg">
-        <Package className="h-5 w-5 text-purple-600" />
+      <div className="flex items-center gap-2 p-3 bg-primary/5 border border-primary/20 rounded-lg">
+        <Package className="h-5 w-5 text-primary" />
         <div className="flex-1">
-          <div className="font-semibold text-purple-900">{bom.productName}</div>
-          <div className="text-sm text-purple-600">{bom.productSku}</div>
+          <div className="font-semibold text-primary">{bom.productName}</div>
+          <div className="text-sm text-primary">{bom.productSku}</div>
         </div>
         <div className="text-right">
-          <div className="text-sm font-medium text-purple-900">
+          <div className="text-sm font-medium text-primary">
             ${bom.estimatedCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </div>
-          <div className="text-xs text-purple-600">Estimated Cost</div>
+          <div className="text-xs text-primary">Estimated Cost</div>
         </div>
       </div>
 

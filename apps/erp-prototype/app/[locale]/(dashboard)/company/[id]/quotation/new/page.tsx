@@ -282,14 +282,14 @@ export default function NewQuotationPage() {
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                   <DialogTrigger asChild>
                     <Button type="button" variant="outline" size="sm" className="bg-gradient-to-r from-purple-50 to-blue-50">
-                      <Sparkles className="h-4 w-4 mr-2 text-purple-600" />
+                      <Sparkles className="h-4 w-4 mr-2 text-primary" />
                       Paste Request
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle className="flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-purple-600" />
+                        <Sparkles className="h-5 w-5 text-primary" />
                         AI Paste Request
                       </DialogTitle>
                     </DialogHeader>
@@ -554,7 +554,7 @@ export default function NewQuotationPage() {
                 </div>
                 <div className="border-t pt-3 flex justify-between text-lg font-bold">
                   <span>Grand Total:</span>
-                  <span className="text-purple-600">{grandTotal.toFixed(2)}</span>
+                  <span className="text-primary">{grandTotal.toFixed(2)}</span>
                 </div>
               </CardContent>
             </Card>
@@ -565,7 +565,7 @@ export default function NewQuotationPage() {
             <Button type="button" variant="outline" onClick={() => router.back()}>
               Cancel
             </Button>
-            <Button type="submit" className="bg-purple-600 hover:bg-purple-700" data-testid="save-quotation-btn">
+            <Button type="submit" className="bg-primary hover:bg-primary/90" data-testid="save-quotation-btn">
               <Save className="h-4 w-4 mr-2" />
               Save Quotation
             </Button>

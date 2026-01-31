@@ -327,7 +327,7 @@ export default function NewSalesOrderPage() {
                 </div>
                 <div className="border-t pt-3 flex justify-between text-lg font-bold">
                   <span>Grand Total:</span>
-                  <span className="text-purple-600">{grandTotal.toFixed(2)}</span>
+                  <span className="text-primary">{grandTotal.toFixed(2)}</span>
                 </div>
               </CardContent>
             </Card>
@@ -338,7 +338,7 @@ export default function NewSalesOrderPage() {
             <Button type="button" variant="outline" onClick={() => router.back()}>
               Cancel
             </Button>
-            <Button type="submit" className="bg-purple-600 hover:bg-purple-700" data-testid="save-order-btn">
+            <Button type="submit" className="bg-primary hover:bg-primary/90" data-testid="save-order-btn">
               <Save className="h-4 w-4 mr-2" />
               Save Order
             </Button>

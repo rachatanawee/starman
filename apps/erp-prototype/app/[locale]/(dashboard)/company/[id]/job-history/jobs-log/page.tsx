@@ -29,7 +29,7 @@ export default function JobsLogPage() {
             setSelectedJob(row.original)
             setDetailDrawerOpen(true)
           }}
-          className="font-semibold text-purple-600 hover:underline"
+          className="font-semibold text-primary hover:underline"
         >
           {row.original.productionOrderNo}
         </button>
@@ -109,7 +109,7 @@ export default function JobsLogPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
-              <List className="h-8 w-8 text-purple-600" />
+              <List className="h-8 w-8 text-primary" />
               Jobs Log
             </h1>
             <p className="text-gray-600 mt-1">Complete history of all production jobs</p>

@@ -81,7 +81,7 @@ export function MobileMenu({ projectId }: MobileMenuProps) {
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
-            <div className="bg-purple-500 p-1.5 rounded-lg">
+            <div className="bg-primary/50 p-1.5 rounded-lg">
               <Star className="h-5 w-5 text-white" />
             </div>
             <h2 className="text-lg font-bold text-gray-900">Starman ERP</h2>
@@ -111,7 +111,7 @@ export function MobileMenu({ projectId }: MobileMenuProps) {
               {/* Header */}
               <div className="flex items-center justify-between border-b p-4">
                 <div className="flex items-center gap-2">
-                  <div className="bg-purple-500 p-1.5 rounded-lg">
+                  <div className="bg-primary/50 p-1.5 rounded-lg">
                     <Star className="h-5 w-5 text-white" />
                   </div>
                   <h2 className="text-lg font-bold text-gray-900">Starman ERP</h2>
@@ -151,7 +151,7 @@ export function MobileMenu({ projectId }: MobileMenuProps) {
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-all duration-200 rounded-lg ${
                           isActive
-                            ? 'bg-purple-100 text-purple-700'
+                            ? 'bg-primary/10 text-primary'
                             : isBackButton
                             ? 'text-gray-600 hover:bg-gray-50 border border-gray-200'
                             : isGuideButton

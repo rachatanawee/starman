@@ -107,7 +107,7 @@ export default function EditSalesInvoicePage() {
 
         <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-900">
+            <CardTitle className="flex items-center gap-2 text-primary">
               <Receipt className="h-5 w-5" />
               Document Chain
             </CardTitle>
@@ -135,8 +135,8 @@ export default function EditSalesInvoicePage() {
               </div>
               <div className="ml-6 border-l-2 border-blue-300 h-4"></div>
               <div className="flex items-start gap-3">
-                <div className="bg-purple-100 rounded-full p-2">
-                  <span className="text-xs font-bold text-purple-700">2</span>
+                <div className="bg-primary/10 rounded-full p-2">
+                  <span className="text-xs font-bold text-primary">2</span>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
@@ -144,7 +144,7 @@ export default function EditSalesInvoicePage() {
                     <button
                       type="button"
                       onClick={() => router.push(`/${params.locale}/company/${projectId}/sales-order/SO-001`)}
-                      className="text-purple-600 hover:underline text-sm font-mono"
+                      className="text-primary hover:underline text-sm font-mono"
                     >
                       SO-2026-055
                     </button>
@@ -356,7 +356,7 @@ export default function EditSalesInvoicePage() {
 
           <div className="flex justify-end gap-3">
             <Button type="button" variant="outline" onClick={() => router.back()}>Cancel</Button>
-            <Button type="submit" className="bg-green-600 hover:bg-green-700">
+            <Button type="submit" className="bg-primary hover:bg-primary/90">
               <Receipt className="h-4 w-4 mr-2" />
               Update Invoice
             </Button>

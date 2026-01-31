@@ -79,7 +79,7 @@ export function OverviewGuide() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+            <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
               <h4 className="font-semibold mb-2">Sales Module</h4>
               <p className="text-sm text-gray-600">จัดการใบเสนอราคา ใบสั่งขาย และใบแจ้งหนี้</p>
             </div>
@@ -91,7 +91,7 @@ export function OverviewGuide() {
               <h4 className="font-semibold mb-2">Materials Module</h4>
               <p className="text-sm text-gray-600">จัดการสต็อกและวัตถุดิบ</p>
             </div>
-            <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+            <div className="bg-orange-50 p-4 rounded-lg border border-primary/20">
               <h4 className="font-semibold mb-2">Finance Module</h4>
               <p className="text-sm text-gray-600">บันทึกบัญชีและรายงานทางการเงิน</p>
             </div>
@@ -213,7 +213,7 @@ export function OverviewGuide() {
           <p className="text-gray-700">
             <strong>AI Agent</strong> เป็น Ground Control ของธุรกิจคุณ คอยวิเคราะห์ข้อมูล หารูปแบบ และให้คำแนะนำที่ช่วยให้คุณตัดสินใจได้ดีขึ้น เร็วขึ้น และแม่นยำขึ้น เหมือนมี Ground Control คอยดูแลระบบให้ คุณจึงสามารถมุ่งเน้นไปที่ Mission หลักขอนธุรกิจได้
           </p>
-          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg border border-indigo-200">
+          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-2 flex items-center gap-2">
               <span>🚀</span>
               <span>AI Ground Control ทำอะไรให้คุณ</span>
@@ -237,7 +237,7 @@ export function OverviewGuide() {
             AI Agent เป็นผู้ช่วยอัจฉริยะที่ใช้ AI วิเคราะห์ข้อมูล หารูปแบบ และให้คำแนะนำที่ช่วยให้ตัดสินใจได้ดีขึ้น เร็วขึ้น และแม่นยำขึ้น
           </p>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg border border-purple-200">
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg border border-primary/20">
               <h4 className="font-semibold mb-2">📊 Sales Insights</h4>
               <p className="text-sm text-gray-600 mb-2">วิเคราะห์พฤติกรรมลูกค้า แนะนำกลยุทธ์การขาย</p>
               <ul className="text-xs text-gray-600 space-y-1">
@@ -264,7 +264,7 @@ export function OverviewGuide() {
                 <li>• ลดสินค้าค้างและช้าเคลื่อนที่</li>
               </ul>
             </div>
-            <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg border border-orange-200">
+            <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg border border-primary/20">
               <h4 className="font-semibold mb-2">💰 Financial Analysis</h4>
               <p className="text-sm text-gray-600 mb-2">วิเคราะห์กระแสเงินสด คาดการณ์รายได้</p>
               <ul className="text-xs text-gray-600 space-y-1">

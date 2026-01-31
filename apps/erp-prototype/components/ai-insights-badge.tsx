@@ -24,7 +24,7 @@ export function AIInsightsBadge({ type, message, confidence, compact = false }: 
     positive: 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100',
     negative: 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100',
     warning: 'bg-yellow-50 text-yellow-700 border-yellow-200 hover:bg-yellow-100',
-    neutral: 'bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100'
+    neutral: 'bg-primary/5 text-primary border-primary/20 hover:bg-primary/10'
   }
 
   return (

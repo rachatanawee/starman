@@ -36,7 +36,7 @@ const severityColors = {
 }
 
 const costTypeColors = {
-  DM: 'bg-purple-100 text-purple-800',
+  DM: 'bg-primary/10 text-primary',
   DL: 'bg-blue-100 text-blue-800',
   OH: 'bg-orange-100 text-orange-800'
 }
@@ -102,7 +102,7 @@ export default function WIPCostingPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
-              <DollarSign className="h-8 w-8 text-purple-600" />
+              <DollarSign className="h-8 w-8 text-primary" />
               WIP Costing
             </h1>
             <p className="text-gray-600 mt-1">Real-time job costing and variance analysis</p>
@@ -130,7 +130,7 @@ export default function WIPCostingPage() {
                   <p className="text-sm text-gray-600">Total WIP Value</p>
                   <p className="text-2xl font-bold mt-1">฿{stats.totalWIPValue.toLocaleString()}</p>
                 </div>
-                <Package className="h-8 w-8 text-purple-600" />
+                <Package className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -141,7 +141,7 @@ export default function WIPCostingPage() {
                   <p className="text-sm text-gray-600">Active Jobs</p>
                   <p className="text-2xl font-bold mt-1">{stats.activeJobs}</p>
                 </div>
-                <Activity className="h-8 w-8 text-blue-600" />
+                <Activity className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -154,7 +154,7 @@ export default function WIPCostingPage() {
                     {stats.avgVariance.toFixed(1)}%
                   </p>
                 </div>
-                <TrendingUp className="h-8 w-8 text-orange-600" />
+                <TrendingUp className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -165,7 +165,7 @@ export default function WIPCostingPage() {
                   <p className="text-sm text-gray-600">Critical Alerts</p>
                   <p className="text-2xl font-bold mt-1 text-red-600">{stats.criticalAlerts}</p>
                 </div>
-                <AlertTriangle className="h-8 w-8 text-red-600" />
+                <AlertTriangle className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -173,10 +173,10 @@ export default function WIPCostingPage() {
 
         {/* AI Alerts */}
         {alerts.length > 0 && (
-          <Card className="border-purple-200 bg-gradient-to-r from-purple-50 to-blue-50">
+          <Card className="border-primary/20 bg-gradient-to-r from-purple-50 to-blue-50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-purple-600" />
+                <Sparkles className="h-5 w-5 text-primary" />
                 🤖 The Financial Analyst - AI Insights
               </CardTitle>
             </CardHeader>
@@ -239,7 +239,7 @@ export default function WIPCostingPage() {
                       onClick={() => setSelectedOrder(wip)}
                       className={`border rounded-lg p-4 cursor-pointer transition-all ${
                         selectedOrder?.id === wip.id
-                          ? 'border-purple-500 bg-purple-50'
+                          ? 'border-purple-500 bg-primary/5'
                           : 'border-gray-200 hover:border-purple-300'
                       } ${wip.variancePercent > 10 ? 'border-l-4 border-l-red-500' : ''}`}
                     >

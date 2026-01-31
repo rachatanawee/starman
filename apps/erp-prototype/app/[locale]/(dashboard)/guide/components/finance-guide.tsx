@@ -30,7 +30,7 @@ export function FinanceGuide() {
           <p className="text-gray-700 mb-4">
             บันทึกบัญชี จัดการรายรับ-รายจ่าย และสร้างรายงานทางการเงิน
           </p>
-          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+          <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-2">ฟีเจอร์หลัก</h4>
             <ul className="space-y-1 text-sm text-gray-700">
               <li>• บันทึกรายรับ-รายจ่าย</li>
@@ -99,7 +99,7 @@ export function FinanceGuide() {
           <CardTitle>🤖 AI Agent ใน Finance</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg border border-orange-200">
+          <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-lg border border-primary/20">
             <h4 className="font-semibold mb-3">💰 Financial Analysis</h4>
             <ul className="space-y-2 text-sm text-gray-700">
               <li>• วิเคราะห์กระแสเงินสด</li>
