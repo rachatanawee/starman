@@ -1,17 +1,16 @@
 'use client'
 
 import { 
-  LayoutDashboard, LogOut, ChevronLeft, ChevronRight, Languages,
+  LayoutDashboard, ChevronLeft, ChevronRight,
   Star, ListTodo, FileText, DollarSign, Users2,
   BarChart3, Users, Settings, Calendar, BookOpen, Network,
-  Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown, ChevronUp
+  Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown
 } from 'lucide-react'
 import { Button } from './ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
 import { QuickSearch } from './quick-search'
 import Link from 'next/link'
-import { useParams, usePathname, useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useParams, usePathname } from 'next/navigation'
+import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react'
 
 interface ProjectSidebarProps {
   collapsed: boolean
@@ -19,53 +18,113 @@ interface ProjectSidebarProps {
   projectId?: string
 }
 
+interface MenuItem {
+  href?: string
+  icon?: React.ComponentType<{ className?: string }>
+  label?: string
+  section?: string
+  isBack?: boolean
+  isGuide?: boolean
+}
+
 export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSidebarProps) {
   const params = useParams()
   const pathname = usePathname()
-  const router = useRouter()
   const locale = params.locale as string
-  const [userEmail, setUserEmail] = useState('')
-  const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({})
+  const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('sidebar_collapsed_sections')
+      if (saved) {
+        try {
+          return JSON.parse(saved)
+        } catch (e) {
+          console.error('Failed to parse saved sections', e)
+        }
+      }
+    }
+    return {}
+  })
   const [mounted, setMounted] = useState(false)
-  const [version, setVersion] = useState('v0.1.0')
-  const [buildTime, setBuildTime] = useState('')
+  const navRef = useRef<HTMLElement>(null)
+  const [showTopFade, setShowTopFade] = useState(false)
+  const [showBottomFade, setShowBottomFade] = useState(false)
 
+  // Set mounted flag
   useEffect(() => {
     setMounted(true)
-    setVersion(process.env.NEXT_PUBLIC_APP_VERSION || 'v0.1.0')
-    setBuildTime(process.env.NEXT_PUBLIC_BUILD_TIME || new Date().toISOString())
-    const saved = localStorage.getItem('sidebar_collapsed_sections')
-    if (saved) {
-      setCollapsedSections(JSON.parse(saved))
-    }
-    const user = localStorage.getItem('mock_user')
-    if (user) {
-      const userData = JSON.parse(user)
-      setUserEmail(userData.email)
+  }, [])
+
+  // Restore scroll position from localStorage on mount
+  useLayoutEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
+
+    const savedScrollPosition = localStorage.getItem('sidebar_scroll_position')
+    if (savedScrollPosition) {
+      const scrollPos = parseInt(savedScrollPosition, 10)
+      if (!isNaN(scrollPos)) {
+        // Use requestAnimationFrame to ensure DOM is fully rendered
+        requestAnimationFrame(() => {
+          nav.scrollTop = scrollPos
+        })
+      }
     }
   }, [])
 
-  const handleLogout = () => {
-    localStorage.removeItem('mock_token')
-    localStorage.removeItem('mock_user')
-    router.push(`/${locale}/login`)
-  }
+  // Save scroll position to localStorage on every scroll
+  useEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
 
-  const switchLocale = () => {
-    const newLocale = locale === 'en' ? 'th' : 'en'
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`)
-    router.push(newPath)
-  }
+    let timeoutId: NodeJS.Timeout
+
+    const handleScroll = () => {
+      // Debounce to avoid too many localStorage writes
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        localStorage.setItem('sidebar_scroll_position', nav.scrollTop.toString())
+      }, 100)
+    }
+
+    nav.addEventListener('scroll', handleScroll, { passive: true })
+    
+    return () => {
+      clearTimeout(timeoutId)
+      nav.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  // Handle fade indicators on scroll
+  useEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
+
+    const updateFadeIndicators = () => {
+      const { scrollTop, scrollHeight, clientHeight } = nav
+      setShowTopFade(scrollTop > 10)
+      setShowBottomFade(scrollTop + clientHeight < scrollHeight - 10)
+    }
+
+    // Initial check with a small delay to ensure DOM is ready
+    const timer = setTimeout(updateFadeIndicators, 100)
+    
+    nav.addEventListener('scroll', updateFadeIndicators, { passive: true })
+    
+    return () => {
+      clearTimeout(timer)
+      nav.removeEventListener('scroll', updateFadeIndicators)
+    }
+  }, [mounted, collapsed, collapsedSections])
 
   const toggleSection = (section: string) => {
-    setCollapsedSections(prev => {
+    setCollapsedSections((prev: Record<string, boolean>) => {
       const newState = { ...prev, [section]: !prev[section] }
       localStorage.setItem('sidebar_collapsed_sections', JSON.stringify(newState))
       return newState
     })
   }
 
-  const menuItems = projectId ? [
+  const menuItems = useMemo(() => projectId ? [
     { href: `/${locale}/company`, icon: GitBranch, label: '← All Companies', isBack: true },
     { href: `/${locale}/guide`, icon: BookOpen, label: 'User Guide', isGuide: true },
     { section: 'Sales' },
@@ -95,7 +154,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
     { href: `/${locale}/company`, icon: GitBranch, label: 'Companies' },
     { href: `/${locale}/users`, icon: Users, label: 'User Management' },
     { href: `/${locale}/guide`, icon: BookOpen, label: 'User Guide', isGuide: true },
-  ]
+  ], [locale, projectId])
 
   return (
     <div 
@@ -132,10 +191,20 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
       )}
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-1 p-2 overflow-y-auto">
-        {menuItems.map((item, index) => {
-          if ((item as any).section) {
-            const sectionName = (item as any).section
+      <div className="relative flex-1 overflow-hidden">
+        {/* Top fade overlay */}
+        <div 
+          className={`absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-10 transition-opacity duration-300 ${
+            showTopFade ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+        
+        <nav ref={navRef} className="absolute inset-0 space-y-1 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
+          {menuItems.map((item, index) => {
+          const menuItem = item as MenuItem
+          
+          if (menuItem.section) {
+            const sectionName = menuItem.section
             const isCollapsed = mounted ? collapsedSections[sectionName] : false
             return !collapsed ? (
               <div key={index}>
@@ -152,23 +221,23 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
             )
           }
 
-          if (!item.href || !item.icon) return null
+          if (!menuItem.href || !menuItem.icon) return null
           
-          const Icon = item.icon
-          const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
-          const isBackButton = (item as any).isBack
-          const isGuideButton = (item as any).isGuide
-          const section = menuItems.slice(0, index).reverse().find(i => (i as any).section) as any
+          const Icon = menuItem.icon
+          const isActive = pathname === menuItem.href || pathname.startsWith(menuItem.href + '/')
+          const isBackButton = menuItem.isBack
+          const isGuideButton = menuItem.isGuide
+          const section = menuItems.slice(0, index).reverse().find(i => (i as MenuItem).section) as MenuItem
           const sectionName = section?.section || ''
           const isSectionCollapsed = mounted && sectionName ? collapsedSections[sectionName] : false
           
           if (isSectionCollapsed && !collapsed) return null
           
           return (
-            <div key={item.href}>
+            <div key={menuItem.href}>
               {isBackButton && <div className="border-b my-2"></div>}
               <Link
-                href={item.href}
+                href={menuItem.href}
                 className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-all duration-200 rounded-lg ${
                   isActive
                     ? 'bg-primary/10 text-primary'
@@ -180,54 +249,21 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
                 } ${collapsed ? 'justify-center' : ''}`}
               >
                 <Icon className="h-5 w-5 flex-shrink-0" />
-                {!collapsed && <span>{item.label}</span>}
+                {!collapsed && <span>{menuItem.label}</span>}
               </Link>
               {(isBackButton || isGuideButton) && <div className="border-b my-2"></div>}
             </div>
           )
         })}
       </nav>
-
-      {/* Footer */}
-      <div className="border-t p-2 space-y-1">
-        {!collapsed && userEmail && (
-          <div className="px-3 py-2 text-xs text-gray-600 truncate">
-            {userEmail}
-          </div>
-        )}
-        <Button
-          variant="ghost"
-          size="sm"
-          className={`w-full ${collapsed ? 'justify-center px-0' : 'justify-start'}`}
-          onClick={switchLocale}
-        >
-          <Languages className={`h-4 w-4 ${collapsed ? '' : 'mr-2'}`} />
-          {!collapsed && (locale === 'en' ? 'ไทย' : 'EN')}
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          className={`w-full ${collapsed ? 'justify-center px-0' : 'justify-start'}`}
-          onClick={handleLogout}
-        >
-          <LogOut className={`h-4 w-4 ${collapsed ? '' : 'mr-2'}`} />
-          {!collapsed && 'Logout'}
-        </Button>
-        {!collapsed && mounted && (
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div className="px-3 py-1 text-xs text-gray-400 text-center cursor-help">
-                  {version}
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="text-xs">Built: {new Date(buildTime).toLocaleString()}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        )}
-      </div>
+      
+      {/* Bottom fade overlay */}
+      <div 
+        className={`absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10 transition-opacity duration-300 ${
+          showBottomFade ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+    </div>
       </div>
     </div>
   )
