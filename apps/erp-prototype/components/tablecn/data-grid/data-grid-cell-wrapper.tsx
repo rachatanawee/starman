@@ -146,12 +146,12 @@ export function DataGridCellWrapper<TData>({
       data-selected={isSelected ? "" : undefined}
       tabIndex={isFocused && !isEditing ? 0 : -1}
       className={cn(
-        "size-full px-2 py-1.5 text-left text-sm outline-none has-data-[slot=checkbox]:pt-2.5",
+        "size-full text-left text-sm outline-none has-data-[slot=checkbox]:pt-2.5 box-border",
+        "px-2 py-1.5",
         {
-          "ring-1 ring-ring ring-inset": isFocused,
-          "bg-yellow-100 dark:bg-yellow-900/30":
-            isSearchMatch && !isActiveSearchMatch,
-          "bg-orange-200 dark:bg-orange-900/50": isActiveSearchMatch,
+          "bg-primary/5": isFocused && !isSelected,
+          "bg-primary/20": isSearchMatch && !isActiveSearchMatch,
+          "bg-primary/30": isActiveSearchMatch,
           "bg-primary/10": isSelected && !isEditing,
           "cursor-default": !isEditing,
           "**:data-[slot=grid-cell-content]:line-clamp-1":

@@ -164,7 +164,7 @@ export function DataGrid<TData>({
                     }}
                   >
                   {header.isPlaceholder ? null : (
-                    <div className="size-full px-3 py-1.5 font-semibold">
+                    <div className="size-full px-2 py-1 font-semibold text-xs">
                       {typeof header.column.columnDef.header === "function" ? (
                         flexRender(
                           header.column.columnDef.header,
@@ -224,7 +224,7 @@ export function DataGrid<TData>({
               <div
                 role="gridcell"
                 tabIndex={0}
-                className="relative flex h-9 grow items-center bg-muted/30 transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none"
+                className="relative flex h-8 grow items-center bg-muted/30 transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none"
                 style={{
                   width: table.getTotalSize(),
                   minWidth: table.getTotalSize(),
@@ -232,9 +232,9 @@ export function DataGrid<TData>({
                 onClick={onRowAdd}
                 onKeyDown={onAddRowKeyDown}
               >
-                <div className="sticky left-0 flex items-center gap-2 px-3 text-muted-foreground">
-                  <Plus className="size-3.5" />
-                  <span className="text-sm">Add row</span>
+                <div className="sticky left-0 flex items-center gap-2 px-2 text-muted-foreground">
+                  <Plus className="size-3" />
+                  <span className="text-xs">Add row</span>
                 </div>
               </div>
             </div>

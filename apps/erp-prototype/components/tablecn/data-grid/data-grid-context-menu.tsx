@@ -84,14 +84,15 @@ function ContextMenuImpl<TData>({
       position: "fixed",
       left: `${contextMenu.x}px`,
       top: `${contextMenu.y}px`,
-      width: "1px",
-      height: "1px",
+      width: "0px",
+      height: "0px",
       padding: 0,
       margin: 0,
       border: "none",
       background: "transparent",
       pointerEvents: "none",
       opacity: 0,
+      zIndex: 9999,
     }),
     [contextMenu.x, contextMenu.y],
   );
@@ -172,6 +173,49 @@ function ContextMenuImpl<TData>({
     );
   }, [table, selectionState]);
 
+  const onCopyRow = React.useCallback(() => {
+    if (
+      !selectionState?.selectedCells ||
+      selectionState.selectedCells.size === 0
+    )
+      return;
+
+    const rows = table.getRowModel().rows;
+    const rowIndices = new Set<number>();
+
+    // Get all unique row indices from selected cells
+    for (const cellKey of selectionState.selectedCells) {
+      const { rowIndex } = parseCellKey(cellKey);
+      rowIndices.add(rowIndex);
+    }
+
+    const sortedRowIndices = Array.from(rowIndices).sort((a, b) => a - b);
+    
+    // Get all visible columns
+    const visibleColumns = table.getVisibleLeafColumns().filter(col => col.id !== 'select');
+
+    // Build TSV data with all columns for selected rows
+    const tsvData = sortedRowIndices
+      .map((rowIndex) => {
+        const row = rows[rowIndex];
+        if (!row) return "";
+        
+        return visibleColumns
+          .map((column) => {
+            const cell = row.getVisibleCells().find((c) => c.column.id === column.id);
+            const value = cell?.getValue();
+            return String(value ?? "");
+          })
+          .join("\t");
+      })
+      .join("\n");
+
+    navigator.clipboard.writeText(tsvData);
+    toast.success(
+      `${sortedRowIndices.length} row${sortedRowIndices.length !== 1 ? "s" : ""} copied`,
+    );
+  }, [table, selectionState]);
+
   const onClear = React.useCallback(() => {
     if (
       !selectionState?.selectedCells ||
@@ -223,12 +267,19 @@ function ContextMenuImpl<TData>({
       <DropdownMenuContent
         data-grid-popover=""
         align="start"
+        side="bottom"
+        alignOffset={0}
+        sideOffset={0}
         className="w-48"
         onCloseAutoFocus={onCloseAutoFocus}
       >
         <DropdownMenuItem onSelect={onCopy}>
           <CopyIcon />
           Copy
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={onCopyRow}>
+          <CopyIcon />
+          Copy row
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={onClear}>
           <EraserIcon />

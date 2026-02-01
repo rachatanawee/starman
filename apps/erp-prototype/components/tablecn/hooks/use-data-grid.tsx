@@ -1033,7 +1033,7 @@ function useDataGrid<TData>({
         });
       }
 
-      // Open context menu at cursor position
+      // Use clientX/Y for fixed positioning (viewport coordinates)
       store.setState("contextMenu", {
         open: true,
         x: event.clientX,

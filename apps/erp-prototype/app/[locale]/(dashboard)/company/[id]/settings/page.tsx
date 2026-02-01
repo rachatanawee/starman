@@ -24,7 +24,7 @@ export default function SettingsPage() {
     { value: 'ocean-breeze', label: 'Ocean Breeze', color: 'bg-blue-500' },
     { value: 'claude', label: 'Claude', color: 'bg-amber-600' },
     { value: 'forest-green', label: 'Forest Green', color: 'bg-green-600' },
-    { value: 'royal-purple', label: 'Royal Purple', color: 'bg-primary' },
+    { value: 'royal-purple', label: 'Royal Purple', color: 'bg-purple-600' },
     { value: 'crimson-red', label: 'Crimson Red', color: 'bg-red-600' },
     { value: 'clean-slate', label: 'Clean Slate', color: 'bg-slate-600' },
     { value: 'twitter', label: 'Twitter Blue', color: 'bg-sky-500' },

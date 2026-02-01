@@ -81,9 +81,11 @@ function DataGridRowImpl<TData>({
       data-testid={`grid-row-${virtualRowIndex}`}
       ref={rowRef}
       tabIndex={-1}
-      className={cn("group absolute flex border-b bg-white hover:bg-gray-50 transition-colors", className)}
+      className={cn("group absolute flex border-b bg-white hover:bg-primary/5 transition-colors cursor-pointer", className)}
       style={{
+        height: `${getRowHeightValue(rowHeight)}px`,
         minHeight: `${getRowHeightValue(rowHeight)}px`,
+        maxHeight: `${getRowHeightValue(rowHeight)}px`,
         transform: `translateY(${rowVirtualizer.getVirtualItems()[virtualRowIndex]?.start ?? 0}px)`,
       }}
       {...props}
@@ -114,7 +116,7 @@ function DataGridRowImpl<TData>({
             }}
           >
             <div
-              className={cn("size-full break-words px-3 py-1.5 bg-white group-hover:bg-gray-50 transition-colors", {
+              className={cn("size-full break-words px-2 py-1 text-sm bg-white group-hover:bg-primary/5 transition-colors", {
                 "bg-primary/10": isRowSelected,
               })}
             >
