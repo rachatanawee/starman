@@ -14,7 +14,7 @@ import { Label } from '@/components/ui/label'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
-import { mockInventoryItems, mockAIGuardianAlerts, type InventoryItem } from '@/lib/inventory-data'
+import { mockInventoryItems, mockAIGuardianAlerts, type InventoryItem } from '@/lib/mock-data'
 
 export default function InventoryPage() {
   const params = useParams()

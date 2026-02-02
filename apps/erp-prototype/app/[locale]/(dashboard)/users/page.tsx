@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Users, Plus, Edit, Trash2, Shield, Search, X, Building2 } from 'lucide-react'
-import { mockUsers, roleLabels, statusLabels, type User, type UserRole, type UserStatus } from '@/lib/user-data'
+import { mockUsers, roleLabels, statusLabels, type User, type UserRole, type UserStatus } from '@/lib/mock-data'
 import { mockProjects } from '@/lib/mock-data'
 import { FloatingUndo, InlineFeedback } from '@/components/feedback'
 

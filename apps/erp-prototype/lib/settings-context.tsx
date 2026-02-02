@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect } from 'react'
+import { appConfig } from './app.config'
 
 interface Settings {
   theme_name: string
@@ -18,7 +19,7 @@ interface SettingsContextType {
 }
 
 const SettingsContext = createContext<SettingsContextType>({
-  settings: { theme_name: 'tangerine' },
+  settings: { theme_name: appConfig.themes[0].id },
   updateTheme: () => {},
   updateLastCompany: () => {},
   updateAppName: () => {},
@@ -41,40 +42,39 @@ export function useSettingsActions() {
 }
 
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
-  const [settings, setSettings] = useState<Settings>({ theme_name: 'tangerine' })
+  const [settings, setSettings] = useState<Settings>({ theme_name: appConfig.themes[0].id })
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme_name')
-    const savedCompany = localStorage.getItem('last_company_id')
-    const savedAppName = localStorage.getItem('app_name')
-    const savedAppIcon = localStorage.getItem('app_icon')
+    const savedTheme = localStorage.getItem(appConfig.storage.theme)
+    const savedCompany = localStorage.getItem(appConfig.storage.lastCompany)
+    const savedAppName = localStorage.getItem(appConfig.storage.appName)
+    const savedAppIcon = localStorage.getItem(appConfig.storage.appIcon)
     setSettings({ 
-      theme_name: savedTheme || 'tangerine',
+      theme_name: savedTheme || appConfig.themes[0].id,
       last_company_id: savedCompany || undefined,
-      app_name: savedAppName || 'Starman ERP',
-      app_icon: savedAppIcon || 'GitBranch'
+      app_name: savedAppName || appConfig.app.defaultName,
+      app_icon: savedAppIcon || appConfig.app.defaultIcon
     })
   }, [])
 
   const updateTheme = (theme: string) => {
-    console.log('🔄 Updating theme to:', theme)
     setSettings(prev => ({ ...prev, theme_name: theme }))
-    localStorage.setItem('theme_name', theme)
+    localStorage.setItem(appConfig.storage.theme, theme)
   }
 
   const updateLastCompany = (companyId: string) => {
     setSettings(prev => ({ ...prev, last_company_id: companyId }))
-    localStorage.setItem('last_company_id', companyId)
+    localStorage.setItem(appConfig.storage.lastCompany, companyId)
   }
 
   const updateAppName = (name: string) => {
     setSettings(prev => ({ ...prev, app_name: name }))
-    localStorage.setItem('app_name', name)
+    localStorage.setItem(appConfig.storage.appName, name)
   }
 
   const updateAppIcon = (icon: string) => {
     setSettings(prev => ({ ...prev, app_icon: icon }))
-    localStorage.setItem('app_icon', icon)
+    localStorage.setItem(appConfig.storage.appIcon, icon)
   }
 
   return (

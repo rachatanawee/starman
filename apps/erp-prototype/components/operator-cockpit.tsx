@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Play, Pause, Square, Plus, Minus, AlertTriangle, Clock, Target, CheckCircle2 } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { JobTicket, mockDefectCodes, mockDowntimeReasons } from '@/lib/manufacturing-data'
+import { JobTicket, mockDefectCodes, mockDowntimeReasons } from '@/lib/mock-data'
 import {
   Dialog,
   DialogContent,

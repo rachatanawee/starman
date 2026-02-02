@@ -8,6 +8,7 @@ import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save, Palette, St
 import * as LucideIcons from 'lucide-react'
 import { mockProjectsAPI } from '@/lib/mock-data'
 import { useSettings, useSettingsActions } from '@/lib/settings-context'
+import { appConfig } from '@/lib/app.config'
 
 export default function SettingsPage() {
   const params = useParams()
@@ -15,24 +16,35 @@ export default function SettingsPage() {
   const project = mockProjectsAPI.getSync(projectId)
   const settings = useSettings()
   const { updateTheme, updateAppName, updateAppIcon } = useSettingsActions()
-  const [appName, setAppName] = useState(settings.app_name || 'Starman ERP')
-  const [selectedIcon, setSelectedIcon] = useState(settings.app_icon || 'GitBranch')
+  const [appName, setAppName] = useState(settings.app_name || appConfig.app.defaultName)
+  const [selectedIcon, setSelectedIcon] = useState(settings.app_icon || appConfig.app.defaultIcon)
+  const [isSaving, setIsSaving] = useState(false)
 
-  const availableIcons = [
-    'GitBranch', 'Star', 'Zap', 'Rocket', 'Heart', 'Sparkles',
-    'Building2', 'Settings', 'Shield', 'Globe'
-  ]
+  const handleApplyBranding = () => {
+    setIsSaving(true)
+    updateAppName(appName)
+    updateAppIcon(selectedIcon)
+    setTimeout(() => setIsSaving(false), 800)
+  }
 
-  const themes = [
-    { value: 'tangerine', label: 'Tangerine', color: 'bg-orange-500' },
-    { value: 'ocean-breeze', label: 'Ocean Breeze', color: 'bg-blue-500' },
-    { value: 'claude', label: 'Claude', color: 'bg-amber-600' },
-    { value: 'forest-green', label: 'Forest Green', color: 'bg-green-600' },
-    { value: 'royal-purple', label: 'Royal Purple', color: 'bg-purple-600' },
-    { value: 'crimson-red', label: 'Crimson Red', color: 'bg-red-600' },
-    { value: 'clean-slate', label: 'Clean Slate', color: 'bg-slate-600' },
-    { value: 'twitter', label: 'Twitter Blue', color: 'bg-sky-500' },
-  ]
+  const availableIcons = appConfig.icons
+  const themes = appConfig.themes.map(t => {
+    const colorMap: Record<string, string> = {
+      'tangerine': 'bg-orange-500',
+      'ocean-breeze': 'bg-blue-500',
+      'claude': 'bg-amber-600',
+      'forest-green': 'bg-green-600',
+      'royal-purple': 'bg-purple-600',
+      'crimson-red': 'bg-red-600',
+      'clean-slate': 'bg-slate-600',
+      'twitter': 'bg-sky-500',
+    }
+    return {
+      value: t.id,
+      label: t.name,
+      color: colorMap[t.id] || 'bg-gray-500'
+    }
+  })
 
   if (!project) {
     return (
@@ -104,14 +116,12 @@ export default function SettingsPage() {
                 </div>
               </div>
               <Button 
-                onClick={() => {
-                  updateAppName(appName)
-                  updateAppIcon(selectedIcon)
-                }}
-                className="bg-primary hover:bg-primary/90"
+                onClick={handleApplyBranding}
+                disabled={isSaving}
+                className="bg-primary hover:bg-primary/90 transition-all hover:scale-105 active:scale-95"
               >
                 <Save className="h-4 w-4 mr-2" />
-                Apply Branding
+                {isSaving ? 'Saving...' : 'Apply Branding'}
               </Button>
             </CardContent>
           </Card>

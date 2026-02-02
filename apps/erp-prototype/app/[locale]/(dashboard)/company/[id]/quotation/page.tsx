@@ -16,42 +16,9 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import { DateRangeFilter } from '@/components/date-range-filter'
 import { AIInsightsBadge } from '@/components/ai-insights-badge'
+import { mockQuotations, type Quotation } from '@/lib/mock-data'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
-
-interface Quotation {
-  id: string
-  quotationNumber: string
-  customer: string
-  date: string
-  validUntil: string
-  amount: number
-  status: string
-  items: number
-}
-
-const mockData: Quotation[] = [
-  { id: '1', quotationNumber: 'QT-2026-001', customer: 'Acme Corp', date: '2026/01/15', validUntil: '2026/02/15', amount: 15000, status: 'Sent', items: 5 },
-  { id: '2', quotationNumber: 'QT-2026-002', customer: 'Tech Solutions', date: '2026/01/16', validUntil: '2026/02/16', amount: 28500, status: 'Draft', items: 8 },
-  { id: '3', quotationNumber: 'QT-2026-003', customer: 'Global Industries', date: '2026/01/17', validUntil: '2026/02/17', amount: 42000, status: 'Accepted', items: 12 },
-  { id: '4', quotationNumber: 'QT-2026-004', customer: 'Smart Systems', date: '2026/01/18', validUntil: '2026/02/18', amount: 19800, status: 'Sent', items: 6 },
-  { id: '5', quotationNumber: 'QT-2026-005', customer: 'Digital Dynamics', date: '2026/01/19', validUntil: '2026/02/19', amount: 33600, status: 'Rejected', items: 10 },
-  { id: '6', quotationNumber: 'QT-2026-006', customer: 'Innovate Ltd', date: '2026/01/20', validUntil: '2026/02/20', amount: 25000, status: 'Draft', items: 7 },
-  { id: '7', quotationNumber: 'QT-2026-007', customer: 'Future Tech', date: '2026/01/21', validUntil: '2026/02/21', amount: 18500, status: 'Sent', items: 4 },
-  { id: '8', quotationNumber: 'QT-2026-008', customer: 'Mega Corp', date: '2026/01/22', validUntil: '2026/02/22', amount: 52000, status: 'Accepted', items: 15 },
-  { id: '9', quotationNumber: 'QT-2026-009', customer: 'Prime Solutions', date: '2026/01/23', validUntil: '2026/02/23', amount: 31200, status: 'Expired', items: 9 },
-  { id: '10', quotationNumber: 'QT-2026-010', customer: 'Alpha Industries', date: '2026/01/24', validUntil: '2026/02/24', amount: 22500, status: 'Sent', items: 6 },
-  { id: '11', quotationNumber: 'QT-2026-011', customer: 'Beta Systems', date: '2026/01/25', validUntil: '2026/02/25', amount: 38000, status: 'Accepted', items: 11 },
-  { id: '12', quotationNumber: 'QT-2026-012', customer: 'Gamma Tech', date: '2026/01/26', validUntil: '2026/02/26', amount: 16800, status: 'Draft', items: 5 },
-  { id: '13', quotationNumber: 'QT-2026-013', customer: 'Delta Corp', date: '2026/01/27', validUntil: '2026/02/27', amount: 45000, status: 'Sent', items: 13 },
-  { id: '14', quotationNumber: 'QT-2026-014', customer: 'Epsilon Ltd', date: '2026/01/28', validUntil: '2026/02/28', amount: 27500, status: 'Rejected', items: 8 },
-  { id: '15', quotationNumber: 'QT-2026-015', customer: 'Zeta Industries', date: '2026/01/29', validUntil: '2026/03/01', amount: 35000, status: 'Accepted', items: 10 },
-  { id: '16', quotationNumber: 'QT-2026-016', customer: 'Omega Solutions', date: '2026/01/30', validUntil: '2026/03/02', amount: 29800, status: 'Draft', items: 7 },
-  { id: '17', quotationNumber: 'QT-2026-017', customer: 'Nexus Corp', date: '2026/01/31', validUntil: '2026/03/03', amount: 41000, status: 'Sent', items: 12 },
-  { id: '18', quotationNumber: 'QT-2026-018', customer: 'Vertex Systems', date: '2026/02/01', validUntil: '2026/03/04', amount: 23500, status: 'Expired', items: 6 },
-  { id: '19', quotationNumber: 'QT-2026-019', customer: 'Quantum Tech', date: '2026/02/02', validUntil: '2026/03/05', amount: 36000, status: 'Accepted', items: 10 },
-  { id: '20', quotationNumber: 'QT-2026-020', customer: 'Stellar Industries', date: '2026/02/03', validUntil: '2026/03/06', amount: 48500, status: 'Sent', items: 14 },
-]
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -206,7 +173,7 @@ export default function QuotationPage() {
   }
 
   const filteredData = React.useMemo(() => {
-    return mockData.filter(quotation => {
+    return mockQuotations.filter(quotation => {
       const matchesQuotationNumber = !filterCriteria.quotationNumber || quotation.quotationNumber.toLowerCase().includes(filterCriteria.quotationNumber.toLowerCase())
       const matchesStatus = filterCriteria.status === 'all' || quotation.status === filterCriteria.status
       const matchesCustomer = !filterCriteria.customer || quotation.customer.toLowerCase().includes(filterCriteria.customer.toLowerCase())

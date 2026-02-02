@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { ProjectLayout } from '@/components/project-layout'
 import { Plus, Trash2, ArrowLeft, Save } from 'lucide-react'
 import { toast } from 'sonner'
-import { BOMItem } from '@/lib/bom-data'
+import { BOMItem } from '@/lib/mock-data'
 
 export default function BOMNewPage() {
   const params = useParams()

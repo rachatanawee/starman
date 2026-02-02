@@ -11,7 +11,7 @@ import {
   calculateJobHistoryStats,
   getTopPerformers,
   JobHistoryRecord
-} from '@/lib/job-history-data'
+} from '@/lib/mock-data'
 
 export default function JobHistoryPage() {
   const params = useParams()

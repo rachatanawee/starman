@@ -7,8 +7,8 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { ProjectLayout } from '@/components/project-layout'
 import { ArrowLeft, Edit, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Factory } from 'lucide-react'
-import { mockProductionOrders, ProductionStatus } from '@/lib/production-order-data'
-import { mockBOMs } from '@/lib/bom-data'
+import { mockProductionOrders, ProductionStatus } from '@/lib/mock-data'
+import { mockBOMs } from '@/lib/mock-data'
 
 const statusConfig: Record<ProductionStatus, { label: string; color: string; icon: any }> = {
   created: { label: 'Created', color: 'bg-gray-500', icon: Clock },

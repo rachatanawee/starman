@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import { Filter, X, ArrowLeft, History } from 'lucide-react'
-import { mockDailyAllowanceSummary, DailyAllowanceSummary } from '@/lib/worker-allowance-data'
+import { mockDailyAllowanceSummary, DailyAllowanceSummary } from '@/lib/mock-data'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
 import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
 import { DataGridSortMenu } from '@/components/tablecn/data-grid/data-grid-sort-menu'

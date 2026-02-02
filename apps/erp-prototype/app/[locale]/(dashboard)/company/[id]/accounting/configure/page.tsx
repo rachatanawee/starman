@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ArrowLeft, Save, Plus, Trash2, ExternalLink } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
-import { mockIntegration, mockAccountMappings, type ProviderType, type SourceType } from '@/lib/accounting-data'
+import { mockIntegration, mockAccountMappings, type ProviderType, type SourceType } from '@/lib/mock-data'
 import { useState } from 'react'
 
 const providers = [

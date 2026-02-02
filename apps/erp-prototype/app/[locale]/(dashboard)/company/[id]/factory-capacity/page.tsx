@@ -2,7 +2,7 @@
 
 import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useState } from '@/lib/common-exports'
 import { Clock, Factory, AlertTriangle, TrendingUp, Zap, CheckCircle, X, Sparkles, Building2 } from 'lucide-react'
-import { mockWorkCenterCapacity, mockMachineDowntime, mockAICapacityAlerts, AICapacityAlert } from '@/lib/factory-capacity-data'
+import { mockWorkCenterCapacity, mockMachineDowntime, mockAICapacityAlerts, AICapacityAlert } from '@/lib/mock-data'
 import { toast } from 'sonner'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts'
 

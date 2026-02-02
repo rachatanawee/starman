@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { ProjectLayout } from '@/components/project-layout'
 import { ArrowLeft, Edit, Save, Plus, X, Package2, MapPin, TrendingUp, AlertTriangle } from 'lucide-react'
-import { mockInventoryItems, mockStockTransactions } from '@/lib/inventory-data'
+import { mockInventoryItems, mockStockTransactions } from '@/lib/mock-data'
 import { toast } from 'sonner'
 
 export default function InventoryDetailPage() {

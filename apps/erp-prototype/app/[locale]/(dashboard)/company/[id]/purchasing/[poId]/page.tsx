@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ProjectLayout } from '@/components/project-layout'
 import { ArrowLeft, Edit, Clock, Package, CheckCircle, XCircle, FileText, AlertTriangle, ShieldCheck } from 'lucide-react'
-import { mockPurchaseOrders, mockGoodsReceipts, mockVendorBills, type POStatus } from '@/lib/purchasing-data'
+import { mockPurchaseOrders, mockGoodsReceipts, mockVendorBills, type POStatus } from '@/lib/mock-data'
 
 const statusConfig: Record<POStatus, { label: string; color: string; icon: any }> = {
   draft: { label: 'Draft', color: 'bg-gray-500', icon: FileText },

@@ -11,7 +11,7 @@ import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Plus, Trash2, Save } from 'lucide-react'
 import { toast } from 'sonner'
-import { mockPurchaseOrders } from '@/lib/purchasing-data'
+import { mockPurchaseOrders } from '@/lib/mock-data'
 
 interface POItem {
   id: string

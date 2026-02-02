@@ -9,7 +9,7 @@ import { Sparkles, Package, AlertTriangle, TrendingUp, Zap, Clock, CheckCircle, 
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { mockMRPRequirements, mockAIRecommendations, MRPRequirement, AIRecommendation } from '@/lib/mrp-data'
+import { mockMRPRequirements, mockAIRecommendations, MRPRequirement, AIRecommendation } from '@/lib/mock-data'
 import { FloatingUndo, StatusIndicator } from '@/components/feedback'
 import { useTranslations } from 'next-intl'
 import { DynamicTitle } from '@/components/dynamic-title'

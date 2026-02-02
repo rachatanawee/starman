@@ -21,7 +21,7 @@ import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/component
 import { DateRangeFilter } from '@/components/date-range-filter'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
-import { mockPurchaseOrders, mockAIAlerts, type PurchaseOrder } from '@/lib/purchasing-data'
+import { mockPurchaseOrders, mockAIAlerts, type PurchaseOrder } from '@/lib/mock-data'
 import { DynamicTitle } from '@/components/dynamic-title'
 
 const getStatusIcon = (status: string) => {

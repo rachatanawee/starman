@@ -3,7 +3,7 @@
 import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useTranslations, useState } from '@/lib/common-exports'
 import { Plus, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, BookOpen, Package, Factory, BarChart3 } from 'lucide-react'
 import Link from 'next/link'
-import { mockAIInsights, mockPlanItems, AIInsight, PlanItem, InsightType, Severity } from '@/lib/production-planning-data'
+import { mockAIInsights, mockPlanItems, AIInsight, PlanItem, InsightType, Severity } from '@/lib/mock-data'
 import { FloatingUndo, StatusIndicator } from '@/components/feedback'
 
 const insightIcons: Record<InsightType, any> = {

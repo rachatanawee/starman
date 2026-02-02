@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ArrowLeft, Calendar, ZoomIn, ZoomOut, Save } from 'lucide-react'
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
-import { mockPlanItems, PlanItem } from '@/lib/production-planning-data'
+import { mockPlanItems, PlanItem } from '@/lib/mock-data'
 import { toast } from 'sonner'
 
 export default function GanttChartPage() {

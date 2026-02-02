@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { AlertCircle, Activity, TrendingUp, Clock } from 'lucide-react'
-import { WorkCenter, mockOEEData } from '@/lib/manufacturing-data'
+import { WorkCenter, mockOEEData } from '@/lib/mock-data'
 import { Progress } from '@/components/ui/progress'
 
 interface SupervisorDashboardProps {

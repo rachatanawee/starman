@@ -2,7 +2,7 @@
 
 import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
 import { DollarSign, Users, TrendingUp, AlertTriangle, CheckCircle, X, Sparkles, Trophy, Target, History, Users2 } from 'lucide-react'
-import { mockDailyAllowanceSummary, mockAllowanceTransactions, mockAICoachingAlerts, AICoachingAlert, DailyAllowanceSummary } from '@/lib/worker-allowance-data'
+import { mockDailyAllowanceSummary, mockAllowanceTransactions, mockAICoachingAlerts, AICoachingAlert, DailyAllowanceSummary } from '@/lib/mock-data'
 import { toast } from 'sonner'
 
 const statusColors = {

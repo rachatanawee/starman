@@ -11,8 +11,8 @@ import { Badge } from '@/components/ui/badge'
 import { ProjectLayout } from '@/components/project-layout'
 import { ArrowLeft, Save, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
-import { mockProductionOrders } from '@/lib/production-order-data'
-import { mockBOMs } from '@/lib/bom-data'
+import { mockProductionOrders } from '@/lib/mock-data'
+import { mockBOMs } from '@/lib/mock-data'
 
 export default function EditProductionOrderPage() {
   const params = useParams()

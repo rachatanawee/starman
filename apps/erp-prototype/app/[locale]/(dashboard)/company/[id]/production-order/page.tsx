@@ -25,7 +25,7 @@ import { Plus, Factory, Search, Filter, X, Clock, Package, AlertCircle, CheckCir
 import { ProjectLayout } from '@/components/project-layout'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { mockProductionOrders, ProductionOrder, ProductionStatus } from '@/lib/production-order-data'
+import { mockProductionOrders, ProductionOrder, ProductionStatus } from '@/lib/mock-data'
 import { useTranslations } from 'next-intl'
 import {
   ColumnDef,

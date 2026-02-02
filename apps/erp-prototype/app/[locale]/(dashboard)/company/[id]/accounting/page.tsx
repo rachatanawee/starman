@@ -2,7 +2,7 @@
 
 import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
 import { RefreshCw, Settings, AlertTriangle, CheckCircle2, Clock, XCircle, FileText, TrendingUp, Zap, ExternalLink, Calculator } from 'lucide-react'
-import { mockIntegration, mockSyncLogs, mockAIAlerts, mockTaxSummary, mockAccountMappings, getSyncStats } from '@/lib/accounting-data'
+import { mockIntegration, mockSyncLogs, mockAIAlerts, mockTaxSummary, mockAccountMappings, getSyncStats } from '@/lib/mock-data'
 
 export default function AccountingPage() {
   const params = useParams()

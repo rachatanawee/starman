@@ -15,7 +15,7 @@ import {
   WIPBalance,
   CostLedgerEntry,
   AIFinancialAlert
-} from '@/lib/wip-costing-data'
+} from '@/lib/mock-data'
 import { toast } from 'sonner'
 
 const statusColors = {

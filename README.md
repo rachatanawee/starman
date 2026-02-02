@@ -1,374 +1,236 @@
-# Starman ERP 🚀
+# Starman Template 🚀
 
-AI-powered Enterprise Resource Planning system built with Next.js, TypeScript, and modern web technologies.
+A production-ready Next.js application template with built-in theming, authentication, data management, and reusable business utilities. Perfect for building enterprise applications quickly.
 
-## 🌟 Features
+> **Note**: This template includes a complete ERP system as a reference implementation. You can use it as-is or customize it for your specific needs.
 
-### Authentication & Session Management 🔐
-- **Smart Login System** - Animated login page with fade transitions
-  - Credential validation (demo@erp.com / demo123 or any @erp.com email)
-  - Error handling with clear messages
-  - Fade out/in transitions on login/logout
-  - Build version display with hover tooltip
-- **Session Persistence** - Remember last visited page and company
-  - Auto-redirect to last page after login
-  - Remember last selected company
-  - Page tracking across navigation
-- **Animated Branding** - Dynamic login page with continuous animations
-  - Floating gradient shapes
-  - Pulsing glow effects
-  - Smooth hover transitions
+## ✨ Why This Template?
 
-### App Customization 🎨
-- **Custom Branding** - Personalize application name and icon
-  - Change app name (default: "Starman ERP")
-  - Choose from 10 icon options (GitBranch, Star, Zap, Rocket, Heart, Sparkles, Building2, Settings, Shield, Globe)
-  - Settings saved to localStorage
-  - Applied across login page, sidebar, and all UI elements
+- **🎨 8 Beautiful Themes** - Pre-built color schemes with instant switching
+- **🔧 Centralized Configuration** - Single source of truth for all app settings
+- **📊 Mock Data System** - Generic data generators for rapid prototyping
+- **🛠️ Business Utilities** - Ready-to-use functions for common operations
+- **🎯 Type-Safe** - Full TypeScript support throughout
+- **📱 Responsive** - Mobile-first design with modern UI components
+- **🌐 i18n Ready** - Multi-language support (English/Thai)
+- **🔐 Auth System** - Complete authentication flow with session management
 
-### Theme System 🎨
-- **8 Beautiful Themes** - Tangerine, Ocean Breeze, Claude, Forest Green, Royal Purple, Crimson Red, Clean Slate, Twitter Blue
-- **Instant Theme Switching** - Change themes without page refresh
-- **Persistent Preferences** - Theme selection saved to localStorage
-- **Comprehensive Coverage** - Themes apply to all UI elements (sidebar, buttons, titles, charts, borders)
-- **Visual Preview** - See theme colors before applying
-
-### Sales Module
-- **Quotation Management** - Create and manage sales quotations with AI-powered customer insights
-- **Sales Order** - Track customer orders with complete document linkage
-- **Sales Invoice** - Generate invoices and track payments
-
-### Production Module
-- **Bill of Materials (BOM)** - Manage production recipes with tree view and cost estimation
-- **Production Order** - Track manufacturing orders with real-time progress monitoring
-- **Production Planning** - AI-powered scheduling with "The Strategist" agent
-  - Capacity conflict detection
-  - Material risk analysis
-  - Cost optimization suggestions
-  - Deadline risk alerts
-- **Manufacturing Execution** - Shop floor control system
-  - Operator Cockpit - Kiosk mode for machine operators
-  - Supervisor Dashboard - Real-time factory monitoring with OEE metrics
-  - AI Co-Pilot - Intelligent problem-solving assistance
-
-### Reports & Analytics Module
-- **Dashboard** - Executive overview with modern design
-  - Fullscreen mode for presentations
-  - Export to CSV for data analysis
-  - Print-friendly layout
-  - Real-time metrics with hover effects
-  - Gradient headers and visual enhancements
-- **Factory Capacity Report** - Machine utilization and bottleneck analysis
-- **Worker Allowance Report** - Labor cost tracking and productivity metrics
-- **WIP Costing** - Real-time job costing with AI Financial Analyst
-  - Cost ledger tracking (DM/DL/OH)
-  - Variance analysis
-  - Margin erosion alerts
-  - One-click cost optimization
-- **Job History** - Completed production analysis with performance rankings
-
-### Accounting Interface Module
-- **Integration Hub** - Bridge to Thai accounting software (PEAK, FlowAccount, TRCLOUD, Express)
-- **Sync Dashboard** - Real-time document sync status monitoring
-- **AI Reconciliation Agent** - Intelligent error detection and auto-fix
-  - Missing Tax ID alerts
-  - Unsynced document detection
-  - Mapping error resolution
-  - Duplicate entry prevention
-- **Tax Staging** - VAT and WHT report preparation
-- **GL Account Mapping** - Chart of accounts configuration
-
-### User Management Module
-- **User Administration** - Manage users with role-based access control
-  - 7 roles: Admin, Manager, Accountant, Production Manager, Warehouse Staff, Sales, Viewer
-  - Module permissions: Sales, Production, Inventory, Purchasing, Accounting, Reports, Settings
-  - Company access control: Assign users to specific companies
-  - Inline editing: Add/edit users without dialog popups
-  - Search and filter: By role, status, name, or email
-
-### AI Capabilities 🤖
-- **The Strategist** - Production planning optimization
-- **The Co-Pilot** - Shop floor problem diagnosis
-- **The Financial Analyst** - WIP costing and margin analysis
-- **The Reconciliation Agent** - Accounting sync error resolution
-- Customer trend analysis
-- Predictive maintenance alerts
-- One-click fix actions
-
-## 🎨 Theme System
-
-Starman ERP features a comprehensive theme system with 8 beautiful color themes that transform the entire application interface.
-
-### Available Themes
-- **Tangerine** - Vibrant orange theme (default)
-- **Ocean Breeze** - Calming blue theme
-- **Claude** - Warm brown theme
-- **Forest Green** - Natural green theme
-- **Royal Purple** - Elegant purple theme
-- **Crimson Red** - Bold red theme
-- **Clean Slate** - Professional gray theme
-- **Twitter Blue** - Classic Twitter blue
-
-### Theme Features
-- **Global Color System**: Themes apply to all UI elements including:
-  - Sidebar highlights and active states
-  - Primary buttons and actions
-  - Page titles and icons
-  - Progress bars and charts
-  - Borders and accents
-  - Focus rings and hover states
-  
-- **Persistent Settings**: Theme selection is saved to localStorage and persists across sessions
-- **Dynamic Loading**: Themes are loaded dynamically without page refresh
-- **Visual Preview**: Settings page shows color preview for each theme
-- **Consistent Design**: All pages follow the same design language with theme-aware components
-
-### Changing Themes
-1. Navigate to Settings page (`/company/[id]/settings`)
-2. Scroll to "Theme & Appearance" section
-3. Click on any theme card to apply it instantly
-4. Your selection is automatically saved
-
-### Customizing App Branding
-1. Navigate to Settings page (`/company/[id]/settings`)
-2. Find "App Branding" section at the top
-3. Enter your custom application name
-4. Select an icon from the available options
-5. Click "Apply Branding" to save
-6. Changes will appear on login page and sidebar
-
-### Theme Architecture
-- **CSS Variables**: Uses CSS custom properties for dynamic theming
-- **OKLCH Color Space**: Modern color format for better perceptual uniformity
-- **Tailwind Integration**: Theme variables integrate seamlessly with Tailwind utilities
-- **Component Support**: All UI components are theme-aware using `bg-primary`, `text-primary`, etc.
-
-### Adding Custom Themes
-1. Create a new CSS file in `/public/themes/your-theme.css`
-2. Define the required CSS variables:
-   ```css
-   :root {
-     --primary: oklch(0.65 0.25 30);
-     --primary-foreground: oklch(1 0 0);
-     --sidebar-primary: oklch(0.65 0.25 30);
-     --sidebar-primary-foreground: oklch(1 0 0);
-     --ring: oklch(0.65 0.25 30);
-     --sidebar-ring: oklch(0.65 0.25 30);
-   }
-   ```
-3. Add the theme to the settings context in `/lib/settings-context.tsx`
-4. Theme will be available in the Settings page
-
-## 🛠️ Tech Stack
-
-- **Runtime**: Bun (fast JavaScript runtime)
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS with OKLCH color space
-- **UI Components**: shadcn/ui
-- **Data Grid**: TanStack Table
-- **Charts**: Recharts
-- **Diagrams**: Mermaid
-- **State Management**: React Context + Hooks
-- **Internationalization**: next-intl (English/Thai)
-- **Theme System**: Dynamic CSS loading with localStorage persistence
-
-## 📁 Project Structure
-
-```
-erp/
-├── apps/
-│   └── erp-prototype/
-│       ├── app/                    # Next.js app directory
-│       │   └── [locale]/
-│       │       └── (dashboard)/
-│       │           ├── company/[id]/
-│       │           │   ├── quotation/
-│       │           │   ├── sales-order/
-│       │           │   ├── sales-invoice/
-│       │           │   ├── bom/
-│       │           │   ├── production-order/
-│       │           │   ├── production-planning/
-│       │           │   ├── manufacturing/
-│       │           │   ├── factory-capacity/
-│       │           │   ├── worker-allowance/
-│       │           │   ├── wip-costing/
-│       │           │   ├── job-history/
-│       │           │   ├── accounting/
-│       │           │   └── settings/
-│       │           ├── users/          # User management
-│       │           └── guide/          # User documentation
-│       ├── components/             # Reusable components
-│       │   ├── ui/                # shadcn/ui components
-│       │   ├── tablecn/           # Data grid components
-│       │   ├── theme-loader.tsx   # Dynamic theme loading
-│       │   ├── page-title.tsx     # Consistent page titles
-│       │   ├── operator-cockpit.tsx
-│       │   ├── supervisor-dashboard.tsx
-│       │   └── bom-tree-view.tsx
-│       ├── lib/                   # Utilities and mock data
-│       │   ├── settings-context.tsx  # Theme state management
-│       │   ├── bom-data.ts
-│       │   ├── production-order-data.ts
-│       │   ├── production-planning-data.ts
-│       │   ├── manufacturing-data.ts
-│       │   ├── factory-capacity-data.ts
-│       │   ├── worker-allowance-data.ts
-│       │   ├── wip-costing-data.ts
-│       │   ├── job-history-data.ts
-│       │   ├── accounting-data.ts
-│       │   └── user-data.ts
-│       └── public/
-│           └── themes/            # Theme CSS files
-│               ├── tangerine.css
-│               ├── ocean-breeze.css
-│               ├── claude.css
-│               ├── forest-green.css
-│               ├── royal-purple.css
-│               ├── crimson-red.css
-│               ├── clean-slate.css
-│               └── twitter.css
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Bun 1.0+ (recommended) or Node.js 18+
-- Git
-
-### Installation
+## 🚀 Quick Start
 
 ```bash
-# Clone the repository
+# Clone and install
 git clone <repository-url>
-cd erp
-
-# Navigate to the app directory
-cd apps/erp-prototype
-
-# Install dependencies
+cd starman/apps/erp-prototype
 bun install
 
 # Run development server
 bun run dev
 ```
 
-Open [http://localhost:3200](http://localhost:3200) in your browser.
+Open [http://localhost:3200](http://localhost:3200) and login with `demo@erp.com` / `demo123`
 
-### Build for Production
+## 📚 Documentation
 
-```bash
-# Build the application
-bun run build
+- **[Template Guide](TEMPLATE_GUIDE.md)** - How to customize this template
+- **[ERP-Specific Files](ERP_SPECIFIC_FILES.md)** - What to remove/keep when adapting
+- **[Demo Page](/template-demo)** - Live examples of utilities and components
 
-# Start production server
-bun run start
+## 🎨 Core Features
+
+### 1. Configuration System
+
+Centralized configuration in `/lib/app.config.ts`:
+
+```typescript
+import { appConfig } from '@/lib/app.config'
+
+// Access app settings
+const appName = appConfig.app.defaultName
+const themes = appConfig.themes
+const features = appConfig.features
 ```
 
-## 📖 User Guide
+### 2. Theme System
 
-The system includes comprehensive built-in documentation accessible via the "Learn More" buttons throughout the application, or directly at `/guide`.
+8 pre-built themes with instant switching:
+- Tangerine (Orange)
+- Ocean Breeze (Blue)  
+- Claude (Brown)
+- Forest Green
+- Royal Purple
+- Crimson Red
+- Clean Slate (Gray)
+- Twitter Blue
 
-### Quick Navigation
-- **Sales Guide**: `/guide?tab=sales`
-- **Production Guide**: `/guide?tab=production`
-- **Manufacturing Execution**: `/guide?tab=production&section=manufacturing-execution`
-- **Production Planning**: `/guide?tab=production&section=production-planning`
+**Add custom themes:**
+1. Create `/public/themes/your-theme.css`
+2. Add to `appConfig.themes`
+3. Done!
 
-## 🎯 Key Concepts
+### 3. Mock Data Generators
 
-### Authentication Flow
-The system uses mock authentication with session management:
-- Login with demo@erp.com / demo123 or any email ending with @erp.com
-- Session tokens stored in localStorage
-- Auto-redirect to last visited page after login
-- Fade transitions on login/logout for smooth UX
-- Page tracking to remember user's last location
+Generic data generators for rapid prototyping:
 
-### App Customization
-Users can personalize the application:
-- Custom app name replaces "Starman ERP" throughout the system
-- Icon selection from 10 Lucide icons
-- Settings persist in localStorage
-- Changes apply to login page, sidebar, and copyright text
+```typescript
+import { generateTransactions, mockDataGenerator } from '@/lib/mock-data'
 
-### Theme System
-The application uses a dynamic theme system that allows users to customize the entire interface:
-- Themes are loaded as CSS files from `/public/themes/`
-- Settings are managed by `SettingsProvider` context
-- Theme changes apply instantly via `ThemeLoader` component
-- All components use theme-aware CSS variables (`--primary`, `--primary-foreground`, etc.)
-- Tailwind config supports both HSL and OKLCH color formats
+// Generate 20 transactions
+const data = generateTransactions(20)
 
-### Document Flow
-```
-Quotation → Sales Order → Sales Invoice → Payment
-                ↓
-        Production Order → Manufacturing → Finished Goods
+// Custom generation
+const custom = mockDataGenerator.array((i) => ({
+  id: mockDataGenerator.id('item'),
+  name: mockDataGenerator.name('Product'),
+  amount: mockDataGenerator.amount(1000, 50000),
+}), 10)
 ```
 
-### Manufacturing Execution
-- **Operator Cockpit**: Touch-friendly interface for machine operators
-  - Mission Queue - Job selection
-  - Control Panel - START/PAUSE/STOP controls with real-time timer
-  - Output Reporting - Good/Scrap quantity tracking
+### 4. Business Utilities
+
+Ready-to-use functions for common operations:
+
+```typescript
+import { formatUtils, calcUtils, statusUtils } from '@/lib/business-utils'
+
+// Formatting
+formatUtils.currency(1000) // '฿1,000.00'
+formatUtils.percentage(85.5) // '85.5%'
+
+// Calculations
+calcUtils.sum(items, 'amount')
+calcUtils.average(items, 'price')
+
+// Status management
+statusUtils.getVariant('Completed') // 'default'
+statusUtils.getColor('Pending') // 'text-yellow-600'
+```
+
+## 🛠️ Tech Stack
+
+- **Runtime**: Bun
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS + OKLCH colors
+- **UI**: shadcn/ui components
+- **Data Grid**: TanStack Table
+- **Charts**: Recharts
+- **i18n**: next-intl
+
+## 📁 Project Structure
+
+```
+lib/
+├── app.config.ts           # Central configuration
+├── business-utils.ts       # Generic utilities
+├── settings-context.tsx    # Theme & settings state
+├── common-exports.ts       # Barrel exports
+└── mock-data/              # Mock data system
+    ├── generator.ts        # Data generators
+    ├── generic-data.ts     # Generic types
+    └── *.ts                # Domain-specific data
+
+components/
+├── ui/                     # shadcn/ui components
+├── tablecn/                # Data grid
+├── project-layout.tsx      # Main layout
+├── page-title.tsx          # Page headers
+└── theme-loader.tsx        # Dynamic theming
+
+app/
+└── [locale]/
+    ├── (auth)/             # Login pages
+    └── (dashboard)/        # Main app
+        ├── template-demo/  # Usage examples
+        └── company/[id]/   # Your pages here
+```
+
+## 🎯 Customization Guide
+
+### 1. Update Branding
+
+```typescript
+// lib/app.config.ts
+export const appConfig = {
+  app: {
+    defaultName: 'Your App Name',
+    defaultIcon: 'Building2',
+    version: '1.0.0',
+  },
+  // ...
+}
+```
+
+### 2. Add Your Pages
+
+```typescript
+// app/[locale]/(dashboard)/your-page/page.tsx
+import { ProjectLayout, PageTitle } from '@/lib/common-exports'
+import { generateTransactions } from '@/lib/mock-data'
+import { Icon } from 'lucide-react'
+
+export default function YourPage() {
+  const data = generateTransactions(20)
   
-- **Supervisor Dashboard**: Factory-wide monitoring
-  - Factory Map - Live machine status visualization
-  - OEE Monitor - Availability, Performance, Quality metrics
-  - Alert Feed - Real-time issue notifications
+  return (
+    <ProjectLayout projectId={projectId}>
+      <PageTitle 
+        icon={Icon}
+        title="Your Page"
+        subtitle="Description"
+      />
+      {/* Your content */}
+    </ProjectLayout>
+  )
+}
+```
 
-### AI-Powered Planning
-The Strategist AI analyzes production schedules and provides:
-- 🔴 Capacity Conflict - Machine overload detection
-- 📉 Material Risk - Shortage predictions
-- ⚡ Cost Optimization - Setup time reduction
-- ⏰ Deadline Risk - Late delivery warnings
+### 3. Remove ERP Examples (Optional)
+
+See [ERP_SPECIFIC_FILES.md](ERP_SPECIFIC_FILES.md) for detailed instructions on removing the ERP reference implementation.
 
 ## 🎨 Design System
 
-- **Authentication UI**: Modern login page with animated background
-  - Floating gradient shapes with continuous animation
-  - Pulsing glow effects on icons
-  - Smooth fade transitions
-  - Responsive design for mobile and desktop
-- **App Branding**: Customizable application identity
-  - Dynamic app name display
-  - Icon selection from Lucide library
-  - Consistent branding across all pages
-- **Theme System**: 8 customizable color themes with instant switching
-- **Color Variables**: CSS custom properties using OKLCH color space
-- **Typography**: System fonts with responsive sizing (text-xl/2xl/3xl)
-- **Components**: Consistent shadcn/ui design language with theme integration
-- **Icons**: Lucide React icons matching sidebar navigation
-- **Responsive**: Mobile-first approach with breakpoints (sm/md/lg/xl)
-- **Animations**: Smooth transitions and hover effects
-- **Accessibility**: Focus rings and keyboard navigation support
+## 📖 Reference Implementation
+
+This template includes a complete ERP system as a reference implementation:
+
+### Included Modules
+- **Sales** - Quotations, Orders, Invoices
+- **Production** - BOM, Orders, Planning, Manufacturing
+- **Reports** - Dashboard, Capacity, Costing, History
+- **Accounting** - Integration hub, Sync, Reconciliation
+- **Users** - Role-based access control
+
+### AI Features (Examples)
+- Production planning optimization
+- Shop floor problem diagnosis
+- Cost analysis and margin tracking
+- Accounting reconciliation
+
+You can keep these as examples or remove them entirely. See [ERP_SPECIFIC_FILES.md](ERP_SPECIFIC_FILES.md) for details.
 
 ## 🔧 Development
+### Authentication
+- Mock auth system with session management
+- Login: `demo@erp.com` / `demo123`
+- Auto-redirect to last visited page
+- Session persistence in localStorage
 
 ### Mock Data
-All modules use realistic mock data for demonstration:
-- Billion-baht factory scale (invoices 8-15M, production costs 5-12.9M)
-- Steel service center context
-- 20 mock users with 7 different roles
-- 4 sample companies
-- Realistic manufacturing operations
-- Production schedules with conflicts
+- Centralized in `/lib/mock-data/`
+- Generic generators for common data types
+- Domain-specific examples (sales, production, etc.)
+- Easy to replace with real API calls
 
-### Adding New Features
-1. Create mock data in `/lib/*-data.ts`
-2. Build components in `/components/`
-3. Add pages in `/app/[locale]/(dashboard)/company/[id]/`
-4. Update guide documentation in `/app/[locale]/(dashboard)/guide/components/`
+### Adding Features
+1. Create mock data using generators
+2. Build components with shadcn/ui
+3. Add pages following existing patterns
+4. Use business utilities for common operations
 
 ## 📝 License
 
 [Your License Here]
-
-## 👥 Contributors
-
-[Your Team/Contributors Here]
 
 ## 🙏 Acknowledgments
 
