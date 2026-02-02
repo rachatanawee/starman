@@ -4,6 +4,28 @@ AI-powered Enterprise Resource Planning system built with Next.js, TypeScript, a
 
 ## 🌟 Features
 
+### Authentication & Session Management 🔐
+- **Smart Login System** - Animated login page with fade transitions
+  - Credential validation (demo@erp.com / demo123 or any @erp.com email)
+  - Error handling with clear messages
+  - Fade out/in transitions on login/logout
+  - Build version display with hover tooltip
+- **Session Persistence** - Remember last visited page and company
+  - Auto-redirect to last page after login
+  - Remember last selected company
+  - Page tracking across navigation
+- **Animated Branding** - Dynamic login page with continuous animations
+  - Floating gradient shapes
+  - Pulsing glow effects
+  - Smooth hover transitions
+
+### App Customization 🎨
+- **Custom Branding** - Personalize application name and icon
+  - Change app name (default: "Starman ERP")
+  - Choose from 10 icon options (GitBranch, Star, Zap, Rocket, Heart, Sparkles, Building2, Settings, Shield, Globe)
+  - Settings saved to localStorage
+  - Applied across login page, sidebar, and all UI elements
+
 ### Theme System 🎨
 - **8 Beautiful Themes** - Tangerine, Ocean Breeze, Claude, Forest Green, Royal Purple, Crimson Red, Clean Slate, Twitter Blue
 - **Instant Theme Switching** - Change themes without page refresh
@@ -106,6 +128,14 @@ Starman ERP features a comprehensive theme system with 8 beautiful color themes 
 2. Scroll to "Theme & Appearance" section
 3. Click on any theme card to apply it instantly
 4. Your selection is automatically saved
+
+### Customizing App Branding
+1. Navigate to Settings page (`/company/[id]/settings`)
+2. Find "App Branding" section at the top
+3. Enter your custom application name
+4. Select an icon from the available options
+5. Click "Apply Branding" to save
+6. Changes will appear on login page and sidebar
 
 ### Theme Architecture
 - **CSS Variables**: Uses CSS custom properties for dynamic theming
@@ -247,6 +277,21 @@ The system includes comprehensive built-in documentation accessible via the "Lea
 
 ## 🎯 Key Concepts
 
+### Authentication Flow
+The system uses mock authentication with session management:
+- Login with demo@erp.com / demo123 or any email ending with @erp.com
+- Session tokens stored in localStorage
+- Auto-redirect to last visited page after login
+- Fade transitions on login/logout for smooth UX
+- Page tracking to remember user's last location
+
+### App Customization
+Users can personalize the application:
+- Custom app name replaces "Starman ERP" throughout the system
+- Icon selection from 10 Lucide icons
+- Settings persist in localStorage
+- Changes apply to login page, sidebar, and copyright text
+
 ### Theme System
 The application uses a dynamic theme system that allows users to customize the entire interface:
 - Themes are loaded as CSS files from `/public/themes/`
@@ -282,6 +327,15 @@ The Strategist AI analyzes production schedules and provides:
 
 ## 🎨 Design System
 
+- **Authentication UI**: Modern login page with animated background
+  - Floating gradient shapes with continuous animation
+  - Pulsing glow effects on icons
+  - Smooth fade transitions
+  - Responsive design for mobile and desktop
+- **App Branding**: Customizable application identity
+  - Dynamic app name display
+  - Icon selection from Lucide library
+  - Consistent branding across all pages
 - **Theme System**: 8 customizable color themes with instant switching
 - **Color Variables**: CSS custom properties using OKLCH color space
 - **Typography**: System fonts with responsive sizing (text-xl/2xl/3xl)

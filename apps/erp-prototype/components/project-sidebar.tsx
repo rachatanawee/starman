@@ -6,11 +6,13 @@ import {
   BarChart3, Users, Settings, Calendar, BookOpen, Network,
   Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown
 } from 'lucide-react'
+import * as LucideIcons from 'lucide-react'
 import { Button } from './ui/button'
 import { QuickSearch } from './quick-search'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react'
+import { useSettings } from '@/lib/settings-context'
 
 interface ProjectSidebarProps {
   collapsed: boolean
@@ -31,6 +33,10 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
   const params = useParams()
   const pathname = usePathname()
   const locale = params.locale as string
+  const settings = useSettings()
+  const appName = settings.app_name || 'Starman ERP'
+  const appIcon = settings.app_icon || 'GitBranch'
+  const AppIcon = (LucideIcons as any)[appIcon] || (LucideIcons as any).GitBranch
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('sidebar_collapsed_sections')
@@ -168,9 +174,9 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
         {!collapsed && (
           <div className="flex items-center gap-2">
             <div className="bg-primary p-1.5 rounded-lg">
-              <Star className="h-5 w-5 text-primary-foreground" />
+              <AppIcon className="h-5 w-5 text-primary-foreground" />
             </div>
-            <h2 className="text-lg font-bold text-gray-900">Starman ERP</h2>
+            <h2 className="text-lg font-bold text-gray-900">{appName}</h2>
           </div>
         )}
         <Button 

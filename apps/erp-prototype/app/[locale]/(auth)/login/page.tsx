@@ -4,19 +4,26 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
-import { Loader2, GitBranch, Sparkles, Shield } from 'lucide-react'
+import { Loader2, Sparkles, Shield, GitBranch } from 'lucide-react'
+import * as LucideIcons from 'lucide-react'
 import { mockAuth } from '@/lib/mock-data'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useSettings } from '@/lib/settings-context'
 
 export default function LoginPage() {
   const router = useRouter()
   const t = useTranslations('auth')
+  const settings = useSettings()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isFadingOut, setIsFadingOut] = useState(false)
+  
+  const appName = settings.app_name || 'Starman ERP'
+  const appIcon = settings.app_icon || 'GitBranch'
+  const AppIcon = (LucideIcons as any)[appIcon] || (LucideIcons as any).GitBranch
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -80,9 +87,9 @@ export default function LoginPage() {
         <div className="relative z-10 animate-fade-in-up">
           <div className="flex items-center gap-3 mb-8">
             <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/20 animate-pulse-glow">
-              <GitBranch className="h-8 w-8" />
+              <AppIcon className="h-8 w-8" />
             </div>
-            <h1 className="text-3xl font-bold">Starman ERP</h1>
+            <h1 className="text-3xl font-bold">{appName}</h1>
           </div>
           <h2 className="text-4xl font-bold mb-4 leading-tight">AI-Powered<br />Enterprise Resource Planning</h2>
           <p className="text-lg opacity-90 mb-12">
@@ -119,7 +126,7 @@ export default function LoginPage() {
           </div>
         </div>
         <div className="text-sm opacity-70 relative z-10">
-          © 2025 Starman ERP. Prototype Version.
+          © 2025 {appName}. Prototype Version.
           <div 
             className="mt-1 text-xs opacity-60 cursor-help transition-opacity hover:opacity-100"
             title={process.env.NEXT_PUBLIC_BUILD_TIME ? `Built on ${new Date(process.env.NEXT_PUBLIC_BUILD_TIME).toLocaleString()}` : 'Build time not available'}
@@ -135,9 +142,9 @@ export default function LoginPage() {
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
             <div className="bg-primary p-2 rounded-lg">
-              <GitBranch className="h-6 w-6 text-primary-foreground" />
+              <AppIcon className="h-6 w-6 text-primary-foreground" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">Starman ERP</h1>
+            <h1 className="text-2xl font-bold text-gray-900">{appName}</h1>
           </div>
 
           <Card className="w-full border-0 shadow-xl">

@@ -8,16 +8,25 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save, Palette } from 'lucide-react'
+import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save, Palette, Star, Zap, Rocket, Heart, Sparkles as SparklesIcon } from 'lucide-react'
+import * as LucideIcons from 'lucide-react'
 import { mockProjectsAPI } from '@/lib/mock-data'
 import { useSettings, useSettingsActions } from '@/lib/settings-context'
+import { useState } from 'react'
 
 export default function SettingsPage() {
   const params = useParams()
   const projectId = params.id as string
   const project = mockProjectsAPI.getSync(projectId)
   const settings = useSettings()
-  const { updateTheme } = useSettingsActions()
+  const { updateTheme, updateAppName, updateAppIcon } = useSettingsActions()
+  const [appName, setAppName] = useState(settings.app_name || 'Starman ERP')
+  const [selectedIcon, setSelectedIcon] = useState(settings.app_icon || 'GitBranch')
+
+  const availableIcons = [
+    'GitBranch', 'Star', 'Zap', 'Rocket', 'Heart', 'Sparkles',
+    'Building2', 'Settings', 'Shield', 'Globe'
+  ]
 
   const themes = [
     { value: 'tangerine', label: 'Tangerine', color: 'bg-orange-500' },
@@ -56,6 +65,61 @@ export default function SettingsPage() {
         </div>
 
         <div className="space-y-6 max-w-4xl">
+          {/* App Branding */}
+          <Card className="border-primary/20">
+            <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50">
+              <div className="flex items-center gap-2">
+                <Star className="h-5 w-5 text-primary" />
+                <CardTitle className="text-primary">App Branding</CardTitle>
+              </div>
+              <CardDescription>Customize application name and icon</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label className="mb-2 block">Application Name</Label>
+                <Input 
+                  value={appName}
+                  onChange={(e) => setAppName(e.target.value)}
+                  placeholder="Starman ERP"
+                  className="max-w-md"
+                />
+              </div>
+              <div>
+                <Label className="mb-3 block">Application Icon</Label>
+                <div className="grid grid-cols-5 md:grid-cols-10 gap-3">
+                  {availableIcons.map((iconName) => {
+                    const IconComponent = (LucideIcons as any)[iconName]
+                    return (
+                      <button
+                        key={iconName}
+                        onClick={() => setSelectedIcon(iconName)}
+                        className={`
+                          p-3 rounded-lg border-2 transition-all hover:scale-110
+                          ${selectedIcon === iconName
+                            ? 'border-primary bg-primary/10 shadow-lg'
+                            : 'border-gray-200 hover:border-gray-300'
+                          }
+                        `}
+                      >
+                        {IconComponent && <IconComponent className="h-6 w-6 text-primary" />}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+              <Button 
+                onClick={() => {
+                  updateAppName(appName)
+                  updateAppIcon(selectedIcon)
+                }}
+                className="bg-primary hover:bg-primary/90"
+              >
+                <Save className="h-4 w-4 mr-2" />
+                Apply Branding
+              </Button>
+            </CardContent>
+          </Card>
+
           {/* Theme Settings */}
           <Card className="border-primary/20">
             <CardHeader className="bg-gradient-to-r from-pink-50 to-purple-50">
