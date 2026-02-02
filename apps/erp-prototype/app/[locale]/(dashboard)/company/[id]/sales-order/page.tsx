@@ -341,7 +341,6 @@ export default function SalesOrderPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
-      <DynamicTitle pageTitle="Sales Order" />
       <div className="w-full h-full">
         <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">

@@ -1,6 +1,6 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo, useEffect } from '@/lib/common-exports'
+import { ProjectLayout, DynamicTitle, PageTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo, useEffect } from '@/lib/common-exports'
 import { Plus, Filter, X, User, CheckCircle, FileText, Send, Ban, CalendarX, Sparkles, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
@@ -339,23 +339,22 @@ export default function QuotationPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
-      <DynamicTitle pageTitle="Quotation" />
       <div className="w-full h-full">
         <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <FileText className="h-8 w-8 text-primary flex-shrink-0" />
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">{t('title')}</h1>
+              <PageTitle 
+                icon={FileText}
+                title={t('title')}
+                subtitle={t('subtitle')}
+                badge={
                   <AIInsightsBadge
                     type="positive"
                     message="Top customers: Acme Corp (+45%), Tech Solutions (+32%)"
                     confidence={0.92}
                   />
-                </div>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1">{t('subtitle')}</p>
-              </div>
+                }
+              />
               <div className="flex gap-2">
                 <Link href="/guide?tab=sales&section=quotation">
                   <Button variant="outline" size="sm" className="transition-all hover:scale-105 active:scale-95">

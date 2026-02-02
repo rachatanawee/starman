@@ -23,6 +23,8 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
   const locale = params.locale as string
   const [userEmail, setUserEmail] = useState('')
   const [isFadingOut, setIsFadingOut] = useState(false)
+  const [displayChildren, setDisplayChildren] = useState(children)
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   useEffect(() => {
     const user = localStorage.getItem('mock_user')
@@ -31,6 +33,19 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
       setUserEmail(userData.email)
     }
   }, [])
+
+  useEffect(() => {
+    if (children !== displayChildren) {
+      setIsTransitioning(true)
+      const timer = setTimeout(() => {
+        setDisplayChildren(children)
+        requestAnimationFrame(() => {
+          setIsTransitioning(false)
+        })
+      }, 150)
+      return () => clearTimeout(timer)
+    }
+  }, [children, displayChildren])
 
   const handleLogout = async () => {
     setIsFadingOut(true)
@@ -114,7 +129,12 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
             </div>
           </div>
         )}
-        {children}
+        <div 
+          className="transition-opacity duration-150 ease-in-out"
+          style={{ opacity: isTransitioning ? 0 : 1 }}
+        >
+          {displayChildren}
+        </div>
       </main>
     </div>
   )
