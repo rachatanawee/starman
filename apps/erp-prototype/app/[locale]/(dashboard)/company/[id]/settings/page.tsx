@@ -1,10 +1,6 @@
 'use client'
 
-import { useParams } from 'next/navigation'
-import { ProjectLayout } from '@/components/project-layout'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Input, useParams, useState } from '@/lib/common-exports'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -12,7 +8,6 @@ import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save, Palette, St
 import * as LucideIcons from 'lucide-react'
 import { mockProjectsAPI } from '@/lib/mock-data'
 import { useSettings, useSettingsActions } from '@/lib/settings-context'
-import { useState } from 'react'
 
 export default function SettingsPage() {
   const params = useParams()
@@ -53,6 +48,7 @@ export default function SettingsPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Settings" />
       <div className="p-6">
         <div className="bg-white border-b mb-6 -m-6 p-6">
           <div className="flex items-center gap-3">

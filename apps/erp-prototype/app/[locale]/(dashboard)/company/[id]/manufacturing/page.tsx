@@ -39,6 +39,7 @@ import { mockJobTickets, mockWorkCenters, JobTicket, WorkCenter } from '@/lib/ma
 import { OperatorCockpit } from '@/components/operator-cockpit'
 import { SupervisorDashboard } from '@/components/supervisor-dashboard'
 import { useTranslations } from 'next-intl'
+import { DynamicTitle } from '@/components/dynamic-title'
 
 export default function ManufacturingPage() {
   const params = useParams()
@@ -200,6 +201,7 @@ export default function ManufacturingPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Manufacturing" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>

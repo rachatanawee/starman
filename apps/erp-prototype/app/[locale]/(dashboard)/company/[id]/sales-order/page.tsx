@@ -1,9 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { ProjectLayout, DynamicTitle, PageTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo, useEffect } from '@/lib/common-exports'
 import { Plus, Filter, X, User, Clock, Package, Truck, CheckCircle, XCircle, FileText, BookOpen, ListTodo } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
-import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
 import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
@@ -12,14 +10,10 @@ import { DataGridViewMenu } from '@/components/tablecn/data-grid/data-grid-view-
 import { useDataGrid } from '@/components/tablecn/hooks/use-data-grid'
 import { useWindowSize } from '@/components/tablecn/hooks/use-window-size'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
 import { DateRangeFilter } from '@/components/date-range-filter'
-import { PageTitle } from '@/components/page-title'
-import { useTranslations } from 'next-intl'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 
@@ -347,6 +341,7 @@ export default function SalesOrderPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Sales Order" />
       <div className="w-full h-full">
         <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">

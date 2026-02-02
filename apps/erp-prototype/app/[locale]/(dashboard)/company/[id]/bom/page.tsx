@@ -1,18 +1,11 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Input } from '@/components/ui/input'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo } from '@/lib/common-exports'
 import { Plus, Package, Eye, Edit, Layers, TrendingUp, AlertCircle, Search, Filter, X, BookOpen, GitBranch } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
-import { useParams, useRouter } from 'next/navigation'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Link from 'next/link'
 import { mockBOMs, BOM } from '@/lib/bom-data'
 import { BOMTreeView } from '@/components/bom-tree-view'
-import { useTranslations } from 'next-intl'
 
 export default function BOMPage() {
   const params = useParams()
@@ -59,6 +52,7 @@ export default function BOMPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="BOM" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>

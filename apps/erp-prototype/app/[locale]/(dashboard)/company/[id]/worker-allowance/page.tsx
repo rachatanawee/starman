@@ -1,11 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { ProjectLayout } from '@/components/project-layout'
-import { useParams, useRouter } from 'next/navigation'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
 import { DollarSign, Users, TrendingUp, AlertTriangle, CheckCircle, X, Sparkles, Trophy, Target, History, Users2 } from 'lucide-react'
 import { mockDailyAllowanceSummary, mockAllowanceTransactions, mockAICoachingAlerts, AICoachingAlert, DailyAllowanceSummary } from '@/lib/worker-allowance-data'
 import { toast } from 'sonner'
@@ -76,6 +71,7 @@ export default function WorkerAllowancePage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Worker Allowance" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>

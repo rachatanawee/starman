@@ -22,6 +22,7 @@ import { DateRangeFilter } from '@/components/date-range-filter'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 import { mockPurchaseOrders, mockAIAlerts, type PurchaseOrder } from '@/lib/purchasing-data'
+import { DynamicTitle } from '@/components/dynamic-title'
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -240,6 +241,7 @@ export default function PurchasingPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Purchasing" />
       <div className="w-full h-full">
         <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">

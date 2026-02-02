@@ -39,6 +39,7 @@ import {
   ColumnFiltersState,
   VisibilityState,
 } from '@tanstack/react-table'
+import { DynamicTitle } from '@/components/dynamic-title'
 import {
   Table,
   TableBody,
@@ -359,6 +360,7 @@ export default function ProductionOrderPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Production Order" />
       <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">

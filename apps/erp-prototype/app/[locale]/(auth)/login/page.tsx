@@ -12,6 +12,7 @@ import { mockAuth } from '@/lib/mock-data'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useSettings } from '@/lib/settings-context'
+import { DynamicTitle } from '@/components/dynamic-title'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -64,7 +65,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div className={`flex min-h-screen transition-opacity duration-300 ${isFadingOut ? 'opacity-0' : 'opacity-100'} ${isLoading ? 'cursor-wait' : ''}`}>
+    <>
+      <DynamicTitle pageTitle="Login" />
+      <div className={`flex min-h-screen transition-opacity duration-300 ${isFadingOut ? 'opacity-0' : 'opacity-100'} ${isLoading ? 'cursor-wait' : ''}`}>
       {/* Left Side - Branding */}
       <div className="hidden lg:flex lg:w-1/2 p-12 flex-col justify-between relative overflow-hidden" style={{
         background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-darker) 100%)',
@@ -211,6 +214,7 @@ export default function LoginPage() {
           </Card>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }

@@ -1,16 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useState } from '@/lib/common-exports'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { 
   DollarSign, TrendingUp, AlertTriangle, Clock, 
   Sparkles, BookOpen, Package, Activity, Target
 } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
-import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { 
   mockWIPBalances, 
@@ -97,6 +92,7 @@ export default function WIPCostingPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="WIP Costing" />
       <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">

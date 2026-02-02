@@ -12,6 +12,7 @@ import Link from 'next/link'
 import { mockMRPRequirements, mockAIRecommendations, MRPRequirement, AIRecommendation } from '@/lib/mrp-data'
 import { FloatingUndo, StatusIndicator } from '@/components/feedback'
 import { useTranslations } from 'next-intl'
+import { DynamicTitle } from '@/components/dynamic-title'
 
 const priorityColors = {
   urgent: 'bg-red-100 text-red-800 border-red-300',
@@ -123,6 +124,7 @@ export default function MRPPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="MRP" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>

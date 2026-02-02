@@ -1,18 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, useParams, useRouter, useTranslations, useState } from '@/lib/common-exports'
 import {
   Package2, ShoppingCart, DollarSign, TrendingUp,
   Factory, Users, AlertCircle, CheckCircle2, Clock, RefreshCw, Printer, Building2, Sparkles, LayoutDashboard, Maximize, Minimize, Download
 } from 'lucide-react'
 import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
-import { ProjectLayout } from '@/components/project-layout'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { AIInsightsBadge } from '@/components/ai-insights-badge'
-import { useTranslations } from 'next-intl'
 
 export default function CompanyDashboardPage() {
   const params = useParams()
@@ -127,6 +122,7 @@ export default function CompanyDashboardPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Dashboard" />
       <style jsx global>{`
         @media print {
           .no-print {

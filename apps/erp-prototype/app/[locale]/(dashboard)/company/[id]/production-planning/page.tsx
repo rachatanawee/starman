@@ -1,15 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useTranslations, useState } from '@/lib/common-exports'
 import { Plus, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, BookOpen, Package, Factory, BarChart3 } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
-import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { mockAIInsights, mockPlanItems, AIInsight, PlanItem, InsightType, Severity } from '@/lib/production-planning-data'
-import { useTranslations } from 'next-intl'
 import { FloatingUndo, StatusIndicator } from '@/components/feedback'
 
 const insightIcons: Record<InsightType, any> = {
@@ -192,6 +186,7 @@ export default function ProductionPlanningPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Production Planning" />
       <div className="p-6 space-y-4">
         <div className="flex items-center justify-between">
           <div>

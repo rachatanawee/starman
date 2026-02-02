@@ -1,16 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, Input, useParams, useState } from '@/lib/common-exports'
 import { 
   History, CheckCircle, TrendingUp, Award, 
   BookOpen, Search, Calendar, DollarSign, List
 } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
-import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { 
   mockJobHistory, 
@@ -38,6 +32,7 @@ export default function JobHistoryPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Job History" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>

@@ -12,6 +12,7 @@ import { toast } from 'sonner'
 import { ProjectLayout } from '@/components/project-layout'
 import { useTranslations } from 'next-intl'
 import { useSettings, useSettingsActions } from '@/lib/settings-context'
+import { DynamicTitle } from '@/components/dynamic-title'
 
 export default function ProjectsPage() {
   const router = useRouter()
@@ -90,6 +91,7 @@ export default function ProjectsPage() {
 
   return (
     <ProjectLayout>
+      <DynamicTitle pageTitle="Companies" />
       <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b">

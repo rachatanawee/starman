@@ -1,11 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { ProjectLayout } from '@/components/project-layout'
-import { useParams } from 'next/navigation'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useState } from '@/lib/common-exports'
 import { Clock, Factory, AlertTriangle, TrendingUp, Zap, CheckCircle, X, Sparkles, Building2 } from 'lucide-react'
 import { mockWorkCenterCapacity, mockMachineDowntime, mockAICapacityAlerts, AICapacityAlert } from '@/lib/factory-capacity-data'
 import { toast } from 'sonner'
@@ -63,6 +58,7 @@ export default function FactoryCapacityPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Factory Capacity" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>

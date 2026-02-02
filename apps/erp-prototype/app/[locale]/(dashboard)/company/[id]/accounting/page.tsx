@@ -1,13 +1,8 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
 import { RefreshCw, Settings, AlertTriangle, CheckCircle2, Clock, XCircle, FileText, TrendingUp, Zap, ExternalLink, Calculator } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
-import { useParams, useRouter } from 'next/navigation'
 import { mockIntegration, mockSyncLogs, mockAIAlerts, mockTaxSummary, mockAccountMappings, getSyncStats } from '@/lib/accounting-data'
-import { useState } from 'react'
 
 export default function AccountingPage() {
   const params = useParams()
@@ -53,6 +48,7 @@ export default function AccountingPage() {
 
   return (
     <ProjectLayout projectId={projectId}>
+      <DynamicTitle pageTitle="Accounting" />
       <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
