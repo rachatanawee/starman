@@ -4,16 +4,19 @@ import { createContext, useContext, useState, useEffect } from 'react'
 
 interface Settings {
   theme_name: string
+  last_company_id?: string
 }
 
 interface SettingsContextType {
   settings: Settings
   updateTheme: (theme: string) => void
+  updateLastCompany: (companyId: string) => void
 }
 
 const SettingsContext = createContext<SettingsContextType>({
   settings: { theme_name: 'tangerine' },
   updateTheme: () => {},
+  updateLastCompany: () => {},
 })
 
 export function useSettings() {
@@ -23,7 +26,7 @@ export function useSettings() {
 
 export function useSettingsActions() {
   const context = useContext(SettingsContext)
-  return { updateTheme: context.updateTheme }
+  return { updateTheme: context.updateTheme, updateLastCompany: context.updateLastCompany }
 }
 
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
@@ -31,19 +34,26 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme_name')
-    if (savedTheme) {
-      setSettings({ theme_name: savedTheme })
-    }
+    const savedCompany = localStorage.getItem('last_company_id')
+    setSettings({ 
+      theme_name: savedTheme || 'tangerine',
+      last_company_id: savedCompany || undefined
+    })
   }, [])
 
   const updateTheme = (theme: string) => {
     console.log('🔄 Updating theme to:', theme)
-    setSettings({ theme_name: theme })
+    setSettings(prev => ({ ...prev, theme_name: theme }))
     localStorage.setItem('theme_name', theme)
   }
 
+  const updateLastCompany = (companyId: string) => {
+    setSettings(prev => ({ ...prev, last_company_id: companyId }))
+    localStorage.setItem('last_company_id', companyId)
+  }
+
   return (
-    <SettingsContext.Provider value={{ settings, updateTheme }}>
+    <SettingsContext.Provider value={{ settings, updateTheme, updateLastCompany }}>
       {children}
     </SettingsContext.Provider>
   )

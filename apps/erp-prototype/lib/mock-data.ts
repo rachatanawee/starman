@@ -64,10 +64,21 @@ export const mockProjectsAPI = {
 }
 
 export const mockAuth = {
-  login: async (email: string, password: string) => ({
-    user: { id: '1', email, name: 'User' },
-    token: 'mock-token'
-  })
+  login: async (email: string, password: string) => {
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 800))
+    
+    // Simple validation - accept demo credentials or any @erp.com email
+    if ((email === 'demo@erp.com' && password === 'demo123') || email.endsWith('@erp.com')) {
+      return {
+        user: { id: '1', email, name: email.split('@')[0] },
+        token: 'mock-token-' + Date.now()
+      }
+    }
+    
+    // Throw error for invalid credentials
+    throw new Error('Invalid email or password')
+  }
 }
 
 export interface MockTask {

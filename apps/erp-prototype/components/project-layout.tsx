@@ -22,6 +22,7 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
   const router = useRouter()
   const locale = params.locale as string
   const [userEmail, setUserEmail] = useState('')
+  const [isFadingOut, setIsFadingOut] = useState(false)
 
   useEffect(() => {
     const user = localStorage.getItem('mock_user')
@@ -31,7 +32,9 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
     }
   }, [])
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    setIsFadingOut(true)
+    await new Promise(resolve => setTimeout(resolve, 300))
     localStorage.removeItem('mock_token')
     localStorage.removeItem('mock_user')
     router.push(`/${locale}/login`)
@@ -44,7 +47,7 @@ export function ProjectLayout({ children, projectId }: ProjectLayoutProps) {
   }
 
   return (
-    <div className="flex min-h-screen w-full">
+    <div className={`flex min-h-screen w-full transition-opacity duration-300 ${isFadingOut ? 'opacity-0' : 'opacity-100'}`}>
       <MobileMenu projectId={projectId} />
       <ProjectSidebar 
         collapsed={collapsed} 

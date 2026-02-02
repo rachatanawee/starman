@@ -39,7 +39,7 @@ export function Breadcrumbs() {
     // Always start with Companies
     breadcrumbs.push({
       label: 'Companies',
-      href: `/${locale}/company`
+      href: `/${locale}/company?select=true`
     })
 
     // If we're in a project, add project name
@@ -103,7 +103,7 @@ export function Breadcrumbs() {
   return (
     <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-4">
       <Link 
-        href={`/${locale}/company`}
+        href={`/${locale}/company?select=true`}
         className="hover:text-gray-900 transition-colors"
       >
         <Home className="h-4 w-4" />

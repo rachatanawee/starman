@@ -125,7 +125,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
   }
 
   const menuItems = useMemo(() => projectId ? [
-    { href: `/${locale}/company`, icon: GitBranch, label: '← All Companies', isBack: true },
+    { href: `/${locale}/company?select=true`, icon: GitBranch, label: '← All Companies', isBack: true },
     { href: `/${locale}/guide`, icon: BookOpen, label: 'User Guide', isGuide: true },
     { section: 'Sales' },
     { href: `/${locale}/company/${projectId}/quotation`, icon: FileText, label: 'Quotation' },

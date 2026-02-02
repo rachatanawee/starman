@@ -5,6 +5,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { PageTransition } from '@/components/page-transition'
 import { SettingsProvider } from '@/lib/settings-context'
 import { ThemeLoader } from '@/components/theme-loader'
+import { PageTracker } from '@/components/page-tracker'
 import '../globals.css'
 
 export const dynamic = 'force-dynamic'
@@ -30,6 +31,7 @@ export default async function LocaleLayout({
     <>
       <SettingsProvider>
         <ThemeLoader />
+        <PageTracker />
         <NuqsAdapter>
           <NextIntlClientProvider messages={messages}>
             <PageTransition>

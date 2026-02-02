@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -11,22 +11,42 @@ import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
 import { toast } from 'sonner'
 import { ProjectLayout } from '@/components/project-layout'
 import { useTranslations } from 'next-intl'
+import { useSettings, useSettingsActions } from '@/lib/settings-context'
 
 export default function ProjectsPage() {
   const router = useRouter()
   const params = useParams()
+  const searchParams = useSearchParams()
   const locale = params.locale as string
   const t = useTranslations('company')
   const tCommon = useTranslations('common')
+  const settings = useSettings()
+  const { updateLastCompany } = useSettingsActions()
   const [projects, setProjects] = useState<MockProject[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
+  const [settingsLoaded, setSettingsLoaded] = useState(false)
+
+  // Wait for settings to load from localStorage
+  useEffect(() => {
+    setSettingsLoaded(true)
+  }, [settings.last_company_id])
 
   useEffect(() => {
+    if (!settingsLoaded) return
+    
     async function loadProjects() {
       try {
         const data = await mockProjectsAPI.list()
         setProjects(data)
+        
+        // Auto-redirect only if not explicitly choosing (no 'select' param)
+        const isSelectingNew = searchParams.get('select') === 'true'
+        const lastCompanyId = settings.last_company_id || localStorage.getItem('last_company_id')
+        
+        if (!isSelectingNew && lastCompanyId && data.some(p => p.id === lastCompanyId)) {
+          router.push(`/${locale}/company/${lastCompanyId}/dashboard`)
+        }
       } catch {
         toast.error(t('failedToLoad'))
       } finally {
@@ -34,7 +54,7 @@ export default function ProjectsPage() {
       }
     }
     loadProjects()
-  }, [])
+  }, [settingsLoaded])
 
   const filteredProjects = projects.filter(p => 
     p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -111,7 +131,10 @@ export default function ProjectsPage() {
             <Card 
               key={project.id} 
               className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => router.push(`/en/company/${project.id}/dashboard`)}
+              onClick={() => {
+                updateLastCompany(project.id)
+                router.push(`/${locale}/company/${project.id}/dashboard`)
+              }}
             >
               <CardHeader>
                 <div className="flex items-start justify-between">
