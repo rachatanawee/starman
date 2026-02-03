@@ -1,13 +1,21 @@
 {
   "name": "@spark/core",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "main": "./index.ts",
   "types": "./index.ts",
   "exports": {
     ".": "./index.ts"
   },
   "files": ["**/*"],
+  "publishConfig": {
+    "registry": "https://codehub.csigroups.com/api/v4/projects/698/packages/npm/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://codehub.csigroups.com/csird/spark-framework.git"
+  },
   "scripts": {
     "build": "tsup"
   },

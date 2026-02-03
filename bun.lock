@@ -5,7 +5,7 @@
     "": {
       "name": "spark-monorepo",
     },
-    "apps/erp-prototype": {
+    "apps/erp1": {
       "name": "projectflow-prototype",
       "version": "0.1.0",
       "dependencies": {
@@ -231,7 +231,7 @@
     },
     "packages/spark-create": {
       "name": "@spark/create",
-      "version": "0.1.0",
+      "version": "0.1.6",
       "bin": {
         "create-spark": "./dist/index.js",
       },
@@ -1757,7 +1757,7 @@
 
     "process-warning": ["process-warning@2.3.2", "", {}, "sha512-n9wh8tvBe5sFmsqlg+XQhaQLumwpqoAUruLwjCopgTmUBjJ/fjtBsJzKleCaIGBOMXYEhp1YfKl4d7rJ5ZKJGA=="],
 
-    "projectflow-prototype": ["projectflow-prototype@workspace:apps/erp-prototype"],
+    "projectflow-prototype": ["projectflow-prototype@workspace:apps/erp1"],
 
     "prompts": ["prompts@2.4.2", "", { "dependencies": { "kleur": "^3.0.3", "sisteransi": "^1.0.5" } }, "sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q=="],
 

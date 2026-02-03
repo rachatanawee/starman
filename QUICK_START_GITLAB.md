@@ -62,15 +62,49 @@ git push -u origin main
 
 ## การใช้งาน
 
+### ตั้งค่า Registry (ครั้งแรกเท่านั้น)
+
+สำหรับ GitLab ที่มี SSL certificate issue:
+
+```bash
+# เพิ่มใน ~/.npmrc
+cat >> ~/.npmrc << 'EOF'
+@spark:registry=https://your-gitlab.com/api/v4/projects/YOUR_PROJECT_ID/packages/npm/
+strict-ssl=false
+//your-gitlab.com/api/v4/projects/YOUR_PROJECT_ID/packages/npm/:_authToken=YOUR_TOKEN
+EOF
+
+# เพิ่มใน ~/.bunfig.toml
+cat >> ~/.bunfig.toml << 'EOF'
+[install.scopes]
+"@spark" = { url = "https://your-gitlab.com/api/v4/projects/YOUR_PROJECT_ID/packages/npm/", token = "YOUR_TOKEN" }
+
+[install.tls]
+rejectUnauthorized = false
+EOF
+```
+
 ### สร้าง Project ใหม่
 
 ```bash
-# ตั้งค่า registry (ครั้งแรกเท่านั้น)
-echo "@spark:registry=https://your-gitlab.com/api/v4/projects/YOUR_PROJECT_ID/packages/npm/" > ~/.npmrc
+# สำหรับ GitLab ที่มี SSL issue ต้องใช้:
+NODE_TLS_REJECT_UNAUTHORIZED=0 bunx @spark/create my-erp-system
 
-# สร้าง project
-bunx @spark/create my-erp-system --port 3200
+# หรือสร้าง alias ใน ~/.zshrc หรือ ~/.bashrc:
+alias spark-create='NODE_TLS_REJECT_UNAUTHORIZED=0 bunx @spark/create'
 
+# แล้วใช้:
+spark-create my-erp-system
+```
+
+เลือก modules ที่ต้องการ:
+- ☐ Manufacturing - BOM, Production Order, MRP, Manufacturing, Production Planning
+- ☐ Sales & Purchasing - Quotation, Sales Order, Invoice, Purchasing
+- ☐ Inventory - Inventory Management & Warehouse
+- ☐ Accounting - Accounting & WIP Costing
+- ☐ Factory Operations - Factory Capacity, Job History, Worker Allowance
+
+```bash
 # เข้าไปใน project
 cd my-erp-system
 
@@ -80,7 +114,19 @@ bun run dev
 
 ## Troubleshooting
 
+### ❌ SSL Certificate Error
+
+```bash
+# ใช้ environment variable
+NODE_TLS_REJECT_UNAUTHORIZED=0 bunx @spark/create my-project
+
+# หรือสร้าง alias
+echo 'alias spark-create="NODE_TLS_REJECT_UNAUTHORIZED=0 bunx @spark/create"' >> ~/.zshrc
+source ~/.zshrc
+```
+
 ### ❌ Connection failed
+
 ```bash
 # ตรวจสอบ token
 curl --header "PRIVATE-TOKEN: YOUR_TOKEN" \
@@ -88,15 +134,17 @@ curl --header "PRIVATE-TOKEN: YOUR_TOKEN" \
 ```
 
 ### ❌ Publish failed
+
 ```bash
 # ตรวจสอบ .npmrc
-cat .npmrc
+cat ~/.npmrc
 
 # ตรวจสอบว่า GITLAB_TOKEN ถูก export
 echo $GITLAB_TOKEN
 ```
 
 ### ❌ Package not found
+
 ```bash
 # ตรวจสอบว่า publish สำเร็จ
 npm view @spark/create --registry=https://your-gitlab.com/api/v4/projects/YOUR_PROJECT_ID/packages/npm/
@@ -109,7 +157,7 @@ npm view @spark/create --registry=https://your-gitlab.com/api/v4/projects/YOUR_P
 3. ✅ รัน `./scripts/setup-gitlab.sh`
 4. ✅ Push code: `git push -u origin main`
 5. ✅ Publish: `./scripts/publish-packages.sh`
-6. ✅ ใช้งาน: `bunx @spark/create my-project`
+6. ✅ ใช้งาน: `NODE_TLS_REJECT_UNAUTHORIZED=0 bunx @spark/create my-project`
 
 ---
 

@@ -1,11 +1,23 @@
 {
   "name": "@spark/create",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "description": "Create a new Spark project from template",
   "type": "module",
+  "publishConfig": {
+    "registry": "https://codehub.csigroups.com/api/v4/projects/698/packages/npm/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://codehub.csigroups.com/csird/spark-framework.git"
+  },
   "bin": {
     "create-spark": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "templates"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
