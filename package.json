@@ -1,0 +1,18 @@
+{
+  "name": "spark-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun --filter erp-prototype dev",
+    "dev:base": "bun --filter spark-base dev",
+    "build": "bun run build:core && bun run build:apps",
+    "build:core": "bun --filter spark-core build",
+    "build:apps": "bun --filter erp-prototype build && bun --filter spark-base build",
+    "build:erp": "bun --filter erp-prototype build",
+    "build:base": "bun --filter spark-base build"
+  }
+}
