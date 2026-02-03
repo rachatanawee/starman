@@ -2,7 +2,6 @@
 
 import { Button } from '@spark/core'
 import { Plus, Filter, X, Clock, Package, CheckCircle, XCircle, FileText, BookOpen, AlertTriangle, ShieldAlert, ShoppingBag } from 'lucide-react'
-import { ProjectLayout } from '@spark/core'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { DataGrid } from '@spark/core'
@@ -240,7 +239,7 @@ export default function PurchasingPage() {
   const height = Math.max(400, windowSize.height - 200)
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="Purchasing" />
       <div className="w-full h-full">
         <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
@@ -335,6 +334,6 @@ export default function PurchasingPage() {
           </div>
         </div>
       </div>
-    
+    </>
   )
 }

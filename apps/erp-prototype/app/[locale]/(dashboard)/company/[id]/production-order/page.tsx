@@ -22,7 +22,6 @@ import {
   SelectValue,
 } from '@spark/core'
 import { Plus, Factory, Search, Filter, X, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Edit, Eye, BookOpen, Calendar, MoreVertical, Download, Printer, RefreshCw, ArrowUpDown, ChevronDown, Maximize } from 'lucide-react'
-import { ProjectLayout } from '@spark/core'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { mockProductionOrders, ProductionOrder, ProductionStatus } from '@/lib/mock-data'
@@ -359,7 +358,7 @@ export default function ProductionOrderPage() {
   }
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="Production Order" />
       <div className="p-6 space-y-6">
         {/* Header */}
@@ -635,6 +634,6 @@ export default function ProductionOrderPage() {
           </CardContent>
         </Card>
       </div>
-    
+    </>
   )
 }

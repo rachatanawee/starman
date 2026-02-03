@@ -121,7 +121,7 @@ export default function CompanyDashboardPage() {
   ]
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="Dashboard" />
       <style jsx global>{`
         @media print {
@@ -494,6 +494,6 @@ export default function CompanyDashboardPage() {
           </CardContent>
         </Card>
       </div>
-    
+    </>
   )
 }

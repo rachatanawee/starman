@@ -59,7 +59,7 @@ export default function SettingsPage() {
   }
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="Settings" />
       <div className="p-6">
         <div className="bg-white border-b mb-6 -m-6 p-6">
@@ -430,6 +430,6 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
-    
+    </>
   )
 }

@@ -31,7 +31,6 @@ import {
   TableRow,
 } from '@spark/core'
 import { Rocket, BarChart3, Users, Zap, BookOpen, Settings, Plus, Edit, Trash2, Factory, Power, AlertCircle, CheckCircle2, Clock, Wrench, X } from 'lucide-react'
-import { ProjectLayout } from '@spark/core'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -200,7 +199,7 @@ export default function ManufacturingPage() {
   }
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="Manufacturing" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -715,6 +714,6 @@ export default function ManufacturingPage() {
           </TabsContent>
         </Tabs>
       </div>
-    
+    </>
   )
 }

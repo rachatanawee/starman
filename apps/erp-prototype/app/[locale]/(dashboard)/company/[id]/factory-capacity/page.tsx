@@ -57,7 +57,7 @@ export default function FactoryCapacityPage() {
   const avgLoad = stats.totalCapacity > 0 ? (stats.totalLoad / stats.totalCapacity * 100).toFixed(1) : 0
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="Factory Capacity" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -304,6 +304,6 @@ export default function FactoryCapacityPage() {
           </div>
         </div>
       </div>
-    
+    </>
   )
 }

@@ -5,6 +5,7 @@ import type {
   FilterOperator,
   FilterVariant,
 } from "../types/data-table";
+import type { FilterItemSchema } from "./parsers";
 
 export function getCommonPinningStyles<TData>({
   column,
@@ -65,13 +66,15 @@ export function getValidFilters<TData>(
   filters: ExtendedColumnFilter<TData>[],
 ): ExtendedColumnFilter<TData>[] {
   return filters.filter(
-    (filter) =>
-      filter.operator === "isEmpty" ||
-      filter.operator === "isNotEmpty" ||
-      (Array.isArray(filter.value)
-        ? filter.value.length > 0
-        : filter.value !== "" &&
-          filter.value !== null &&
-          filter.value !== undefined),
+    (filter) => {
+      const f = filter as FilterItemSchema;
+      return (
+        f.operator === "isEmpty" ||
+        f.operator === "isNotEmpty" ||
+        (Array.isArray(f.value)
+          ? f.value.length > 0
+          : f.value !== "" && f.value !== null && f.value !== undefined)
+      );
+    },
   );
 }

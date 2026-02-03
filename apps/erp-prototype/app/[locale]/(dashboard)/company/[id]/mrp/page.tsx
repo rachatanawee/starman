@@ -6,7 +6,6 @@ import { Button } from '@spark/core'
 import { Badge } from '@spark/core'
 import { Checkbox } from '@spark/core'
 import { Sparkles, Package, AlertTriangle, TrendingUp, Zap, Clock, CheckCircle, ShoppingCart, BookOpen, FileText, Calendar, Network } from 'lucide-react'
-import { ProjectLayout } from '@spark/core'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { mockMRPRequirements, mockAIRecommendations, MRPRequirement, AIRecommendation } from '@/lib/mock-data'
@@ -123,7 +122,7 @@ export default function MRPPage() {
   }
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="MRP" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -350,6 +349,6 @@ export default function MRPPage() {
           onDismiss={() => setUndoAction(null)}
         />
       )}
-    
+    </>
   )
 }

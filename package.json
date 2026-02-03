@@ -7,12 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "bun --filter erp-prototype dev",
-    "dev:base": "bun --filter spark-base dev",
+    "dev": "cd apps/erp-prototype && bun run dev",
+    "dev:base": "cd apps/spark-base && bun run dev",
     "build": "bun run build:core && bun run build:apps",
-    "build:core": "bun --filter spark-core build",
-    "build:apps": "bun --filter erp-prototype build && bun --filter spark-base build",
-    "build:erp": "bun --filter erp-prototype build",
-    "build:base": "bun --filter spark-base build"
+    "build:core": "cd packages/spark-core && bun run build",
+    "build:apps": "cd apps/erp-prototype && bun run build && cd ../spark-base && bun run build",
+    "build:erp": "cd apps/erp-prototype && bun run build",
+    "build:base": "cd apps/spark-base && bun run build"
   }
 }

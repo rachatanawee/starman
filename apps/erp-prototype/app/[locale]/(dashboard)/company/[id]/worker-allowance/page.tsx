@@ -70,7 +70,7 @@ export default function WorkerAllowancePage() {
     : []
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="Worker Allowance" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -295,6 +295,6 @@ export default function WorkerAllowancePage() {
           </div>
         </div>
       </div>
-    
+    </>
   )
 }

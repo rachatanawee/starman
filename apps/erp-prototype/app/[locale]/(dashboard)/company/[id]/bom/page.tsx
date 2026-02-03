@@ -51,7 +51,7 @@ export default function BOMPage() {
   const avgCost = boms.reduce((sum, b) => sum + b.estimatedCost, 0) / boms.length
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="BOM" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -300,6 +300,6 @@ export default function BOMPage() {
           </CardContent>
         </Card>
       </div>
-    
+    </>
   )
 }

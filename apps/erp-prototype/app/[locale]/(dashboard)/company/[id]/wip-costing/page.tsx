@@ -91,7 +91,7 @@ export default function WIPCostingPage() {
     : []
 
   return (
-    
+    <>
       <DynamicTitle pageTitle="WIP Costing" />
       <div className="p-6 space-y-6">
         {/* Header */}
@@ -414,6 +414,6 @@ export default function WIPCostingPage() {
           </div>
         </div>
       </div>
-    
+    </>
   )
 }
