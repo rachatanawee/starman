@@ -2,16 +2,58 @@
   "name": "@spark/core",
   "version": "1.0.0",
   "private": true,
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./index.ts",
-    "./lib/*": "./lib/*.ts",
-    "./components/*": "./components/*.tsx"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup"
   },
   "peerDependencies": {
     "next": ">=14.0.0",
     "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "react-dom": ">=18.0.0",
+    "@radix-ui/react-accordion": "*",
+    "@radix-ui/react-checkbox": "*",
+    "@radix-ui/react-dialog": "*",
+    "@radix-ui/react-dropdown-menu": "*",
+    "@radix-ui/react-label": "*",
+    "@radix-ui/react-popover": "*",
+    "@radix-ui/react-progress": "*",
+    "@radix-ui/react-select": "*",
+    "@radix-ui/react-separator": "*",
+    "@radix-ui/react-slider": "*",
+    "@radix-ui/react-slot": "*",
+    "@radix-ui/react-switch": "*",
+    "@radix-ui/react-tabs": "*",
+    "@radix-ui/react-tooltip": "*",
+    "@tanstack/react-table": "*",
+    "@tanstack/react-virtual": "*",
+    "lucide-react": "*",
+    "class-variance-authority": "*",
+    "clsx": "*",
+    "tailwind-merge": "*",
+    "cmdk": "*",
+    "next-intl": "*",
+    "date-fns": "*",
+    "date-fns-tz": "*"
+  },
+  "devDependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "react-day-picker": "^9.13.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
   }
 }
