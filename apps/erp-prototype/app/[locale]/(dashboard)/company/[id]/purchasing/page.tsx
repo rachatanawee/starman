@@ -1,28 +1,28 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@spark/core'
 import { Plus, Filter, X, Clock, Package, CheckCircle, XCircle, FileText, BookOpen, AlertTriangle, ShieldAlert, ShoppingBag } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
-import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
-import { DataGridSortMenu } from '@/components/tablecn/data-grid/data-grid-sort-menu'
-import { DataGridViewMenu } from '@/components/tablecn/data-grid/data-grid-view-menu'
-import { useDataGrid } from '@/components/tablecn/hooks/use-data-grid'
-import { useWindowSize } from '@/components/tablecn/hooks/use-window-size'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/components/filter-panel'
-import { DateRangeFilter } from '@/components/date-range-filter'
+import { DataGrid } from '@spark/core'
+import { DataGridRowHeightMenu } from '@spark/core'
+import { DataGridSortMenu } from '@spark/core'
+import { DataGridViewMenu } from '@spark/core'
+import { useDataGrid } from '@spark/core'
+import { useWindowSize } from '@spark/core'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@spark/core'
+import { Input } from '@spark/core'
+import { Label } from '@spark/core'
+import { Badge } from '@spark/core'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@spark/core'
+import { FilterPanel, type FilterConfig, type FilterCriteria } from '@spark/core'
+import { DateRangeFilter } from '@spark/core'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
 import { mockPurchaseOrders, mockAIAlerts, type PurchaseOrder } from '@/lib/mock-data'
-import { DynamicTitle } from '@/components/dynamic-title'
+import { DynamicTitle } from '@spark/core'
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -240,7 +240,7 @@ export default function PurchasingPage() {
   const height = Math.max(400, windowSize.height - 200)
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Purchasing" />
       <div className="w-full h-full">
         <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
@@ -335,6 +335,6 @@ export default function PurchasingPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

@@ -2,17 +2,21 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter, useParams, useSearchParams } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '@spark/core'
+import { } from '@spark/core' // button'
+import { Input } from '@spark/core'
+import { } from '@spark/core' // input'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@spark/core'
+import { } from '@spark/core' // card'
+import { Badge } from '@spark/core'
+import { } from '@spark/core' // badge'
 import { Plus, Search, GitBranch, Users, DollarSign, Calendar } from 'lucide-react'
 import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
 import { toast } from 'sonner'
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 import { useTranslations } from 'next-intl'
-import { useSettings, useSettingsActions } from '@/lib/settings-context'
-import { DynamicTitle } from '@/components/dynamic-title'
+import { useSettings, useSettingsActions } from '@spark/core'
+import { DynamicTitle } from '@spark/core'
 
 export default function ProjectsPage() {
   const router = useRouter()

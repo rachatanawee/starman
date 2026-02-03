@@ -1,6 +1,6 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
+import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
 import { RefreshCw, Settings, AlertTriangle, CheckCircle2, Clock, XCircle, FileText, TrendingUp, Zap, ExternalLink, Calculator } from 'lucide-react'
 import { mockIntegration, mockSyncLogs, mockAIAlerts as mockAccountingAlerts, mockTaxSummary, mockAccountMappings, getSyncStats } from '@/lib/mock-data/accounting-data'
 
@@ -47,7 +47,7 @@ export default function AccountingPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Accounting" />
       <div className="p-6 space-y-6">
         {/* Header */}
@@ -333,6 +333,6 @@ export default function AccountingPage() {
           </CardContent>
         </Card>
       </div>
-    </ProjectLayout>
+    
   )
 }

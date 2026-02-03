@@ -1,6 +1,6 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
+import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
 import { DollarSign, Users, TrendingUp, AlertTriangle, CheckCircle, X, Sparkles, Trophy, Target, History, Users2 } from 'lucide-react'
 import { mockDailyAllowanceSummary, mockAllowanceTransactions, mockAICoachingAlerts, AICoachingAlert, DailyAllowanceSummary } from '@/lib/mock-data'
 import { toast } from 'sonner'
@@ -70,7 +70,7 @@ export default function WorkerAllowancePage() {
     : []
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Worker Allowance" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -295,6 +295,6 @@ export default function WorkerAllowancePage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

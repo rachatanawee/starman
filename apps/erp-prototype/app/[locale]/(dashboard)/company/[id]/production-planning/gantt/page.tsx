@@ -1,12 +1,12 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@spark/core'
 import { ArrowLeft, Calendar, ZoomIn, ZoomOut, Save } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 import { useParams, useRouter } from 'next/navigation'
 import { mockPlanItems, PlanItem } from '@/lib/mock-data'
 import { toast } from 'sonner'
@@ -71,7 +71,7 @@ export default function GanttChartPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -207,6 +207,6 @@ export default function GanttChartPage() {
           </CardContent>
         </Card>
       </div>
-    </ProjectLayout>
+    
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useSettings } from '@/lib/settings-context'
+import { useSettings } from '../lib/settings-context'
 
 interface DynamicTitleProps {
   pageTitle?: string

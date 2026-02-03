@@ -1,10 +1,10 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button } from './ui/button'
 import { Filter, X, ChevronDown, Save, FolderOpen } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
+import { Badge } from './ui/badge'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+import { Input } from './ui/input'
 import * as React from 'react'
 
 export interface FilterCriteria {

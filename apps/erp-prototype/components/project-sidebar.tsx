@@ -7,12 +7,12 @@ import {
   Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown
 } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
-import { Button } from './ui/button'
-import { QuickSearch } from './quick-search'
+import { Button } from '@spark/core'
+import { QuickSearch } from '@spark/core'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react'
-import { useSettings } from '@/lib/settings-context'
+import { useSettings } from '@spark/core'
 
 interface ProjectSidebarProps {
   collapsed: boolean

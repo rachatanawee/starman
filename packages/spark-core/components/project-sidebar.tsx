@@ -12,7 +12,7 @@ import { QuickSearch } from './quick-search'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 import { useState, useEffect, useRef, useMemo, useLayoutEffect } from 'react'
-import { useSettings } from '@/lib/settings-context'
+import { useSettings } from '../lib/settings-context'
 
 interface ProjectSidebarProps {
   collapsed: boolean

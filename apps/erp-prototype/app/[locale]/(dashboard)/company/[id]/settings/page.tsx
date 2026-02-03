@@ -1,14 +1,14 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Input, useParams, useState } from '@/lib/common-exports'
-import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Input, useParams, useState } from '@/lib/common-exports'
+import { Label } from '@spark/core'
+import { Switch } from '@spark/core'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@spark/core'
 import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save, Palette, Star, Zap, Rocket, Heart, Sparkles as SparklesIcon } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import { mockProjectsAPI } from '@/lib/mock-data'
-import { useSettings, useSettingsActions } from '@/lib/settings-context'
-import { appConfig } from '@/lib/app.config'
+import { useSettings, useSettingsActions } from '@spark/core'
+import { appConfig } from '@spark/core'
 
 export default function SettingsPage() {
   const params = useParams()
@@ -48,18 +48,18 @@ export default function SettingsPage() {
 
   if (!project) {
     return (
-      <ProjectLayout projectId={projectId}>
+      
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <p className="text-gray-600">Company not found</p>
           </div>
         </div>
-      </ProjectLayout>
+      
     )
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Settings" />
       <div className="p-6">
         <div className="bg-white border-b mb-6 -m-6 p-6">
@@ -430,6 +430,6 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

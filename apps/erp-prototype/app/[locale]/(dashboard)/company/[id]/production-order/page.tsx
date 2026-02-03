@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Progress } from '@/components/ui/progress'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
+import { Input } from '@spark/core'
+import { Progress } from '@spark/core'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,16 +13,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@spark/core'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@spark/core'
 import { Plus, Factory, Search, Filter, X, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Edit, Eye, BookOpen, Calendar, MoreVertical, Download, Printer, RefreshCw, ArrowUpDown, ChevronDown, Maximize } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { mockProductionOrders, ProductionOrder, ProductionStatus } from '@/lib/mock-data'
@@ -39,7 +39,7 @@ import {
   ColumnFiltersState,
   VisibilityState,
 } from '@tanstack/react-table'
-import { DynamicTitle } from '@/components/dynamic-title'
+import { DynamicTitle } from '@spark/core'
 import {
   Table,
   TableBody,
@@ -47,7 +47,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
+} from '@spark/core'
 
 const statusConfig: Record<ProductionStatus, { label: string; color: string; icon: any }> = {
   created: { label: 'Created', color: 'bg-gray-500', icon: Clock },
@@ -359,7 +359,7 @@ export default function ProductionOrderPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Production Order" />
       <div className="p-6 space-y-6">
         {/* Header */}
@@ -635,6 +635,6 @@ export default function ProductionOrderPage() {
           </CardContent>
         </Card>
       </div>
-    </ProjectLayout>
+    
   )
 }

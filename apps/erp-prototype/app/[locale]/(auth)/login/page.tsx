@@ -1,9 +1,13 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Button } from '@spark/core'
+import { } from '@spark/core' // button'
+import { Input } from '@spark/core'
+import { } from '@spark/core' // input'
+import { Label } from '@spark/core'
+import { } from '@spark/core' // label'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@spark/core'
+import { } from '@spark/core' // card'
 import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
 import { Loader2, Sparkles, Shield, GitBranch } from 'lucide-react'
@@ -11,8 +15,8 @@ import * as LucideIcons from 'lucide-react'
 import { mockAuth } from '@/lib/mock-data'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useSettings } from '@/lib/settings-context'
-import { DynamicTitle } from '@/components/dynamic-title'
+import { useSettings } from '@spark/core'
+import { DynamicTitle } from '@spark/core'
 
 export default function LoginPage() {
   const router = useRouter()

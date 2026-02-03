@@ -1,4 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { } from '@spark/core' // card'
 import { BarChart3, Building2, Users2, DollarSign, History } from 'lucide-react'
 
 export function ReportsGuide() {

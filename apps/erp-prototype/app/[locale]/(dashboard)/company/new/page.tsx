@@ -2,19 +2,25 @@
 
 import { useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import { ProjectLayout } from '@/components/project-layout'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
+import { ProjectLayout } from '@spark/core'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@spark/core'
+import { } from '@spark/core' // card'
+import { Button } from '@spark/core'
+import { } from '@spark/core' // button'
+import { Input } from '@spark/core'
+import { } from '@spark/core' // input'
+import { Label } from '@spark/core'
+import { } from '@spark/core' // label'
+import { Textarea } from '@spark/core'
+import { } from '@spark/core' // textarea'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@spark/core'
+import { } from '@spark/core' // select'
 import { ArrowLeft, Building2, MapPin, Phone, Mail, Users } from 'lucide-react'
 import { toast } from 'sonner'
 import Link from 'next/link'

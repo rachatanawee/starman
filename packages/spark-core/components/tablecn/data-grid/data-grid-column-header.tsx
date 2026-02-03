@@ -32,14 +32,14 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "../../ui/dropdown-menu";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import type { Cell } from "@/components/tablecn/types/data-grid";
+} from "../../ui/tooltip";
+import { cn } from "../../../lib/utils";
+import type { Cell } from "../types/data-grid";
 
 function getColumnVariant(variant?: Cell["variant"]): {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;

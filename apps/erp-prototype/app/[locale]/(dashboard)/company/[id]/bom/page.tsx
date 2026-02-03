@@ -1,8 +1,8 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo } from '@/lib/common-exports'
+import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo } from '@/lib/common-exports'
 import { Plus, Package, Eye, Edit, Layers, TrendingUp, AlertCircle, Search, Filter, X, BookOpen, GitBranch } from 'lucide-react'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@spark/core'
 import Link from 'next/link'
 import { mockBOMs, BOM } from '@/lib/mock-data/bom-data'
 import { BOMTreeView } from '@/components/bom-tree-view'
@@ -51,7 +51,7 @@ export default function BOMPage() {
   const avgCost = boms.reduce((sum, b) => sum + b.estimatedCost, 0) / boms.length
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="BOM" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -300,6 +300,6 @@ export default function BOMPage() {
           </CardContent>
         </Card>
       </div>
-    </ProjectLayout>
+    
   )
 }

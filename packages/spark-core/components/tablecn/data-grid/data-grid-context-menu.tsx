@@ -10,9 +10,9 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { parseCellKey } from "@/components/tablecn/lib/data-grid";
-import type { UpdateCell } from "@/components/tablecn/types/data-grid";
+} from "../../ui/dropdown-menu";
+import { parseCellKey } from "../lib/data-grid";
+import type { UpdateCell } from "../types/data-grid";
 
 interface DataGridContextMenuProps<TData> {
   table: Table<TData>;

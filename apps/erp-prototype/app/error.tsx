@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@spark/core'
+import { } from '@spark/core' // button'
 
 export default function Error({
   error,

@@ -1,18 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
+import { Checkbox } from '@spark/core'
 import { Sparkles, Package, AlertTriangle, TrendingUp, Zap, Clock, CheckCircle, ShoppingCart, BookOpen, FileText, Calendar, Network } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { mockMRPRequirements, mockAIRecommendations, MRPRequirement, AIRecommendation } from '@/lib/mock-data'
 import { FloatingUndo, StatusIndicator } from '@/components/feedback'
 import { useTranslations } from 'next-intl'
-import { DynamicTitle } from '@/components/dynamic-title'
+import { DynamicTitle } from '@spark/core'
 
 const priorityColors = {
   urgent: 'bg-red-100 text-red-800 border-red-300',
@@ -123,7 +123,7 @@ export default function MRPPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="MRP" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -350,6 +350,6 @@ export default function MRPPage() {
           onDismiss={() => setUndoAction(null)}
         />
       )}
-    </ProjectLayout>
+    
   )
 }

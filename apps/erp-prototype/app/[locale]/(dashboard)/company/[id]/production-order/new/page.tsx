@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Select } from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { ProjectLayout } from '@/components/project-layout'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Input } from '@spark/core'
+import { Label } from '@spark/core'
+import { Select } from '@spark/core'
+import { Textarea } from '@spark/core'
+import { ProjectLayout } from '@spark/core'
 import { ArrowLeft, Save, Package, Calendar, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { mockBOMs } from '@/lib/mock-data/bom-data'
@@ -39,7 +39,7 @@ export default function NewProductionOrderPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -221,6 +221,6 @@ export default function NewProductionOrderPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

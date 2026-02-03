@@ -3,13 +3,13 @@
 import { flexRender } from "@tanstack/react-table";
 import { Plus } from "lucide-react";
 import * as React from "react";
-import { DataGridColumnHeader } from "@/components/tablecn/data-grid/data-grid-column-header";
-import { DataGridContextMenu } from "@/components/tablecn/data-grid/data-grid-context-menu";
-import { DataGridRow } from "@/components/tablecn/data-grid/data-grid-row";
-import { DataGridSearch } from "@/components/tablecn/data-grid/data-grid-search";
-import type { useDataGrid } from "@/components/tablecn/hooks/use-data-grid";
-import { getCommonPinningStyles } from "@/components/tablecn/lib/data-table";
-import { cn } from "@/lib/utils";
+import { DataGridColumnHeader } from "./data-grid-column-header";
+import { DataGridContextMenu } from "./data-grid-context-menu";
+import { DataGridRow } from "./data-grid-row";
+import { DataGridSearch } from "./data-grid-search";
+import type { useDataGrid } from "../hooks/use-data-grid";
+import { getCommonPinningStyles } from "../lib/data-table";
+import { cn } from "../../../lib/utils";
 
 interface DataGridProps<TData>
   extends ReturnType<typeof useDataGrid<TData>>,

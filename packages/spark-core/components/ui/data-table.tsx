@@ -19,21 +19,21 @@ import {
   useReactTable,
   Table as TanstackTable,
 } from "@tanstack/react-table"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./table"
+import { Button } from "./button"
+import { Input } from "./input"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "./dropdown-menu"
 
 import { useState, useEffect } from "react"
 import { ChevronDown, Download, X, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
 import * as XLSX from "xlsx"
-import { getCommonPinningStyles } from "@/components/tablecn/lib/data-table"
+import { getCommonPinningStyles } from "../tablecn/lib/data-table"
 
 
 interface DataTableProps<TData, TValue> {

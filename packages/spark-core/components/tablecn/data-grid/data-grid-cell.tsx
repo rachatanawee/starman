@@ -12,7 +12,7 @@ import {
   NumberCell,
   SelectCell,
   ShortTextCell,
-} from "@/components/tablecn/data-grid/data-grid-cell-variants";
+} from "./data-grid-cell-variants";
 
 interface DataGridCellProps<TData> {
   cell: Cell<TData, unknown>;

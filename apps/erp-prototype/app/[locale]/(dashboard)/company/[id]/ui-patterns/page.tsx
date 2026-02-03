@@ -1,22 +1,22 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
+import { Input } from '@spark/core'
+import { Label } from '@spark/core'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@spark/core'
+import { Alert, AlertDescription, AlertTitle } from '@spark/core'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@spark/core'
+import { Popover, PopoverContent, PopoverTrigger } from '@spark/core'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@spark/core'
 import { toast } from 'sonner'
 import { Loader2, Package, AlertCircle, CheckCircle2, Info, XCircle, Sparkles, HelpCircle, Search, Filter, Trash2, Undo2 } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 import { useParams } from 'next/navigation'
-import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
-import { useDataGrid } from '@/components/tablecn/hooks/use-data-grid'
+import { DataGrid } from '@spark/core'
+import { useDataGrid } from '@spark/core'
 import { ColumnDef } from '@tanstack/react-table'
 
 type SampleData = {
@@ -91,7 +91,7 @@ export default function UIPatternsPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-2">
@@ -579,6 +579,6 @@ export default function UIPatternsPage() {
         </TabsContent>
       </Tabs>
     </div>
-    </ProjectLayout>
+    
   )
 }

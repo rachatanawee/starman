@@ -39,8 +39,8 @@ import { CSS } from "@dnd-kit/utilities";
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { useComposedRefs } from "@/components/tablecn/lib/compose-refs";
-import { cn } from "@/lib/utils";
+import { useComposedRefs } from "../tablecn/lib/compose-refs";
+import { cn } from "../../lib/utils";
 
 const orientationConfig = {
   vertical: {

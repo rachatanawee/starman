@@ -1,15 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
 import { List, X } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 import { useParams } from 'next/navigation'
 import { mockJobHistory, JobHistoryRecord } from '@/lib/mock-data'
-import { useDataGrid } from '@/components/tablecn/hooks/use-data-grid'
-import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
+import { useDataGrid } from '@spark/core'
+import { DataGrid } from '@spark/core'
 import { ColumnDef } from '@tanstack/react-table'
 
 export default function JobsLogPage() {
@@ -104,7 +104,7 @@ export default function JobsLogPage() {
   })
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
@@ -215,6 +215,6 @@ export default function JobsLogPage() {
           </>
         )}
       </div>
-    </ProjectLayout>
+    
   )
 }

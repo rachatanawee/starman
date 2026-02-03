@@ -1,10 +1,10 @@
 'use client'
 
 import { useParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { ProjectLayout } from '@/components/project-layout'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
+import { ProjectLayout } from '@spark/core'
 import { ArrowLeft, Edit, Clock, Package, CheckCircle, XCircle, FileText, AlertTriangle, ShieldCheck } from 'lucide-react'
 import { mockPurchaseOrders, mockGoodsReceipts, mockVendorBills, type POStatus } from '@/lib/mock-data'
 
@@ -28,7 +28,7 @@ export default function PurchaseOrderDetailPage() {
 
   if (!po) {
     return (
-      <ProjectLayout projectId={projectId}>
+      
         <div className="p-6">
           <div className="text-center py-12">
             <AlertTriangle className="h-12 w-12 text-gray-400 mx-auto mb-3" />
@@ -42,14 +42,14 @@ export default function PurchaseOrderDetailPage() {
             </Button>
           </div>
         </div>
-      </ProjectLayout>
+      
     )
   }
 
   const StatusIcon = statusConfig[po.status].icon
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -259,6 +259,6 @@ export default function PurchaseOrderDetailPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

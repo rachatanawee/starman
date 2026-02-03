@@ -1,11 +1,11 @@
 'use client'
 
 import { useParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { ProjectLayout } from '@/components/project-layout'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
+import { Progress } from '@spark/core'
+import { ProjectLayout } from '@spark/core'
 import { ArrowLeft, Edit, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Factory } from 'lucide-react'
 import { mockProductionOrders, ProductionStatus } from '@/lib/mock-data'
 import { mockBOMs } from '@/lib/mock-data/bom-data'
@@ -30,7 +30,7 @@ export default function ProductionOrderDetailPage() {
 
   if (!order) {
     return (
-      <ProjectLayout projectId={projectId}>
+      
         <div className="p-6">
           <div className="text-center py-12">
             <AlertCircle className="h-12 w-12 text-gray-400 mx-auto mb-3" />
@@ -44,7 +44,7 @@ export default function ProductionOrderDetailPage() {
             </Button>
           </div>
         </div>
-      </ProjectLayout>
+      
     )
   }
 
@@ -52,7 +52,7 @@ export default function ProductionOrderDetailPage() {
   const progress = order.plannedQuantity > 0 ? Math.round((order.producedQuantity / order.plannedQuantity) * 100) : 0
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -288,6 +288,6 @@ export default function ProductionOrderDetailPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

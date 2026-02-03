@@ -20,9 +20,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@spark/core": ["../../packages/spark-core/index.ts"],
-      "@spark/core/*": ["../../packages/spark-core/*"]
+      "@/*": ["./*"]
     }
   },
   "include": [

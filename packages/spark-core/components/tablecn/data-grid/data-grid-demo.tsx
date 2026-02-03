@@ -3,15 +3,15 @@
 import { faker } from "@faker-js/faker";
 import type { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
-import { DataGrid } from "@/components/tablecn/data-grid/data-grid";
-import { DataGridKeyboardShortcuts } from "@/components/tablecn/data-grid/data-grid-keyboard-shortcuts";
-import { DataGridRowHeightMenu } from "@/components/tablecn/data-grid/data-grid-row-height-menu";
-import { DataGridSortMenu } from "@/components/tablecn/data-grid/data-grid-sort-menu";
-import { DataGridViewMenu } from "@/components/tablecn/data-grid/data-grid-view-menu";
-import { Checkbox } from "@/components/ui/checkbox";
-import { type UseDataGridProps, useDataGrid } from "@/components/tablecn/hooks/use-data-grid";
-import { useWindowSize } from "@/components/tablecn/hooks/use-window-size";
-import type { FileCellData } from "@/components/tablecn/types/data-grid";
+import { DataGrid } from "./data-grid";
+import { DataGridKeyboardShortcuts } from "./data-grid-keyboard-shortcuts";
+import { DataGridRowHeightMenu } from "./data-grid-row-height-menu";
+import { DataGridSortMenu } from "./data-grid-sort-menu";
+import { DataGridViewMenu } from "./data-grid-view-menu";
+import { Checkbox } from "../../ui/checkbox";
+import { type UseDataGridProps, useDataGrid } from "../hooks/use-data-grid";
+import { useWindowSize } from "../hooks/use-window-size";
+import type { FileCellData } from "../types/data-grid";
 
 interface Person {
   id: string;

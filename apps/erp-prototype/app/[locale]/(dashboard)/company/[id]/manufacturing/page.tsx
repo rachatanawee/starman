@@ -1,19 +1,19 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Progress } from '@/components/ui/progress'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@spark/core'
+import { Progress } from '@spark/core'
+import { Input } from '@spark/core'
+import { Label } from '@spark/core'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@spark/core'
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from '@spark/core'
 import {
   Table,
   TableBody,
@@ -29,9 +29,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
+} from '@spark/core'
 import { Rocket, BarChart3, Users, Zap, BookOpen, Settings, Plus, Edit, Trash2, Factory, Power, AlertCircle, CheckCircle2, Clock, Wrench, X } from 'lucide-react'
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -39,7 +39,7 @@ import { mockJobTickets, mockWorkCenters, JobTicket, WorkCenter } from '@/lib/mo
 import { OperatorCockpit } from '@/components/operator-cockpit'
 import { SupervisorDashboard } from '@/components/supervisor-dashboard'
 import { useTranslations } from 'next-intl'
-import { DynamicTitle } from '@/components/dynamic-title'
+import { DynamicTitle } from '@spark/core'
 
 export default function ManufacturingPage() {
   const params = useParams()
@@ -200,7 +200,7 @@ export default function ManufacturingPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Manufacturing" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -715,6 +715,6 @@ export default function ManufacturingPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </ProjectLayout>
+    
   )
 }

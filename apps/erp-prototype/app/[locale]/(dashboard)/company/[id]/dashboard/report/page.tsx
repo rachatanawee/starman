@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
+import { Button } from '@spark/core'
 import { 
   GitBranch, Users, DollarSign, AlertTriangle, 
   CheckCircle2, Clock, Printer, ArrowLeft, Brain, TrendingUp, AlertCircle, Code2, FileCode, Bug, TrendingDown, Wallet

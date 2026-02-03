@@ -1,6 +1,6 @@
 'use client'
 
-import { useSettings } from '@/lib/settings-context'
+import { useSettings } from '../lib/settings-context'
 
 export function SettingsAwareTitle({ children }: { children: string }) {
   const settings = useSettings()

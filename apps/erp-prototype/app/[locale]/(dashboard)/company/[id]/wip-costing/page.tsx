@@ -1,7 +1,7 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useState } from '@/lib/common-exports'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useState } from '@/lib/common-exports'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@spark/core'
 import { 
   DollarSign, TrendingUp, AlertTriangle, Clock, 
   Sparkles, BookOpen, Package, Activity, Target
@@ -91,7 +91,7 @@ export default function WIPCostingPage() {
     : []
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="WIP Costing" />
       <div className="p-6 space-y-6">
         {/* Header */}
@@ -414,6 +414,6 @@ export default function WIPCostingPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

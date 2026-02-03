@@ -1,9 +1,9 @@
 import type { Column, Table, TableOptions } from "@tanstack/react-table";
 import type { motion } from "motion/react";
 import type * as React from "react";
-import type { DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import type { EmptyProps } from "@/components/tablecn/types";
-import type { ExtendedColumnFilter, Option } from "@/components/tablecn/types/data-table";
+import type { DropdownMenuTrigger } from "../ui/dropdown-menu";
+import type { EmptyProps } from "./";
+import type { ExtendedColumnFilter, Option } from "./data-table";
 
 export interface UseDataTableProps<TData>
   extends Required<Pick<TableOptions<TData>, "pageCount">>,

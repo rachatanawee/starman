@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsup'
+import path from 'path'
 
 export default defineConfig({
   entry: ['index.ts'],
@@ -7,6 +8,11 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
+  esbuildOptions(options) {
+    options.alias = {
+      '@': path.resolve(__dirname, '.')
+    }
+  },
   external: [
     'react',
     'react-dom',

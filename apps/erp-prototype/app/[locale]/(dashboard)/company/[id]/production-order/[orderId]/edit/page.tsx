@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
-import { ProjectLayout } from '@/components/project-layout'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Input } from '@spark/core'
+import { Label } from '@spark/core'
+import { Textarea } from '@spark/core'
+import { Badge } from '@spark/core'
+import { ProjectLayout } from '@spark/core'
 import { ArrowLeft, Save, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { mockProductionOrders } from '@/lib/mock-data'
@@ -31,7 +31,7 @@ export default function EditProductionOrderPage() {
 
   if (!order) {
     return (
-      <ProjectLayout projectId={projectId}>
+      
         <div className="p-6">
           <div className="text-center py-12">
             <AlertCircle className="h-12 w-12 text-gray-400 mx-auto mb-3" />
@@ -45,7 +45,7 @@ export default function EditProductionOrderPage() {
             </Button>
           </div>
         </div>
-      </ProjectLayout>
+      
     )
   }
 
@@ -63,7 +63,7 @@ export default function EditProductionOrderPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -283,6 +283,6 @@ export default function EditProductionOrderPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

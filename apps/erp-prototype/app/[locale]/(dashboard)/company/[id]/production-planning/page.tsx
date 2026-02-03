@@ -1,6 +1,6 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useTranslations, useState } from '@/lib/common-exports'
+import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useTranslations, useState } from '@/lib/common-exports'
 import { Plus, Sparkles, AlertTriangle, TrendingDown, Zap, Clock, CheckCircle, BookOpen, Package, Factory, BarChart3 } from 'lucide-react'
 import Link from 'next/link'
 import { mockAIInsights, mockPlanItems, AIInsight, PlanItem, InsightType, Severity } from '@/lib/mock-data'
@@ -185,7 +185,7 @@ export default function ProductionPlanningPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Production Planning" />
       <div className="p-6 space-y-4">
         <div className="flex items-center justify-between">
@@ -552,6 +552,6 @@ export default function ProductionPlanningPage() {
           onDismiss={() => setUndoAction(null)}
         />
       )}
-    </ProjectLayout>
+    
   )
 }

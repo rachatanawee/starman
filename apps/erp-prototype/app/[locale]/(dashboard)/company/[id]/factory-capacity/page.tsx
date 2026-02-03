@@ -1,6 +1,6 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useState } from '@/lib/common-exports'
+import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useState } from '@/lib/common-exports'
 import { Clock, Factory, AlertTriangle, TrendingUp, Zap, CheckCircle, X, Sparkles, Building2 } from 'lucide-react'
 import { mockWorkCenterCapacity, mockMachineDowntime, mockAICapacityAlerts, AICapacityAlert } from '@/lib/mock-data'
 import { toast } from 'sonner'
@@ -57,7 +57,7 @@ export default function FactoryCapacityPage() {
   const avgLoad = stats.totalCapacity > 0 ? (stats.totalLoad / stats.totalCapacity * 100).toFixed(1) : 0
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Factory Capacity" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -304,6 +304,6 @@ export default function FactoryCapacityPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

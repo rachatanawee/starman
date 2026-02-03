@@ -1,6 +1,6 @@
 'use client'
 
-import { ProjectSidebar } from './project-sidebar'
+import { ProjectSidebar } from '@/components/project-sidebar'
 import { MobileMenu } from './mobile-menu'
 import { Breadcrumbs } from './breadcrumbs'
 import { ProjectSwitcher } from './project-switcher'

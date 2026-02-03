@@ -1,6 +1,7 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { } from '@spark/core' // card'
 import { ShoppingCart } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import mermaid from 'mermaid'

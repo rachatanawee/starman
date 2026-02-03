@@ -1,11 +1,12 @@
-import { ProjectLayout } from '@/components/project-layout'
+import { ProjectLayout } from '@spark/core'
 
-export default function CompanyIdLayout({
+export default async function CompanyIdLayout({
   children,
   params,
 }: {
   children: React.ReactNode
   params: Promise<{ id: string }>
 }) {
-  return children
+  const { id } = await params
+  return <ProjectLayout projectId={id}>{children}</ProjectLayout>
 }

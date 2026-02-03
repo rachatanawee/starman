@@ -1,6 +1,6 @@
 'use client'
 
-import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, useParams, useRouter, useTranslations, useState } from '@/lib/common-exports'
+import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, useParams, useRouter, useTranslations, useState } from '@/lib/common-exports'
 import {
   Package2, ShoppingCart, DollarSign, TrendingUp,
   Factory, Users, AlertCircle, CheckCircle2, Clock, RefreshCw, Printer, Building2, Sparkles, LayoutDashboard, Maximize, Minimize, Download
@@ -61,14 +61,14 @@ export default function CompanyDashboardPage() {
 
   if (!project) {
     return (
-      <ProjectLayout projectId={projectId}>
+      
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('companyNotFound')}</h2>
             <Button onClick={() => router.push('/en/company')}>{t('backToCompanies')}</Button>
           </div>
         </div>
-      </ProjectLayout>
+      
     )
   }
 
@@ -121,7 +121,7 @@ export default function CompanyDashboardPage() {
   ]
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <DynamicTitle pageTitle="Dashboard" />
       <style jsx global>{`
         @media print {
@@ -494,6 +494,6 @@ export default function CompanyDashboardPage() {
           </CardContent>
         </Card>
       </div>
-    </ProjectLayout>
+    
   )
 }

@@ -1,13 +1,13 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog'
-import { ProjectLayout } from '@/components/project-layout'
+import { Button } from '@spark/core'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Input } from '@spark/core'
+import { Label } from '@spark/core'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@spark/core'
+import { Textarea } from '@spark/core'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@spark/core'
+import { ProjectLayout } from '@spark/core'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Save, Plus, Trash2, Sparkles, Loader2 } from 'lucide-react'
 import * as React from 'react'
@@ -178,7 +178,7 @@ export default function NewQuotationPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" onClick={() => router.back()}>
@@ -572,6 +572,6 @@ export default function NewQuotationPage() {
           </div>
         </form>
       </div>
-    </ProjectLayout>
+    
   )
 }

@@ -12,9 +12,9 @@ import {
 import { useQueryState } from "nuqs";
 import * as React from "react";
 
-import { DataTableRangeFilter } from "@/components/tablecn/data-table/data-table-range-filter";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { DataTableRangeFilter } from "./data-table/data-table-range-filter";
+import { Button } from "../../ui/button";
+import { Calendar } from "../../ui/calendar";
 import {
   Command,
   CommandEmpty,
@@ -22,27 +22,27 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { Input } from "@/components/ui/input";
+} from "../../ui/command";
+import { Input } from "../../ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "../../ui/popover";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useDebouncedCallback } from "@/components/tablecn/hooks/use-debounced-callback";
-import { getDefaultFilterOperator, getFilterOperators } from "@/components/tablecn/lib/data-table";
-import { formatDate } from "@/components/tablecn/lib/format";
-import { generateId } from "@/components/tablecn/lib/id";
-import { getFiltersStateParser } from "@/components/tablecn/lib/parsers";
-import { cn } from "@/lib/utils";
-import type { ExtendedColumnFilter, FilterOperator } from "@/components/tablecn/types/data-table";
+} from "../../ui/select";
+import { useDebouncedCallback } from "./hooks/use-debounced-callback";
+import { getDefaultFilterOperator, getFilterOperators } from "../lib/data-table";
+import { formatDate } from "../lib/format";
+import { generateId } from "../lib/id";
+import { getFiltersStateParser } from "../lib/parsers";
+import { cn } from "../../../lib/utils";
+import type { ExtendedColumnFilter, FilterOperator } from "../types/data-table";
 
 const DEBOUNCE_MS = 300;
 const THROTTLE_MS = 50;

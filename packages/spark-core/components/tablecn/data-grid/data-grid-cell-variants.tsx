@@ -15,11 +15,11 @@ import {
   X,
 } from "lucide-react";
 import * as React from "react";
-import { DataGridCellWrapper } from "@//components/tablecn/data-grid/data-grid-cell-wrapper";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
+import { DataGridCellWrapper } from "./data-grid-cell-wrapper";
+import { Badge } from "../../ui/badge";
+import { Button } from "../../ui/button";
+import { Calendar } from "../../ui/calendar";
+import { Checkbox } from "../../ui/checkbox";
 import {
   Command,
   CommandEmpty,
@@ -28,26 +28,26 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/components/ui/command";
+} from "../../ui/command";
 import {
   Popover,
   PopoverAnchor,
   PopoverContent,
-} from "@/components/ui/popover";
+} from "../../ui/popover";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Textarea } from "@/components/ui/textarea";
-import { useBadgeOverflow } from "@/components/tablecn/hooks/use-badge-overflow";
-import { useDebouncedCallback } from "@/components/tablecn/hooks/use-debounced-callback";
-import { getLineCount } from "@/components/tablecn/lib/data-grid";
-import { cn } from "@/lib/utils";
-import type { FileCellData } from "@/components/tablecn/types/data-grid";
+} from "../../ui/select";
+import { Skeleton } from "../../ui/skeleton";
+import { Textarea } from "../../ui/textarea";
+import { useBadgeOverflow } from "../hooks/use-badge-overflow";
+import { useDebouncedCallback } from "../hooks/use-debounced-callback";
+import { getLineCount } from "../lib/data-grid";
+import { cn } from "../../../lib/utils";
+import type { FileCellData } from "../types/data-grid";
 
 interface CellVariantProps<TData> {
   cell: Cell<TData, unknown>;

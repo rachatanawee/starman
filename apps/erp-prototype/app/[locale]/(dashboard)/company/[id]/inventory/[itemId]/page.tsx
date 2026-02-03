@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { ProjectLayout } from '@/components/project-layout'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { Button } from '@spark/core'
+import { Badge } from '@spark/core'
+import { Input } from '@spark/core'
+import { Label } from '@spark/core'
+import { Textarea } from '@spark/core'
+import { ProjectLayout } from '@spark/core'
 import { ArrowLeft, Edit, Save, Plus, X, Package2, MapPin, TrendingUp, AlertTriangle } from 'lucide-react'
 import { mockInventoryItems, mockStockTransactions } from '@/lib/mock-data'
 import { toast } from 'sonner'
@@ -31,7 +31,7 @@ export default function InventoryDetailPage() {
 
   if (!item) {
     return (
-      <ProjectLayout projectId={projectId}>
+      
         <div className="p-6 text-center">
           <AlertTriangle className="h-12 w-12 text-gray-400 mx-auto mb-3" />
           <p className="text-gray-600">Item not found</p>
@@ -39,7 +39,7 @@ export default function InventoryDetailPage() {
             Back to Inventory
           </Button>
         </div>
-      </ProjectLayout>
+      
     )
   }
 
@@ -84,7 +84,7 @@ export default function InventoryDetailPage() {
   }
 
   return (
-    <ProjectLayout projectId={projectId}>
+    
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -346,6 +346,6 @@ export default function InventoryDetailPage() {
           </div>
         </div>
       </div>
-    </ProjectLayout>
+    
   )
 }

@@ -1,12 +1,14 @@
 'use client'
 
-import { ProjectLayout } from '@/components/project-layout'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ProjectLayout } from '@spark/core'
+import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
+import { } from '@spark/core' // card'
 import { 
   BookOpen, Target, ShoppingCart, Package, Factory, Receipt, BarChart3
 } from 'lucide-react'
 import { useParams, useSearchParams } from 'next/navigation'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@spark/core'
+import { } from '@spark/core' // tabs'
 import * as React from 'react'
 import { OverviewGuide } from './components/overview-guide'
 import { SalesGuide } from './components/sales-guide'

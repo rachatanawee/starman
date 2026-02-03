@@ -15,8 +15,8 @@ import {
   formatUtils, 
   calcUtils,
   validationUtils,
-} from '@/lib/business-utils'
-import { appConfig } from '@/lib/app.config'
+} from '@spark/core'
+import { appConfig } from '@spark/core'
 
 export default function TemplateDemoPage() {
   const [generatedData, setGeneratedData] = useState<any[]>([])
@@ -261,9 +261,9 @@ export default function TemplateDemoPage() {
             </CardHeader>
             <CardContent>
               <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto">
-                <pre>{`import { appConfig } from '@/lib/app.config'
+                <pre>{`import { appConfig } from '@spark/core'
 import { generateTransactions } from '@/lib/mock-data'
-import { formatUtils, calcUtils } from '@/lib/business-utils'
+import { formatUtils, calcUtils } from '@spark/core'
 
 // Generate mock data
 const data = generateTransactions(20)
