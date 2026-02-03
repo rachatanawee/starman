@@ -11,8 +11,10 @@
     "dev:base": "cd apps/spark-base && bun run dev",
     "build": "bun run build:core && bun run build:apps",
     "build:core": "cd packages/spark-core && bun run build",
+    "build:cli": "cd packages/spark-create && bun run build",
     "build:apps": "cd apps/erp-prototype && bun run build && cd ../spark-base && bun run build",
     "build:erp": "cd apps/erp-prototype && bun run build",
-    "build:base": "cd apps/spark-base && bun run build"
+    "build:base": "cd apps/spark-base && bun run build",
+    "create": "cd packages/spark-create && bun dist/index.js"
   }
 }

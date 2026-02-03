@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Button } from '@/shared/components/ui/button'
+import { Input } from '@/shared/components/ui/input'
+import { Label } from '@/shared/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared/components/ui/card'
 import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
 import { Loader2, Sparkles, Shield, GitBranch } from 'lucide-react'
@@ -12,7 +12,7 @@ import { mockAuth } from '@/lib/mock-data'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useSettings } from '@/lib/settings-context'
-import { DynamicTitle } from '@/components/dynamic-title'
+import { DynamicTitle } from '@/core/layout/dynamic-title'
 
 export default function LoginPage() {
   const router = useRouter()

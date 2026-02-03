@@ -1,12 +1,12 @@
 'use client'
 
-import { ProjectLayout } from '@/components/project-layout'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ProjectLayout } from '@/core/layout/project-layout'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { 
   BookOpen, Target, ShoppingCart, Package, Factory, Receipt, BarChart3
 } from 'lucide-react'
 import { useParams, useSearchParams } from 'next/navigation'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import * as React from 'react'
 import { OverviewGuide } from './components/overview-guide'
 import { SalesGuide } from './components/sales-guide'

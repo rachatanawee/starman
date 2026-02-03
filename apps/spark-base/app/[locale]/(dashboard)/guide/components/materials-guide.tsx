@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { Package } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import mermaid from 'mermaid'

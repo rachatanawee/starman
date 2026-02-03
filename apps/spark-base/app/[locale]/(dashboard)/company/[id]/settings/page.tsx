@@ -1,9 +1,9 @@
 'use client'
 
 import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Input, useParams, useState } from '@/lib/common-exports'
-import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Label } from '@/shared/components/ui/label'
+import { Switch } from '@/shared/components/ui/switch'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select'
 import { Settings, Building2, DollarSign, Globe, Bell, Shield, Save, Palette, Star, Zap, Rocket, Heart, Sparkles as SparklesIcon } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import { mockProjectsAPI } from '@/lib/mock-data'
