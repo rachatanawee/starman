@@ -1,9 +1,9 @@
 'use client'
 
 import { useParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
-import { Button } from '@spark/core'
-import { Badge } from '@spark/core'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { ArrowLeft, Edit, Clock, Package, CheckCircle, XCircle, FileText, AlertTriangle, ShieldCheck } from 'lucide-react'
 import { mockPurchaseOrders, mockGoodsReceipts, mockVendorBills, type POStatus } from '@/lib/mock-data'
 

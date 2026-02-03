@@ -7,7 +7,7 @@ import {
   Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown
 } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
-import { Button } from '@spark/core'
+import { Button } from '@/components/ui/button'
 import { QuickSearch } from '@spark/core'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'

@@ -1,11 +1,8 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
-import { } from '@spark/core' // card'
-import { Button } from '@spark/core'
-import { } from '@spark/core' // button'
-import { Badge } from '@spark/core'
-import { } from '@spark/core' // badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { Play, Pause, Square, Plus, Minus, AlertTriangle, Clock, Target, CheckCircle2 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { JobTicket, mockDefectCodes, mockDowntimeReasons } from '@/lib/mock-data'
@@ -15,18 +12,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from '@spark/core'
-import { } from '@spark/core' // dialog'
+} from '@/components/ui/dialog'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@spark/core'
-import { } from '@spark/core' // select'
-import { Textarea } from '@spark/core'
-import { } from '@spark/core' // textarea'
+} from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 
 interface OperatorCockpitProps {
   jobTicket: JobTicket

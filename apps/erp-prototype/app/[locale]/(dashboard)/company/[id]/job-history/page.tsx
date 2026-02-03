@@ -1,6 +1,6 @@
 'use client'
 
-import { DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, Input, useParams, useState } from '@/lib/common-exports'
+import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, Input, useParams, useState } from '@/lib/common-exports'
 import { 
   History, CheckCircle, TrendingUp, Award, 
   BookOpen, Search, Calendar, DollarSign, List
@@ -31,7 +31,7 @@ export default function JobHistoryPage() {
   )
 
   return (
-    <>
+    <ProjectLayout projectId={projectId}>
       <DynamicTitle pageTitle="Job History" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -329,6 +329,6 @@ export default function JobHistoryPage() {
           </div>
         </div>
       </div>
-    </>
+    </ProjectLayout>
   )
 }

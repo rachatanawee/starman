@@ -1,14 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
-import { Button } from '@spark/core'
-import { Badge } from '@spark/core'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { List, X } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { mockJobHistory, JobHistoryRecord } from '@/lib/mock-data'
-import { useDataGrid } from '@spark/core'
-import { DataGrid } from '@spark/core'
+import { useDataGrid } from '@/components/tablecn/hooks/use-data-grid'
+import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
 import { ColumnDef } from '@tanstack/react-table'
 
 export default function JobsLogPage() {

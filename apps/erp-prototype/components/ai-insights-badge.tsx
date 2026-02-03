@@ -2,10 +2,8 @@
 
 import * as React from 'react'
 import { Sparkles, TrendingUp, TrendingDown, AlertTriangle } from 'lucide-react'
-import { Badge } from '@spark/core'
-import { } from '@spark/core' // badge'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@spark/core'
-import { } from '@spark/core' // tooltip'
+import { Badge } from '@/components/ui/badge'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 interface AIInsightsBadgeProps {
   type: 'positive' | 'negative' | 'warning' | 'neutral'

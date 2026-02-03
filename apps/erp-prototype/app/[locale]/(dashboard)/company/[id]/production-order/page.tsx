@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
-import { Button } from '@spark/core'
-import { Badge } from '@spark/core'
-import { Input } from '@spark/core'
-import { Progress } from '@spark/core'
+import { ProjectLayout } from '@/lib/common-exports'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { Progress } from '@/components/ui/progress'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,14 +14,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@spark/core'
+} from '@/components/ui/dropdown-menu'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@spark/core'
+} from '@/components/ui/select'
 import { Plus, Factory, Search, Filter, X, Clock, Package, AlertCircle, CheckCircle2, PlayCircle, ShoppingCart, FileText, GitBranch, Warehouse, Edit, Eye, BookOpen, Calendar, MoreVertical, Download, Printer, RefreshCw, ArrowUpDown, ChevronDown, Maximize } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -358,7 +359,7 @@ export default function ProductionOrderPage() {
   }
 
   return (
-    <>
+    <ProjectLayout projectId={projectId}>
       <DynamicTitle pageTitle="Production Order" />
       <div className="p-6 space-y-6">
         {/* Header */}
@@ -634,6 +635,6 @@ export default function ProductionOrderPage() {
           </CardContent>
         </Card>
       </div>
-    </>
+    </ProjectLayout>
   )
 }

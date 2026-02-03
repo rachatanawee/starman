@@ -1,19 +1,20 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@spark/core'
-import { Button } from '@spark/core'
-import { Badge } from '@spark/core'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@spark/core'
-import { Progress } from '@spark/core'
-import { Input } from '@spark/core'
-import { Label } from '@spark/core'
+import { ProjectLayout } from '@/lib/common-exports'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Progress } from '@/components/ui/progress'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@spark/core'
+} from '@/components/ui/select'
 import {
   Dialog,
   DialogContent,
@@ -21,7 +22,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@spark/core'
+} from '@/components/ui/dialog'
 import {
   Table,
   TableBody,
@@ -199,7 +200,7 @@ export default function ManufacturingPage() {
   }
 
   return (
-    <>
+    <ProjectLayout projectId={projectId}>
       <DynamicTitle pageTitle="Manufacturing" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -714,6 +715,6 @@ export default function ManufacturingPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </>
+    </ProjectLayout>
   )
 }

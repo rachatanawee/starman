@@ -1,13 +1,10 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
-import { } from '@spark/core' // card'
-import { Badge } from '@spark/core'
-import { } from '@spark/core' // badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { AlertCircle, Activity, TrendingUp, Clock } from 'lucide-react'
 import { WorkCenter, mockOEEData } from '@/lib/mock-data'
-import { Progress } from '@spark/core'
-import { } from '@spark/core' // progress'
+import { Progress } from '@/components/ui/progress'
 
 interface SupervisorDashboardProps {
   workCenters: WorkCenter[]

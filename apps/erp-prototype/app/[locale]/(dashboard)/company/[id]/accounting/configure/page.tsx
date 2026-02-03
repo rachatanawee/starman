@@ -1,11 +1,12 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
-import { Button } from '@spark/core'
-import { Input } from '@spark/core'
-import { Label } from '@spark/core'
-import { Switch } from '@spark/core'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@spark/core'
+import { ProjectLayout } from '@/lib/common-exports'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ArrowLeft, Save, Plus, Trash2, ExternalLink } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { mockIntegration, mockAccountMappings, type ProviderType, type SourceType } from '@/lib/mock-data'
@@ -59,7 +60,7 @@ export default function AccountingConfigurePage() {
   }
 
   return (
-    
+    <ProjectLayout projectId={projectId}>
       <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -289,6 +290,6 @@ export default function AccountingConfigurePage() {
           </CardContent>
         </Card>
       </div>
-    
+    </ProjectLayout>
   )
 }

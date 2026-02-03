@@ -1,17 +1,17 @@
 'use client'
 
-import { DynamicTitle, PageTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo, useEffect } from '@/lib/common-exports'
+import { ProjectLayout, DynamicTitle, PageTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo, useEffect } from '@/lib/common-exports'
 import { Plus, Filter, X, User, Clock, Package, Truck, CheckCircle, XCircle, FileText, BookOpen, ListTodo } from 'lucide-react'
 import Link from 'next/link'
-import { DataGrid } from '@spark/core'
-import { DataGridRowHeightMenu } from '@spark/core'
-import { DataGridSortMenu } from '@spark/core'
-import { DataGridViewMenu } from '@spark/core'
-import { useDataGrid } from '@spark/core'
-import { useWindowSize } from '@spark/core'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@spark/core'
-import { Label } from '@spark/core'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@spark/core'
+import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
+import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
+import { DataGridSortMenu } from '@/components/tablecn/data-grid/data-grid-sort-menu'
+import { DataGridViewMenu } from '@/components/tablecn/data-grid/data-grid-view-menu'
+import { useDataGrid } from '@/components/tablecn/hooks/use-data-grid'
+import { useWindowSize } from '@/components/tablecn/hooks/use-window-size'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Label } from '@/components/ui/label'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@spark/core'
 import { DateRangeFilter } from '@spark/core'
 import { mockSalesOrders, type SalesOrder } from '@/lib/mock-data'
@@ -300,7 +300,7 @@ export default function SalesOrderPage() {
   const height = Math.max(400, windowSize.height - 200)
 
   return (
-    
+    <ProjectLayout projectId={projectId}>
       <div className="w-full h-full">
         <div className="p-2 sm:p-3 lg:p-4 space-y-3 sm:space-y-3 lg:space-y-4">
           <div className="bg-white rounded-lg border shadow-sm p-4 sm:p-5 lg:p-6">
@@ -356,6 +356,6 @@ export default function SalesOrderPage() {
         </div>
         </div>
       </div>
-    
+    </ProjectLayout>
   )
 }

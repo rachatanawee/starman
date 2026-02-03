@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@spark/core'
-import { Button } from '@spark/core'
-import { Badge } from '@spark/core'
-import { Checkbox } from '@spark/core'
+import { ProjectLayout } from '@/lib/common-exports'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Sparkles, Package, AlertTriangle, TrendingUp, Zap, Clock, CheckCircle, ShoppingCart, BookOpen, FileText, Calendar, Network } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
@@ -122,7 +123,7 @@ export default function MRPPage() {
   }
 
   return (
-    <>
+    <ProjectLayout projectId={projectId}>
       <DynamicTitle pageTitle="MRP" />
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
@@ -349,6 +350,6 @@ export default function MRPPage() {
           onDismiss={() => setUndoAction(null)}
         />
       )}
-    </>
+    </ProjectLayout>
   )
 }
