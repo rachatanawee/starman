@@ -6,7 +6,7 @@
 export const appConfig = {
   // Application Identity
   app: {
-    defaultName: 'Starman ERP',
+    defaultName: 'Spark ERP',
     defaultIcon: 'GitBranch',
     version: '1.0.0',
     buildNumber: '2026.01.15',
