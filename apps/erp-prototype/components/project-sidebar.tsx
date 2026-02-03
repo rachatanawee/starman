@@ -156,6 +156,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
     { href: `/${locale}/company/${projectId}/accounting`, icon: Calculator, label: 'Accounting' },
     { section: 'Settings' },
     { href: `/${locale}/company/${projectId}/settings`, icon: Settings, label: 'Settings' },
+    { href: `/${locale}/company/${projectId}/ui-patterns`, icon: Star, label: 'UI Patterns' },
   ] : [
     { href: `/${locale}/company`, icon: GitBranch, label: 'Companies' },
     { href: `/${locale}/users`, icon: Users, label: 'User Management' },

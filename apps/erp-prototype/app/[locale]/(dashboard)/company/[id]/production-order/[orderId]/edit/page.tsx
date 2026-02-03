@@ -12,7 +12,7 @@ import { ProjectLayout } from '@/components/project-layout'
 import { ArrowLeft, Save, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { mockProductionOrders } from '@/lib/mock-data'
-import { mockBOMs } from '@/lib/mock-data'
+import { mockBOMs } from '@/lib/mock-data/bom-data'
 
 export default function EditProductionOrderPage() {
   const params = useParams()

@@ -17,9 +17,25 @@ export * from './production-planning-data'
 export * from './production-order-data'
 export * from './mrp-data'
 export * from './purchasing-data'
-export * from './accounting-data'
-export * from './bom-data'
-export * from './wip-costing-data'
+export { 
+  mockIntegration,
+  mockSyncLogs,
+  mockAIAlerts as mockAccountingAIAlerts,
+  mockTaxSummary,
+  mockAccountMappings,
+  getSyncStats,
+  type ProviderType,
+  type SourceType,
+  type DocumentType,
+  type SyncStatus,
+  type AccountingIntegration,
+  type AccountMapping,
+  type SyncLog,
+  type AIReconciliationAlert,
+  type TaxSummary
+} from './accounting-data'
+// Note: bom-data and wip-costing-data not exported to avoid conflicts
+// Import directly from those files if needed
 
 // Re-export for convenience
 export { mockDataGenerator as generator } from './generator'

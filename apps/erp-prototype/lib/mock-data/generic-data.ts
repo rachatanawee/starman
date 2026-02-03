@@ -53,7 +53,7 @@ export const generateDocument = (index: number): GenericDocument => ({
   id: mockDataGenerator.id('doc'),
   documentNumber: `DOC-${String(index + 1).padStart(4, '0')}`,
   date: mockDataGenerator.date(-index),
-  status: mockDataGenerator.status(commonStatuses.document),
+  status: mockDataGenerator.status([...commonStatuses.document]),
   amount: mockDataGenerator.amount(),
   notes: '',
 })
@@ -64,7 +64,7 @@ export const generateTransaction = (index: number): GenericTransaction => ({
   date: mockDataGenerator.date(-index),
   party: mockDataGenerator.status(sampleData.companies),
   amount: mockDataGenerator.amount(10000, 500000),
-  status: mockDataGenerator.status(commonStatuses.order),
+  status: mockDataGenerator.status([...commonStatuses.order]),
   items: mockDataGenerator.number(1, 15),
 })
 
@@ -74,7 +74,7 @@ export const generateTask = (index: number): GenericTask => ({
   title: `Task ${index + 1}`,
   startDate: mockDataGenerator.date(index),
   endDate: mockDataGenerator.date(index + mockDataGenerator.number(1, 7)),
-  status: mockDataGenerator.status(commonStatuses.production),
+  status: mockDataGenerator.status([...commonStatuses.production]),
   progress: mockDataGenerator.number(0, 100),
 })
 

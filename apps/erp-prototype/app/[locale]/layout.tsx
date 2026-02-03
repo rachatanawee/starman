@@ -6,6 +6,7 @@ import { PageTransition } from '@/components/page-transition'
 import { SettingsProvider } from '@/lib/settings-context'
 import { ThemeLoader } from '@/components/theme-loader'
 import { PageTracker } from '@/components/page-tracker'
+import { Toaster } from '@/components/ui/sonner'
 import '../globals.css'
 
 export const dynamic = 'force-dynamic'
@@ -39,6 +40,7 @@ export default async function LocaleLayout({
             </PageTransition>
           </NextIntlClientProvider>
         </NuqsAdapter>
+        <Toaster />
       </SettingsProvider>
     </>
   )

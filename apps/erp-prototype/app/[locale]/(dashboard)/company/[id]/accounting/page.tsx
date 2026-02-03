@@ -2,14 +2,14 @@
 
 import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, Button, Badge, useParams, useRouter, useState } from '@/lib/common-exports'
 import { RefreshCw, Settings, AlertTriangle, CheckCircle2, Clock, XCircle, FileText, TrendingUp, Zap, ExternalLink, Calculator } from 'lucide-react'
-import { mockIntegration, mockSyncLogs, mockAIAlerts, mockTaxSummary, mockAccountMappings, getSyncStats } from '@/lib/mock-data'
+import { mockIntegration, mockSyncLogs, mockAIAlerts as mockAccountingAlerts, mockTaxSummary, mockAccountMappings, getSyncStats } from '@/lib/mock-data/accounting-data'
 
 export default function AccountingPage() {
   const params = useParams()
   const router = useRouter()
   const projectId = params.id as string
   const stats = getSyncStats()
-  const [alerts, setAlerts] = useState(mockAIAlerts)
+  const [alerts, setAlerts] = useState(mockAccountingAlerts)
   const [syncing, setSyncing] = useState(false)
   const [syncProgress, setSyncProgress] = useState(0)
   const [syncMessage, setSyncMessage] = useState('')

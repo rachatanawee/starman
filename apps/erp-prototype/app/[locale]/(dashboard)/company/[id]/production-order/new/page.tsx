@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { ProjectLayout } from '@/components/project-layout'
 import { ArrowLeft, Save, Package, Calendar, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
-import { mockBOMs } from '@/lib/mock-data'
+import { mockBOMs } from '@/lib/mock-data/bom-data'
 
 export default function NewProductionOrderPage() {
   const params = useParams()

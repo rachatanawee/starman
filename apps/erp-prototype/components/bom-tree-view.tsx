@@ -1,6 +1,6 @@
 'use client'
 
-import { BOM } from '@/lib/mock-data'
+import { BOM } from '@/lib/mock-data/bom-data'
 import { ChevronRight, ChevronDown, Package, Wrench } from 'lucide-react'
 import { useState } from 'react'
 

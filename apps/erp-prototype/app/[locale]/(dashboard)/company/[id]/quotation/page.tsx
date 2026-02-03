@@ -1,7 +1,7 @@
 'use client'
 
 import { ProjectLayout, DynamicTitle, PageTitle, Button, Badge, Input, useParams, useRouter, useTranslations, useState, useMemo, useEffect } from '@/lib/common-exports'
-import { Plus, Filter, X, User, CheckCircle, FileText, Send, Ban, CalendarX, Sparkles, BookOpen } from 'lucide-react'
+import { Plus, Filter, X, User, CheckCircle, FileText, Send, Ban, CalendarX, Sparkles, BookOpen, Trash2, AlertCircle, Check } from 'lucide-react'
 import Link from 'next/link'
 import { DataGrid } from '@/components/tablecn/data-grid/data-grid'
 import { DataGridRowHeightMenu } from '@/components/tablecn/data-grid/data-grid-row-height-menu'
@@ -19,6 +19,7 @@ import { AIInsightsBadge } from '@/components/ai-insights-badge'
 import { mockQuotations, type Quotation } from '@/lib/mock-data'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
+import { toast } from 'sonner'
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -185,6 +186,7 @@ export default function QuotationPage() {
   }, [filterCriteria])
 
   const [data, setData] = React.useState<Quotation[]>(filteredData)
+  const [deleteConfirmId, setDeleteConfirmId] = React.useState<string | null>(null)
 
   React.useEffect(() => {
     setData(filteredData)
@@ -289,8 +291,54 @@ export default function QuotationPage() {
           <div className="text-right">{row.original.items}</div>
         ),
       },
+      {
+        id: 'actions',
+        header: '',
+        size: 100,
+        cell: ({ row }) => (
+          deleteConfirmId === row.original.id ? (
+            <div className="flex items-center gap-1">
+              <Button 
+                size="sm" 
+                variant="destructive"
+                onClick={() => {
+                  setData(prev => prev.filter(q => q.id !== row.original.id))
+                  toast.success('Quotation deleted', {
+                    action: {
+                      label: 'Undo',
+                      onClick: () => {
+                        setData(filteredData)
+                        toast.info('Quotation restored')
+                      }
+                    },
+                    duration: 5000
+                  })
+                  setDeleteConfirmId(null)
+                }}
+              >
+                <Check className="h-4 w-4" />
+              </Button>
+              <Button 
+                size="sm" 
+                variant="ghost"
+                onClick={() => setDeleteConfirmId(null)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          ) : (
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setDeleteConfirmId(row.original.id)}
+            >
+              <Trash2 className="h-4 w-4 text-red-600" />
+            </Button>
+          )
+        ),
+      },
     ],
-    [params.locale, projectId, router]
+    [params.locale, projectId, router, deleteConfirmId, filteredData]
   )
 
   const { table, ...dataGridProps } = useDataGrid({

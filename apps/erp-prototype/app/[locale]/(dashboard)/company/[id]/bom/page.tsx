@@ -4,7 +4,7 @@ import { ProjectLayout, DynamicTitle, Card, CardContent, CardHeader, CardTitle, 
 import { Plus, Package, Eye, Edit, Layers, TrendingUp, AlertCircle, Search, Filter, X, BookOpen, GitBranch } from 'lucide-react'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Link from 'next/link'
-import { mockBOMs, BOM } from '@/lib/mock-data'
+import { mockBOMs, BOM } from '@/lib/mock-data/bom-data'
 import { BOMTreeView } from '@/components/bom-tree-view'
 
 export default function BOMPage() {
