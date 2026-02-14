@@ -170,7 +170,7 @@
     },
     "packages/spark-core": {
       "name": "@spark/core",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "dependencies": {
         "sonner": "^2.0.7",
       },
@@ -221,7 +221,7 @@
     },
     "packages/spark-create": {
       "name": "@spark/create",
-      "version": "0.1.14",
+      "version": "0.1.15",
       "bin": {
         "create-spark": "./dist/index.js",
       },

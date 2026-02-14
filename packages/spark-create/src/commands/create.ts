@@ -13,6 +13,7 @@ interface CreateOptions {
   template: string
   port: string
   modules?: string
+  skipInstall?: boolean
 }
 
 export async function create(projectName?: string, options?: CreateOptions) {
@@ -248,17 +249,24 @@ export function isModuleInstalled(module: ModuleName): boolean {
     }
 
     // Install dependencies
-    spinner.text = 'Installing dependencies with bun...'
-    await execa('bun', ['install'], {
-      cwd: targetDir,
-      stdio: 'pipe',
-    })
+    if (!options?.skipInstall) {
+      spinner.text = 'Installing dependencies with bun...'
+      await execa('bun', ['install'], {
+        cwd: targetDir,
+        stdio: 'pipe',
+      })
+    } else {
+      spinner.text = 'Skipping dependency installation...'
+    }
 
     spinner.succeed(chalk.green('Project created successfully!'))
 
     // Show next steps
     console.log(chalk.bold('\n📦 Next steps:\n'))
     console.log(chalk.cyan(`  cd ${projectName}`))
+    if (options?.skipInstall) {
+      console.log(chalk.cyan('  bun install'))
+    }
     console.log(chalk.cyan('  bun run dev'))
     console.log(chalk.dim(`\n  Your app will be running on http://localhost:${port}\n`))
 

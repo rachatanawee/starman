@@ -14,6 +14,7 @@ program
   .argument('[project-name]', 'Name of the project to create')
   .option('-t, --template <template>', 'Template to use (spark-base)', 'spark-base')
   .option('-p, --port <port>', 'Development server port', '3100')
+  .option('--skip-install', 'Skip dependency installation')
   .action(create)
 
 program.parse()
