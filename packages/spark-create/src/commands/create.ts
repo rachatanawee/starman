@@ -71,23 +71,6 @@ export async function create(projectName?: string, options?: CreateOptions) {
 
   const port = portResponse.port || 3100
 
-  // Prompt for modules
-  const modulesResponse = await prompts({
-    type: 'multiselect',
-    name: 'modules',
-    message: 'Select modules to install:',
-    choices: [
-      { title: 'Manufacturing', value: 'manufacturing', description: 'BOM, Production Order, MRP, Manufacturing', selected: false },
-      { title: 'Sales & Purchasing', value: 'sales', description: 'Quotation, Sales Order, Invoice, Purchasing', selected: false },
-      { title: 'Inventory', value: 'inventory', description: 'Inventory Management & Warehouse', selected: false },
-      { title: 'Accounting', value: 'accounting', description: 'Accounting & WIP Costing', selected: false },
-      { title: 'Factory Operations', value: 'factory-ops', description: 'Factory Capacity, Job History, Worker Allowance', selected: false },
-    ],
-    hint: 'Space to select, Enter to confirm',
-  })
-
-  const selectedModules = modulesResponse.modules || []
-
   const spinner = ora('Creating project...').start()
 
   try {
@@ -127,6 +110,9 @@ export async function create(projectName?: string, options?: CreateOptions) {
 NEXT_PUBLIC_APP_ICON="Rocket"
 `
     await fs.writeFile(envPath, envContent)
+
+    // No modules to install - using base template only
+    const selectedModules: string[] = []
 
     // Create modules config
     if (selectedModules.length > 0) {

@@ -1,6 +1,6 @@
 {
   "name": "@spark/core",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "private": false,
   "main": "./index.ts",
   "types": "./index.ts",

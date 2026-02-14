@@ -106,6 +106,8 @@
         "@radix-ui/react-tabs": "^1.1.13",
         "@radix-ui/react-tooltip": "^1.2.8",
         "@react-pdf/renderer": "^4.3.1",
+        "@tanstack/react-table": "^8.20.5",
+        "@tanstack/react-virtual": "^3.10.8",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
@@ -168,7 +170,7 @@
     },
     "packages/spark-core": {
       "name": "@spark/core",
-      "version": "1.0.1",
+      "version": "1.0.4",
       "dependencies": {
         "sonner": "^2.0.7",
       },
@@ -219,7 +221,7 @@
     },
     "packages/spark-create": {
       "name": "@spark/create",
-      "version": "0.1.11",
+      "version": "0.1.14",
       "bin": {
         "create-spark": "./dist/index.js",
       },
