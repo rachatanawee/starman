@@ -1,13 +1,15 @@
 {
   "name": "@spark/core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "main": "./index.ts",
   "types": "./index.ts",
   "exports": {
     ".": "./index.ts"
   },
-  "files": ["**/*"],
+  "files": [
+    "**/*"
+  ],
   "publishConfig": {
     "registry": "https://codehub.csigroups.com/api/v4/projects/698/packages/npm/",
     "access": "public"

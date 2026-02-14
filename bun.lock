@@ -219,7 +219,7 @@
     },
     "packages/spark-create": {
       "name": "@spark/create",
-      "version": "0.1.7",
+      "version": "0.1.11",
       "bin": {
         "create-spark": "./dist/index.js",
       },

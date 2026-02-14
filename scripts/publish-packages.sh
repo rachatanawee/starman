@@ -36,6 +36,8 @@ echo ""
 echo "  Building @spark/create..."
 cd packages/spark-create
 bun install
+echo "  Bumping version (patch)..."
+npm version patch --no-git-tag-version --no-workspaces-update
 bun run build
 cd ../..
 echo "  ✅ @spark/create built"
@@ -44,6 +46,8 @@ echo "  ✅ @spark/create built"
 echo "  Building @spark/core..."
 cd packages/spark-core
 bun install
+echo "  Bumping version (patch)..."
+npm version patch --no-git-tag-version --no-workspaces-update
 bun run build
 cd ../..
 echo "  ✅ @spark/core built"
@@ -72,8 +76,12 @@ echo ""
 # Publish spark-create
 echo "  Publishing @spark/create..."
 cd packages/spark-create
-npm publish --userconfig="$TEMP_NPMRC"
+# Use npm pack to create clean tarball without workspace references
+npm pack
+TARBALL=$(ls spark-create-*.tgz | head -n 1)
+npm publish "$TARBALL" --userconfig="$TEMP_NPMRC"
 PUBLISH_EXIT_CODE=$?
+rm -f "$TARBALL"
 cd ../..
 
 if [ $PUBLISH_EXIT_CODE -ne 0 ]; then
@@ -86,8 +94,12 @@ echo "  ✅ @spark/create published"
 # Publish spark-core
 echo "  Publishing @spark/core..."
 cd packages/spark-core
-npm publish --userconfig="$TEMP_NPMRC"
+# Use npm pack to create clean tarball without workspace references
+npm pack
+TARBALL=$(ls spark-core-*.tgz | head -n 1)
+npm publish "$TARBALL" --userconfig="$TEMP_NPMRC"
 PUBLISH_EXIT_CODE=$?
+rm -f "$TARBALL"
 cd ../..
 
 if [ $PUBLISH_EXIT_CODE -ne 0 ]; then
