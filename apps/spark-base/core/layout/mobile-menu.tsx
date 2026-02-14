@@ -4,7 +4,7 @@ import {
   Menu, X, Star, LogOut, Languages, Search,
   LayoutDashboard, ListTodo, FileText, DollarSign, Users2,
   BarChart3, Users, Settings, Calendar, BookOpen, Network,
-  Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown, ChevronRight
+  Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown, ChevronRight, QrCode
 } from 'lucide-react'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
@@ -57,6 +57,7 @@ export function MobileMenu({ projectId }: MobileMenuProps) {
     { section: 'Main' },
     { href: `/${locale}/company/${projectId}/dashboard`, icon: LayoutDashboard, label: 'Dashboard' },
     { href: `/${locale}/company/${projectId}/sales-order`, icon: ListTodo, label: 'Sales Order' },
+    { href: `/${locale}/company/${projectId}/assets`, icon: QrCode, label: 'Assets' },
     { section: 'Settings' },
     { href: `/${locale}/company/${projectId}/settings`, icon: Settings, label: 'Settings' },
     { href: `/${locale}/company/${projectId}/ui-patterns`, icon: Star, label: 'UI Patterns' },

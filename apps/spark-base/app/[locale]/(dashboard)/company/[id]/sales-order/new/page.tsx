@@ -4,72 +4,27 @@ import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select'
 import { Textarea } from '@/shared/components/ui/textarea'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select'
 import { ProjectLayout } from '@/core/layout/project-layout'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, Save, Plus, Trash2 } from 'lucide-react'
-import * as React from 'react'
-
-interface OrderItem {
-  id: string
-  productName: string
-  sku: string
-  quantity: number
-  unitPrice: number
-  discount: number
-  total: number
-}
+import { ArrowLeft, Save } from 'lucide-react'
+import { useState } from 'react'
+import { useOrderItems, calculateOrderSummary, OrderItemsTable, OrderSummaryCard } from '@/modules/sales-order'
 
 export default function NewSalesOrderPage() {
   const params = useParams()
   const router = useRouter()
   const projectId = params.id as string
 
-  const [items, setItems] = React.useState<OrderItem[]>([
-    { id: '1', productName: '', sku: '', quantity: 1, unitPrice: 0, discount: 0, total: 0 }
-  ])
-  const [globalDiscount, setGlobalDiscount] = React.useState(0)
-  const [shippingCost, setShippingCost] = React.useState(0)
-  const [taxRate] = React.useState(7) // VAT 7%
+  const { items, addItem, removeItem, updateItem } = useOrderItems()
+  const [globalDiscount, setGlobalDiscount] = useState(0)
+  const [shippingCost, setShippingCost] = useState(0)
+  const taxRate = 7 // VAT 7%
 
-  const subtotal = items.reduce((sum, item) => sum + item.total, 0)
-  const discountAmount = (subtotal * globalDiscount) / 100
-  const taxableAmount = subtotal - discountAmount
-  const taxAmount = (taxableAmount * taxRate) / 100
-  const grandTotal = taxableAmount + taxAmount + shippingCost
+  const summary = calculateOrderSummary(items, globalDiscount, shippingCost, taxRate)
 
-  const addItem = () => {
-    setItems([...items, { 
-      id: Date.now().toString(), 
-      productName: '', 
-      sku: '', 
-      quantity: 1, 
-      unitPrice: 0, 
-      discount: 0, 
-      total: 0 
-    }])
-  }
-
-  const removeItem = (id: string) => {
-    if (items.length > 1) {
-      setItems(items.filter(item => item.id !== id))
-    }
-  }
-
-  const updateItem = (id: string, field: keyof OrderItem, value: string | number) => {
-    setItems(items.map(item => {
-      if (item.id === id) {
-        const updated = { ...item, [field]: value }
-        const lineTotal = (updated.quantity * updated.unitPrice) - updated.discount
-        updated.total = Math.max(0, lineTotal)
-        return updated
-      }
-      return item
-    }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     router.push(`/${params.locale}/company/${projectId}/sales-order`)
   }
@@ -174,95 +129,13 @@ export default function NewSalesOrderPage() {
 
           {/* Line Items */}
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Order Items</CardTitle>
-              <Button type="button" variant="outline" size="sm" onClick={addItem} data-testid="add-item-row">
-                <Plus className="h-4 w-4 mr-2" />
-                Add Item
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="border rounded-lg overflow-hidden">
-                <table className="w-full text-sm">
-                  <thead className="bg-gray-50 border-b">
-                    <tr>
-                      <th className="text-left p-2 font-medium">SKU</th>
-                      <th className="text-left p-2 font-medium">Product Name</th>
-                      <th className="text-right p-2 font-medium">Qty</th>
-                      <th className="text-right p-2 font-medium">Unit Price</th>
-                      <th className="text-right p-2 font-medium">Discount</th>
-                      <th className="text-right p-2 font-medium">Total</th>
-                      <th className="w-10 p-2"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {items.map((item) => (
-                      <tr key={item.id} className="border-b">
-                        <td className="p-2">
-                          <Input 
-                            value={item.sku} 
-                            onChange={(e) => updateItem(item.id, 'sku', e.target.value)}
-                            placeholder="SKU"
-                            className="h-8"
-                          />
-                        </td>
-                        <td className="p-2">
-                          <Input 
-                            value={item.productName} 
-                            onChange={(e) => updateItem(item.id, 'productName', e.target.value)}
-                            placeholder="Product name"
-                            className="h-8"
-                          />
-                        </td>
-                        <td className="p-2">
-                          <Input 
-                            type="number" 
-                            value={item.quantity} 
-                            onChange={(e) => updateItem(item.id, 'quantity', Number(e.target.value))}
-                            className="h-8 text-right"
-                            min="1"
-                          />
-                        </td>
-                        <td className="p-2">
-                          <Input 
-                            type="number" 
-                            value={item.unitPrice} 
-                            onChange={(e) => updateItem(item.id, 'unitPrice', Number(e.target.value))}
-                            className="h-8 text-right"
-                            min="0"
-                            step="0.01"
-                          />
-                        </td>
-                        <td className="p-2">
-                          <Input 
-                            type="number" 
-                            value={item.discount} 
-                            onChange={(e) => updateItem(item.id, 'discount', Number(e.target.value))}
-                            className="h-8 text-right"
-                            min="0"
-                            step="0.01"
-                          />
-                        </td>
-                        <td className="p-2 text-right font-medium">
-                          {item.total.toFixed(2)}
-                        </td>
-                        <td className="p-2">
-                          <Button 
-                            type="button" 
-                            variant="ghost" 
-                            size="icon" 
-                            onClick={() => removeItem(item.id)}
-                            disabled={items.length === 1}
-                            className="h-8 w-8"
-                          >
-                            <Trash2 className="h-4 w-4 text-red-600" />
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            <CardContent className="pt-6">
+              <OrderItemsTable
+                items={items}
+                onAddItem={addItem}
+                onRemoveItem={removeItem}
+                onUpdateItem={updateItem}
+              />
             </CardContent>
           </Card>
 
@@ -281,56 +154,14 @@ export default function NewSalesOrderPage() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span>Subtotal:</span>
-                  <span className="font-medium">{subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span>Discount (%):</span>
-                  <Input 
-                    type="number" 
-                    value={globalDiscount} 
-                    onChange={(e) => setGlobalDiscount(Number(e.target.value))}
-                    className="w-24 h-8 text-right"
-                    min="0"
-                    max="100"
-                    step="0.01"
-                  />
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Discount Amount:</span>
-                  <span className="text-red-600">-{discountAmount.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Taxable Amount:</span>
-                  <span>{taxableAmount.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>VAT ({taxRate}%):</span>
-                  <span>{taxAmount.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span>Shipping Cost:</span>
-                  <Input 
-                    type="number" 
-                    value={shippingCost} 
-                    onChange={(e) => setShippingCost(Number(e.target.value))}
-                    className="w-24 h-8 text-right"
-                    min="0"
-                    step="0.01"
-                  />
-                </div>
-                <div className="border-t pt-3 flex justify-between text-lg font-bold">
-                  <span>Grand Total:</span>
-                  <span className="text-primary">{grandTotal.toFixed(2)}</span>
-                </div>
-              </CardContent>
-            </Card>
+            <OrderSummaryCard
+              summary={summary}
+              globalDiscount={globalDiscount}
+              shippingCost={shippingCost}
+              taxRate={taxRate}
+              onDiscountChange={setGlobalDiscount}
+              onShippingChange={setShippingCost}
+            />
           </div>
 
           {/* Actions */}

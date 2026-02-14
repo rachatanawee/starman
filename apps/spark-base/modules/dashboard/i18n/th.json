@@ -1,0 +1,22 @@
+{
+  "title": "แดชบอร์ด",
+  "companyNotFound": "ไม่พบบริษัท",
+  "backToCompanies": "กลับไปที่บริษัท",
+  "totalInventory": "สินค้าคงคลังทั้งหมด",
+  "activeOrders": "คำสั่งซื้อที่ใช้งาน",
+  "monthlyRevenue": "รายได้รายเดือน",
+  "productionRate": "อัตราการผลิต",
+  "salesTrend": "แนวโน้มการขาย",
+  "inventoryDistribution": "การกระจายสินค้าคงคลัง",
+  "productionPerformance": "ประสิทธิภาพการผลิต",
+  "topProducts": "สินค้ายอดนิยม",
+  "alertsNotifications": "การแจ้งเตือน",
+  "recentActivity": "กิจกรรมล่าสุด",
+  "quickActions": "การดำเนินการด่วน",
+  "inventory": "สินค้าคงคลัง",
+  "salesOrder": "ใบสั่งขาย",
+  "production": "การผลิต",
+  "accounting": "บัญชี",
+  "printReport": "พิมพ์รายงาน",
+  "refresh": "รีเฟรช"
+}

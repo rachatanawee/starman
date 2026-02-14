@@ -26,7 +26,14 @@ interface FilterPanelProps {
 }
 
 export function FilterPanel({ config, criteria, onCriteriaChange }: FilterPanelProps) {
-  const [isOpen, setIsOpen] = React.useState(true)
+  const [isOpen, setIsOpen] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(`${config.storageKey}_filterPanelOpen`)
+      return saved !== null ? saved === 'true' : true
+    }
+    return true
+  })
+  
   const [savedFilters, setSavedFilters] = React.useState<Array<{name: string, filters: FilterCriteria}>>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem(`${config.storageKey}_savedFilters`)
@@ -46,6 +53,13 @@ export function FilterPanel({ config, criteria, onCriteriaChange }: FilterPanelP
   const [isSaveDialogOpen, setIsSaveDialogOpen] = React.useState(false)
   const [isLoadDialogOpen, setIsLoadDialogOpen] = React.useState(false)
   const [loadedFilterName, setLoadedFilterName] = React.useState<string | null>(null)
+
+  // Save isOpen state to localStorage whenever it changes
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`${config.storageKey}_filterPanelOpen`, String(isOpen))
+    }
+  }, [isOpen, config.storageKey])
 
   const hasActiveFilters = React.useMemo(() => {
     return Object.keys(criteria).some(key => {

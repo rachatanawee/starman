@@ -1,0 +1,60 @@
+import { Asset } from '../types'
+
+export const mockAssets: Asset[] = [
+  {
+    id: '1',
+    code: 'AST-2024-001',
+    name: 'MacBook Pro 16"',
+    category: 'electronics',
+    status: 'active',
+    location: 'Office Floor 3',
+    department: 'Engineering',
+    purchaseDate: '2024-01-15',
+    purchasePrice: 85000,
+    currentValue: 75000,
+    assignedTo: 'John Doe',
+    qrCode: 'AST-2024-001',
+    imageUrl: '/placeholder-laptop.jpg',
+    description: 'M3 Max, 32GB RAM, 1TB SSD',
+    lastMaintenanceDate: '2024-12-01',
+    nextMaintenanceDate: '2025-06-01',
+    createdAt: '2024-01-15T10:00:00Z',
+    updatedAt: '2024-12-01T14:30:00Z'
+  },
+  {
+    id: '2',
+    code: 'AST-2024-002',
+    name: 'Office Desk',
+    category: 'furniture',
+    status: 'active',
+    location: 'Office Floor 2',
+    department: 'Sales',
+    purchaseDate: '2024-02-20',
+    purchasePrice: 12000,
+    currentValue: 10000,
+    qrCode: 'AST-2024-002',
+    description: 'Standing desk with electric adjustment',
+    createdAt: '2024-02-20T09:00:00Z',
+    updatedAt: '2024-02-20T09:00:00Z'
+  },
+  {
+    id: '3',
+    code: 'AST-2024-003',
+    name: 'Toyota Camry',
+    category: 'vehicle',
+    status: 'maintenance',
+    location: 'Parking Lot B',
+    department: 'Operations',
+    purchaseDate: '2023-06-10',
+    purchasePrice: 1200000,
+    currentValue: 1000000,
+    assignedTo: 'Jane Smith',
+    qrCode: 'AST-2024-003',
+    description: 'Company car for field operations',
+    lastMaintenanceDate: '2025-02-01',
+    nextMaintenanceDate: '2025-08-01',
+    notes: 'Currently in maintenance - oil change and tire rotation',
+    createdAt: '2023-06-10T11:00:00Z',
+    updatedAt: '2025-02-01T08:00:00Z'
+  }
+]

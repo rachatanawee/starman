@@ -14,22 +14,10 @@ import { Label } from '@/shared/components/ui/label'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/shared/components/ui/tooltip'
 import { FilterPanel, type FilterConfig, type FilterCriteria } from '@/shared/components/filter-panel'
 import { DateRangeFilter } from '@/shared/components/date-range-filter'
-import { mockSalesOrders, type SalesOrder } from '@/lib/mock-data'
+import { mockSalesOrders, StatusIcon } from '@/modules/sales-order'
+import type { SalesOrder } from '@/modules/sales-order'
 import type { ColumnDef } from '@tanstack/react-table'
 import * as React from 'react'
-
-const getStatusIcon = (status: string) => {
-  switch (status) {
-    case 'Draft': return <FileText className="h-4 w-4 text-gray-600" />
-    case 'Pending': return <Clock className="h-4 w-4 text-yellow-600" />
-    case 'Confirmed': return <CheckCircle className="h-4 w-4 text-blue-600" />
-    case 'Processing': return <Package className="h-4 w-4 text-blue-600" />
-    case 'Shipped': return <Truck className="h-4 w-4 text-primary" />
-    case 'Completed': return <CheckCircle className="h-4 w-4 text-green-600" />
-    case 'Cancelled': return <XCircle className="h-4 w-4 text-red-600" />
-    default: return null
-  }
-}
 
 export default function SalesOrderPage() {
   const params = useParams()
@@ -265,7 +253,7 @@ export default function SalesOrderPage() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <div className="flex justify-center">
-                  {getStatusIcon(row.original.status)}
+                  <StatusIcon status={row.original.status} />
                 </div>
               </TooltipTrigger>
               <TooltipContent>

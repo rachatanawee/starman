@@ -150,6 +150,22 @@
         "typescript": "^5.9.3",
       },
     },
+    "packages/add-module": {
+      "name": "@spark/add-module",
+      "version": "1.0.0",
+      "bin": {
+        "spark-add-module": "./dist/index.js",
+      },
+      "dependencies": {
+        "chalk": "^5.3.0",
+        "commander": "^12.0.0",
+        "prompts": "^2.4.2",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@types/prompts": "^2.4.9",
+      },
+    },
     "packages/spark-core": {
       "name": "@spark/core",
       "version": "1.0.1",
@@ -702,6 +718,8 @@
     "@rtsao/scc": ["@rtsao/scc@1.1.0", "", {}, "sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g=="],
 
     "@schummar/icu-type-parser": ["@schummar/icu-type-parser@1.21.5", "", {}, "sha512-bXHSaW5jRTmke9Vd0h5P7BtWZG9Znqb8gSDxZnxaGSJnGwPLDPfS+3g0BKzeWqzgZPsIVZkM7m2tbo18cm5HBw=="],
+
+    "@spark/add-module": ["@spark/add-module@workspace:packages/add-module"],
 
     "@spark/core": ["@spark/core@workspace:packages/spark-core"],
 

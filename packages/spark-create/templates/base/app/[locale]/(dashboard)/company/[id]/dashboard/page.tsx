@@ -7,6 +7,22 @@ import {
 } from 'lucide-react'
 import { mockProjectsAPI, type MockProject } from '@/lib/mock-data'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+import {
+  StatCard,
+  AlertCard,
+  TopProductsList,
+  ActivityItem,
+  mockInventoryStats,
+  mockProductionStats,
+  mockSalesData,
+  mockInventoryByCategory,
+  mockProductionTrend,
+  mockTopProducts,
+  mockAlerts,
+  mockActivities,
+  exportDashboardCSV,
+  toggleFullscreen as toggleFullscreenUtil
+} from '@/modules/dashboard'
 
 export default function CompanyDashboardPage() {
   const params = useParams()
@@ -18,13 +34,8 @@ export default function CompanyDashboardPage() {
   const [isFullscreen, setIsFullscreen] = useState(false)
 
   const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen()
-      setIsFullscreen(true)
-    } else {
-      document.exitFullscreen()
-      setIsFullscreen(false)
-    }
+    const newState = toggleFullscreenUtil()
+    setIsFullscreen(newState)
   }
 
   const handlePrint = () => {
@@ -32,30 +43,10 @@ export default function CompanyDashboardPage() {
   }
 
   const handleExport = () => {
-    // Create a simple CSV export
-    const data = [
-      ['Dashboard Report', project?.name || ''],
-      ['Generated', new Date().toLocaleString()],
-      [''],
-      ['Inventory Stats'],
-      ['Total Items', inventoryStats.totalItems],
-      ['Low Stock', inventoryStats.lowStock],
-      ['Out of Stock', inventoryStats.outOfStock],
-      [''],
-      ['Production Stats'],
-      ['Active Orders', productionStats.activeOrders],
-      ['Completed', productionStats.completed],
-      ['Pending', productionStats.pending],
-      ['Delayed', productionStats.delayed],
-    ]
-    
-    const csv = data.map(row => row.join(',')).join('\n')
-    const blob = new Blob([csv], { type: 'text/csv' })
-    const url = window.URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `dashboard-${projectId}-${Date.now()}.csv`
-    a.click()
+    exportDashboardCSV(project?.name || '', {
+      inventory: mockInventoryStats,
+      production: mockProductionStats
+    })
   }
 
   if (!project) {
@@ -71,53 +62,7 @@ export default function CompanyDashboardPage() {
     )
   }
 
-  // ERP Mock Data
-  const inventoryStats = {
-    totalItems: 1247,
-    lowStock: 23,
-    outOfStock: 5,
-    inTransit: 156
-  }
-
-  const productionStats = {
-    activeOrders: 45,
-    completed: 128,
-    pending: 67,
-    delayed: 8
-  }
-
-  const salesData = [
-    { month: 'Jan', sales: 450000, orders: 120 },
-    { month: 'Feb', sales: 520000, orders: 145 },
-    { month: 'Mar', sales: 480000, orders: 132 },
-    { month: 'Apr', sales: 610000, orders: 168 },
-    { month: 'May', sales: 580000, orders: 155 },
-    { month: 'Jun', sales: 720000, orders: 192 },
-  ]
-
-  const inventoryByCategory = [
-    { name: 'Raw Materials', value: 450, color: '#3b82f6' },
-    { name: 'Work in Progress', value: 280, color: '#f59e0b' },
-    { name: 'Finished Goods', value: 380, color: '#10b981' },
-    { name: 'Packaging', value: 137, color: '#8b5cf6' },
-  ]
-
-  const productionTrend = [
-    { week: 'W1', planned: 120, actual: 115 },
-    { week: 'W2', planned: 130, actual: 128 },
-    { week: 'W3', planned: 125, actual: 130 },
-    { week: 'W4', planned: 140, actual: 135 },
-    { week: 'W5', planned: 135, actual: 140 },
-    { week: 'W6', planned: 150, actual: 145 },
-  ]
-
-  const topProducts = [
-    { name: 'Product A', units: 450, revenue: 225000 },
-    { name: 'Product B', units: 380, revenue: 190000 },
-    { name: 'Product C', units: 320, revenue: 160000 },
-    { name: 'Product D', units: 280, revenue: 140000 },
-    { name: 'Product E', units: 250, revenue: 125000 },
-  ]
+  const currentRevenue = mockSalesData[mockSalesData.length - 1].sales
 
   return (
     <ProjectLayout projectId={projectId}>
@@ -189,60 +134,47 @@ export default function CompanyDashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-blue-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">{t('totalInventory')}</CardTitle>
-              <div className="bg-blue-100 p-2 rounded-lg">
-                <Package2 className="h-5 w-5 text-blue-600" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{inventoryStats.totalItems}</div>
-              <p className="text-xs text-red-600 mt-1 font-medium">{inventoryStats.lowStock} low stock items</p>
-            </CardContent>
-          </Card>
+          <StatCard
+            title={t('totalInventory')}
+            value={mockInventoryStats.totalItems}
+            subtitle={`${mockInventoryStats.lowStock} low stock items`}
+            subtitleColor="text-red-600"
+            icon={Package2}
+            iconColor="text-blue-600"
+            iconBgColor="bg-blue-100"
+            borderColor="border-l-blue-500"
+          />
 
-          <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-green-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">{t('activeOrders')}</CardTitle>
-              <div className="bg-green-100 p-2 rounded-lg">
-                <ShoppingCart className="h-5 w-5 text-green-600" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-green-600">{productionStats.activeOrders}</div>
-              <p className="text-xs text-gray-600 mt-1">{productionStats.pending} pending</p>
-            </CardContent>
-          </Card>
+          <StatCard
+            title={t('activeOrders')}
+            value={mockProductionStats.activeOrders}
+            subtitle={`${mockProductionStats.pending} pending`}
+            icon={ShoppingCart}
+            iconColor="text-green-600"
+            iconBgColor="bg-green-100"
+            borderColor="border-l-green-500"
+          />
 
-          <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-primary">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">{t('monthlyRevenue')}</CardTitle>
-              <div className="bg-primary/10 p-2 rounded-lg">
-                <DollarSign className="h-5 w-5 text-primary" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-primary">฿{salesData[salesData.length - 1].sales.toLocaleString()}</div>
-              <p className="text-xs text-green-600 mt-1 font-medium flex items-center gap-1">
-                <TrendingUp className="h-3 w-3" />
-                +12% from last month
-              </p>
-            </CardContent>
-          </Card>
+          <StatCard
+            title={t('monthlyRevenue')}
+            value={`฿${currentRevenue.toLocaleString()}`}
+            subtitle="+12% from last month"
+            subtitleColor="text-green-600"
+            icon={DollarSign}
+            iconColor="text-primary"
+            iconBgColor="bg-primary/10"
+            borderColor="border-l-primary"
+          />
 
-          <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-orange-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">{t('productionRate')}</CardTitle>
-              <div className="bg-orange-100 p-2 rounded-lg">
-                <Factory className="h-5 w-5 text-orange-600" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-orange-600">96%</div>
-              <p className="text-xs text-gray-600 mt-1">Efficiency this week</p>
-            </CardContent>
-          </Card>
+          <StatCard
+            title={t('productionRate')}
+            value={`${mockProductionStats.efficiency}%`}
+            subtitle="Efficiency this week"
+            icon={Factory}
+            iconColor="text-orange-600"
+            iconBgColor="bg-orange-100"
+            borderColor="border-l-orange-500"
+          />
         </div>
 
         {/* Charts Section */}
@@ -257,7 +189,7 @@ export default function CompanyDashboardPage() {
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={salesData}>
+                <LineChart data={mockSalesData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis />
@@ -281,7 +213,7 @@ export default function CompanyDashboardPage() {
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie
-                    data={inventoryByCategory}
+                    data={mockInventoryByCategory}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
@@ -290,7 +222,7 @@ export default function CompanyDashboardPage() {
                     fill="#8884d8"
                     dataKey="value"
                   >
-                    {inventoryByCategory.map((entry, index) => (
+                    {mockInventoryByCategory.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
@@ -310,7 +242,7 @@ export default function CompanyDashboardPage() {
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={productionTrend}>
+                <BarChart data={mockProductionTrend}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="week" />
                   <YAxis />
@@ -332,27 +264,7 @@ export default function CompanyDashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {topProducts.map((product, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium">{product.name}</span>
-                        <span className="text-sm text-gray-600">{product.units} units</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
-                          className="bg-primary h-2 rounded-full"
-                          style={{ width: `${(product.units / topProducts[0].units) * 100}%` }}
-                        />
-                      </div>
-                    </div>
-                    <span className="text-sm font-semibold text-primary ml-4">
-                      ฿{product.revenue.toLocaleString()}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <TopProductsList products={mockTopProducts} />
             </CardContent>
           </Card>
         </div>
@@ -369,32 +281,9 @@ export default function CompanyDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-primary/20">
-                  <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-primary">Low Stock Alert</p>
-                    <p className="text-xs text-red-700">5 items are out of stock, 23 items below minimum level</p>
-                    <p className="text-xs text-red-600 mt-1">2 hours ago</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 bg-orange-50 rounded-lg border border-primary/20">
-                  <Clock className="h-5 w-5 text-primary mt-0.5" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-primary">Production Delay</p>
-                    <p className="text-xs text-orange-700">Order #PO-2024-156 is delayed by 2 days</p>
-                    <p className="text-xs text-orange-600 mt-1">5 hours ago</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                  <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-primary">Shipment Completed</p>
-                    <p className="text-xs text-green-700">Order #SO-2024-892 delivered successfully</p>
-                    <p className="text-xs text-green-600 mt-1">1 day ago</p>
-                  </div>
-                </div>
+                {mockAlerts.map((alert) => (
+                  <AlertCard key={alert.id} alert={alert} />
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -406,49 +295,9 @@ export default function CompanyDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 p-2 rounded-full">
-                    <ShoppingCart className="h-4 w-4 text-blue-600" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">New Sales Order</p>
-                    <p className="text-xs text-gray-600">SO-2024-945 created for 250 units</p>
-                    <p className="text-xs text-gray-400 mt-1">30 minutes ago</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-green-100 p-2 rounded-full">
-                    <Factory className="h-4 w-4 text-green-600" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">Production Completed</p>
-                    <p className="text-xs text-gray-600">Batch #B-2024-089 finished</p>
-                    <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <Package2 className="h-4 w-4 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">Inventory Received</p>
-                    <p className="text-xs text-gray-600">PO-2024-334 - 500 units received</p>
-                    <p className="text-xs text-gray-400 mt-1">4 hours ago</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-orange-100 p-2 rounded-full">
-                    <Users className="h-4 w-4 text-orange-600" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">Worker Shift Change</p>
-                    <p className="text-xs text-gray-600">Evening shift started - 15 workers</p>
-                    <p className="text-xs text-gray-400 mt-1">6 hours ago</p>
-                  </div>
-                </div>
+                {mockActivities.map((activity) => (
+                  <ActivityItem key={activity.id} activity={activity} />
+                ))}
               </div>
             </CardContent>
           </Card>

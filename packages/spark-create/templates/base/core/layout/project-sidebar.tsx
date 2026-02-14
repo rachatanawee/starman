@@ -4,7 +4,7 @@ import {
   LayoutDashboard, ChevronLeft, ChevronRight,
   Star, ListTodo, FileText, DollarSign, Users2,
   BarChart3, Users, Settings, Calendar, BookOpen, Network,
-  Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown
+  Package2, ShoppingBag, Building2, History, Calculator, GitBranch, ChevronDown, QrCode
 } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import { Button } from '@/shared/components/ui/button'
@@ -136,6 +136,7 @@ export function ProjectSidebar({ collapsed, onToggle, projectId }: ProjectSideba
     { section: 'Main' },
     { href: `/${locale}/company/${projectId}/dashboard`, icon: LayoutDashboard, label: 'Dashboard' },
     { href: `/${locale}/company/${projectId}/sales-order`, icon: ListTodo, label: 'Sales Order' },
+    { href: `/${locale}/company/${projectId}/assets`, icon: QrCode, label: 'Assets' },
     { section: 'Settings' },
     { href: `/${locale}/company/${projectId}/settings`, icon: Settings, label: 'Settings' },
     { href: `/${locale}/company/${projectId}/ui-patterns`, icon: Star, label: 'UI Patterns' },

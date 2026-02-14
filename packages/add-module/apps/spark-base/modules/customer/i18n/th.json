@@ -1,0 +1,18 @@
+{
+  "title": "Customer",
+  "subtitle": "จัดการCustomer",
+  "add": "เพิ่มCustomer",
+  "edit": "แก้ไขCustomer",
+  "delete": "ลบCustomer",
+  "search": "ค้นหาCustomer...",
+  "name": "ชื่อ",
+  "code": "รหัส",
+  "status": "สถานะ",
+  "active": "ใช้งาน",
+  "inactive": "ไม่ใช้งาน",
+  "allStatus": "ทุกสถานะ",
+  "createdAt": "สร้างเมื่อ",
+  "updatedAt": "อัพเดทเมื่อ",
+  "noItemsFound": "ไม่พบรายการ",
+  "loading": "กำลังโหลด..."
+}

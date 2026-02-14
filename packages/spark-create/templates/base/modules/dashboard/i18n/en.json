@@ -1,0 +1,22 @@
+{
+  "title": "Dashboard",
+  "companyNotFound": "Company not found",
+  "backToCompanies": "Back to Companies",
+  "totalInventory": "Total Inventory",
+  "activeOrders": "Active Orders",
+  "monthlyRevenue": "Monthly Revenue",
+  "productionRate": "Production Rate",
+  "salesTrend": "Sales Trend",
+  "inventoryDistribution": "Inventory Distribution",
+  "productionPerformance": "Production Performance",
+  "topProducts": "Top Products",
+  "alertsNotifications": "Alerts & Notifications",
+  "recentActivity": "Recent Activity",
+  "quickActions": "Quick Actions",
+  "inventory": "Inventory",
+  "salesOrder": "Sales Order",
+  "production": "Production",
+  "accounting": "Accounting",
+  "printReport": "Print Report",
+  "refresh": "Refresh"
+}

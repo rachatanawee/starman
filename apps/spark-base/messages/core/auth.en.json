@@ -1,0 +1,15 @@
+{
+  "login": "Login",
+  "username": "Username",
+  "emailOrUsername": "Username or Email",
+  "email": "Email",
+  "password": "Password",
+  "logout": "Logout",
+  "welcomeBack": "Welcome Back",
+  "signInToAccount": "Sign in to your ERP account",
+  "signingIn": "Signing in...",
+  "signIn": "Sign In",
+  "loginFailed": "Login failed. Please try again.",
+  "demoMode": "Prototype Mode",
+  "uiDemo": "This is a UI demonstration with mock data only"
+}

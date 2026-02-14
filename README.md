@@ -1,58 +1,255 @@
-# Starman Template 🚀
+# Spark 🚀
 
-A production-ready Next.js application template with built-in theming, authentication, data management, and reusable business utilities. Perfect for building enterprise applications quickly.
+A production-ready Next.js monorepo template with modular architecture, built-in theming, i18n support, and powerful data management tools.
 
-> **Note**: This template includes a complete ERP system as a reference implementation. You can use it as-is or customize it for your specific needs.
+## ✨ Features
 
-## ✨ Why This Template?
+- **🧩 Modular Architecture** - Organized by feature modules with clear boundaries
+- **🌐 i18n Ready** - Multi-language support (EN/TH) with automatic module loading
+- **📊 DataGrid** - Powerful table with sorting, filtering, and search
+- **🛠️ CLI Generator** - Create new modules instantly with `@spark/add-module`
+- **🎨 Theme System** - 8 pre-built themes with instant switching
+- **�  Type-Safe** - Full TypeScript support
+- **📱 Responsive** - Mobile-first design
+- **⚡ Bun Runtime** - Fast development and build times
 
-- **🎨 8 Beautiful Themes** - Pre-built color schemes with instant switching
-- **🔧 Centralized Configuration** - Single source of truth for all app settings
-- **📊 Mock Data System** - Generic data generators for rapid prototyping
-- **🛠️ Business Utilities** - Ready-to-use functions for common operations
-- **🎯 Type-Safe** - Full TypeScript support throughout
-- **📱 Responsive** - Mobile-first design with modern UI components
-- **🌐 i18n Ready** - Multi-language support (English/Thai)
-- **🔐 Auth System** - Complete authentication flow with session management
+## 📋 Prerequisites
+
+- **Bun** (recommended) - [Install Bun](https://bun.sh/docs/installation)
+- **Node.js 20+** (alternative) - [Install Node.js](https://nodejs.org/)
 
 ## 🚀 Quick Start
 
+### Create New Project
+
 ```bash
-# Clone and install
-git clone <repository-url>
-cd starman/apps/erp-prototype
+# Using Bun (Recommended)
+bunx @spark/create my-project
+
+```
+
+### Run Development Server
+
+```bash
+# Navigate to your project
+cd my-project
+
+# Install dependencies (if not already installed)
 bun install
 
-# Run development server
+# Start development server
+cd apps/spark-base
 bun run dev
 ```
 
-Open [http://localhost:3200](http://localhost:3200) and login with `demo@erp.com` / `demo123`
+Open [http://localhost:3201](http://localhost:3201) to see your app!
+
+### Alternative: Using npm
+
+```bash
+# Create project
+npx @spark/create my-project
+
+# Navigate and install
+cd my-project
+npm install
+
+# Start development
+cd apps/spark-base
+npm run dev
+```
+
+## 📁 Project Structure
+
+```
+spark/
+├── apps/
+│   └── spark-base/              # Main application
+│       ├── app/                 # Next.js app directory
+│       │   └── [locale]/
+│       │       ├── (auth)/      # Login pages
+│       │       └── (dashboard)/ # Main app
+│       ├── core/                # Core components
+│       │   ├── auth/            # Authentication
+│       │   ├── layout/          # Layout components
+│       │   └── settings/        # Settings management
+│       ├── shared/              # Shared utilities
+│       │   ├── components/      # Shared components
+│       │   │   ├── ui/          # shadcn/ui components
+│       │   │   └── tablecn/     # DataGrid components
+│       │   ├── hooks/           # Shared hooks
+│       │   └── lib/             # Shared utilities
+│       ├── modules/             # Feature modules
+│       │   ├── sales-order/
+│       │   ├── dashboard/
+│       │   ├── assets/
+│       ├── lib/                 # App-level utilities
+│       │   ├── app.config.ts    # App configuration
+│       │   ├── business-utils.ts
+│       │   ├── common-exports.ts
+│       │   └── mock-data/       # Mock data generators
+│       ├── messages/            # Core i18n
+│       │   ├── en.json
+│       │   └── th.json
+│       └── i18n.ts              # i18n config
+├── packages/
+│   └── add-module/              # CLI for generating modules
+└── docs/                        # Documentation
+```
+
+## 🧩 Modular Architecture
+
+Each module is self-contained:
+
+```
+modules/{module-name}/
+├── hooks/              # Custom React hooks
+├── lib/                # Utilities and data
+├── types/              # TypeScript types
+├── i18n/               # Module translations
+│   ├── en.json
+│   └── th.json
+└── index.ts            # Module exports
+```
+
+### Creating New Modules
+
+```bash
+cd packages/add-module
+bun run src/index.ts <module-name> --path ../../apps/spark-base
+```
+
+Example:
+```bash
+bun run src/index.ts inventory --path ../../apps/spark-base
+```
+
+This generates:
+- Complete module structure
+- Page with DataGrid, filtering, sorting
+- i18n translations (EN/TH)
+- TypeScript types and mock data
+
+See [packages/add-module/README.md](packages/add-module/README.md) for details.
+
+## 🌐 Internationalization
+
+Modular i18n system that automatically loads translations:
+
+### Core Translations
+`apps/spark-base/messages/`:
+- `en.json` - Core English
+- `th.json` - Core Thai
+
+### Module Translations
+`modules/{module-name}/i18n/`:
+- `en.json` - Module English
+- `th.json` - Module Thai
+
+The system automatically:
+1. Scans modules for translation files
+2. Loads and merges with core translations
+3. Makes available via `useTranslations('{moduleName}')`
+
+### Usage
+
+```typescript
+import { useTranslations } from 'next-intl'
+
+const t = useTranslations('salesOrder')
+t('title') // "Sales Order" or "ใบสั่งขาย"
+```
+
+See [apps/spark-base/messages/README.md](apps/spark-base/messages/README.md)
+
+## 📊 DataGrid
+
+Powerful table component with:
+- Sorting and filtering
+- Search functionality
+- Row height controls
+- Column visibility
+- Responsive design
+- Virtual scrolling
+
+Based on TanStack Table.
+
+## 🛠️ Tech Stack
+
+- **Runtime**: Bun
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4 + OKLCH colors
+- **UI**: shadcn/ui
+- **Data Grid**: TanStack Table
+- **Charts**: Recharts
+- **i18n**: next-intl
+- **Icons**: Lucide React
+
+## 🔧 Development
+
+### Commands
+
+```bash
+# Development
+cd apps/spark-base
+bun run dev          # Port 3201
+bun run dev:bun      # With Bun runtime
+
+# Build
+bun run build
+bun run build:bun    # With Bun runtime
+
+# Production
+bun run start
+bun run start:bun    # With Bun runtime
+
+# Lint
+bun run lint
+```
+
+### Creating a Module
+
+```bash
+cd packages/add-module
+
+# Generate module
+bun run src/index.ts {module-name} --path ../../apps/spark-base
+
+# Example
+bun run src/index.ts inventory --path ../../apps/spark-base
+```
+
+### Adding to Navigation
+
+After creating a module:
+
+1. Edit `apps/spark-base/core/layout/project-sidebar.tsx`
+2. Edit `apps/spark-base/core/layout/mobile-menu.tsx`
+3. Add menu item with icon and route
 
 ## 📚 Documentation
 
-- **[Guide](docs/GUIDE.md)** - Complete guide for Spark Framework
+- **[Module Generator](packages/add-module/README.md)** - CLI tool
+- **[i18n System](apps/spark-base/messages/README.md)** - Translations
+- **[Modular Monolith](apps/spark-base/docs/MODULAR_MONOLITH.md)** - Architecture
+- **[Troubleshooting](apps/spark-base/docs/TROUBLESHOOTING.md)** - Common issues
 
-## 🎨 Core Features
+## 🎯 Example Modules
 
-### 1. Configuration System
+Included modules demonstrate best practices:
 
-Centralized configuration in `/lib/app.config.ts`:
+- **Dashboard** - Stats and charts
+- **Sales Order** - DataGrid with filtering
+- **Assets** - QR scanning and tracking
+- **Purchases** - Generated example
+- **Customer** - Generated example
 
-```typescript
-import { appConfig } from '@/lib/app.config'
+## 🎨 Theme System
 
-// Access app settings
-const appName = appConfig.app.defaultName
-const themes = appConfig.themes
-const features = appConfig.features
-```
-
-### 2. Theme System
-
-8 pre-built themes with instant switching:
+8 pre-built themes:
 - Tangerine (Orange)
-- Ocean Breeze (Blue)  
+- Ocean Breeze (Blue)
 - Claude (Brown)
 - Forest Green
 - Royal Purple
@@ -60,178 +257,15 @@ const features = appConfig.features
 - Clean Slate (Gray)
 - Twitter Blue
 
-**Add custom themes:**
-1. Create `/public/themes/your-theme.css`
-2. Add to `appConfig.themes`
-3. Done!
-
-### 3. Mock Data Generators
-
-Generic data generators for rapid prototyping:
-
-```typescript
-import { generateTransactions, mockDataGenerator } from '@/lib/mock-data'
-
-// Generate 20 transactions
-const data = generateTransactions(20)
-
-// Custom generation
-const custom = mockDataGenerator.array((i) => ({
-  id: mockDataGenerator.id('item'),
-  name: mockDataGenerator.name('Product'),
-  amount: mockDataGenerator.amount(1000, 50000),
-}), 10)
-```
-
-### 4. Business Utilities
-
-Ready-to-use functions for common operations:
-
-```typescript
-import { formatUtils, calcUtils, statusUtils } from '@/lib/business-utils'
-
-// Formatting
-formatUtils.currency(1000) // '฿1,000.00'
-formatUtils.percentage(85.5) // '85.5%'
-
-// Calculations
-calcUtils.sum(items, 'amount')
-calcUtils.average(items, 'price')
-
-// Status management
-statusUtils.getVariant('Completed') // 'default'
-statusUtils.getColor('Pending') // 'text-yellow-600'
-```
-
-## 🛠️ Tech Stack
-
-- **Runtime**: Bun
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS + OKLCH colors
-- **UI**: shadcn/ui components
-- **Data Grid**: TanStack Table
-- **Charts**: Recharts
-- **i18n**: next-intl
-
-## 📁 Project Structure
-
-```
-lib/
-├── app.config.ts           # Central configuration
-├── business-utils.ts       # Generic utilities
-├── settings-context.tsx    # Theme & settings state
-├── common-exports.ts       # Barrel exports
-└── mock-data/              # Mock data system
-    ├── generator.ts        # Data generators
-    ├── generic-data.ts     # Generic types
-    └── *.ts                # Domain-specific data
-
-components/
-├── ui/                     # shadcn/ui components
-├── tablecn/                # Data grid
-├── project-layout.tsx      # Main layout
-├── page-title.tsx          # Page headers
-└── theme-loader.tsx        # Dynamic theming
-
-app/
-└── [locale]/
-    ├── (auth)/             # Login pages
-    └── (dashboard)/        # Main app
-        ├── template-demo/  # Usage examples
-        └── company/[id]/   # Your pages here
-```
-
-## 🎯 Customization Guide
-
-### 1. Update Branding
-
-```typescript
-// lib/app.config.ts
-export const appConfig = {
-  app: {
-    defaultName: 'Your App Name',
-    defaultIcon: 'Building2',
-    version: '1.0.0',
-  },
-  // ...
-}
-```
-
-### 2. Add Your Pages
-
-```typescript
-// app/[locale]/(dashboard)/your-page/page.tsx
-import { ProjectLayout, PageTitle } from '@/lib/common-exports'
-import { generateTransactions } from '@/lib/mock-data'
-import { Icon } from 'lucide-react'
-
-export default function YourPage() {
-  const data = generateTransactions(20)
-  
-  return (
-    <ProjectLayout projectId={projectId}>
-      <PageTitle 
-        icon={Icon}
-        title="Your Page"
-        subtitle="Description"
-      />
-      {/* Your content */}
-    </ProjectLayout>
-  )
-}
-```
-
-### 3. Remove ERP Examples (Optional)
-
-See [ERP_SPECIFIC_FILES.md](ERP_SPECIFIC_FILES.md) for detailed instructions on removing the ERP reference implementation.
-
-## 🎨 Design System
-
-## 📖 Reference Implementation
-
-This template includes a complete ERP system as a reference implementation:
-
-### Included Modules
-- **Sales** - Quotations, Orders, Invoices
-- **Production** - BOM, Orders, Planning, Manufacturing
-- **Reports** - Dashboard, Capacity, Costing, History
-- **Accounting** - Integration hub, Sync, Reconciliation
-- **Users** - Role-based access control
-
-### AI Features (Examples)
-- Production planning optimization
-- Shop floor problem diagnosis
-- Cost analysis and margin tracking
-- Accounting reconciliation
-
-You can keep these as examples or remove them entirely. See [ERP_SPECIFIC_FILES.md](ERP_SPECIFIC_FILES.md) for details.
-
-## 🔧 Development
-### Authentication
-- Mock auth system with session management
-- Login: `demo@erp.com` / `demo123`
-- Auto-redirect to last visited page
-- Session persistence in localStorage
-
-### Mock Data
-- Centralized in `/lib/mock-data/`
-- Generic generators for common data types
-- Domain-specific examples (sales, production, etc.)
-- Easy to replace with real API calls
-
-### Adding Features
-1. Create mock data using generators
-2. Build components with shadcn/ui
-3. Add pages following existing patterns
-4. Use business utilities for common operations
+Themes persist across sessions.
 
 ## 📝 License
 
-[Your License Here]
+MIT
 
 ## 🙏 Acknowledgments
 
-- Built with [Next.js](https://nextjs.org/)
-- UI components from [shadcn/ui](https://ui.shadcn.com/)
-- Icons from [Lucide](https://lucide.dev/)
+- [Next.js](https://nextjs.org/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Lucide](https://lucide.dev/)
+- [Bun](https://bun.sh/)
