@@ -150,30 +150,9 @@
         "typescript": "^5.9.3",
       },
     },
-    "packages/spark-cli": {
-      "name": "@spark/cli",
-      "version": "0.1.0",
-      "bin": {
-        "spark": "./dist/index.js",
-      },
-      "dependencies": {
-        "chalk": "^5.3.0",
-        "commander": "^12.0.0",
-        "fs-extra": "^11.2.0",
-        "ora": "^8.0.1",
-        "prompts": "^2.4.2",
-      },
-      "devDependencies": {
-        "@types/fs-extra": "^11.0.4",
-        "@types/node": "^20.11.0",
-        "@types/prompts": "^2.4.9",
-        "tsup": "^8.0.1",
-        "typescript": "^5.3.3",
-      },
-    },
     "packages/spark-core": {
       "name": "@spark/core",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "dependencies": {
         "sonner": "^2.0.7",
       },
@@ -224,7 +203,7 @@
     },
     "packages/spark-create": {
       "name": "@spark/create",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "bin": {
         "create-spark": "./dist/index.js",
       },
@@ -723,8 +702,6 @@
     "@rtsao/scc": ["@rtsao/scc@1.1.0", "", {}, "sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g=="],
 
     "@schummar/icu-type-parser": ["@schummar/icu-type-parser@1.21.5", "", {}, "sha512-bXHSaW5jRTmke9Vd0h5P7BtWZG9Znqb8gSDxZnxaGSJnGwPLDPfS+3g0BKzeWqzgZPsIVZkM7m2tbo18cm5HBw=="],
-
-    "@spark/cli": ["@spark/cli@workspace:packages/spark-cli"],
 
     "@spark/core": ["@spark/core@workspace:packages/spark-core"],
 

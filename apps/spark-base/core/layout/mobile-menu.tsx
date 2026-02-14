@@ -52,34 +52,17 @@ export function MobileMenu({ projectId }: MobileMenuProps) {
   }
 
   const menuItems = projectId ? [
-    { href: `/${locale}/company`, icon: GitBranch, label: '← All Companies', isBack: true },
+    { href: `/${locale}/company?select=true`, icon: GitBranch, label: '← All Companies', isBack: true },
     { href: `/${locale}/guide`, icon: BookOpen, label: 'User Guide', isGuide: true },
-    { section: 'Sales' },
-    { href: `/${locale}/company/${projectId}/quotation`, icon: FileText, label: 'Quotation' },
-    { href: `/${locale}/company/${projectId}/sales-order`, icon: ListTodo, label: 'Sales Order' },
-    { href: `/${locale}/company/${projectId}/sales-invoice`, icon: DollarSign, label: 'Sales Invoice' },
-    { section: 'Production' },
-    { href: `/${locale}/company/${projectId}/bom`, icon: GitBranch, label: 'BOM' },
-    { href: `/${locale}/company/${projectId}/production-order`, icon: Calendar, label: 'Production Order' },
-    { href: `/${locale}/company/${projectId}/production-planning`, icon: BarChart3, label: 'Production Planning' },
-    { href: `/${locale}/company/${projectId}/manufacturing`, icon: Settings, label: 'Manufacturing' },
-    { section: 'Materials' },
-    { href: `/${locale}/company/${projectId}/mrp`, icon: Network, label: 'MRP' },
-    { href: `/${locale}/company/${projectId}/purchasing`, icon: ShoppingBag, label: 'Purchasing' },
-    { href: `/${locale}/company/${projectId}/inventory`, icon: Package2, label: 'Inventory' },
-    { section: 'Reports' },
+    { section: 'Main' },
     { href: `/${locale}/company/${projectId}/dashboard`, icon: LayoutDashboard, label: 'Dashboard' },
-    { href: `/${locale}/company/${projectId}/factory-capacity`, icon: Building2, label: 'Factory Capacity' },
-    { href: `/${locale}/company/${projectId}/worker-allowance`, icon: Users2, label: 'Worker Allowance' },
-    { href: `/${locale}/company/${projectId}/wip-costing`, icon: DollarSign, label: 'WIP Costing' },
-    { href: `/${locale}/company/${projectId}/job-history`, icon: History, label: 'Job History' },
-    { section: 'Finance' },
-    { href: `/${locale}/company/${projectId}/accounting`, icon: Calculator, label: 'Accounting' },
+    { href: `/${locale}/company/${projectId}/sales-order`, icon: ListTodo, label: 'Sales Order' },
     { section: 'Settings' },
-    { href: `/${locale}/company/${projectId}/team`, icon: Users, label: 'Team' },
     { href: `/${locale}/company/${projectId}/settings`, icon: Settings, label: 'Settings' },
+    { href: `/${locale}/company/${projectId}/ui-patterns`, icon: Star, label: 'UI Patterns' },
   ] : [
     { href: `/${locale}/company`, icon: GitBranch, label: 'Companies' },
+    { href: `/${locale}/users`, icon: Users, label: 'User Management' },
     { href: `/${locale}/guide`, icon: BookOpen, label: 'User Guide', isGuide: true },
   ]
 
@@ -124,36 +107,36 @@ export function MobileMenu({ projectId }: MobileMenuProps) {
         <>
           <div className="lg:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
           
-          <div className="lg:hidden fixed top-0 right-0 w-72 max-h-screen bg-white z-50 shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
+          <div className="lg:hidden fixed top-0 right-0 w-80 max-h-screen bg-white z-50 shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
             {/* Header */}
-            <div className="flex items-center justify-between border-b p-3 bg-gradient-to-r from-primary/5 to-primary/10">
+            <div className="flex items-center justify-between border-b p-4 bg-gradient-to-r from-primary/5 to-primary/10">
               <div className="flex items-center gap-2">
-                <div className="bg-primary p-1.5 rounded-lg">
-                  <Star className="h-4 w-4 text-primary-foreground" />
+                <div className="bg-primary p-2 rounded-lg">
+                  <Star className="h-5 w-5 text-primary-foreground" />
                 </div>
-                <h2 className="text-base font-bold text-gray-900">Starman ERP</h2>
+                <h2 className="text-lg font-bold text-gray-900">Starman ERP</h2>
               </div>
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setIsOpen(false)}>
-                <X className="h-4 w-4" />
+              <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => setIsOpen(false)}>
+                <X className="h-5 w-5" />
               </Button>
             </div>
 
             {/* Search */}
-            <div className="flex-shrink-0 p-2 border-b bg-gray-50/50">
+            <div className="flex-shrink-0 p-3 border-b bg-gray-50/50">
               <div className="relative">
-                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                 <Input
                   type="text"
                   placeholder="Search menu..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-8 h-9 text-sm bg-white"
+                  className="pl-10 h-11 text-base bg-white"
                 />
               </div>
             </div>
 
             {/* Navigation */}
-            <nav className="overflow-y-auto p-2 space-y-0.5">
+            <nav className="overflow-y-auto p-3 space-y-0.5">
               {filteredItems.map((item, index) => {
                 const section = (item as any).section
                 if (section) {
@@ -161,10 +144,10 @@ export function MobileMenu({ projectId }: MobileMenuProps) {
                     <button
                       key={index}
                       onClick={() => toggleSection(section)}
-                      className="w-full flex items-center justify-between px-2 pt-2 pb-1 text-xs font-semibold text-gray-500 uppercase tracking-wider hover:text-gray-700"
+                      className="w-full flex items-center justify-between px-3 pt-2.5 pb-1.5 text-sm font-semibold text-gray-500 uppercase tracking-wider hover:text-gray-700 active:bg-gray-50 rounded-lg transition-colors"
                     >
                       <span>{section}</span>
-                      {collapsed[section] ? <ChevronRight className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                      {collapsed[section] ? <ChevronRight className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                     </button>
                   )
                 }
@@ -180,44 +163,44 @@ export function MobileMenu({ projectId }: MobileMenuProps) {
                 
                 return (
                   <div key={item.href}>
-                    {isBack && <div className="border-b my-1" />}
+                    {isBack && <div className="border-b my-1.5" />}
                     <Link
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center gap-2.5 px-2.5 py-1.5 text-sm font-medium transition-all rounded-lg ${
+                      className={`flex items-center gap-3 px-4 py-2.5 text-base font-medium transition-all rounded-lg active:scale-[0.98] ${
                         isActive ? 'bg-primary/10 text-primary' :
-                        isBack ? 'text-gray-600 hover:bg-gray-50 border border-gray-200' :
-                        isGuide ? 'text-blue-600 hover:bg-blue-50 border border-blue-200' :
-                        'text-gray-700 hover:bg-gray-100'
+                        isBack ? 'text-gray-600 hover:bg-gray-50 active:bg-gray-100 border border-gray-200' :
+                        isGuide ? 'text-blue-600 hover:bg-blue-50 active:bg-blue-100 border border-blue-200' :
+                        'text-gray-700 hover:bg-gray-100 active:bg-gray-200'
                       }`}
                     >
-                      <Icon className="h-4 w-4 flex-shrink-0" />
+                      <Icon className="h-5 w-5 flex-shrink-0" />
                       <span className="truncate">{item.label}</span>
                     </Link>
-                    {(isBack || isGuide) && <div className="border-b my-1" />}
+                    {(isBack || isGuide) && <div className="border-b my-1.5" />}
                   </div>
                 )
               })}
 
               {/* User Controls */}
-              <div className="pt-2 mt-2 border-t space-y-0.5">
+              <div className="pt-2.5 mt-2.5 border-t space-y-1">
                 {userEmail && (
-                  <div className="px-2.5 py-1.5 text-xs text-gray-600 truncate bg-gray-50 rounded-lg border">
+                  <div className="px-4 py-2 text-sm text-gray-600 truncate bg-gray-50 rounded-lg border">
                     {userEmail}
                   </div>
                 )}
                 <button
                   onClick={() => { switchLocale(); setIsOpen(false) }}
-                  className="w-full flex items-center gap-2.5 px-2.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg"
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-gray-100 active:bg-gray-200 rounded-lg transition-all active:scale-[0.98]"
                 >
-                  <Languages className="h-4 w-4 flex-shrink-0" />
+                  <Languages className="h-5 w-5 flex-shrink-0" />
                   <span>{locale === 'en' ? 'ไทย' : 'EN'}</span>
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-2.5 px-2.5 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg"
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-base font-medium text-red-600 hover:bg-red-50 active:bg-red-100 rounded-lg transition-all active:scale-[0.98]"
                 >
-                  <LogOut className="h-4 w-4 flex-shrink-0" />
+                  <LogOut className="h-5 w-5 flex-shrink-0" />
                   <span>Logout</span>
                 </button>
               </div>

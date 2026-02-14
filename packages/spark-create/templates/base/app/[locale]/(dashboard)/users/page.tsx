@@ -13,7 +13,7 @@ import { Checkbox } from '@/shared/components/ui/checkbox'
 import { Users, Plus, Edit, Trash2, Shield, Search, X, Building2 } from 'lucide-react'
 import { mockUsers, roleLabels, statusLabels, type User, type UserRole, type UserStatus } from '@/lib/mock-data'
 import { mockProjects } from '@/lib/mock-data'
-import { FloatingUndo, InlineFeedback } from '@/shared/components/feedback'
+import { FloatingUndo, InlineFeedback } from '@/components/feedback'
 
 export default function UsersPage() {
   const [users, setUsers] = useState(mockUsers)
