@@ -31,9 +31,7 @@ Open [http://localhost:3200](http://localhost:3200) and login with `demo@erp.com
 
 ## 📚 Documentation
 
-- **[Template Guide](TEMPLATE_GUIDE.md)** - How to customize this template
-- **[ERP-Specific Files](ERP_SPECIFIC_FILES.md)** - What to remove/keep when adapting
-- **[Demo Page](/template-demo)** - Live examples of utilities and components
+- **[Guide](docs/GUIDE.md)** - Complete guide for Spark Framework
 
 ## 🎨 Core Features
 
