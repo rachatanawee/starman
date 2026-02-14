@@ -9,7 +9,7 @@ A production-ready Next.js monorepo template with modular architecture, built-in
 - **📊 DataGrid** - Powerful table with sorting, filtering, and search
 - **🛠️ CLI Generator** - Create new modules instantly with `@spark/add-module`
 - **🎨 Theme System** - 8 pre-built themes with instant switching
-- **�  Type-Safe** - Full TypeScript support
+- **🎯 Type-Safe** - Full TypeScript support
 - **📱 Responsive** - Mobile-first design
 - **⚡ Bun Runtime** - Fast development and build times
 
@@ -17,46 +17,165 @@ A production-ready Next.js monorepo template with modular architecture, built-in
 
 - **Bun** (recommended) - [Install Bun](https://bun.sh/docs/installation)
 - **Node.js 20+** (alternative) - [Install Node.js](https://nodejs.org/)
+- **GitLab Access Token** - For accessing Spark packages
 
 ## 🚀 Quick Start
 
-### Create New Project
+### 1. Setup Registry (First Time Only)
 
-```bash
-# Using Bun (Recommended)
-bunx @spark/create my-project
+#### Windows Users:
 
+**PowerShell:**
+```powershell
+# Set environment variable for SSL
+$env:NODE_TLS_REJECT_UNAUTHORIZED = '0'
+
+# Configure registry
+Add-Content -Path "$env:USERPROFILE\.bunfig.toml" -Value @"
+
+[install.scopes]
+`"@spark`" = `"https://codehub.csigroups.com/api/v4/projects/698/packages/npm/`"
+
+[install.tls]
+rejectUnauthorized = false
+"@
 ```
 
-### Run Development Server
+**Command Prompt:**
+```cmd
+set NODE_TLS_REJECT_UNAUTHORIZED=0
+
+notepad %USERPROFILE%\.bunfig.toml
+```
+
+Then add this content:
+```toml
+[install.scopes]
+"@spark" = "https://codehub.csigroups.com/api/v4/projects/698/packages/npm/"
+
+[install.tls]
+rejectUnauthorized = false
+```
+
+#### macOS/Linux Users:
 
 ```bash
-# Navigate to your project
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+
+cat >> ~/.bunfig.toml << 'EOF'
+
+[install.scopes]
+"@spark" = "https://codehub.csigroups.com/api/v4/projects/698/packages/npm/"
+
+[install.tls]
+rejectUnauthorized = false
+EOF
+```
+
+**Note:** If you get authentication errors, you may need a GitLab token. See "Using Token" section below.
+
+### 2. Create New Project
+
+**Windows PowerShell:**
+```powershell
+$env:NODE_TLS_REJECT_UNAUTHORIZED = '0'
+bunx @spark/create my-project --skip-install
 cd my-project
-
-# Install dependencies (if not already installed)
 bun install
+```
 
-# Start development server
-cd apps/spark-base
+**Windows Command Prompt:**
+```cmd
+set NODE_TLS_REJECT_UNAUTHORIZED=0
+bunx @spark/create my-project --skip-install
+cd my-project
+bun install
+```
+
+**macOS/Linux:**
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED=0 bunx @spark/create my-project --skip-install
+cd my-project
+bun install
+```
+
+**Note:** Using `--skip-install` flag avoids Windows-specific bun install issues during project creation.
+
+### 3. Run Development Server
+
+```bash
+cd my-project/apps/spark-base
+bun install
 bun run dev
 ```
 
-Open [http://localhost:3201](http://localhost:3201) to see your app!
+Open [http://localhost:3201](http://localhost:3201)
 
-### Alternative: Using npm
+---
 
+## 🔐 Using Token (Optional)
+
+If you get authentication errors, add a GitLab token:
+
+### Get Token:
+1. Go to https://codehub.csigroups.com/-/user_settings/personal_access_tokens
+2. Create token with `read_api` and `read_registry` scopes
+3. Copy the token
+
+### Configure with Token:
+
+**Windows (PowerShell):**
+```powershell
+Add-Content -Path "$env:USERPROFILE\.bunfig.toml" -Value @"
+
+[install.scopes]
+`"@spark`" = { 
+  url = `"https://codehub.csigroups.com/api/v4/projects/698/packages/npm/`",
+  token = `"YOUR_GITLAB_TOKEN`"
+}
+
+[install.tls]
+rejectUnauthorized = false
+"@
+```
+
+**macOS/Linux:**
 ```bash
-# Create project
-npx @spark/create my-project
+cat >> ~/.bunfig.toml << 'EOF'
 
-# Navigate and install
-cd my-project
-npm install
+[install.scopes]
+"@spark" = { 
+  url = "https://codehub.csigroups.com/api/v4/projects/698/packages/npm/",
+  token = "YOUR_GITLAB_TOKEN"
+}
 
-# Start development
-cd apps/spark-base
-npm run dev
+[install.tls]
+rejectUnauthorized = false
+EOF
+```
+
+Replace `YOUR_GITLAB_TOKEN` with your actual token.
+
+---
+
+## 📝 Using npm instead of Bun
+
+**Configure npm:**
+```bash
+npm config set @spark:registry https://codehub.csigroups.com/api/v4/projects/698/packages/npm/
+npm config set strict-ssl false
+```
+
+**Create project:**
+```bash
+# Windows Command Prompt
+set NODE_TLS_REJECT_UNAUTHORIZED=0 && npx @spark/create my-project
+
+# Windows PowerShell
+$env:NODE_TLS_REJECT_UNAUTHORIZED='0'; npx @spark/create my-project
+
+# macOS/Linux
+NODE_TLS_REJECT_UNAUTHORIZED=0 npx @spark/create my-project
 ```
 
 ## 📁 Project Structure
@@ -82,7 +201,7 @@ spark/
 │       ├── modules/             # Feature modules
 │       │   ├── sales-order/
 │       │   ├── dashboard/
-│       │   ├── assets/
+│       │   └── assets/
 │       ├── lib/                 # App-level utilities
 │       │   ├── app.config.ts    # App configuration
 │       │   ├── business-utils.ts
@@ -242,8 +361,6 @@ Included modules demonstrate best practices:
 - **Dashboard** - Stats and charts
 - **Sales Order** - DataGrid with filtering
 - **Assets** - QR scanning and tracking
-- **Purchases** - Generated example
-- **Customer** - Generated example
 
 ## 🎨 Theme System
 
